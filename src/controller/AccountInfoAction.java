@@ -14,6 +14,7 @@ package controller;
 //try push from vic 1
 //try push avanti
 //push from dell
+//try push vic 2
 import java.util.ArrayList;
 import java.util.List;
 
