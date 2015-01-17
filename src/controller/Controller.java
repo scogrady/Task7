@@ -1,8 +1,3 @@
-//Name: Hanze Xu
-//Andrew ID: hanzex
-//Title: Homework #9 Controller.java
-//Course Number: 08-600
-//Date: 2014-12-3
 package controller;
 
 import helper.Initialization;
