@@ -16,8 +16,10 @@ package controller;
 //push from dell
 //try push vic 2
 //push by Iris
-
 // push helen2
+
+//push helen3
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +30,6 @@ import model.FavoriteDAO;
 import model.UserDAO;
 
 import org.genericdao.RollbackException;
-
-import databeans.FavoriteBean;
-import databeans.UserBean;
 
 /*
  * Sets up the request attributes for manage.jsp.
