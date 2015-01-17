@@ -11,6 +11,7 @@ package controller;
 //try push
 //try push helen
 //try push from vic
+//try push from vic 1
 import java.util.ArrayList;
 import java.util.List;
 
