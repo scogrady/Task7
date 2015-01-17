@@ -10,6 +10,7 @@ package controller;
 //try pull
 //try push
 //try push helen
+//try push from vic
 import java.util.ArrayList;
 import java.util.List;
 
