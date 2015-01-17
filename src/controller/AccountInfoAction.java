@@ -13,6 +13,7 @@ package controller;
 //try push from vic
 //try push from vic 1
 //try push avanti
+//push from dell
 import java.util.ArrayList;
 import java.util.List;
 
