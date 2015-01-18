@@ -14,6 +14,7 @@ package controller;
 //try push from vic 1
 //try push avanti
 //push from dell
+//push try from dell
 //try push vic 2
 //try push vic 3
 //push by Iris
