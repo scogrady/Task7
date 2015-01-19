@@ -40,7 +40,7 @@ public class BuyForm extends FormBean {
 		BigInteger max = new BigInteger("9999999999");
 		boolean error = false;
 
-		if (!(num_1 >= 0 && num_1 < max)) {
+		if (!(num_1 >= 0 && num_1 < Integer.MAX_VALUE)) {
 			error = true;
 		}
 		if (!(num_2 >= 0 && num_2 < 1000)) {
