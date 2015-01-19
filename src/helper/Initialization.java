@@ -8,11 +8,13 @@ package helper;
 import model.Model;
 import model.FavoriteDAO;
 import model.UserDAO;
+import model.CustomerDAO;
 
 import org.genericdao.RollbackException;
 
 import databeans.FavoriteBean;
 import databeans.UserBean;
+import databeans.CustomerBean;
 
 
 /*
@@ -23,17 +25,20 @@ public class Initialization {
 	
 	private FavoriteDAO favoriteDAO;
 	private UserDAO  userDAO;
+	private CustomerDAO customerDAO;
 	
 	public Initialization(Model model) {
 		favoriteDAO = model.getFavoriteDAO();
     	userDAO  = model.getUserDAO();
+    	customerDAO = model.getCustomerDAO();
 	}
 
 
     public void init() {
         try {
-			if (!userDAO.userExist()) {
-				initializeDB();
+			if (!customerDAO.customerExist()) {
+				//initializeDB();
+				System.out.println("InitializeDB called");
 			}
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block
@@ -41,30 +46,7 @@ public class Initialization {
 		}
     }
     
-    public void initializeDB() {
-    	String[] names = {"Boat Yang", "Edison He", "BBC Xie", "Stella Long"};
-    	String[] webPages = {"www.google.com", "www.amazon.com", "www.baidu.com", "blackboard.andrew.cmu.edu"};
-    	try {
-        	for (String name : names) {
-        		UserBean user = new UserBean();
-        		user.setEmail(name + "@gmail.com");
-        		user.setPassword(name);
-        		String[] fullName = name.split(" ");
-        		user.setFirstName(fullName[0]);
-        		user.setLastName(fullName[1]);
-    			userDAO.create(user);
-    			for (String webPage : webPages) {
-    				FavoriteBean favorite = new FavoriteBean();
-    				favorite.setUrl(webPage);
-    				favorite.setComment("hi" + webPage);
-    				favorite.setClickCount(0);
-    				favorite.setUserID(user.getUserID());
-    				favoriteDAO.create(favorite);
-    			}
-    		}
+   
     		
-    	} catch (RollbackException e) {
-    		e.printStackTrace();
-    	} 
     }
-}
+

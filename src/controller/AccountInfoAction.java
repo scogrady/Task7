@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.Model;
 import model.FavoriteDAO;
 import model.UserDAO;
+import model.CustomerDAO;
 
 import org.genericdao.RollbackException;
 
@@ -46,12 +47,15 @@ import org.genericdao.RollbackException;
  */
 public class AccountInfoAction extends Action {
 
-	private FavoriteDAO favoriteDAO;
+	
 	private UserDAO  userDAO;
+	private CustomerDAO customerDAO;
 
 	public AccountInfoAction(Model model) {
-    	favoriteDAO = model.getFavoriteDAO();
+    	
     	userDAO  = model.getUserDAO();
+    	customerDAO =model.getCustomerDAO();
+    	
 	}
 
 	public String getName() { return "AccountInfo.do"; }
@@ -63,12 +67,15 @@ public class AccountInfoAction extends Action {
         
 		try {
             // Set up user list for nav bar
-			request.setAttribute("userList",userDAO.getUsers());
+			request.setAttribute("customerList",customerDAO.getCustomers());
+			//request.setAttribute("there",customerDAO.customerExist());
+			
+			//request.setAttribute("userList",userDAO.getUsers());
 			//UserBean user = (UserBean) request.getSession(false).getAttribute("user");
         	//FavoriteBean[] favoriteList = favoriteDAO.getUserFavorites(user.getUserID());
 	        //request.setAttribute("favoriteList",favoriteList);
 
-	        return "customer/account-info.jsp";
+	        return "account-info.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "error.jsp";

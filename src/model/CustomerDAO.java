@@ -15,9 +15,9 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		super(CustomerBean.class, tableName, pool);
 	}
 
-	public CustomerBean[] getCustomers() throws RollbackException {
-		CustomerBean[] users = match();
-		return users;
+	public  CustomerBean[] getCustomers() throws RollbackException {
+		CustomerBean[] customers = match();
+		return customers;
 	}
 	
 	public boolean customerExist() throws RollbackException {
@@ -66,12 +66,12 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 			return userList[0];
 	}
 	
-	public CustomerBean readFromID(int userID) throws RollbackException {
-		CustomerBean[] userList = match(MatchArg.equals("userID", userID));
-		if (userList.length == 0)
+	public CustomerBean readFromID(int customer_id) throws RollbackException {
+		CustomerBean[] customerList = match(MatchArg.equals("customer_id", customer_id));
+		if (customerList.length == 0)
 			return null;
 		else 
-			return userList[0];
+			return customerList[0];
 	}
 
 }

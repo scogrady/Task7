@@ -1,6 +1,6 @@
 package controller;
 
-import helper.Initialization;
+
 
 import java.io.IOException;
 
@@ -34,8 +34,7 @@ public class Controller extends HttpServlet {
         Action.add(new ResearchFundAction(model));
 
         //Initialization if table is null or empty then add default users and favorites
-        Initialization initHelper = new Initialization(model);
-        initHelper.init();
+       
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,11 +55,14 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
-        UserBean        user = (UserBean) session.getAttribute("user");
+        UserBean     user = (UserBean) session.getAttribute("user");
         String      action = getActionName(servletPath);
 
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
-
+        if(action.equals("AccountInfo.do"))
+        {
+        	return Action.perform(action, request);
+        }
         if (action.equals("register.do") || action.equals("login.do")) {
         	// Allow these actions without logging in
 			return Action.perform(action,request);

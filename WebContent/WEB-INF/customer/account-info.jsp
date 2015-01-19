@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="databeans.FavoriteBean" %>
+<%@ page import="databeans.CustomerBean" %>
 
 <jsp:include page="template-top.jsp" />
 	<div class="row">
@@ -11,6 +11,19 @@
 
             </div>
             <div class="panel-body">
+            <%
+           
+   	        	for (CustomerBean c : (CustomerBean[])request.getAttribute("customerList")) {
+			%>
+			    <span >
+					<a href="#">
+						<%=c.getFirstname() %> <%=c.getLastname()%>
+					</a>
+				</span>
+				<%
+				}
+				%>
+            
                 <table>
                     <tr>
                         <td>Name :</td>
