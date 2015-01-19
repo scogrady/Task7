@@ -1,7 +1,5 @@
 package controller;
 
-import helper.Initialization;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -20,11 +18,8 @@ public class Controller extends HttpServlet {
 	
     public void init() throws ServletException {
         Model model = new Model(getServletConfig());
-        Action.add(new ChangePwdAction(model));
         Action.add(new LoginAction(model));
-        Action.add(new ManageAction(model));
-        Action.add(new RegisterAction(model));
-        Action.add(new RemoveAction(model));
+        
         Action.add(new AccountInfoAction(model));
         Action.add(new ChangePwdAction(model));
         Action.add(new TransHistoryAction(model));
@@ -32,10 +27,16 @@ public class Controller extends HttpServlet {
         Action.add(new BuyFundAction(model));
         Action.add(new SellFundAction(model));
         Action.add(new ResearchFundAction(model));
-
-        //Initialization if table is null or empty then add default users and favorites
-        Initialization initHelper = new Initialization(model);
-        initHelper.init();
+        
+        Action.add(new CreateEmployeeAction(model));
+        Action.add(new ChangeEmployeePwdAction(model));
+        Action.add(new CreateCustomerAction(model));
+        Action.add(new ResetPasswordAction(model));
+        Action.add(new ViewAccountAction(model));
+        Action.add(new ViewTransactionAction(model));
+        Action.add(new CreateFundAction(model));
+        Action.add(new DepositCheckAction(model));
+        Action.add(new TransactionDayAction(model));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
