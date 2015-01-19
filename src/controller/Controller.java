@@ -1,7 +1,5 @@
 package controller;
 
-import helper.Initialization;
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -39,10 +37,6 @@ public class Controller extends HttpServlet {
         Action.add(new CreateFundAction(model));
         Action.add(new DepositCheckAction(model));
         Action.add(new TransactionDayAction(model));
-        
-        //Initialization if table is null or empty then add default users and favorites
-        Initialization initHelper = new Initialization(model);
-        initHelper.init();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
