@@ -7,6 +7,7 @@
 
 //oh my god
 package controller;
+
 //try pull
 //try push
 //try push helen
@@ -28,8 +29,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.Model;
-import model.FavoriteDAO;
-import model.UserDAO;
+
 import model.CustomerDAO;
 
 import org.genericdao.RollbackException;
@@ -48,12 +48,12 @@ import org.genericdao.RollbackException;
 public class AccountInfoAction extends Action {
 
 	
-	private UserDAO  userDAO;
+	
 	private CustomerDAO customerDAO;
 
 	public AccountInfoAction(Model model) {
     	
-    	userDAO  = model.getUserDAO();
+    	
     	customerDAO =model.getCustomerDAO();
     	
 	}
