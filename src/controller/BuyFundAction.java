@@ -13,10 +13,13 @@ import model.Model;
 import model.TransactionDAO;
 
 import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
+import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
 import databeans.TransactionBean;
 import formbeans.BuyForm;
+import formbeans.FavoriteForm;
 
 public class BuyFundAction extends Action {
 
@@ -24,6 +27,8 @@ public class BuyFundAction extends Action {
 	private CustomerDAO customerDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
+	private FormBeanFactory<BuyForm> formBeanFactory;
+
 
 	public BuyFundAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
@@ -44,7 +49,7 @@ public class BuyFundAction extends Action {
 
 		try {
 			
-			customer = customerDAO.getCustomer(customer.getCustomer_id());
+			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 			
 			//display the form
@@ -91,15 +96,15 @@ public class BuyFundAction extends Action {
 			// put it into queue
 			// change available balance
 			
-			customer = customerDAO.getCustomer(customer.getCustomer_id());
+			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 			
-
-			request.setAttribute("userList", userDAO.getUsers());
-
+			
 			return "buy-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
+			return "error.jsp";
+		} catch (FormBeanException e) {
 			return "error.jsp";
 		}
 	}

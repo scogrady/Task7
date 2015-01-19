@@ -1,8 +1,4 @@
-//Name: Hanze Xu
-//Andrew ID: hanzex
-//Title: Homework #9 Model.java
-//Course Number: 08-600
-//Date: 2014-12-3
+
 package model;
 
 import javax.servlet.ServletConfig;
@@ -12,8 +8,14 @@ import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 
 public class Model {
-	private FavoriteDAO favoriteDAO;
-	private UserDAO  userDAO;
+	private CustomerDAO customerDAO;
+	private EmployeeDAO  employeeDAO;
+	private FundDAO fundDAO;
+	private FundPriceHistoryDAO fundPriceHistoryDAO;
+	private PositionDAO positionDAO;
+	private TransactionDAO transactionDAO;
+
+	
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -21,13 +23,30 @@ public class Model {
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			
-			userDAO  = new UserDAO("hanzex_user", pool);
-			favoriteDAO = new FavoriteDAO("hanzex_favorite", pool);
+			customerDAO  = new CustomerDAO("customer", pool);
+			employeeDAO = new EmployeeDAO("employee", pool);
+			fundDAO  = new FundDAO("fund", pool);
+			fundPriceHistoryDAO  = new FundPriceHistoryDAO("fund_price_history", pool);
+			positionDAO  = new PositionDAO("position", pool);
+			transactionDAO  = new TransactionDAO("transaction", pool);
+			
+			
 		} catch (DAOException e) {
 			throw new ServletException(e);
 		}
 	}
 	
-	public FavoriteDAO getFavoriteDAO() { return favoriteDAO; }
-	public UserDAO  getUserDAO()  { return userDAO;  }
+	public CustomerDAO getCustomerDAO() { return customerDAO; }
+	
+	public EmployeeDAO getEmployeeDAO() { return employeeDAO; }
+
+	public FundDAO getFundDAO() { return fundDAO; }
+
+	public FundPriceHistoryDAO getFundPriceHistoryDAO() { return fundPriceHistoryDAO; }
+
+	public PositionDAO getPositionDAO() { return positionDAO; }
+	
+	public TransactionDAO getTransactionDAO() { return transactionDAO; }
 }
+
+
