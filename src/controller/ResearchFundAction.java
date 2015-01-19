@@ -1,11 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import model.FundDAO;
 import model.Model;
 
-<<<<<<< HEAD
 import org.genericdao.RollbackException;
 
 import databeans.FavoriteBean;
@@ -23,17 +25,11 @@ import databeans.UserBean;
  * 
  * Forwards to manage.jsp.
  */
-=======
->>>>>>> branch 'master' of https://github.com/scogrady/Task7.git
 public class ResearchFundAction extends Action {
 
-<<<<<<< HEAD
 	private FundDAO fundDAO;
 
-=======
->>>>>>> branch 'master' of https://github.com/scogrady/Task7.git
 	public ResearchFundAction(Model model) {
-<<<<<<< HEAD
 		fundDAO = model.getFundDAO();
 		try {
 			FundBean[] list = fundDAO.getFunds();
@@ -45,8 +41,6 @@ public class ResearchFundAction extends Action {
 			e.printStackTrace();
 		}
 	
-=======
->>>>>>> branch 'master' of https://github.com/scogrady/Task7.git
 	}
 
 	public String getName() {
@@ -54,7 +48,6 @@ public class ResearchFundAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
-<<<<<<< HEAD
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
@@ -67,9 +60,5 @@ public class ResearchFundAction extends Action {
 			errors.add(e.getMessage());
 			return "error.jsp";
 		}
-	}
-=======
-	        return "customer/research-fund.jsp";
     }
->>>>>>> branch 'master' of https://github.com/scogrady/Task7.git
 }
