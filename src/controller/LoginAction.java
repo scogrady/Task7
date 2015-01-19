@@ -76,7 +76,7 @@ public class LoginAction extends Action {
 	        session.setAttribute("user",user);*/
 	        if (role != null) {
 	        	if (role.equals("Customer")) return "AccountInfo.do";
-	        	if (role.equals("Employee")) return "EmployeeIndex.do";
+	        	if (role.equals("Employee")) return "CreateEmployee.do";
 	        } 
 	        return "login.jsp";
         } catch (RollbackException e) {

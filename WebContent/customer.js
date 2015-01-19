@@ -27,14 +27,6 @@ $(document).ready(function() {
 		$('#fund-manage').removeClass("active");
 	}
 	
-	$('#view-account').click(function() {
-
-	})
-	
-	$('#fund-manage').click(function() {
-	
-	})
-	
 	var listItems = $("#sub-operation li");
 	listItems.each(function(idx, li) {
 	    var product = $(li);
