@@ -1,8 +1,10 @@
 //Name: Hanze Xu
+
 //Andrew ID: hanzex
 //Title: Homework #9 UserBean.java
 //Course Number: 08-600
 //Date: 2014-12-3
+//test
 package databeans;
 import org.genericdao.PrimaryKey;
 
