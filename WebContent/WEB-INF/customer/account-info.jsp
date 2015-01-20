@@ -19,12 +19,7 @@
             <%
             
             CustomerBean customer = (CustomerBean) session.getAttribute("customer");
-        
-            
-            
-           
-            
-   	        	
+        	
 			%>
 			   
 				
@@ -43,16 +38,16 @@
                         <td id="customer-address-2"><%=customer.getAddr_line2()%></td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>City,State,Zip:</td>
                         <td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
                     </tr>
                     <tr>
-                        <td>Account balance: $</td>
-                        <td id="customer-balance"><%=customer.getCurrent_cash()%></td>
+                        <td>Account balance: </td>
+                        <td id="customer-balance">$<%=customer.getCurrent_cash()%></td>
                     </tr>
                     <tr>
-                        <td>Available balance: $</td>
-                        <td id="customer-balance"><%=customer.getAvailable_cash()%></td>
+                        <td>Available balance: </td>
+                        <td id="customer-balance">$<%=customer.getAvailable_cash()%></td>
                     </tr>
                     <tr>
                         <td>Last Trading Day</td>
