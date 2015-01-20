@@ -12,42 +12,41 @@
             </div>
             <div class="panel-body">
             <%
-           
-   	        	for (CustomerBean c : (CustomerBean[])request.getAttribute("customerList")) {
+            
+            CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+   	        	
 			%>
-			    <span >
-					<a href="#">
-						<%=c.getFirstname() %> <%=c.getLastname()%>
-					</a>
-				</span>
-				<%
-				}
-				%>
+			   
+				
             
                 <table>
                     <tr>
                         <td>Name :</td>
-                        <td id="customer-name">Name from the session</td>
+                        <td id="customer-name"><%=customer.getFirstname()%> <%=customer.getLastname()%></td>
                     </tr>
                     <tr>
                         <td>Address :</td>
-                        <td id="customer-address-1">Address line 1 from Databaseeeeeeeeeeeeeeee</td>
+                        <td id="customer-address-1"><%=customer.getAddr_line1()%></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td id="customer-address-2">Address line 2 from Databaseeeeeeeeeeeeeeee</td>
+                        <td id="customer-address-2"><%=customer.getAddr_line2()%></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td id="customer-city">Customer City,PIN</td>
+                        <td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
                     </tr>
                     <tr>
                         <td>Account balance: $</td>
-                        <td id="customer-balance">9999999999.00</td>
+                        <td id="customer-balance"><%=customer.getCurrent_cash()%></td>
+                    </tr>
+                    <tr>
+                        <td>Available balance: $</td>
+                        <td id="customer-balance"><%=customer.getAvailable_cash()%></td>
                     </tr>
                     <tr>
                         <td>Last Trading Day</td>
-                        <td id="last-trading-day">DD/MM/YYYY</td>
+                        <td id="last-trading-day"><%=customer.getLast_login_time()%></td>
                     </tr>
                 </table>
             </div>

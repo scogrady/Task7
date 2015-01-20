@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="databeans.CustomerBean" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +13,7 @@
 </head>
 
 <body class="nojs">
-<%@ page import="databeans.UserBean" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="wrap">
 <nav class="navbar navbar-inverse" role="navigation">
@@ -29,7 +31,12 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-      	<li><a style="color: white">Welcome! 				Hanze Xu</a></li>
+     		 
+     		 <%
+            CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+			%>
+			
+      	<li><a style="color: white">Welcome! <%=customer.getFirstname()%> <%=customer.getLastname()%></a></li>
 		<li><a href="logout.do">Logout</a></li>
 		<li>&nbsp;</li><br/>
       </ul>
