@@ -16,7 +16,10 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databeans.BuyFundBean;
 import databeans.CustomerBean;
+import databeans.FundBean;
+import databeans.FundPriceHistoryBean;
 import databeans.TransactionBean;
 import formbeans.BuyForm;
 import formbeans.FavoriteForm;
@@ -46,11 +49,22 @@ public class BuyFundAction extends Action {
 		CustomerBean customer = (CustomerBean) request.getSession(false)
 				.getAttribute("customer");
 		Date date = new Date();
+		FundBean[] fundList;
+		BuyFundBean[] buyFundList = null;
+		FundPriceHistoryBean price;
 
 		try {
 			
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
+			
+			fundList = fundDAO.getFunds();
+			for (int i = 0; i < fundList.length; i++) {
+				buyFundList[i] = new BuyFundBean(fundList[i]);
+				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i].getFund_id());
+				buyFundList[i].setChange
+				
+			}
 			
 			//display the form
 			
