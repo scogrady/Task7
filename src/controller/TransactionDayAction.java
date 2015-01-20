@@ -54,7 +54,7 @@ public class TransactionDayAction extends Action {
 				//sell fund
 				if (transactionType.equals("Sell Fund")) {
 					int fundId = transaction.getFund_id();
-					long price = fundPriceHistoryDAO.readByDateAndFundID(date, fundId)[0].getPrice();
+					long price = fundPriceHistoryDAO.readByDateAndFundID((java.sql.Date)date, fundId)[0].getPrice();
 					double share = transaction.getShares(); 
 					//positionDAO.readByCustomerIDAndFundId(customerId, fundId)[0].getShares();
 					long moneyGot = (long)share / 1000 * price;
@@ -72,7 +72,7 @@ public class TransactionDayAction extends Action {
 				//buy fund
 				if (transactionType.equals("Buy Fund")) {
 					int fundId = transaction.getFund_id();
-					long price = fundPriceHistoryDAO.readByDateAndFundID(date, fundId)[0].getPrice();
+					long price = fundPriceHistoryDAO.readByDateAndFundID((java.sql.Date)date, fundId)[0].getPrice();
 					long amount = transaction.getAmount();
 					long shares = Math.round((amount / price) * 1000);
 					

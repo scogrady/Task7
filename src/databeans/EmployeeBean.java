@@ -9,7 +9,18 @@ public class EmployeeBean {
 	private String password;
 	private String firstname;
 	private String lastname;
-	
+	private int status;
+	public boolean isLoged(){
+		return status==0 ? false:true;
+	}
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public String getUsername() {
 		return username;
 	}

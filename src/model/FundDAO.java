@@ -55,7 +55,14 @@ public class FundDAO extends GenericDAO<FundBean> {
 		else 
 			return fundList[0];
 	}
+	public FundBean readById(int id) throws RollbackException {
+		FundBean[] fundList = match(MatchArg.equals("fund_id", id));
+		if (fundList.length == 0)
+			return null;
+		else 
+			return fundList[0];
+	}
+	
 	
 
-	
 }

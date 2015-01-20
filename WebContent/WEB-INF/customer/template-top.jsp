@@ -61,7 +61,7 @@
           <ul id="sub-operation" class="nav navbar-nav">
             <li class="active" name = "SellFund"><a href="SellFund.do">Sell Fund</a></li>
             <li name = "BuyFund"><a href="BuyFund.do">Buy Fund</a></li>
-            <li name = "ResearchFund"><a href="ResearchFund.do">Research Fund</a></li>
+            <li name = "ResearchFund"><a href="ResearchFund.do?fund_id=1">Research Fund</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
