@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="databeans.FundBean" %>
 <%@ page import="databeans.FundPriceHistoryBean" %>
-
+<script src="Chart.js"></script>
 
 <jsp:include page="template-top.jsp" />
 	<div class="container-fluid">
@@ -113,60 +113,12 @@
 										</td>
 									</tr>
 								</c:forEach>
-									
-									<!-- <tr >
-										<td>
-											03/04/2013
-										</td>
-										<td>
-											15.00
-										</td>
-										<td>
-											Up
-										</td>
-									</tr>
-									<tr >
-										<td>
-											02/04/2013
-										</td>
-										<td>
-											10.00
-										</td>
-										<td>
-											Down
-										</td>
-									</tr>
-									<tr >
-										<td>
-											01/04/2013
-										</td>
-										<td>
-											11.00
-										</td>
-										<td>
-											Up
-										</td>
-									</tr>
-									<tr >
-										<td>
-											12/04/2012
-										</td>
-										<td>
-											10.00
-										</td>
-										<td>
-											-
-										</td>
-									</tr> -->>
-									
 								</tbody>
 							</table>
 				  </div>		
 				</div>
 
 
-
-				
 
 				<nav>
 	  				<ul class="pagination">
