@@ -3,8 +3,6 @@
 <%@ page import="databeans.FundPriceHistoryBean" %>
 
 
-
-
 <jsp:include page="template-top.jsp" />
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -15,42 +13,22 @@
 					</h3>
 				</div>
 				<div class="row">
+				
+				  <c:forEach var="recommandFund" items="${recommandFundList}">
 					<div class="col-sm-6 col-md-4">
 						<div class="thumbnail">
 							<img data-src="holder.js/300x300" alt="...">
 							<div class="caption">
-								<h3>Fund A - TICKER</h3>
-								<p>Bigger risk, bigger reward. </p>
-	        					<p><a href="#" class="btn btn-primary" role="button">View More</a> <a href="#" class="btn btn-default" role="button">Compare</a></p>
+								<h4>${recommandFund.getName()} - ${recommandFund.getSymbol()}</h4>
+								<p>${recommandFund.getDescription()}</p>
+	        					<p><a href="ResearchFund.do?fund_id=${recommandFund.getFund_id()}" class="btn btn-primary">View More</a> 
+	        					<a href="#" class="btn btn-default" role="button">Compare</a></p>
 	      					</div>
 	    				</div>
 	  				</div>
-
-					<div class="col-sm-6 col-md-4">
-				    	<div class="thumbnail">
-				      	<img data-src="holder.js/300x300" alt="...">
-				    		<div class="caption">
-				        		<h3>Fund B - TICKER</h3>
-				        		<p>-.-</p>
-				        		<p><a href="#" class="btn btn-primary" role="button">View More</a> <a href="#" class="btn btn-default" role="button">Compare</a></p>
-				      		</div>
-				    	</div>
-				  	</div>
-				
-				  	<div class="col-sm-6 col-md-4">
-				    	<div class="thumbnail">
-				      	<img data-src="holder.js/300x300" alt="...">
-				      		<div class="caption">
-				        		<h3>Fund C - TICKER</h3>
-				        		<p> Safety is the most important thing.</p>
-				        		<p><a href="#" class="btn btn-primary" role="button">View More</a> <a href="#" class="btn btn-default" role="button">Compare</a></p>
-				      		</div>
-				    	</div>
-				  	</div>
+				  </c:forEach>
+				  
 				</div>
-
-				
-
 
 
 				<div class="row" >
@@ -59,62 +37,31 @@
 							Mutual Funds.
 						</h3>
 
-
 						<ol>
-							<li>
-								<h4>
-									fundA - TICKER
-								</h4>
-								<p>
-									Always increases.
-								</p>
-								<p>
-									<a class="btn" href="#">View More »</a>
-								</p>
-							</li>
-							<li>
-								<h4>
-									fundB - TICKER
-								</h4>
-								<p>
-									Always decreases.
-								</p>
-								<p>
-									<a class="btn" href="#">View More »</a>
-								</p>
-							</li>
-							<li>
-								<h4>
-									fundC - TICKER
-								</h4>
-								<p>
-									Always keeps the same.
-								</p>
-								<p>
-									<a class="btn" href="#">View More »</a>
-								</p>
-							</li>
-							<li>
-								<h4>
-									fundD - TICKER
-								</h4>
-								<p>
-									-.-
-								</p>
-								<p>
-									<a class="btn" href="#">View More »</a>
-								</p>
-							</li>
+							<c:forEach var="fund" items="${fundList}">
+								<li>
+									<h4>
+										${fund.getName()} - ${fund.getSymbol()}
+									</h4>
+									<p>${fund.getDescription()}</p>
+									<p>
+										<a class="btn" href="ResearchFund.do?fund_id=${fund.getFund_id()}"> View More  »</a>
+									</p>
+								</li>
+							</c:forEach>
 						</ol>
+					
 	  				</div>
 
 
 					<div class="col-sm-6 col-md-8"  id="detail-section">
 							<h3>
-								Detail Information of Fund A - Ticker
+								${fundPriceHistoryName.getName()} - ${fundPriceHistoryName.getSymbol()}
 							</h3>
+								
 							<dl>
 								<dt>
+								${fundPriceHistoryName.getDescription()}
 									Description of Fund.
 								</dt>
 								<dt>
@@ -151,18 +98,23 @@
 									</tr>
 								</thead>
 								<tbody>
+								
+								<c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
+								
 									<tr>
 										<td>
-											04/04/2013
+											${fundPriceHistory.getPrice_date()}
 										</td>
 										<td>
-											15.00
+											${fundPriceHistory.getPrice()}
 										</td>
 										<td>
 											Up
 										</td>
 									</tr>
-									<tr >
+								</c:forEach>
+									
+									<!-- <tr >
 										<td>
 											03/04/2013
 										</td>
@@ -205,7 +157,8 @@
 										<td>
 											-
 										</td>
-									</tr>
+									</tr> -->>
+									
 								</tbody>
 							</table>
 				  </div>		
