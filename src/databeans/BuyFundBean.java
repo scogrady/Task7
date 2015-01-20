@@ -6,6 +6,11 @@ public class BuyFundBean extends FundBean{
 	private long change;
 	private long chgPer;
 	
+	
+	public BuyFundBean() {
+		
+	}
+	
 	public BuyFundBean(FundBean fund) {
 		super.setFund_id(fund.getFund_id());
 		super.setName(fund.getName());

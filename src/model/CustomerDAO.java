@@ -67,7 +67,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	}
 	
 	public CustomerBean readFromID(int userID) throws RollbackException {
-		CustomerBean[] userList = match(MatchArg.equals("userID", userID));
+		CustomerBean[] userList = match(MatchArg.equals("customer_id", userID));
 		if (userList.length == 0)
 			return null;
 		else 

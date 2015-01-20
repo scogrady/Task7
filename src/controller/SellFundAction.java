@@ -33,8 +33,6 @@ public class SellFundAction extends Action {
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private PositionDAO positionDAO;
 	private FormBeanFactory<SellForm> formBeanFactory;
-	
-	
 
 	public SellFundAction(Model model) {
 
@@ -56,24 +54,26 @@ public class SellFundAction extends Action {
 		FundPriceHistoryBean price;
 
 		try {
+			customer = customerDAO.read(1);
 
-			customer = customerDAO.readFromID(customer.getCustomer_id());
+			//customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-			
+
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
-			
+
 			for (int i = 0; i < fundList.length; i++) {
 				sellFundList[i].setFund_id(fundList[i].getFund_id());
 				sellFundList[i].setShares(fundList[i].getShares());
-				
+
 				fund = fundDAO.read(fundList[i].getFund_id());
 				sellFundList[i].setName(fund.getName());
-				
-				price = fundPriceHistoryDAO.readLastPrice(fundList[i].getFund_id());
+
+				price = fundPriceHistoryDAO.readLastPrice(fundList[i]
+						.getFund_id());
 				sellFundList[i].setPrice(price.getPrice());
 			}
-			request.setAttribute("sellFundList",sellFundList);
-		// display
+			request.setAttribute("sellFundList", sellFundList);
+			// display
 
 			SellForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
@@ -83,7 +83,6 @@ public class SellFundAction extends Action {
 			}
 
 			errors.addAll(form.getValidationErrors());
-			
 
 			if (errors.size() != 0) {
 				return "sell-fund.jsp";
@@ -98,13 +97,13 @@ public class SellFundAction extends Action {
 			sellFund.setShares(share);
 			sellFund.setTransaction_type("Sell Fund");
 			sellFund.setStatus("Pending");
-			//sellFund.setAmount(amount);
+			// sellFund.setAmount(amount);
 			transactionDAO.create(sellFund);
 
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
-			
 
-			customer.setAvailable_cash(customer.getAvailable_cash() + (price.getPrice() * share));
+			customer.setAvailable_cash(customer.getAvailable_cash()
+					+ (price.getPrice() * share));
 			customerDAO.update(customer);
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
@@ -117,7 +116,6 @@ public class SellFundAction extends Action {
 		} catch (FormBeanException e) {
 			return "error.jsp";
 		}
-
 
 	}
 }
