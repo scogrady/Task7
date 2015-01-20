@@ -1,8 +1,4 @@
-//Name: Hanze Xu
-//Andrew ID: hanzex
-//Title: Homework #9 IdForm.java
-//Course Number: 08-600
-//Date: 2014-12-3
+
 package formbeans;
 
 import java.util.ArrayList;

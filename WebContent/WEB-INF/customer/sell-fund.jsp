@@ -1,54 +1,61 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="databeans.FavoriteBean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
-<div class="container-fluid">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-             <h3 class="panel-title">Balance</h3>
 
-        </div>
-        <div class="panel-body">Available Balance:</div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="page-header">
-                 <h1>Your Fund</h1>
 
-            </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th width="30%">Fund Name</th>
-                        <th width="15%">You own</th>
-                        <th width="10%">Price</th>
-                        <th width="30%">Share</th>
-                        <th width="15%">Sell</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <div class="form-group width: 10%">
-                            <td>SPARK NO.1</td>
-                            <td>
-                                <div class="num">500 shares</div>
-                            </td>
-                            <td id="change-p">$35.00</td>
-                            <td>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-                                    <div class="input-group-addon">shares</div>
-                                </div>
-                            </td>
-                            <td>
-                                <input class="btn btn-default" type="submit" value="Sell">
-                            </td>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="col-xs-12 col-sm-9">
+	<jsp:include page="balance.jsp" />
+
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Your Fund</h1>
+
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th width="30%">Fund Name</th>
+						<th width="15%">You own</th>
+						<th width="10%">Price</th>
+						<th width="30%">Share</th>
+						<th width="15%">Sell</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${sellFundList}" var="fund">
+				
+					<tr>
+						<div class="form-group">
+							<td>${fund.getName()}</td>
+							<td>
+								<div class="num">${fund.getShares()} shares</div>
+							</td>
+							<td id="change-p">$${fund.getPrice()}</td>
+							<td>
+								<div class="form-inline">
+									<input type="text" class="form-control" id="InputAmount1"
+										placeholder="100000000000" size="10" maxlength="12" name="num_1">.
+									<input type="text" class="form-control" id="InputAmount2"
+										placeholder="000" size="1" maxlength="3"  name="num_2"> shares
+
+								</div>
+							</td>
+							<td>
+							<input type="hidden" name="fund_id" value="${fund.getFund_id()}">
+							<input type="hidden" name="shares" value="${fund.getShares()}">
+							<input class="btn btn-default" type="submit"
+								value="Sell"></td>
+						</div>
+					</tr>
+					</c:forEach>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
+
 
 <jsp:include page="template-bottom.jsp" />
