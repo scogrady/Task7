@@ -5,7 +5,8 @@
 <jsp:include page="balance.jsp" />
 
 
-<div class="container-fluid">
+<div class="col-xs-12 col-sm-9">
+
 
 
 	<div class="row-fluid">
@@ -50,7 +51,7 @@
 											placeholder="00" size="1" maxlength="2  name="num_2"">
 									</div>
 								</td>
-								<td><input type="hidden" name="fund_id" value="${fund.getFund_id()}"> <input
+								<td><input type="hidden" name="shares" value="${fund.getFund_id()}"> <input
 									class="btn btn-default" type="submit" value="Buy"></td>
 							</div>
 						</div>

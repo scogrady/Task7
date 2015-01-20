@@ -22,7 +22,6 @@ import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionBean;
 import formbeans.BuyForm;
-import formbeans.FavoriteForm;
 
 public class BuyFundAction extends Action {
 
@@ -37,6 +36,8 @@ public class BuyFundAction extends Action {
 
 		transactionDAO = model.getTransactionDAO();
 		customerDAO = model.getCustomerDAO();
+		fundDAO = model.getFundDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
 	public String getName() {
@@ -99,11 +100,11 @@ public class BuyFundAction extends Action {
 
 			buyFund.setCustomer_id(customer.getCustomer_id());
 			buyFund.setFund_id(form.getFund_id());
-			buyFund.setExecute_date(date);
+			//buyFund.setExecute_date();
 			// buyFund.setShares();
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
-			long amount = form.getNum_1() * 1000 + form.getNum_2();
+			long amount = form.getNum_1() * 100 + form.getNum_2();
 			buyFund.setAmount(amount);
 			transactionDAO.create(buyFund);
 
