@@ -69,16 +69,10 @@ public class BuyFundAction extends Action {
 				buyFundList[i].setChange(change);
 				buyFundList[i].setChgPer(change/price.getPrice());
 				
-				
 			}
 			
-			//display the form
-			
-			
-			
-			
-			
-
+			request.setAttribute("buyFundList",buyFundList);
+		
 			BuyForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 
@@ -116,6 +110,9 @@ public class BuyFundAction extends Action {
 			// put it into queue
 			// change available balance
 			
+			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
+			customerDAO.update(customer);
+			
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 			
@@ -128,12 +125,5 @@ public class BuyFundAction extends Action {
 			return "error.jsp";
 		}
 	}
-}
-
-		transactionDAO = model.getTransactionDAO();
-		customerDAO = model.getCustomerDAO();
-	}
-
-
 }
 

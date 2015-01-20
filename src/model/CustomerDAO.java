@@ -73,5 +73,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		else 
 			return userList[0];
 	}
+	
+	
 
 }
