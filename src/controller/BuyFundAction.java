@@ -40,5 +40,25 @@ public class BuyFundAction extends Action {
 	public String perform(HttpServletRequest request) {
 		
 	    return "customer/buy-fund.jsp";
+   
+		// Set up the errors list
+		
+		
+			
+			
+
+			// check if it's within available balance?
+
+			
+			
+			
+			
+			
+
+		
+			
+			
+			
+		} 
 	}
-	}
+

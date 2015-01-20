@@ -19,7 +19,17 @@ public class CustomerBean {
 	private long current_cash;
 	private long available_cash;
 	private Date last_login_time;
+	private int status;
+	public boolean isLoged(){
+		return status==0 ? false:true;
+	}
+	public int getStatus() {
+		return status;
+	}
 
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public int getCustomer_id() {
 		return customer_id;
 	}

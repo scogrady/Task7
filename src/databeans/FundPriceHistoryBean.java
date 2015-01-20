@@ -1,6 +1,8 @@
 package databeans;
 
-import java.util.Date;
+
+import java.math.BigInteger;
+import java.sql.Date;
 
 import org.genericdao.PrimaryKey;
 

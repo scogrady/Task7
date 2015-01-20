@@ -65,13 +65,19 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		else 
 			return userList[0];
 	}
-	
 	public CustomerBean readFromID(int customer_id) throws RollbackException {
 		CustomerBean[] customerList = match(MatchArg.equals("customer_id", customer_id));
-		if (customerList.length == 0)
-			return null;
-		else 
+		if (customerList.length == 0){
+			return null;}
+		else{
 			return customerList[0];
+		}
+		
+
+	}
 	}
 
-}
+	
+	
+
+
