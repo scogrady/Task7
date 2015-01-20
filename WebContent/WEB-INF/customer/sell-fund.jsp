@@ -24,32 +24,32 @@
 					</tr>
 				</thead>
 				<tbody>
-				
+					<c:forEach items="${sellFundList}" var="fund">
 				
 					<tr>
 						<div class="form-group">
-							<td>SPARK NO.1</td>
+							<td>${fund.getName()}</td>
 							<td>
-								<div class="num">500 shares</div>
+								<div class="num">${fund.getShares()} shares</div>
 							</td>
-							<td id="change-p">$35.00</td>
+							<td id="change-p">$${fund.getPrice()}</td>
 							<td>
 								<div class="form-inline">
 									<input type="text" class="form-control" id="InputAmount1"
-										placeholder="100000000000" size="10" maxlength="12">.
+										placeholder="100000000000" size="10" maxlength="12" name="num_1">.
 									<input type="text" class="form-control" id="InputAmount2"
-										placeholder="000" size="1" maxlength="3"> shares
+										placeholder="000" size="1" maxlength="3"  name="num_2"> shares
 
 								</div>
 							</td>
 							<td>
 							<input type="hidden" name="fund_id" value="${fund.getFund_id()}">
-							<input type="hidden" name="shares" value="${fund.getFund_sharet()}">
+							<input type="hidden" name="shares" value="${fund.getShares()}">
 							<input class="btn btn-default" type="submit"
 								value="Sell"></td>
 						</div>
 					</tr>
-					
+					</c:forEach>
 					
 				</tbody>
 			</table>

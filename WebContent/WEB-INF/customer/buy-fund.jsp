@@ -48,7 +48,7 @@
 										$ <input type="text" class="form-control" id="InputAmount1"
 											placeholder="1000000000000" size="11" maxlength="13" name="num_1">.
 										<input type="text" class="form-control" id="InputAmount2"
-											placeholder="00" size="1" maxlength="2  name="num_2"">
+											placeholder="00" size="1" maxlength="2"  name="num_2">
 									</div>
 								</td>
 								<td><input type="hidden" name="shares" value="${fund.getFund_id()}"> <input
