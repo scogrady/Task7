@@ -24,8 +24,7 @@ public class BuyFundAction extends Action {
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public BuyFundAction(Model model) {
-		transactionDAO = model.getTransactionDAO();
-		customerDAO = model.getCustomerDAO();
+
 	}
 
 	public String getName() {
@@ -33,9 +32,6 @@ public class BuyFundAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
-		
-	    return "customer/buy-fund.jsp";
-    }
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
@@ -94,9 +90,5 @@ public class BuyFundAction extends Action {
 			request.setAttribute("userList", userDAO.getUsers());
 
 			return "buy-fund.jsp";
-		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return "error.jsp";
-		}
 	}
 }
