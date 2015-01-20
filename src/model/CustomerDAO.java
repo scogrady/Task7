@@ -12,7 +12,9 @@ import databeans.CustomerBean;
 public class CustomerDAO extends GenericDAO<CustomerBean> {
 	
 	public CustomerDAO(String tableName, ConnectionPool pool) throws DAOException {
-		super(CustomerBean.class, tableName, pool);
+				super(CustomerBean.class, tableName, pool);
+				System.out.println("in cus dao");
+
 	}
 
 	public  CustomerBean[] getCustomers() throws RollbackException {
@@ -21,7 +23,11 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	}
 	
 	public boolean customerExist() throws RollbackException {
-		CustomerBean[] customers = match();		
+		System.out.println("in cus exist dao");
+
+		CustomerBean[] customers = match();	
+		System.out.println(customers.length);
+
 		return (customers.length > 0);
 	}
 	
