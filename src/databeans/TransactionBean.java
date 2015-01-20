@@ -12,6 +12,7 @@ public class TransactionBean {
 	private int fund_id;
 	private Date execute_date;
 	private long shares;
+	
 	/**
 	 * Transaction Type: Sell Fund Buy Fund Request Check Deposit Check
 	 * */
@@ -63,6 +64,7 @@ public class TransactionBean {
 		return amount;
 	}
 
+	
 	public void setTransaction_id(int transaction_id) {
 		this.transaction_id = transaction_id;
 	}
@@ -94,5 +96,4 @@ public class TransactionBean {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
-
 }

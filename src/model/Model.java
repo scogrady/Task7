@@ -23,6 +23,7 @@ public class Model {
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL,"root","root");
 			
+			
 			customerDAO  = new CustomerDAO("customer", pool);
 			employeeDAO = new EmployeeDAO("employee", pool);
 			fundDAO  = new FundDAO("fund", pool);
