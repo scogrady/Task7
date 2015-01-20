@@ -90,14 +90,22 @@ public class TransactionDayAction extends Action {
 					
 					continue;
 				}
-				
+								
 				//request check
 				if (transactionType.equals("Request Check")) {
+					long amount = transaction.getAmount();
 					
+					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
+					customer.setAvailable_cash(customer.getAvailable_cash() + amount);
 					continue;
-				}
+				}				
+				
 				//deposit check
 				if (transactionType.equals("Deposit Check")) {
+					long amount = transaction.getAmount();
+					
+					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
+					customer.setAvailable_cash(customer.getAvailable_cash() - amount);
 					continue;
 				}		
 			}
