@@ -100,7 +100,7 @@ public class BuyFundAction extends Action {
 
 			buyFund.setCustomer_id(customer.getCustomer_id());
 			buyFund.setFund_id(form.getFund_id());
-			//buyFund.setExecute_date();
+			buyFund.setGenerate_date(date);
 			// buyFund.setShares();
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
