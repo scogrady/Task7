@@ -40,50 +40,5 @@ public class BuyFundAction extends Action {
 	public String perform(HttpServletRequest request) {
 		
 	    return "customer/buy-fund.jsp";
-    }
-		// Set up the errors list
-		List<String> errors = new ArrayList<String>();
-		
-			
-			
-
-			// check if it's within available balance?
-
-			errors.addAll(form.getValidationErrors());
-			if (form.getNum_1() + 1 > customer.getAvailable_cash()) {
-				errors.add("Not enough money in Available Cash");
-			}
-			
-			
-			if (errors.size() != 0) {
-				return "buy-fund.jsp";
-			}
-
-			TransactionBean buyFund = new TransactionBean();
-
-			buyFund.setCustomer_id(customer.getCustomer_id());
-			buyFund.setFund_id(form.getFund_id());
-			buyFund.setExecute_date(date);
-			// buyFund.setShares();
-			buyFund.setTransaction_type("Buy Fund");
-			buyFund.setStatus("Pending");
-			long amount = form.getNum_1() * 1000 + form.getNum_2();
-			buyFund.setAmount(amount);
-			transactionDAO.create(buyFund);
-
-			// put it into queue
-			// change available balance
-			
-			customer = customerDAO.readFromID(customer.getCustomer_id());
-			request.getSession().setAttribute("customer", customer);
-			
-			
-			return "buy-fund.jsp";
-		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return "error.jsp";
-		} catch (FormBeanException e) {
-			return "error.jsp";
-		}
 	}
-}
+	}

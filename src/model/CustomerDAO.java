@@ -25,15 +25,15 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		return (customers.length > 0);
 	}
 	
-	public void setPassword(String username, String fullName, String password) throws RollbackException {
+	public void setPassword(int customer_id,  String password) throws RollbackException {
         try {
         	Transaction.begin();
         	
-        	CustomerBean[] userList = match(MatchArg.equals("username", username));
-        	CustomerBean dbUser = userList[0];
+        	CustomerBean[] customerList = match(MatchArg.equals("customer_id", customer_id));
+        	CustomerBean dbUser = customerList[0];
         	
 			if (dbUser == null) {
-				throw new RollbackException("Customer "+ fullName +" no longer exists");
+				throw new RollbackException("Customer ID does not  exists");
 			}
 			
 			dbUser.setPassword(password);
