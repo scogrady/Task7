@@ -1,5 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="databeans.CustomerBean" %>
+<%@ page import="databeans.PositionBean" %>
+<%@ page import="databeans.FundBean" %>
+<%@ page import="databeans.FundPriceHistoryBean" %>
+
+
 
 <jsp:include page="template-top.jsp" />
 	<div class="row">
@@ -14,6 +19,11 @@
             <%
             
             CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+        
+            
+            
+           
+            
    	        	
 			%>
 			   
@@ -57,6 +67,10 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
+    
+   			
+            
+           
         	<h3> Portfolio</h3>
 
         <table class="table table-striped">
@@ -66,29 +80,45 @@
                 <th>Share Price</th>
                 <th>Worth</th>
             </tr>
+             <% 
+             long total=0;
+            for (PositionBean pos : (PositionBean[])request.getAttribute("position")){
+            	%>
+            
             <tr>
-                <td>GOGL</td>
-                <td>20</td>
-                <td>50.00</td>
-                <td>1000.00</td>
+            	<%
+            	String symbol="";
+            	for (FundBean fun : (FundBean[])request.getAttribute("fundTicker")){
+            		
+            		if(fun.getFund_id()==pos.getFund_id())
+            			symbol=fun.getSymbol();
+            	}
+            		%>
+            	
+                <td><%=symbol%></td>
+                <td><%=pos.getShares() %></td>
+                <%
+            	long price=-1;
+            	for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[])request.getAttribute("priceList")){
+            		
+            		if(fundprice.getFund_id()==pos.getFund_id())
+            			price=fundprice.getPrice();
+            	}
+            		%>
+                <td><%=price %></td>
+                <td><%=pos.getShares()*price %></td>
             </tr>
-            <tr>
-                <td>GOGL</td>
-                <td>20</td>
-                <td>50.00</td>
-                <td>1000.00</td>
-            </tr>
-            <tr>
-                <td>GOGL</td>
-                <td>20</td>
-                <td>50.00</td>
-                <td>1000.00</td>
-            </tr>
+            <%
+            total+=pos.getShares()*price;
+            }
+             %>
+            
+            
             <tr>
                 <td></td>
                 <td></td>
                 <td>Total Investment:</td>
-                <td>3000.00</td>
+                <td><%=total %></td>
         </table>
         <div class="col-md-2"></div>
     </div>
