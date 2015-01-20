@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
@@ -51,7 +51,7 @@ public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 		return fundList;
 	}
 	public FundPriceHistoryBean[] readByDateAndFundID(Date price_date,int fund_id) throws RollbackException {
-		FundPriceHistoryBean[] fundList = match(MatchArg.equals("price_date", price_date),MatchArg.equals("fund_id", fund_id));
+		FundPriceHistoryBean[] fundList = match(MatchArg.and(MatchArg.equals("price_date", price_date), MatchArg.equals("fund_id", fund_id)));
 		return fundList;
 	}
 	
