@@ -6,36 +6,33 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.FundDAO;
+import model.FundPriceHistoryDAO;
 import model.Model;
 
 import org.genericdao.RollbackException;
 
-import databeans.FavoriteBean;
 import databeans.FundBean;
-import databeans.UserBean;
+import databeans.FundPriceHistoryBean;
 
-/*
- * Sets up the request attributes for manage.jsp.
-
- * Sets the "userList" request attribute in order to display
- * the list of users on the navbar.
- * 
- * Sets the "favoriteList" request attribute in order to display
- * the list of user's favorites for management.
- * 
- * Forwards to manage.jsp.
- */
 public class ResearchFundAction extends Action {
 
 	private FundDAO fundDAO;
+	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public ResearchFundAction(Model model) {
 		fundDAO = model.getFundDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 		try {
 			FundBean[] list = fundDAO.getFunds();
 			for(int i=0;i<list.length;i++){
 				System.out.println(list[i].getName());
 			}
+			
+			FundPriceHistoryBean[] list2 = fundPriceHistoryDAO.getFundPriceHistorys();
+			for(int i=0;i<list2.length;i++){
+				System.out.println(list2[i].getFund_id()+" "+list2[i].getPrice_date()+" "+list2[i].getPrice());
+			}
+			
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

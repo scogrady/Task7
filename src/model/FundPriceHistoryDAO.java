@@ -8,9 +8,7 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
-
 import databeans.FundPriceHistoryBean;
-import databeans.PositionBean;
 
 public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 	
@@ -51,7 +49,7 @@ public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 		return fundList;
 	}
 	public FundPriceHistoryBean[] readByDateAndFundID(Date price_date,int fund_id) throws RollbackException {
-		FundPriceHistoryBean[] fundList = match(MatchArg.equals("price_date", price_date),MatchArg.equals("fund_id", fund_id));
+		FundPriceHistoryBean[] fundList = match(MatchArg.and(MatchArg.equals("price_date", price_date),MatchArg.equals("fund_id", fund_id)));
 		return fundList;
 	}
 	
