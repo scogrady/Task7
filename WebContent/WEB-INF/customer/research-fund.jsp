@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="databeans.FavoriteBean" %>
+<%@ page import="databeans.FundBean" %>
+<%@ page import="databeans.FundPriceHistoryBean" %>
+
+
+
 
 <jsp:include page="template-top.jsp" />
 	<div class="container-fluid">

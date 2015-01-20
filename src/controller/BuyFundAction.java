@@ -34,6 +34,7 @@ public class BuyFundAction extends Action {
 
 
 	public BuyFundAction(Model model) {
+
 		transactionDAO = model.getTransactionDAO();
 		customerDAO = model.getCustomerDAO();
 	}
@@ -52,6 +53,7 @@ public class BuyFundAction extends Action {
 		FundBean[] fundList;
 		BuyFundBean[] buyFundList = null;
 		FundPriceHistoryBean price;
+		long change;
 
 		try {
 			
@@ -62,7 +64,11 @@ public class BuyFundAction extends Action {
 			for (int i = 0; i < fundList.length; i++) {
 				buyFundList[i] = new BuyFundBean(fundList[i]);
 				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i].getFund_id());
-				buyFundList[i].setChange
+				buyFundList[i].setPrice(price.getPrice());
+				change = fundPriceHistoryDAO.readChange(buyFundList[i].getFund_id());
+				buyFundList[i].setChange(change);
+				buyFundList[i].setChgPer(change/price.getPrice());
+				
 				
 			}
 			
@@ -123,3 +129,11 @@ public class BuyFundAction extends Action {
 		}
 	}
 }
+
+		transactionDAO = model.getTransactionDAO();
+		customerDAO = model.getCustomerDAO();
+	}
+
+
+}
+

@@ -1,6 +1,8 @@
 package databeans;
 
 public class BuyFundBean extends FundBean{
+	
+	private long price;
 	private long change;
 	private long chgPer;
 	
@@ -12,6 +14,9 @@ public class BuyFundBean extends FundBean{
 	}
 	
 	
+	public long getPrice() {
+		return price;
+	}
 	public long getChange() {
 		return change;
 	}
@@ -20,13 +25,15 @@ public class BuyFundBean extends FundBean{
 		return chgPer;
 	}
 	
-	public void setChg(long s) {
+	public void setChgPer(long s) {
 		chgPer = s;
 	}
 	
 	public void setChange(long s) {
 		change = s;
 	}
-	
+	public void setPrice(long s) {
+		price = s;
+	}
 
 }

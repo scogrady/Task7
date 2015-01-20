@@ -57,6 +57,4 @@ public class FundDAO extends GenericDAO<FundBean> {
 	}
 	
 
-	
-	
 }
