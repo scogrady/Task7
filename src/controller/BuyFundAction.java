@@ -1,4 +1,5 @@
 package controller;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
 import model.TransactionDAO;
+
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
@@ -38,9 +40,6 @@ public class BuyFundAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
-		
-	    return "customer/buy-fund.jsp";
-    }
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
@@ -53,7 +52,12 @@ public class BuyFundAction extends Action {
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 			
-			//display the form			
+			//display the form
+			
+			
+			
+			
+			
 
 			BuyForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
