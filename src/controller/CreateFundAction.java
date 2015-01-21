@@ -36,7 +36,6 @@ public class CreateFundAction extends Action{
 			request.setAttribute("fundList", fundDAO.getFunds());
 			if (!form.isPresent()) {
 
-				System.out.println("create fund IS NOT PRESENT!");
 				return "employee/create-fund.jsp";
 			}
 
@@ -64,7 +63,6 @@ public class CreateFundAction extends Action{
 			HttpSession session = request.getSession(false);
 			session.setAttribute("fund", fund);
 
-			
 			return "employee/create-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

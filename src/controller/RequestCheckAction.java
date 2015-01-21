@@ -21,7 +21,8 @@ import model.TransactionDAO;
 public class RequestCheckAction extends Action {
 	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
-	private FormBeanFactory<RequestCheckForm> formBeanFactory;
+	private FormBeanFactory<RequestCheckForm> formBeanFactory = FormBeanFactory
+			.getInstance(RequestCheckForm.class);;
 
 	public RequestCheckAction(Model model) {
 		customerDAO = model.getCustomerDAO();
@@ -47,16 +48,14 @@ public class RequestCheckAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "request-check.jsp";
+				return "customer/request-check.jsp";
 			}
 			
 			errors.addAll(form.getValidationErrors());
-			if (form.getNum() > customer.getAvailable_cash()) {
-				errors.add("Not enough money in Available Cash");
-			}
+			
 
 			if (errors.size() != 0) {
-				return "request-check.jsp";
+				return "customer/request-check.jsp";
 			}
 			TransactionBean requestCheck = new TransactionBean();
 
@@ -66,7 +65,7 @@ public class RequestCheckAction extends Action {
 		
 			requestCheck.setTransaction_type("Request Check");
 			requestCheck.setStatus("Pending");
-			long amount = form.getNum() * 100 ;
+			long amount = Long.parseLong(form.getNum()) * 100 ;
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
 
@@ -78,7 +77,7 @@ public class RequestCheckAction extends Action {
 			request.getSession().setAttribute("customer", customer);
 		
 			
-			return "request-check.jsp";
+			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";

@@ -21,7 +21,8 @@ public class Model {
 			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL,
 					"root", "");
 
-			customerDAO = new CustomerDAO("customer", pool);
+				
+			customerDAO  = new CustomerDAO("customer", pool);
 			employeeDAO = new EmployeeDAO("employee", pool);
 			fundDAO = new FundDAO("fund", pool);
 			fundPriceHistoryDAO = new FundPriceHistoryDAO("fund_price_history",

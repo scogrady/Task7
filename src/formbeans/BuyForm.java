@@ -1,59 +1,90 @@
 package formbeans;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.mybeans.form.FormBean;
 
 public class BuyForm extends FormBean {
-	long num_1;
-	int num_2;
-	int fund_id;
+	String num_1;
+	String num_2;
+	String fund_id;
+	String avail_cash;
 
-	public long getNum_1() {
+	public String getNum_1() {
 		return num_1;
 	}
 
-	public int getNum_2() {
+	public String getNum_2() {
 		return num_2;
 	}
 
-	public int getFund_id() {
+	public String getFund_id() {
 		return fund_id;
 	}
 
+	public String getAvail_cash() {
+		return avail_cash;
+	}
+
 	public void setNum_1(String s) {
-		num_1 = Long.parseLong(s.trim());
+		num_1 = s.trim();
 	}
 
 	public void setNum_2(String s) {
-		num_2 = Integer.parseInt(s.trim());
+		num_2 = s.trim();
 	}
 
-	public void fund_id(String s) {
-		fund_id = Integer.parseInt(s.trim());
+	public void setFund_id(String s) {
+		fund_id = s.trim();
+	}
+
+	public void setAvail_cash(String s) {
+		avail_cash = s.trim();
 	}
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		
-		boolean error = false;
-
-		if (!(num_1 >= 0 && num_1 < Integer.MAX_VALUE)) {
-			error = true;
-		}
-		if (!(num_2 >= 0 && num_2 < 100)) {
-			error = true;
-		}
-		
-		if (fund_id == 0) {
+		if (this.num_1 == null || this.num_2 == null || this.fund_id == null) {
 			errors.add("Connection error. Please refresh the page and try again.");
 		}
-		
-		if (error) {
+
+		try {
+			long num_1;
+			long num_2;
+			if (this.num_1 == "") {
+				num_1 = 0;
+			} else {
+				num_1 = Long.parseLong(this.num_1);
+			}
+			if (this.num_2 == "") {
+				num_2 = 0;
+			} else {
+				num_2 = Long.parseLong(this.num_2);
+			}
+
+			long avail_cash = Long.parseLong(this.avail_cash);
+
+			if (!(num_1 >= 0 && num_1 < Integer.MAX_VALUE)) {
+				errors.add("Please double check your 1st input.");
+			}
+			if (!(num_2 >= 0 && num_2 < 100)) {
+				errors.add("Please double check your 2nd input.");
+			}
+
+			if (num_1 == 0 && num_2 == 0) {
+				errors.add("You can't buy 0 share.");
+
+			}
+
+			if ((num_1 + 1) * 1000 > avail_cash) {
+				errors.add("Not enough money in Available Cash");
+			}
+
+			return errors;
+		} catch (NumberFormatException e) {
 			errors.add("Please double check your input.");
+			return errors;
 		}
-		return errors;
 	}
+
 }

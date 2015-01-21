@@ -55,7 +55,7 @@ public class CreateEmployeeAction extends Action {
 			employee.setFirstname(form.getFirstname());
 			employee.setLastname(form.getLastname());
 			employee.setPassword(form.getPassword());
-			//employee.setStatus(0);
+			employee.setStatus(0);
 			employeeDAO.createAutoIncrement(employee);
 
 			// Attach (this copy of) the user bean to the session

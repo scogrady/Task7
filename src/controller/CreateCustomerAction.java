@@ -18,6 +18,7 @@ import formbeans.EmployeeForm;
 import model.CustomerDAO;
 import model.EmployeeDAO;
 import model.Model;
+
 public class CreateCustomerAction extends Action {
 
 	private CustomerDAO customerDAO;
@@ -28,7 +29,9 @@ public class CreateCustomerAction extends Action {
 		customerDAO = model.getCustomerDAO();
 	}
 
-	public String getName() { return "CreateCustomer.do"; }
+	public String getName() {
+		return "CreateCustomer.do";
+	}
 
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
@@ -67,15 +70,16 @@ public class CreateCustomerAction extends Action {
 			customer.setState(form.getState());
 			customer.setStatus(0);
 			customer.setZip(form.getZip());
-
+			customer.setCurrent_cash(0);
+			customer.setAvailable_cash(0);
 			// Attach (this copy of) the user bean to the session
-			//TODO ?
+			// TODO ?
 			HttpSession session = request.getSession(false);
-			
+
 			session.setAttribute("customer", customer);
 
 			return "employee/create-customer.jsp";
-			
+
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "employee/create-customer.jsp";

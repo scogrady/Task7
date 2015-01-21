@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.GenericDAO;
@@ -54,5 +56,12 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		TransactionBean[] transactionList = match(MatchArg.equals("status", status));
 		return transactionList;
 	}
-	
+	public TransactionBean[] readByStatusBeforeDate(String status, Date date) throws RollbackException {
+		TransactionBean[] transactionList = match(MatchArg.and(MatchArg.equals("status", status), MatchArg.lessThan("execute_date", date)));
+		return transactionList;
+	}
+	public TransactionBean[] readByDate(Date date) throws RollbackException {
+		TransactionBean[] transactionList = match(MatchArg.equals("excution_date", date));
+		return transactionList;		
+	}
 }
