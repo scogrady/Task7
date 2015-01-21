@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul id="group-function" class="nav navbar-nav">
           <li class="active" id = "view-account"><a href="AccountInfo.do">View Account</a></li>
-          <li id = "fund-manage"><a href="SellFund.do" >Fund Management</a>
+          <li id = "fund-manage"><a href="ResearchFund.do?fund_id=1" >Fund Management</a>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

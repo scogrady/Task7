@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="databeans.FundBean" %>
 <%@ page import="databeans.FundPriceHistoryBean" %>
-<script src="Chart.js"></script>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 <jsp:include page="template-top.jsp" />
 	<div class="container-fluid">

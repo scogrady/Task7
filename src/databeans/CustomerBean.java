@@ -20,8 +20,13 @@ public class CustomerBean {
 	private long available_cash;
 	private Date last_login_time;
 	private int status;
-	public boolean isLoged(){
-		return status==0 ? false:true;
+
+	public boolean isLoged() {
+		return status == 0 ? false : true;
+	}
+	
+	public boolean checkPassword(String password){
+		return this.password.equals(password) ? true:false;
 	}
 	public int getStatus() {
 		return status;
@@ -30,6 +35,7 @@ public class CustomerBean {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	public int getCustomer_id() {
 		return customer_id;
 	}
@@ -73,6 +79,7 @@ public class CustomerBean {
 	public long getCurrent_cash() {
 		return current_cash;
 	}
+
 	public long getAvailable_cash() {
 		return available_cash;
 	}
@@ -124,7 +131,7 @@ public class CustomerBean {
 	public void setCurrent_cash(long s) {
 		current_cash = s;
 	}
-	
+
 	public void setAvailable_cash(long s) {
 		available_cash = s;
 	}
