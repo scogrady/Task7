@@ -55,7 +55,30 @@ public class BuyFundAction extends Action {
 			
 			
 
+<<<<<<< HEAD
 		
+=======
+			TransactionBean buyFund = new TransactionBean();
+
+			buyFund.setCustomer_id(customer.getCustomer_id());
+			buyFund.setFund_id(form.getFund_id());
+			buyFund.setGenerate_date(date);
+			// buyFund.setShares();
+			buyFund.setTransaction_type("Buy Fund");
+			buyFund.setStatus("Pending");
+			long amount = form.getNum_1() * 100 + form.getNum_2();
+			buyFund.setAmount(amount);
+			transactionDAO.create(buyFund);
+
+			// put it into queue
+			// change available balance
+			
+			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
+			customerDAO.update(customer);
+			
+			customer = customerDAO.readFromID(customer.getCustomer_id());
+			request.getSession().setAttribute("customer", customer);
+>>>>>>> branch 'master' of https://github.com/scogrady/Task7.git
 			
 			
 			
