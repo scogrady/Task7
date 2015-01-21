@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,7 @@ import model.PositionDAO;
 import model.TransactionDAO;
 
 public class TransactionDayAction extends Action {
-	private FormBeanFactory<TransactionForm> formBeanFactory = FormBeanFactory.getInstance(TransactionForm.class);
+	//private FormBeanFactory<TransactionForm> formBeanFactory = FormBeanFactory.getInstance(TransactionForm.class);
 	TransactionDAO transactionDAO;
 	CustomerDAO customerDAO;
 	FundPriceHistoryDAO fundPriceHistoryDAO;
@@ -38,13 +40,14 @@ public class TransactionDayAction extends Action {
 
 	public String perform(HttpServletRequest request) {
 		try {
-			TransactionForm transactionForm = formBeanFactory.create(request);
+			//TransactionForm transactionForm = formBeanFactory.create(request);
 			//not present
-			if (!transactionForm.isPresent()) {
-				return "transaction-day.jsp";
-			}
+			//if (!transactionForm.isPresent()) {
+				//return "transaction-day.jsp";
+			//}
 			
-			Date date = transactionForm.getDate();
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
+			//transactionForm.getDate();
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
 			for (TransactionBean transaction : transactions) {
 				int customerId = transaction.getCustomer_id();
@@ -114,7 +117,11 @@ public class TransactionDayAction extends Action {
 		catch (RollbackException e) {
 			e.printStackTrace();
 		}	
-		catch (FormBeanException e) {
+		//catch (FormBeanException e) {
+		//	e.printStackTrace();
+		//} 
+		catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

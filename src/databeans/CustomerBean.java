@@ -7,11 +7,11 @@ import org.genericdao.PrimaryKey;
 @PrimaryKey("customer_id")
 public class CustomerBean {
 	private int customer_id;
+	private String addr_line1;
 	private String username;
 	private String password;
 	private String firstname;
 	private String lastname;
-	private String addr_line1;
 	private String addr_line2;
 	private String city;
 	private String state;

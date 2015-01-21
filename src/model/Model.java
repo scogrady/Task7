@@ -20,7 +20,10 @@ public class Model {
 		try {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
+
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL,"root","root");
+			
+
 			
 			customerDAO  = new CustomerDAO("customer", pool);
 			employeeDAO = new EmployeeDAO("employee", pool);
