@@ -21,7 +21,8 @@ import model.TransactionDAO;
 public class RequestCheckAction extends Action {
 	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
-	private FormBeanFactory<RequestCheckForm> formBeanFactory;
+	private FormBeanFactory<RequestCheckForm> formBeanFactory = FormBeanFactory
+			.getInstance(RequestCheckForm.class);;
 
 	public RequestCheckAction(Model model) {
 		customerDAO = model.getCustomerDAO();
@@ -51,9 +52,7 @@ public class RequestCheckAction extends Action {
 			}
 			
 			errors.addAll(form.getValidationErrors());
-			if (form.getNum() > customer.getAvailable_cash()) {
-				errors.add("Not enough money in Available Cash");
-			}
+			
 
 			if (errors.size() != 0) {
 				return "customer/request-check.jsp";
@@ -66,7 +65,7 @@ public class RequestCheckAction extends Action {
 		
 			requestCheck.setTransaction_type("Request Check");
 			requestCheck.setStatus("Pending");
-			long amount = form.getNum() * 100 ;
+			long amount = Long.parseLong(form.getNum()) * 100 ;
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
 

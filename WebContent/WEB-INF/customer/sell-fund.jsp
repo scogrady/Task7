@@ -2,10 +2,10 @@
 <%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
+<jsp:include page="balance.jsp" />
+<jsp:include page="error-list.jsp" />
 
-
-<div class="col-xs-12 col-sm-9">
-	<jsp:include page="balance.jsp" />
+<div class="col-xs-12 col-sm-12">
 
 	<div class="row-fluid">
 		<div class="col-md-12">
@@ -24,34 +24,36 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${sellFundList}" var="fund">
-				<form role="form" method="post" action="SellFund.do">
-					<tr>
-						<div class="form-group">
-							<td>${fund.getName()}</td>
-							<td>
-								<div class="num">${fund.getShares()} shares</div>
-							</td>
-							<td id="change-p">$${fund.getPrice()}</td>
-							<td>
-								<div class="form-inline">
-									<input type="text" class="form-control" id="InputAmount1"
-										placeholder="100000000000" size="10" maxlength="12" name="num_1">.
-									<input type="text" class="form-control" id="InputAmount2"
-										placeholder="000" size="1" maxlength="3"  name="num_2"> shares
+					<c:if test="${!empty sellFundList}">
+						<c:forEach items="${sellFundList}" var="fund">
+							<form role="form" method="post" action="SellFund.do">
+								<tr>
+									<div class="form-group">
+										<td>${fund.getName()}</td>
+										<td>
+											<div class="num">${fund.getShares()}shares</div>
+										</td>
+										<td id="change-p">$${fund.getPrice()}</td>
+										<td>
+											<div class="form-inline">
+												<input type="text" class="form-control" id="InputAmount1"
+													placeholder="100000000000" size="10" maxlength="12"
+													name="num_1">. <input type="text"
+													class="form-control" id="InputAmount2" placeholder="000"
+													size="1" maxlength="3" name="num_2"> shares
 
-								</div>
-							</td>
-							<td>
-							<input type="hidden" name="fund_id" value="${fund.getFund_id()}">
-							<input type="hidden" name="shares" value="${fund.getShares()}">
-							<input class="btn btn-default" type="submit"
-								value="Sell" name="action"></td>
-						</div>
-					</tr>
-					</form>
-					</c:forEach>
-					
+											</div>
+										</td>
+										<td><input type="hidden" name="fund_id"
+											value="${fund.getFund_id()}"> <input type="hidden"
+											name="shares" value="${fund.getShares()}"> <input
+											class="btn btn-default" type="submit" value="Sell"
+											name="action"></td>
+									</div>
+								</tr>
+							</form>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 		</div>

@@ -11,7 +11,7 @@ import org.genericdao.Transaction;
 
 import databeans.FundPriceHistoryBean;
 
-public class  FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
+public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 
 	public FundPriceHistoryDAO(String tableName, ConnectionPool pool)
 			throws DAOException {
@@ -43,31 +43,36 @@ public class  FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 		}
 	}
 
-
-
 	public FundPriceHistoryBean[] readByFundID(int fund_id)
 			throws RollbackException {
 		FundPriceHistoryBean[] fundList = match(MatchArg.equals("fund_id",
 				fund_id));
 		return fundList;
 	}
-	
 
 	public FundPriceHistoryBean readLastPrice(int fund_id)
 			throws RollbackException {
 		FundPriceHistoryBean[] fundList = match(MatchArg.equals("fund_id",
 				fund_id));
-		return fundList[fundList.length - 1];
+		if (fundList.length == 0) {
+			return null;
+		} else {
+			return fundList[fundList.length - 1];
+		}
 	}
-	
 
-	public long readChange(int fund_id)
-			throws RollbackException {
+	public long readChange(int fund_id) throws RollbackException {
 		FundPriceHistoryBean[] fundList = match(MatchArg.equals("fund_id",
 				fund_id));
-		return fundList[fundList.length - 1].getPrice() - fundList[fundList.length - 2].getPrice();
+		
+		if (fundList.length == 0 || fundList.length == 1) {
+			return -1;
+		} else {
+		return fundList[fundList.length - 1].getPrice()
+				- fundList[fundList.length - 2].getPrice();
+		}
 	}
-	
+
 	public FundPriceHistoryBean[] readByDate(Date price_date)
 			throws RollbackException {
 		FundPriceHistoryBean[] fundList = match(MatchArg.equals("price_date",

@@ -30,8 +30,8 @@ public class BuyFundAction extends Action {
 	private CustomerDAO customerDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
-	private FormBeanFactory<BuyForm> formBeanFactory = FormBeanFactory.getInstance(BuyForm.class);
-
+	private FormBeanFactory<BuyForm> formBeanFactory = FormBeanFactory
+			.getInstance(BuyForm.class);
 
 	public BuyFundAction(Model model) {
 
@@ -53,80 +53,102 @@ public class BuyFundAction extends Action {
 				.getAttribute("customer");
 		Date date = new Date();
 		FundBean[] fundList;
-		BuyFundBean[] buyFundList = null;
+		BuyFundBean[] buyFundList;
 		FundPriceHistoryBean price;
 		long change;
 
 		try {
-			
+
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-			
+
 			fundList = fundDAO.getFunds();
+			System.out.println("==========" + fundList.length);
+			buyFundList = new BuyFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {
 				buyFundList[i] = new BuyFundBean();
-				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i].getFund_id());
+				buyFundList[i].setFund_id(fundList[i].getFund_id());
+				buyFundList[i].setName(fundList[i].getName());
+				buyFundList[i].setSymbol(fundList[i].getSymbol());
+
+				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i]
+						.getFund_id());
+				if (price == null) {
+					price = new FundPriceHistoryBean();
+					price.setPrice(-1);
+				}
 				buyFundList[i].setPrice(price.getPrice());
-				change = fundPriceHistoryDAO.readChange(buyFundList[i].getFund_id());
+				change = fundPriceHistoryDAO.readChange(buyFundList[i]
+						.getFund_id());
 				buyFundList[i].setChange(change);
-				buyFundList[i].setChgPer(change/price.getPrice());
-				
+				buyFundList[i].setChgPer(change / price.getPrice());
+
 			}
-			
-			request.setAttribute("buyFundList",buyFundList);
-		
+
+			request.setAttribute("buyFundList", buyFundList);
+
 			BuyForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "buy-fund.jsp";
+				return "customer/buy-fund.jsp";
 			}
-			
-			
-			
 
 			// check if it's within available balance?
 
 			errors.addAll(form.getValidationErrors());
-			if (form.getNum_1() + 1 > customer.getAvailable_cash()) {
-				errors.add("Not enough money in Available Cash");
-			}
-			
 			
 			if (errors.size() != 0) {
-				return "buy-fund.jsp";
+				return "customer/buy-fund.jsp";
 			}
+			
+			//handle amount from form
+
+			long num_1, num_2;
+			if (form.getNum_1() == "") {
+				num_1 = 0;
+
+			} else {
+				num_1 = Long.parseLong(form.getNum_1());
+			}
+			if (form.getNum_2() == "") {
+				num_2 = 0;
+
+			} else {
+				num_2 = Long.parseLong(form.getNum_2());
+			}
+
 
 			TransactionBean buyFund = new TransactionBean();
 
 			buyFund.setCustomer_id(customer.getCustomer_id());
-			buyFund.setFund_id(form.getFund_id());
+			buyFund.setFund_id(Integer.parseInt(form.getFund_id()));
 			buyFund.setGenerate_date(date);
 			// buyFund.setShares();
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
-			long amount = form.getNum_1() * 100 + form.getNum_2();
+			
+			long amount = num_1 * 100 + num_2;
+			
 			buyFund.setAmount(amount);
 			transactionDAO.create(buyFund);
 
 			// put it into queue
 			// change available balance
-			
+
 			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
 			customerDAO.update(customer);
-			
+
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-			
-			
-			return "buy-fund.jsp";
+
+			return "customer/buy-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
 		} catch (FormBeanException e) {
 			return "error.jsp";
 		}
-	
+
 	}
 }
-

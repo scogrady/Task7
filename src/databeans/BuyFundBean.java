@@ -6,11 +6,10 @@ import org.genericdao.PrimaryKey;
 
 
 public class BuyFundBean {
-
+	private int fund_id;
 	private long price;
 	private long change;
-	private long chgPer;
-	private int fund_id;
+	private double chgPer;
 	private String name;
 	private String symbol;
 	private String description;
@@ -39,11 +38,11 @@ public class BuyFundBean {
 		return change;
 	}
 
-	public long getChgPer() {
+	public double getChgPer() {
 		return chgPer;
 	}
 
-	public void setChgPer(long s) {
+	public void setChgPer(double s) {
 		chgPer = s;
 	}
 
