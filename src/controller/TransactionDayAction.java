@@ -16,7 +16,6 @@ import databeans.FundPriceHistoryBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import formbeans.LoginForm;
-import formbeans.TransactionForm;
 import model.CustomerDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
