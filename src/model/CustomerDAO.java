@@ -13,7 +13,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	
 	public CustomerDAO(String tableName, ConnectionPool pool) throws DAOException {
 				super(CustomerBean.class, tableName, pool);
-				System.out.println("in cus dao");
+				
 
 	}
 
@@ -23,7 +23,7 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	}
 	
 	public boolean customerExist() throws RollbackException {
-		System.out.println("in cus exist dao");
+		
 
 		CustomerBean[] customers = match();	
 		System.out.println(customers.length);
