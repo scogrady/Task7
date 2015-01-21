@@ -7,29 +7,34 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.genericdao.RollbackException;
+
 import databeans.CustomerBean;
+import databeans.FundBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import model.CustomerDAO;
+import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
 import model.PositionDAO;
 import model.TransactionDAO;
 
-public class TransactionDayAction extends Action {
+public class TransitionDayAction extends Action {
 	//private FormBeanFactory<TransactionForm> formBeanFactory = FormBeanFactory.getInstance(TransactionForm.class);
 	TransactionDAO transactionDAO;
 	CustomerDAO customerDAO;
 	FundPriceHistoryDAO fundPriceHistoryDAO;
 	PositionDAO positionDAO;
-	public TransactionDayAction(Model model) {
+	FundDAO fundDAO;
+	public TransitionDayAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
 		customerDAO = model.getCustomerDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 		positionDAO = model.getPositionDAO();
+		fundDAO = model.getFundDAO();
 	}
 
-	public String getName() { return "TransactionDay.do"; }
+	public String getName() { return "Transition.do"; }
 
 	public String perform(HttpServletRequest request) {
 		try {
@@ -39,9 +44,14 @@ public class TransactionDayAction extends Action {
 				//return "transaction-day.jsp";
 			//}
 			
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
+			//Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2015-01-15");
 			//transactionForm.getDate();
+			FundBean[] fundList = fundDAO.getFunds();
+			request.setAttribute("fundList", fundList);
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
+			int i = 1;
+			if (i != 1) {
 			for (TransactionBean transaction : transactions) {
 				int customerId = transaction.getCustomer_id();
 				CustomerBean customer = customerDAO.read(customerId);
@@ -103,7 +113,8 @@ public class TransactionDayAction extends Action {
 					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
 					customer.setAvailable_cash(customer.getAvailable_cash() - amount);
 					continue;
-				}		
+				}
+			}
 			}
 			
 		} 
@@ -117,7 +128,7 @@ public class TransactionDayAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return "employee/transition-day.jsp";
 		
-		return "employee/transaction-day.jsp";
     }
 }

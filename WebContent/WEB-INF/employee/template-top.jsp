@@ -36,7 +36,7 @@
           
           </li>
           <li id = "fund-op"><a href="CreateFund.do" >Fund Management</a></li>
-          <li id = "transaction-day"><a href="TransactionDay.do">Transaction Day</a></li>
+          <li id = "transaction-day"><a href="Transition.do">Transition Day</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
