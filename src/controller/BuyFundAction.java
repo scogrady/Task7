@@ -126,6 +126,7 @@ public class BuyFundAction extends Action {
 		} catch (FormBeanException e) {
 			return "error.jsp";
 		}
+	
 	}
 }
 

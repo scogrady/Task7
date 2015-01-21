@@ -55,7 +55,7 @@ public class SellFundAction extends Action {
 				.getAttribute("customer");
 		Date date = new Date();
 		PositionBean[] fundList;
-		SellFundBean[] sellFundList = null;
+		SellFundBean[] sellFundList;
 		FundBean fund;
 		FundPriceHistoryBean price;
 
@@ -66,8 +66,11 @@ public class SellFundAction extends Action {
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
-
+			
+			
+			sellFundList = new SellFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {
+				sellFundList[i] = new SellFundBean();
 				sellFundList[i].setFund_id(fundList[i].getFund_id());
 				sellFundList[i].setShares(fundList[i].getShares());
 
@@ -83,8 +86,9 @@ public class SellFundAction extends Action {
 
 			SellForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-
+			System.out.println(form.getFund_id());
 			if (!form.isPresent()) {
+				System.out.println("no form");
 				return "customer/sell-fund.jsp";
 			}
 
@@ -97,9 +101,9 @@ public class SellFundAction extends Action {
 			TransactionBean sellFund = new TransactionBean();
 
 			sellFund.setCustomer_id(customer.getCustomer_id());
-			sellFund.setFund_id(form.getFund_id());
+			sellFund.setFund_id(Integer.parseInt(form.getFund_id()));
 			sellFund.setGenerate_date(date);
-			long share = form.getNum_1() * 1000 + form.getNum_2();
+			long share = Long.parseLong(form.getNum_1()+1) * 1000 + Long.parseLong(form.getNum_2()+1);
 			sellFund.setShares(share);
 			sellFund.setTransaction_type("Sell Fund");
 			sellFund.setStatus("Pending");

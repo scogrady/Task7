@@ -25,7 +25,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${sellFundList}" var="fund">
-				
+				<form role="form" method="post" action="SellFund.do">
 					<tr>
 						<div class="form-group">
 							<td>${fund.getName()}</td>
@@ -46,9 +46,10 @@
 							<input type="hidden" name="fund_id" value="${fund.getFund_id()}">
 							<input type="hidden" name="shares" value="${fund.getShares()}">
 							<input class="btn btn-default" type="submit"
-								value="Sell"></td>
+								value="Sell" name="action"></td>
 						</div>
 					</tr>
+					</form>
 					</c:forEach>
 					
 				</tbody>
