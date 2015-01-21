@@ -35,6 +35,11 @@ public class SellFundAction extends Action {
 	private FormBeanFactory<SellForm> formBeanFactory;
 
 	public SellFundAction(Model model) {
+		transactionDAO = model.getTransactionDAO();
+		customerDAO = model.getCustomerDAO();
+		fundDAO = model.getFundDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
+		positionDAO = model.getPositionDAO();
 
 	}
 
@@ -56,7 +61,7 @@ public class SellFundAction extends Action {
 		try {
 			customer = customerDAO.read(1);
 
-			//customer = customerDAO.readFromID(customer.getCustomer_id());
+			// customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
@@ -92,7 +97,7 @@ public class SellFundAction extends Action {
 
 			sellFund.setCustomer_id(customer.getCustomer_id());
 			sellFund.setFund_id(form.getFund_id());
-			sellFund.setExecute_date(date);
+			sellFund.setGenerate_date(date);
 			long share = form.getNum_1() * 1000 + form.getNum_2();
 			sellFund.setShares(share);
 			sellFund.setTransaction_type("Sell Fund");
@@ -101,13 +106,6 @@ public class SellFundAction extends Action {
 			transactionDAO.create(sellFund);
 
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
-
-			customer.setAvailable_cash(customer.getAvailable_cash()
-					+ (price.getPrice() * share));
-			customerDAO.update(customer);
-
-			customer = customerDAO.readFromID(customer.getCustomer_id());
-			request.getSession().setAttribute("customer", customer);
 
 			return "sell-fund.jsp";
 		} catch (RollbackException e) {

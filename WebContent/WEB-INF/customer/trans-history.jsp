@@ -5,20 +5,20 @@
 <h1>Transaction History</h1>
 <div class="col-md-7 col-md-offset-2">
 	<br> <br>
-	<h3>Welcome John Doe</h3>
+	<h3>Welcome ${customer.getFirstName()} ${customer.getLastName()}</h3>
 	<br>
 	<h5>Your Transaction History</h5>
 
 	<table class="table">
 		<tr>
 			<td><h4>
-					<strong>Transaction Date</strong>
+					<strong>Date of Execution</strong>
 				</h4></td>
 			<td><h4>
 					<strong>Operation</strong>
 				</h4></td>
 			<td><h4>
-					<strong>Fund Name</strong>
+					<strong>Fund ID</strong>
 				</h4></td>
 			<td><h4>
 					<strong>Number of shares</strong>
@@ -44,10 +44,13 @@
 					<td>${transactionBean.getFund_id()}</td>
 				</tr>
 				<tr>
+
 					<td>${transactionBean.getShares()}</td>
 				</tr>
 				<tr>
-					<td>${transactionBean.getShareValue()}</td>
+					<c:set var="price" scope="session"
+						value="${transactionBean.getAmount()/transactionBean.getShares()}" />
+					<td>${transactionBean.getAmount()/transactionBean.getShares()}</td>
 				</tr>
 				<tr>
 					<td>${transactionBean.getAmount()}</td>
