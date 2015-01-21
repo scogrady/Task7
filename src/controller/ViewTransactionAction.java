@@ -36,7 +36,7 @@ public class ViewTransactionAction extends Action {
 
 			request.setAttribute("transactionHistory", transactionHistory);
 
-			return "trans-history.jsp";
+			return "customer/trans-history.jsp";
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

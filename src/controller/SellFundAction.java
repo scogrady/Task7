@@ -32,7 +32,8 @@ public class SellFundAction extends Action {
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private PositionDAO positionDAO;
-	private FormBeanFactory<SellForm> formBeanFactory;
+	private FormBeanFactory<SellForm> formBeanFactory = FormBeanFactory
+			.getInstance(SellForm.class);
 
 	public SellFundAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
@@ -84,13 +85,13 @@ public class SellFundAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "sell-fund.jsp";
+				return "customer/sell-fund.jsp";
 			}
 
 			errors.addAll(form.getValidationErrors());
 
 			if (errors.size() != 0) {
-				return "sell-fund.jsp";
+				return "customer/sell-fund.jsp";
 			}
 
 			TransactionBean sellFund = new TransactionBean();
@@ -107,7 +108,7 @@ public class SellFundAction extends Action {
 
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
 
-			return "sell-fund.jsp";
+			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";

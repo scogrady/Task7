@@ -47,7 +47,7 @@ public class RequestCheckAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "request-check.jsp";
+				return "customer/request-check.jsp";
 			}
 			
 			errors.addAll(form.getValidationErrors());
@@ -56,7 +56,7 @@ public class RequestCheckAction extends Action {
 			}
 
 			if (errors.size() != 0) {
-				return "request-check.jsp";
+				return "customer/request-check.jsp";
 			}
 			TransactionBean requestCheck = new TransactionBean();
 
@@ -78,7 +78,7 @@ public class RequestCheckAction extends Action {
 			request.getSession().setAttribute("customer", customer);
 		
 			
-			return "request-check.jsp";
+			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";

@@ -17,12 +17,12 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 
-import databeans.BuyFundBean;
 //import databeans.BuyFundBean;
 import databeans.CustomerBean;
 import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionBean;
+import databeans.BuyFundBean;
 import formbeans.BuyForm;
 
 public class BuyFundAction extends Action {
@@ -31,7 +31,7 @@ public class BuyFundAction extends Action {
 	private CustomerDAO customerDAO;
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
-	private FormBeanFactory<BuyForm> formBeanFactory;
+	private FormBeanFactory<BuyForm> formBeanFactory = FormBeanFactory.getInstance(BuyForm.class);
 
 
 	public BuyFundAction(Model model) {
@@ -65,7 +65,12 @@ public class BuyFundAction extends Action {
 			
 			fundList = fundDAO.getFunds();
 			for (int i = 0; i < fundList.length; i++) {
-				buyFundList[i] = new BuyFundBean(fundList[i]);
+				buyFundList[i] = new BuyFundBean();
+				buyFundList[i].setFund_id(fundList[i].getFund_id());
+				buyFundList[i].setName(fundList[i].getName());
+				buyFundList[i].setSymbol(fundList[i].getSymbol());
+				buyFundList[i].setDescription(fundList[i].getDescription());
+				
 				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i].getFund_id());
 				buyFundList[i].setPrice(price.getPrice());
 				change = fundPriceHistoryDAO.readChange(buyFundList[i].getFund_id());
@@ -80,7 +85,7 @@ public class BuyFundAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "buy-fund.jsp";
+				return "customer/buy-fund.jsp";
 			}
 			
 			
@@ -95,7 +100,7 @@ public class BuyFundAction extends Action {
 			
 			
 			if (errors.size() != 0) {
-				return "buy-fund.jsp";
+				return "customer/buy-fund.jsp";
 			}
 
 			TransactionBean buyFund = new TransactionBean();
@@ -120,7 +125,7 @@ public class BuyFundAction extends Action {
 			request.getSession().setAttribute("customer", customer);
 			
 			
-			return "buy-fund.jsp";
+			return "customer/buy-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";
