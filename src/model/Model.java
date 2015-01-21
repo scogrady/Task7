@@ -20,8 +20,9 @@ public class Model {
 		try {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
-
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
+			String user = "team2";
+			String password = "123zhxxhz321";
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL, user, password);
 			
 
 			
