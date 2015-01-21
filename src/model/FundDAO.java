@@ -6,10 +6,7 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
-
 import databeans.FundBean;
-import databeans.PositionBean;
-
 
 public class FundDAO extends GenericDAO<FundBean> {
 	
@@ -48,6 +45,7 @@ public class FundDAO extends GenericDAO<FundBean> {
 			return fundList[0];
 	}
 	
+	//end addition by abhishek
 	public FundBean readByName(String name) throws RollbackException {
 		FundBean[] fundList = match(MatchArg.equals("name", name));
 		if (fundList.length == 0)

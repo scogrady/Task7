@@ -1,5 +1,4 @@
 package controller;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,17 +10,14 @@ import model.FundDAO;
 import model.FundPriceHistoryDAO;
 import model.Model;
 import model.TransactionDAO;
-
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.BuyFundBean;
 import databeans.CustomerBean;
-import databeans.FundBean;
-import databeans.FundPriceHistoryBean;
 import databeans.TransactionBean;
 import formbeans.BuyForm;
+import formbeans.FavoriteForm;
 
 public class BuyFundAction extends Action {
 
@@ -33,11 +29,8 @@ public class BuyFundAction extends Action {
 
 
 	public BuyFundAction(Model model) {
-
 		transactionDAO = model.getTransactionDAO();
 		customerDAO = model.getCustomerDAO();
-		fundDAO = model.getFundDAO();
-		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
 	public String getName() {
@@ -45,62 +38,31 @@ public class BuyFundAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
-		// Set up the errors list
-		List<String> errors = new ArrayList<String>();
-		request.setAttribute("errors", errors);
-		CustomerBean customer = (CustomerBean) request.getSession(false)
-				.getAttribute("customer");
-		Date date = new Date();
-		FundBean[] fundList;
-		BuyFundBean[] buyFundList = null;
-		FundPriceHistoryBean price;
-		long change;
-
-		try {
-			
-			customer = customerDAO.readFromID(customer.getCustomer_id());
-			request.getSession().setAttribute("customer", customer);
-			
-			fundList = fundDAO.getFunds();
-			for (int i = 0; i < fundList.length; i++) {
-				buyFundList[i] = new BuyFundBean(fundList[i]);
-				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i].getFund_id());
-				buyFundList[i].setPrice(price.getPrice());
-				change = fundPriceHistoryDAO.readChange(buyFundList[i].getFund_id());
-				buyFundList[i].setChange(change);
-				buyFundList[i].setChgPer(change/price.getPrice());
-				
-			}
-			
-			request.setAttribute("buyFundList",buyFundList);
 		
-			BuyForm form = formBeanFactory.create(request);
-			request.setAttribute("form", form);
-
-			if (!form.isPresent()) {
-				return "buy-fund.jsp";
-			}
-			
+	    return "customer/buy-fund.jsp";
+   
+		// Set up the errors list
+		
+		
 			
 			
 
 			// check if it's within available balance?
 
-			errors.addAll(form.getValidationErrors());
-			if (form.getNum_1() + 1 > customer.getAvailable_cash()) {
-				errors.add("Not enough money in Available Cash");
-			}
 			
 			
-			if (errors.size() != 0) {
-				return "buy-fund.jsp";
-			}
+			
+			
+			
 
+<<<<<<< HEAD
+		
+=======
 			TransactionBean buyFund = new TransactionBean();
 
 			buyFund.setCustomer_id(customer.getCustomer_id());
 			buyFund.setFund_id(form.getFund_id());
-			//buyFund.setExecute_date();
+			buyFund.setGenerate_date(date);
 			// buyFund.setShares();
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
@@ -116,15 +78,10 @@ public class BuyFundAction extends Action {
 			
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
+>>>>>>> branch 'master' of https://github.com/scogrady/Task7.git
 			
 			
-			return "buy-fund.jsp";
-		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return "error.jsp";
-		} catch (FormBeanException e) {
-			return "error.jsp";
-		}
+			
+		} 
 	}
-}
 
