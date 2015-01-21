@@ -16,7 +16,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-
+import databeans.BuyFundBean;
 //import databeans.BuyFundBean;
 import databeans.CustomerBean;
 import databeans.FundBean;
@@ -65,11 +65,6 @@ public class BuyFundAction extends Action {
 			fundList = fundDAO.getFunds();
 			for (int i = 0; i < fundList.length; i++) {
 				buyFundList[i] = new BuyFundBean();
-				buyFundList[i].setFund_id(fundList[i].getFund_id());
-				buyFundList[i].setName(fundList[i].getName());
-				buyFundList[i].setSymbol(fundList[i].getSymbol());
-				buyFundList[i].setDescription(fundList[i].getDescription());
-				
 				price = fundPriceHistoryDAO.readLastPrice(buyFundList[i].getFund_id());
 				buyFundList[i].setPrice(price.getPrice());
 				change = fundPriceHistoryDAO.readChange(buyFundList[i].getFund_id());
@@ -84,7 +79,7 @@ public class BuyFundAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "customer/buy-fund.jsp";
+				return "buy-fund.jsp";
 			}
 			
 			
@@ -99,7 +94,7 @@ public class BuyFundAction extends Action {
 			
 			
 			if (errors.size() != 0) {
-				return "customer/buy-fund.jsp";
+				return "buy-fund.jsp";
 			}
 
 			TransactionBean buyFund = new TransactionBean();
@@ -124,7 +119,7 @@ public class BuyFundAction extends Action {
 			request.getSession().setAttribute("customer", customer);
 			
 			
-			return "customer/buy-fund.jsp";
+			return "buy-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "error.jsp";

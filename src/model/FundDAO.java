@@ -48,6 +48,7 @@ public class FundDAO extends GenericDAO<FundBean> {
 			return fundList[0];
 	}
 	
+	//end addition by abhishek
 	public FundBean readByName(String name) throws RollbackException {
 		FundBean[] fundList = match(MatchArg.equals("name", name));
 		if (fundList.length == 0)
