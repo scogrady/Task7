@@ -22,7 +22,6 @@ import databeans.CustomerBean;
 import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.TransactionBean;
-import databeans.BuyFundBean;
 import formbeans.BuyForm;
 
 public class BuyFundAction extends Action {

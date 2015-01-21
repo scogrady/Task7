@@ -1,5 +1,10 @@
 package databeans;
 
+import org.genericdao.PrimaryKey;
+
+@PrimaryKey("fund_id")
+
+
 public class BuyFundBean {
 
 	private long price;
