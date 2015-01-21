@@ -21,7 +21,7 @@ public class Model {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL,"root","root");
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			
 
 			
