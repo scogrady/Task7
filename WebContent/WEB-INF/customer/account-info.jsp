@@ -43,11 +43,11 @@
                     </tr>
                     <tr>
                         <td>Account balance: </td>
-                        <td id="customer-balance">$<%=customer.getCurrent_cash()%></td>
+                        <td id="customer-balance">$<%=customer.getCurrent_cash()/100%></td>
                     </tr>
                     <tr>
                         <td>Available balance: </td>
-                        <td id="customer-balance">$<%=customer.getAvailable_cash()%></td>
+                        <td id="customer-balance">$<%=customer.getAvailable_cash()/100%></td>
                     </tr>
                     <tr>
                         <td>Last Trading Day</td>
@@ -91,20 +91,20 @@
             		%>
             	
                 <td><%=symbol%></td>
-                <td><%=pos.getShares() %></td>
+                <td><%=pos.getShares() / 1000 %></td>
                 <%
             	long price=-1;
             	for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[])request.getAttribute("priceList")){
             		
             		if(fundprice.getFund_id()==pos.getFund_id())
-            			price=fundprice.getPrice();
+            			price=fundprice.getPrice() / 100;
             	}
             		%>
                 <td><%=price %></td>
-                <td><%=pos.getShares()*price %></td>
+                <td><%=pos.getShares()*price / 1000 %></td>
             </tr>
             <%
-            total+=pos.getShares()*price;
+            total+=pos.getShares()*price  / 1000;
             }
              %>
             

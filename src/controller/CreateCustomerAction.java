@@ -38,9 +38,10 @@ public class CreateCustomerAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {
+
+			request.setAttribute("customerList", customerDAO.getCustomers());
 			CustomerForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			request.setAttribute("customerList", customerDAO.getCustomers());
 			if (!form.isPresent()) {
 				System.out.println("create customer form is not present!");
 				return "employee/create-customer.jsp";
@@ -55,6 +56,10 @@ public class CreateCustomerAction extends Action {
 			}
 
 			if (errors.size() != 0) {
+				System.out.println(" error :");	
+				for(int i=0;i<errors.size();i++){
+					System.out.println(errors.get(i));
+				}
 				return "employee/create-customer.jsp";
 			}
 
@@ -77,12 +82,8 @@ public class CreateCustomerAction extends Action {
 			customer.setAvailable_cash(1000);
 			customerDAO.create(customer);
 			
-			// Attach (this copy of) the user bean to the session
-			// TODO ?
-			HttpSession session = request.getSession(false);
 
-			session.setAttribute("customer", customer);
-
+			request.setAttribute("customerList", customerDAO.getCustomers());
 			return "employee/create-customer.jsp";
 
 		} catch (RollbackException e) {

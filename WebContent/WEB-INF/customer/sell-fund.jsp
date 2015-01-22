@@ -31,16 +31,16 @@
 									<div class="form-group">
 										<td>${fund.getName()}</td>
 										<td>
-											<div class="num">${fund.getShares()}shares</div>
+											<div class="num">${fund.getShares() / 1000}shares</div>
 										</td>
-										<td id="change-p">$${fund.getPrice()}</td>
+										<td id="change-p">$${fund.getPrice() / 100}</td>
 										<td>
 											<div class="form-inline">
 												<input type="text" class="form-control" id="InputAmount1"
-													placeholder="100000000000" size="10" maxlength="12"
+													placeholder="100,000,000" size="13px" maxlength="9"
 													name="num_1">. <input type="text"
 													class="form-control" id="InputAmount2" placeholder="000"
-													size="1" maxlength="3" name="num_2"> shares
+													size="3px" maxlength="3" name="num_2"> shares
 
 											</div>
 										</td>

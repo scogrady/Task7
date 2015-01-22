@@ -7,6 +7,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import databeans.CustomerBean;
 import databeans.EmployeeBean;
 
 public class EmployeeDAO extends GenericDAO<EmployeeBean> {
@@ -45,6 +46,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean> {
 		}
 	}
 	
+
 	public EmployeeBean read(String username) throws RollbackException {
 		EmployeeBean[] userList = match(MatchArg.equals("username", username));
 		if (userList.length == 0)

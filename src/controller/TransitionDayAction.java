@@ -129,6 +129,9 @@ public class TransitionDayAction extends Action {
 					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
 					customer.setAvailable_cash(customer.getAvailable_cash() + amount);
 					customerDAO.update(customer);
+					
+					transaction.setExecute_date(date);
+					transaction.setStatus("completed");
 					transactionDAO.update(transaction);					
 					continue;
 				}				
