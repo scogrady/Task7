@@ -55,6 +55,10 @@ public class CreateCustomerAction extends Action {
 			}
 
 			if (errors.size() != 0) {
+				System.out.println(" error :");	
+				for(int i=0;i<errors.size();i++){
+					System.out.println(errors.get(i));
+				}
 				return "employee/create-customer.jsp";
 			}
 

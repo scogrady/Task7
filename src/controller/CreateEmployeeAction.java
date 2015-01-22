@@ -66,7 +66,7 @@ public class CreateEmployeeAction extends Action {
 			employee.setPassword(form.getPassword());
 			System.out.println("pass = "+form.getPassword());
 			employee.setStatus(0);
-			employeeDAO.createAutoIncrement(employee);
+			employeeDAO.create(employee);
 
 			// Attach (this copy of) the user bean to the session
 			// TODO ?

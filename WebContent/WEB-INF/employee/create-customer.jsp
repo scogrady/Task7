@@ -45,7 +45,7 @@
 						<input type="text" id="city" name="city" placeholder="City" />
 					</p>
 
-					<label for="State">State</label> <select class="form-control">
+					<label for="State">State</label> <select class="form-control" id="state" name="state"  >
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
 						<option value="AZ">Arizona</option>
