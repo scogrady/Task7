@@ -28,8 +28,14 @@
 				  </c:forEach>
               </tbody>
             </table>
-            <input type="text" class="form-control" name="date" placeholder="Transition Date">
-            <input type="submit" class="btn btn-primary" name="action" value="Start Transition Day!">
+            <div class="row">
+            	<div class="col-md-4"><h4>Last Transition Day: 2014-11-4</h4></div>
+            	<div class="col-md-4">
+	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date">
+            	</div>
+            	<input type="submit" class="btn btn-primary" name="action" value="Start Transition Day!">
+            </div>
+            
 		</form>
 
 </div>
