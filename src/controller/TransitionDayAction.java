@@ -10,6 +10,7 @@ import org.genericdao.RollbackException;
 
 import databeans.CustomerBean;
 import databeans.FundBean;
+import databeans.FundPriceHistoryBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import model.CustomerDAO;
@@ -44,11 +45,22 @@ public class TransitionDayAction extends Action {
 				//return "transaction-day.jsp";
 			//}
 			
-			//Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2015-01-15");
-			//transactionForm.getDate();
+			//get form data
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
 			FundBean[] fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
+		
+			for (FundBean fund: fundList) {
+				int fundId = fund.getFund_id();
+				long price = Math.round(Double.parseDouble(request.getParameter(Integer.toString(fundId))) * 1000);
+				FundPriceHistoryBean fundPrice = new FundPriceHistoryBean();
+				fundPrice.setFund_id(fundId);
+				fundPrice.setPrice(price);
+				fundPrice.setPrice_date((java.sql.Date)date);
+				fundPriceHistoryDAO.create(fundPrice);
+			}
+				
+				
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
 			int i = 1;
 			if (i != 1) {
