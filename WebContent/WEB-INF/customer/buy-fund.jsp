@@ -40,27 +40,27 @@
 									<td>${fund.getName()}</td>
 									<td>${fund.getSymbol()}</td>
 									<td>
-										<div class="num">$${fund.getPrice()}</div>
+										<div class="num">$${fund.getPrice()/100}</div>
 									</td>
 									<td>
-										<p id="change-a">$${fund.getChange()}</p>
+										<p id="change-a">$${fund.getChange()/100}</p>
 									</td>
 									<td id="change-b">${fund.getChgPer()}%</td>
-									<div class="input-group">
-										<td>
-											<div class="form-inline">
-												$ <input type="text" class="form-control" id="InputAmount1"
-													placeholder="1000000000000" size="11" maxlength="13"
-													name="num_1">. <input type="text"
-													class="form-control" id="InputAmount2" placeholder="00"
-													size="1" maxlength="2" name="num_2">
-											</div>
-										</td>
-										<td><input type="hidden" name="fund_id"
-											value="${fund.getFund_id()}"> <input type="hidden"
-											name="avail_cash" value="${customer.getAvailable_cash()}"><input
-											class="btn btn-default" type="submit" value="Buy"></td>
-									</div>
+
+									<td>
+										<div class="form-inline">
+											$ <input type="text" class="form-control" id="InputAmount1"
+												placeholder="100,000,000" size="13px" maxlength="9"
+												name="num_1">. <input type="text"
+												class="form-control" id="InputAmount2" placeholder="00"
+												size="3px" maxlength="2" name="num_2">
+										</div>
+									</td>
+									<td><input type="hidden" name="fund_id"
+										value="${fund.getFund_id()}"> <input type="hidden"
+										name="avail_cash" value="${customer.getAvailable_cash()}"><input
+										class="btn btn-default" type="submit" value="Buy"></td>
+
 
 								</tr>
 							</form>

@@ -78,7 +78,7 @@ public class SellForm extends FormBean {
 
 			}
 
-			if (num_1 + 1 > shares) {
+			if (num_1 + 1 > (shares / 1000)) {
 				errors.add("You can't sell more than what you have.");
 			}
 

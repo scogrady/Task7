@@ -76,7 +76,7 @@ public class BuyForm extends FormBean {
 
 			}
 
-			if ((num_1 + 1) * 1000 > avail_cash) {
+			if ((num_1 + 1) * 100 > avail_cash) {
 				errors.add("Not enough money in Available Cash");
 			}
 
