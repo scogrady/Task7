@@ -60,7 +60,8 @@ public class SellFundAction extends Action {
 		FundPriceHistoryBean price;
 
 		try {
-			customer = customerDAO.read(1);
+			customer = customerDAO.read("duhl09");
+			if(customer == null)System.out.println("customer = null!");
 
 			// customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);

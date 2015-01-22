@@ -6,10 +6,7 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
-
 import databeans.FundBean;
-import databeans.PositionBean;
-
 
 public class FundDAO extends GenericDAO<FundBean> {
 	
