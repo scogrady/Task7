@@ -1,4 +1,3 @@
-
 package model;
 
 import javax.servlet.ServletConfig;
@@ -21,8 +20,9 @@ public class Model {
 		try {
 			String jdbcDriver = config.getInitParameter("jdbcDriverName");
 			String jdbcURL    = config.getInitParameter("jdbcURL");
-
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL,"root","root");
+			String user = "team2";
+			String password = "123zhxxhz321";
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL, user, password);
 			
 
 			
@@ -51,8 +51,3 @@ public class Model {
 	
 	public TransactionDAO getTransactionDAO() { return transactionDAO; }
 }
-
-
-
-
-
