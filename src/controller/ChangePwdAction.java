@@ -51,10 +51,9 @@ public class ChangePwdAction extends Action {
 	            return "customer/change-pwd.jsp";
 	        }
 	        // new password same as old password
-	        System.out.println("new:"+form.getNewPassword());
+	        
 	       
 			CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
-			 System.out.println("old:"+ customer.getPassword());
 			if(customer.getPassword().equals(form.getNewPassword())){
 				errors.add("New Password is same as Old password, please change and retry ");
 				return"customer/change-pwd.jsp";
