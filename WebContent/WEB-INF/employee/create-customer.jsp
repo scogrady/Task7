@@ -2,9 +2,6 @@
 <%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
-<div class="col-xs-12 col-sm-9">
-	<h1>Create Customer Account</h1>
-</div>
 
 
 <div class="container-fluid">
