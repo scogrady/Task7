@@ -46,20 +46,29 @@ public class TransitionDayAction extends Action {
 			//}
 			
 			//get form data
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
 			FundBean[] fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
-		
+			if (request.getParameter("date") == null) {
+				return "employee/transition-day.jsp";
+			}
+			
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
 			for (FundBean fund: fundList) {
 				int fundId = fund.getFund_id();
+				System.out.println(request.getParameter(Integer.toString(fundId)));
+				if (request.getParameter(Integer.toString(fundId)) == null) {
+					break;
+				}
 				long price = Math.round(Double.parseDouble(request.getParameter(Integer.toString(fundId))) * 1000);
 				FundPriceHistoryBean fundPrice = new FundPriceHistoryBean();
 				fundPrice.setFund_id(fundId);
 				fundPrice.setPrice(price);
-				fundPrice.setPrice_date((java.sql.Date)date);
+				fundPrice.setPrice_date(new java.sql.Date(date.getTime()));
 				fundPriceHistoryDAO.create(fundPrice);
 			}
-				
+			if (1 == 1) {
+				return "employee/transition-day.jsp";
+			}
 				
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
 			int i = 1;
@@ -72,7 +81,7 @@ public class TransitionDayAction extends Action {
 				//sell fund
 				if (transactionType.equals("Sell Fund")) {
 					int fundId = transaction.getFund_id();
-					long price = fundPriceHistoryDAO.readByDateAndFundID((java.sql.Date)date, fundId)[0].getPrice();
+					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
 					double share = transaction.getShares(); 
 					//positionDAO.readByCustomerIDAndFundId(customerId, fundId)[0].getShares();
 					long moneyGot = (long)share / 1000 * price;
@@ -90,7 +99,7 @@ public class TransitionDayAction extends Action {
 				//buy fund
 				if (transactionType.equals("Buy Fund")) {
 					int fundId = transaction.getFund_id();
-					long price = fundPriceHistoryDAO.readByDateAndFundID((java.sql.Date)date, fundId)[0].getPrice();
+					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
 					long amount = transaction.getAmount();
 					long shares = Math.round((amount / price) * 1000);
 					

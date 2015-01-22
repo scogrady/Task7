@@ -4,7 +4,7 @@
 <jsp:include page="template-top.jsp" />
 <div class="col-md-10 col-md-offset-2">
 <div class="table-responsive">
-		<form role="form" method="post" action="login.do">
+		<form role="form" method="post" action="Transition.do">
 
             <table class="table table-striped">
               <thead>

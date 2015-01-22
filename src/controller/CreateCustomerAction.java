@@ -73,9 +73,9 @@ public class CreateCustomerAction extends Action {
 			customer.setState(form.getState());
 			customer.setStatus(0);
 			customer.setZip(form.getZip());
-			customer.setCurrent_cash(0);
-			customer.setAvailable_cash(0);
-			customerDAO.createAutoIncrement(customer);
+			customer.setCurrent_cash(1000);
+			customer.setAvailable_cash(1000);
+			customerDAO.create(customer);
 			
 			// Attach (this copy of) the user bean to the session
 			// TODO ?

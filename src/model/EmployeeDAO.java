@@ -45,19 +45,6 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean> {
 		}
 	}
 	
-	public void create(EmployeeBean bean) throws RollbackException {
-		try {
-			Transaction.begin();
-			
-			createAutoIncrement(bean);
-			
-			Transaction.commit();
-			
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
-		}		
-	}
-	
 	public EmployeeBean read(String username) throws RollbackException {
 		EmployeeBean[] userList = match(MatchArg.equals("username", username));
 		if (userList.length == 0)

@@ -42,19 +42,6 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		}
 	}
 	
-	public void create(CustomerBean bean) throws RollbackException {
-		try {
-			Transaction.begin();
-			
-			createAutoIncrement(bean);
-			
-			Transaction.commit();
-			
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
-		}		
-	}
-	
 	public CustomerBean read(String username) throws RollbackException {
 		CustomerBean[] userList = match(MatchArg.equals("username", username));
 		if (userList.length == 0)
