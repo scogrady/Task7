@@ -88,10 +88,10 @@ public class CreateCustomerAction extends Action {
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "employee/create-customer.jsp";
+			return "error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "employee/create-customer.jsp";
+			return "error.jsp";
 		}
 	}
 

@@ -2,9 +2,12 @@
 
 
 <jsp:include page="template-top.jsp" />
+
 <div class="col-md-3"></div>
 <div class="col-md-6">
+
     <div class="jumbotron">
+    
         <form class="form-horizontal" method="POST" action="ChangePwd.do">
            
             <div class="form-group">
@@ -25,9 +28,12 @@
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-5">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Change</button>
+                  
                 </div>
             </div>
         </form>
     </div>
+                      <jsp:include page="error-list.jsp" />
+    
 </div>
 <div class="col-md-3"></div><jsp:include page="template-bottom.jsp" />

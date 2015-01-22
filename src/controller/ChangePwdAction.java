@@ -48,12 +48,16 @@ public class ChangePwdAction extends Action {
 	        // Check for any validation errors
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
-	        	
 	            return "customer/change-pwd.jsp";
 	        }
-	
-			CustomerBean customer = (CustomerBean) request.getSession().getAttribute("customer");
-	
+	        // new password same as old password
+	        
+	       
+			CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
+			if(customer.getPassword().equals(form.getNewPassword())){
+				errors.add("New Password is same as Old password, please change and retry ");
+				return"customer/change-pwd.jsp";
+			}
 			// Change the password
         	customerDAO.setPassword(customer.getCustomer_id(),form.getNewPassword());
 	
