@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="databeans.CustomerBean" %>
 <%@ page import="databeans.PositionBean" %>
 <%@ page import="databeans.FundBean" %>
 <%@ page import="databeans.FundPriceHistoryBean" %>
-
 
 
 <jsp:include page="template-top.jsp" />
@@ -42,12 +42,17 @@
                         <td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
                     </tr>
                     <tr>
+                    <c:set var="currentBalance" value="<%=customer.getCurrent_cash()/100%>" />
                         <td>Account balance: </td>
-                        <td id="customer-balance">$<%=customer.getCurrent_cash()/100%></td>
+                        <td >$<fmt:formatNumber type="number" 
+            pattern="#,##0.00" value="${currentBalance}" /></td>
                     </tr>
                     <tr>
-                        <td>Available balance: </td>
-                        <td id="customer-balance">$<%=customer.getAvailable_cash()/100%></td>
+                    <c:set var="availableBalance" value="<%=customer.getAvailable_cash()/100%>" />
+                        <td>Available balance:</td>
+                        <td>$<fmt:formatNumber type="number" 
+            pattern="#,##0.00" value="${availableBalance}" /> </td>
+                        <td id="customer-balance">$</td>
                     </tr>
                     <tr>
                         <td>Last Trading Day</td>
