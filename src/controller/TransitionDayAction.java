@@ -55,7 +55,6 @@ public class TransitionDayAction extends Action {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
 			for (FundBean fund: fundList) {
 				int fundId = fund.getFund_id();
-				System.out.println(request.getParameter(Integer.toString(fundId)));
 				if (request.getParameter(Integer.toString(fundId)) == null) {
 					break;
 				}
@@ -81,16 +80,21 @@ public class TransitionDayAction extends Action {
 				if (transactionType.equals("Sell Fund")) {
 					int fundId = transaction.getFund_id();
 					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
-					double share = transaction.getShares(); 
+					long shares = transaction.getShares(); 
 					//positionDAO.readByCustomerIDAndFundId(customerId, fundId)[0].getShares();
-					long moneyGot = (long)share / 1000 * price;
+					long moneyGot = (long)shares / 1000 * price;
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + moneyGot);
-					customer.setAvailable_cash(customer.getAvailable_cash());
+					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
+					
+					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
+					position.setShares(position.getShares() - shares);
+					positionDAO.update(position);
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
+					transaction.setAmount(moneyGot);
 					transactionDAO.update(transaction);
 					
 					continue;
@@ -107,11 +111,12 @@ public class TransitionDayAction extends Action {
 					customerDAO.update(customer);
 					
 					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
-					position.setShares(position.getShares() - shares);
+					position.setShares(position.getShares() + shares);
 					positionDAO.update(position);
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
+					transaction.setShares(shares);
 					transactionDAO.update(transaction);
 					
 					continue;
@@ -123,6 +128,8 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
 					customer.setAvailable_cash(customer.getAvailable_cash() + amount);
+					customerDAO.update(customer);
+					transactionDAO.update(transaction);					
 					continue;
 				}				
 				
@@ -132,6 +139,12 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
 					customer.setAvailable_cash(customer.getAvailable_cash() - amount);
+					customerDAO.update(customer);
+					
+					
+					transaction.setExecute_date(date);
+					transaction.setStatus("completed");
+					transactionDAO.update(transaction);
 					continue;
 				}
 			}
