@@ -79,6 +79,10 @@ public class SellFundAction extends Action {
 
 				price = fundPriceHistoryDAO.readLastPrice(fundList[i]
 						.getFund_id());
+				if(price == null) {
+					price = new FundPriceHistoryBean();
+					price.setPrice(-1);
+				}
 				sellFundList[i].setPrice(price.getPrice());
 			}
 			request.setAttribute("sellFundList", sellFundList);
