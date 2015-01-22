@@ -120,18 +120,27 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th>Customer ID</th>
 					<th>Customer Username</th>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th>Password - for programming check - delete</th>
+					
+					<th>City</th>
+					<th>State</th>
+					<th>Zip Code</th>
+					<th>Password</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="customer" items="${customerList}">
 					<tr>
+					<td>${customer.getCustomer_id()}</td>
 						<td>${customer.getUsername()}</td>
 						<td>${customer.getFirstname()}</td>
 						<td>${customer.getLastname()}</td>
+						<td>${customer.getCity()}</td>
+						<td>${customer.getState()}</td>
+						<td>${customer.getZip()}</td>
 						<td>${customer.getPassword()}-delete</td>
 					</tr>
 				</c:forEach>

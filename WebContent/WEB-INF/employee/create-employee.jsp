@@ -51,7 +51,7 @@
 							<th>Employee Username</th>
 							<th>First Name</th>
 							<th>Last Name</th>
-							<th>Password - for programming check - delete</th>
+							<th>Password</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,7 +60,7 @@
 								<td>${employee.getUsername()}</td>
 								<td>${employee.getFirstname()}</td>
 								<td>${employee.getLastname()}</td>
-								<td>${employee.getPassword()} - delete</td>
+								<td>${employee.getPassword()}</td>
 							</tr>
 						</c:forEach>
 
