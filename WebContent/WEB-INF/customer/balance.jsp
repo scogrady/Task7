@@ -6,7 +6,7 @@
 
                 </div>
                 <div class="panel-body">
-                     <h4>${customer.getAvailable_cash()}</h4>
+                     <h4>${customer.getAvailable_cash()/100}</h4>
 
                 </div>
             </div>
@@ -17,7 +17,7 @@
 
                 </div>
                 <div class="panel-body">
-                     <h4>${customer.getCurrent_cash()}</h4>
+                     <h4>${customer.getCurrent_cash()/100}</h4>
 
                 </div>
             </div>

@@ -60,7 +60,7 @@ public class RequestCheckAction extends Action {
 			TransactionBean requestCheck = new TransactionBean();
 
 			requestCheck.setCustomer_id(customer.getCustomer_id());
-			
+			requestCheck.setFund_id(1);
 			requestCheck.setGenerate_date(date);
 		
 			requestCheck.setTransaction_type("Request Check");

@@ -4,8 +4,7 @@
 <jsp:include page="template-top.jsp" />
 
 <div class="col-xs-12 col-sm-12">
-	<h3>Welcome ${customer.getFirstname()} ${customer.getLastname()}</h3>
-
+	
 	<div class="page-header">
 		<h1>Transaction History</h1>
 	</div>
@@ -16,10 +15,10 @@
 
 		<thead>
 			<tr>
-				<th width="15%">Date of Execution</th>
+				<th width="25%">Date of Execution</th>
 				<th width="15%">Operation</th>
-				<th width="15%">Fund ID</th>
-				<th width="20%">Number of shares</th>
+				<th width="10%">Fund ID</th>
+				<th width="15%">Number of shares</th>
 				<th width="15%">Share Price</th>
 				<th width="20%">Dollar Amount</th>
 
@@ -39,13 +38,13 @@
 						<td>${transactionBean.getFund_id()}</td>
 
 
-						<td>${transactionBean.getShares()}</td>
+						<td>${transactionBean.getShares() / 1000 }</td>
 
 						<c:set var="price" scope="session"
 							value="${transactionBean.getAmount()/transactionBean.getShares()}" />
-						<td>${transactionBean.getAmount()/transactionBean.getShares()}</td>
+						<td>${transactionBean.getAmount()/transactionBean.getShares() * 10}</td>
 
-						<td>${transactionBean.getAmount()}</td>
+						<td>${transactionBean.getAmount() / 100}</td>
 					</tr>
 
 

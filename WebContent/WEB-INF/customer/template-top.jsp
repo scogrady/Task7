@@ -20,14 +20,14 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Your Favorites</a>
+      <a class="navbar-brand" href="#">Carnegie Financial Services</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul id="group-function" class="nav navbar-nav">
           <li class="active" id = "view-account"><a href="AccountInfo.do">View Account</a></li>
-          <li id = "fund-manage"><a href="SellFund.do" >Fund Management</a>
+          <li id = "fund-manage"><a href="ResearchFund.do?fund_id=1" >Fund Management</a>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
