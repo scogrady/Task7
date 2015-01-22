@@ -63,7 +63,7 @@ public class AccountInfoAction extends Action {
 
 	public AccountInfoAction(Model model) {
     	
-		System.out.println("error0");
+		
     	customerDAO =model.getCustomerDAO();
     	positionDAO =model.getPositionDAO();
     	fundDAO =model.getFundDAO();
@@ -71,21 +71,21 @@ public class AccountInfoAction extends Action {
 
 	}
 
-	public String getName() {System.out.println("error getname");
+	public String getName() {
 	return "AccountInfo.do"; }
 
 	public String perform(HttpServletRequest request) {
         // Set up the errors list
-		System.out.println("error http request");
+		
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
-		try {System.out.println("error11");
+		try {
             // Set up customer list for nav bar
 			
 			request.setAttribute("customerList",customerDAO.getCustomers());
 			
-			System.out.println("error1");
+			
 			
 			//-------------------------setting up session for test purpose-----------------
 			
@@ -103,7 +103,7 @@ public class AccountInfoAction extends Action {
 			request.setAttribute("fundTicker", fundDAO.getFunds());
 			//to get fund price 
 			request.setAttribute("priceList", fundPriceHistoryDAO.getFundPriceHistorys());
-			System.out.println("error5");
+			
 			
 			
 			//request.setAttribute("userList",userDAO.getUsers());
@@ -113,7 +113,6 @@ public class AccountInfoAction extends Action {
 
 	        return "customer/account-info.jsp";
         } catch (RollbackException e) {
-        	System.out.print("error");
         	errors.add(e.getMessage());
         	return "error.jsp";
         }

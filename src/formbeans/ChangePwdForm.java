@@ -22,7 +22,7 @@ public class ChangePwdForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		System.out.println("reached here");
+		
 		if (newPassword == null || newPassword.length() == 0) {
 			errors.add("New Password is required");
 		}
