@@ -32,7 +32,8 @@ public class ChangeEmployeePwdAction extends Action {
         request.setAttribute("errors",errors);
 
         try {
-	        // Load the form parameters into a form bean
+        	EmployeeBean employee = (EmployeeBean)request.getSession().getAttribute("employee");
+        	// Load the form parameters into a form bean
 	        ChangePwdForm form = formBeanFactory.create(request);
 	        
 	        // If no params were passed, return with no errors so that the form will be
@@ -47,10 +48,12 @@ public class ChangeEmployeePwdAction extends Action {
 	        if (errors.size() != 0) {
 	            return "employee/change-pwd.jsp";
 	        }
+	     // Old password not correct
+	     	if(!employee.getPassword().equals(form.getOldPassword())){
+	     		errors.add("Enter correct Old password to countinue");
+	     		return"employee/change-pwd.jsp";
+	   		}
 	        // new password same as old password
-	        
-	       
-			EmployeeBean employee = (EmployeeBean)request.getSession().getAttribute("employee");
 			if(employee.getPassword().equals(form.getNewPassword())){
 				errors.add("New Password is same as Old password, please change and retry ");
 				return"employee/change-pwd.jsp";

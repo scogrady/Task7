@@ -53,7 +53,7 @@ public class ChangePwdAction extends Action {
 	        }
 	        // Old password not correct
 	     	if(!customer.getPassword().equals(form.getOldPassword())){
-	     		errors.add("Please enter correct old password to countinue");
+	     		errors.add("Enter correct Old password to countinue");
 	     		return"customer/change-pwd.jsp";
 	   		}
 	        // new password same as old password
