@@ -9,6 +9,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import databeans.CustomerBean;
 import databeans.TransactionBean;
 
 public class TransactionDAO extends GenericDAO<TransactionBean> {
@@ -17,10 +18,11 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		super(TransactionBean.class, tableName, pool);
 	}
 //TODO
-	public TransactionBean[] getFunds() throws RollbackException {
+	public TransactionBean[] getTransactions() throws RollbackException {
 		TransactionBean[] transactions = match();
 		return transactions;
 	}
+	
 	
 	public boolean transactionExist() throws RollbackException {
 		TransactionBean[] transaction = match();		
