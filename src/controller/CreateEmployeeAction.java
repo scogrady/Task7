@@ -33,9 +33,9 @@ public class CreateEmployeeAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {
+			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			EmployeeForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			if (!form.isPresent()) {
 				System.out.println("create employee form is not present!");
 				return "employee/create-employee.jsp";
@@ -68,12 +68,7 @@ public class CreateEmployeeAction extends Action {
 			employee.setStatus(0);
 			employeeDAO.create(employee);
 
-			// Attach (this copy of) the user bean to the session
-			// TODO ?
-			HttpSession session = request.getSession(false);
-
-			session.setAttribute("employee", employee);
-
+			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			return "employee/create-employee.jsp";
 
 		} catch (RollbackException e) {

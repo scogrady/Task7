@@ -31,9 +31,9 @@ public class CreateFundAction extends Action{
 		request.setAttribute("errors", errors);
 
 		try {
+			request.setAttribute("fundList", fundDAO.getFunds());
 			FundForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-		//	request.setAttribute("fundList", fundDAO.getFunds());
 			if (!form.isPresent()) {
 
 				return "employee/create-fund.jsp";
@@ -58,11 +58,9 @@ public class CreateFundAction extends Action{
 			fund.setSymbol(form.getSymbol());
 			
 			fundDAO.createAutoIncrement(fund);
-			
-			// Attach (this copy of) the user bean to the session
-			HttpSession session = request.getSession(false);
-			session.setAttribute("fund", fund);
 
+			request.setAttribute("fundList", fundDAO.getFunds());
+			
 			return "employee/create-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
