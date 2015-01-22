@@ -10,6 +10,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databeans.CustomerBean;
 import databeans.EmployeeBean;
 import formbeans.EmployeeForm;
 import model.EmployeeDAO;
@@ -33,6 +34,16 @@ public class CreateEmployeeAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {
+			
+			//-------------------------setting up session for test purpose-----------------
+			
+			 EmployeeBean employee = employeeDAO.read("ttt1");
+			 System.out.println("error2");
+			 HttpSession session = request.getSession();
+			 System.out.println("error3");
+		     session.setAttribute("employee",employee);
+		     System.out.println("error4");
+		    //----------------------------------------------------------------------------- 
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			EmployeeForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
@@ -43,7 +54,7 @@ public class CreateEmployeeAction extends Action {
 
 			errors.addAll(form.getValidationErrors());
 
-			EmployeeBean employee = employeeDAO.read(form.getUsername());
+			employee = employeeDAO.read(form.getUsername());
 			if (employee != null) {
 				System.out.println(" employee  is already exist");	
 				errors.add("Employee username is already exist.");

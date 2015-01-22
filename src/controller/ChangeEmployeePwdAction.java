@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.Model;
-import model.CustomerDAO;
 import model.EmployeeDAO;
 
 import org.genericdao.RollbackException;
@@ -14,9 +13,7 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import formbeans.ChangePwdForm;
-import databeans.CustomerBean;
 import databeans.EmployeeBean;
-import databeans.UserBean;
 
 public class ChangeEmployeePwdAction extends Action {
 	private FormBeanFactory<ChangePwdForm> formBeanFactory = FormBeanFactory.getInstance(ChangePwdForm.class);
@@ -63,7 +60,7 @@ public class ChangeEmployeePwdAction extends Action {
 	
 			request.setAttribute("message","Password changed for "+employee.getFirstname() +" "+employee.getLastname());
 			
-	        return "customer/success.jsp";
+	        return "employee/success.jsp";
         } catch (RollbackException e) {
         	errors.add(e.toString());
         	return "error.jsp";
