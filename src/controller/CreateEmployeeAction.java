@@ -24,7 +24,9 @@ public class CreateEmployeeAction extends Action {
 		employeeDAO = model.getEmployeeDAO();
 	}
 
-	public String getName() { return "CreateEmployee.do"; }
+	public String getName() {
+		return "CreateEmployee.do";
+	}
 
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
@@ -35,6 +37,7 @@ public class CreateEmployeeAction extends Action {
 			request.setAttribute("form", form);
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			if (!form.isPresent()) {
+				System.out.println("create employee form is not present!");
 				return "employee/create-employee.jsp";
 			}
 
@@ -42,6 +45,7 @@ public class CreateEmployeeAction extends Action {
 
 			EmployeeBean employee = employeeDAO.read(form.getUsername());
 			if (employee != null) {
+				System.out.println(" employee  is already exist");	
 				errors.add("Employee username is already exist.");
 			}
 
@@ -50,6 +54,7 @@ public class CreateEmployeeAction extends Action {
 			}
 
 			// Create new UserBean
+			System.out.println("create employee now!");
 			employee = new EmployeeBean();
 			employee.setUsername(form.getUsername());
 			employee.setFirstname(form.getFirstname());
@@ -59,13 +64,13 @@ public class CreateEmployeeAction extends Action {
 			employeeDAO.createAutoIncrement(employee);
 
 			// Attach (this copy of) the user bean to the session
-			//TODO ?
+			// TODO ?
 			HttpSession session = request.getSession(false);
-			
+
 			session.setAttribute("employee", employee);
 
 			return "employee/create-employee.jsp";
-			
+
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "employee/create-employee.jsp";
@@ -76,6 +81,3 @@ public class CreateEmployeeAction extends Action {
 	}
 
 }
-
-
-	

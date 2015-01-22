@@ -13,15 +13,15 @@
 					
 					<label>Fund Ticker</label>
 					<p>
-						<input type="text" id="fund_symbol" name="symbol"/>
+						<input type="text" id="fund_symbol" name="symbol" placeholder="Fund Ticker"/>
 					</p>
 					<label>Fund Name</label>
 					<p>
-						<input type="text" id="fund_name" name="name"/>
+						<input type="text" id="fund_name" name="name" placeholder="Fund Name" />
 					</p>
 					<label>Fund Description</label>
 					<p>
-						<input type="text" id="fund_description" name="description"/>
+						<input type="text" id="fund_description" name="description" placeholder="Fund Description"/>
 					</p>
 					<p>
 						<input class="btn btn-primary" type="submit" name="action" value="Create Mutual Fund"></input>

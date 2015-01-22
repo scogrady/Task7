@@ -66,7 +66,7 @@ public class EmployeeForm extends FormBean {
 
 
 		if (username == null || username.length() == 0) {
-			errors.add("Email address is required");
+			errors.add("Employee username is required");
 		}
 
 		if (firstname == null || firstname.length() == 0) {

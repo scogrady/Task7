@@ -33,7 +33,7 @@ public class CreateFundAction extends Action{
 		try {
 			FundForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			request.setAttribute("fundList", fundDAO.getFunds());
+		//	request.setAttribute("fundList", fundDAO.getFunds());
 			if (!form.isPresent()) {
 
 				return "employee/create-fund.jsp";

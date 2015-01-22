@@ -42,6 +42,7 @@ public class CreateCustomerAction extends Action {
 			request.setAttribute("form", form);
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			if (!form.isPresent()) {
+				System.out.println("create customer form is not present!");
 				return "employee/create-customer.jsp";
 			}
 
@@ -49,6 +50,7 @@ public class CreateCustomerAction extends Action {
 
 			CustomerBean customer = customerDAO.read(form.getUsername());
 			if (customer != null) {
+				System.out.println(" customer is already exist");	
 				errors.add("Customer username is already exist.");
 			}
 
@@ -57,6 +59,7 @@ public class CreateCustomerAction extends Action {
 			}
 
 			// Create new UserBean
+			System.out.println("create customer now!");
 			customer = new CustomerBean();
 			customer.setUsername(form.getUsername());
 			customer.setAddr_line1(form.getAddr_line1());
@@ -72,6 +75,8 @@ public class CreateCustomerAction extends Action {
 			customer.setZip(form.getZip());
 			customer.setCurrent_cash(0);
 			customer.setAvailable_cash(0);
+			customerDAO.createAutoIncrement(customer);
+			
 			// Attach (this copy of) the user bean to the session
 			// TODO ?
 			HttpSession session = request.getSession(false);
