@@ -57,9 +57,14 @@ public class CreateEmployeeAction extends Action {
 			System.out.println("create employee now!");
 			employee = new EmployeeBean();
 			employee.setUsername(form.getUsername());
+			System.out.println("username = "+form.getUsername());
+			
 			employee.setFirstname(form.getFirstname());
+			System.out.println("first = "+form.getFirstname());
 			employee.setLastname(form.getLastname());
+			System.out.println("last = "+form.getLastname());
 			employee.setPassword(form.getPassword());
+			System.out.println("pass = "+form.getPassword());
 			employee.setStatus(0);
 			employeeDAO.createAutoIncrement(employee);
 

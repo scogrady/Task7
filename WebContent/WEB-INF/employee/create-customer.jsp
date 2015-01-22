@@ -111,7 +111,25 @@
 	</div>
 </div>
 
+		<div class="row">
+			<div class="col-sm-6 col-md-4">
+				<h3>Customer List.</h3>
 
+				<ol>
+
+					<c:forEach var="customer" items="${customerList}">
+						<li>
+							<h4>username = ${customer.getUsername()}</h4>
+							<p>Firstname = ${customer.getFirstname()}</p>
+							<p>Lastname = ${customer.getLastname()}</p>
+							<p>Password = ${customer.getPassword()}</p>
+
+						</li>
+					</c:forEach>
+
+				</ol>
+			</div>
+		</div>
 
 
 <jsp:include page="template-bottom.jsp" />
