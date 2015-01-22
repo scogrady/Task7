@@ -59,20 +59,19 @@ public class TransitionDayAction extends Action {
 				if (request.getParameter(Integer.toString(fundId)) == null) {
 					break;
 				}
-				long price = Math.round(Double.parseDouble(request.getParameter(Integer.toString(fundId))) * 1000);
+				long price = Math.round(Double.parseDouble(request.getParameter(Integer.toString(fundId))) * 100);
 				FundPriceHistoryBean fundPrice = new FundPriceHistoryBean();
 				fundPrice.setFund_id(fundId);
 				fundPrice.setPrice(price);
 				fundPrice.setPrice_date(new java.sql.Date(date.getTime()));
 				fundPriceHistoryDAO.create(fundPrice);
 			}
-			if (1 == 1) {
-				return "employee/transition-day.jsp";
-			}
+			//if (1 == 1) {
+			//	return "employee/transition-day.jsp";
+			//}
 				
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
-			int i = 1;
-			if (i != 1) {
+
 			for (TransactionBean transaction : transactions) {
 				int customerId = transaction.getCustomer_id();
 				CustomerBean customer = customerDAO.read(customerId);
@@ -135,7 +134,6 @@ public class TransitionDayAction extends Action {
 					customer.setAvailable_cash(customer.getAvailable_cash() - amount);
 					continue;
 				}
-			}
 			}
 			
 		} 
