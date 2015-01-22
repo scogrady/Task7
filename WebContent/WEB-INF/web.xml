@@ -20,7 +20,6 @@
         <init-param>
           <param-name>    jdbcURL                 </param-name> 
 	      <param-value>jdbc:mysql://cfsdb.cjdvyu9rrojc.us-west-2.rds.amazonaws.com:3306/CFS</param-value>
-	      
         </init-param>
         <init-param>
           <param-name>    csvDir                  </param-name> 

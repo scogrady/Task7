@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="databeans.FavoriteBean"%>
+<%@ page import="databeans.FundBean"%>
 
 <jsp:include page="template-top.jsp" />
 
@@ -35,20 +35,29 @@
 		</div>
 
 		<div class="row">
-			<div class="col-sm-6 col-md-4">
+			<div class="col-xs-12 col-sm-9">
 				<h3>Fund List.</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Fund ID</th>
+							<th>Fund name</th>
+							<th>Fund Ticker</th>
+							<th>Fund Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="fund" items="${fundList}">
+							<tr>
+								<td>${fund.getFund_id()}</td>
+								<td>${fund.getName()}</td>
+								<td>${fund.getSymbol()}</td>
+								<td>${fund.getDescription()}</td>
+							</tr>
+						</c:forEach>
 
-				<ol>
-
-					<c:forEach var="fund" items="${fundList}">
-						<li>
-							<h4>Fund name = ${fund.getName()}</h4>
-							<p>Fund Symbol = ${fund.getSymbol()}</p>
-							<p>Fund Description = ${fund.getDescription()}</p>
-						</li>
-					</c:forEach>
-
-				</ol>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
@@ -56,4 +65,3 @@
 	</div>
 </div>
 <jsp:include page="template-bottom.jsp" />
-
