@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="databeans.CustomerBean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="databeans.CustomerBean"%>
 
 <jsp:include page="template-top.jsp" />
 
@@ -21,7 +21,7 @@
 						<input type="text" id="amount" name="amount"
 							placeholder="Deposit Amount" />
 					</p>
-					
+
 					<p>
 						<input class="btn btn-primary" type="submit" name="action"
 							value="Deposit Check"></input>
@@ -31,46 +31,66 @@
 		</div>
 
 		<div class="row">
-			<div class="col-sm-6 col-md-4">
+			<div class="col-xs-12 col-sm-9">
 				<h3>Customer List.</h3>
 
-				<ol>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Available Cash (long type need/100)</th>
+						</tr>
+					</thead>
+					<tbody>
 
-					<c:forEach var="customer" items="${customerList}">
-						<li>
-							<h4>username = ${customer.getUsername()}</h4>
-							<p>Firstname = ${customer.getFirstname()}</p>
-							<p>Lastname = ${customer.getLastname()}</p>
-							<p>Available Cash = ${customer.getAvailable_cash()}</p>
+						<c:forEach var="customer" items="${customerList}">
+							<tr>
+								<td>${customer.getUsername()}</td>
+								<td>${customer.getFirstname()}</td>
+								<td>${customer.getLastname()}</td>
+								<td>${customer.getAvailable_cash()}</td>
+							</tr>
+						</c:forEach>
 
-						</li>
-					</c:forEach>
-
-				</ol>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		
+
 		<div class="row">
-			<div class="col-sm-6 col-md-4">
+			<div class="col-xs-12 col-sm-9">
 				<h3>Transaction List - for programming check.</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Transaction ID</th>
+							<th>Transaction Type</th>
+							<th>Customer ID</th>
+							<th>Transaction Amount</th>
+							<th>Transaction Generate Date</th>
+							<th>Transaction Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="transaction" items="${transactionList}">
+							<tr>
+								<td>${transaction.getTransaction_id()}</td>
+								<td>${transaction.getTransaction_type()}</td>
+								<td>${transaction.getCustomer_id()}</td>
+								<td>${transaction.getAmount()}</td>
+								<td>${transaction.getGenerate_date()}</td>
+								<td>${transaction.getStatus()}</td>
+							</tr>
+						</c:forEach>
 
-				<ol>
-
-					<c:forEach var="transaction" items="${transactionList}">
-						<li>
-							<h4>ID = ${transaction.getTransaction_id()}</h4>
-							<p>amount = ${transaction.getAmount()}</p>
-							<p>customer id = ${transaction.getCustomer_id()}</p>
-							<p>generate date = ${transaction.getGenerate_date()}</p>
-							<p>transaction type = ${transaction.getTransaction_type()}</p>
-
-						</li>
-					</c:forEach>
-
-				</ol>
+					</tbody>
+				</table>
 			</div>
 		</div>
-		
+
+
 	</div>
 </div>
 

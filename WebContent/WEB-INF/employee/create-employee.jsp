@@ -41,26 +41,37 @@
 			</form>
 		</div>
 
+
 		<div class="row">
-			<div class="col-sm-6 col-md-4">
+			<div class="col-xs-12 col-sm-9">
 				<h3>Employee List.</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Employee Username</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Password - for programming check - delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="employee" items="${employeeList}">
+							<tr>
+								<td>${employee.getUsername()}</td>
+								<td>${employee.getFirstname()}</td>
+								<td>${employee.getLastname()}</td>
+								<td>${employee.getPassword()} - delete</td>
+							</tr>
+						</c:forEach>
 
-				<ol>
-
-					<c:forEach var="employee" items="${employeeList}">
-						<li>
-							<h4>username = ${employee.getUsername()}</h4>
-							<p>Firstname = ${employee.getFirstname()}</p>
-							<p>Lastname = ${employee.getLastname()}</p>
-							<p>Password = ${employee.getPassword()}</p>
-
-						</li>
-					</c:forEach>
-
-				</ol>
+					</tbody>
+				</table>
 			</div>
 		</div>
+
+
+
 	</div>
 </div>
 
-	<jsp:include page="template-bottom.jsp" />
+<jsp:include page="template-bottom.jsp" />

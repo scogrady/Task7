@@ -18,11 +18,13 @@
 						<div class="thumbnail">
 							<img data-src="holder.js/300x300" alt="...">
 							<div class="caption">
-								<h3>${recommandFund.getName()} - ${recommandFund.getSymbol()}</h3>
+								<h3>${recommandFund.getName()}-
+									${recommandFund.getSymbol()}</h3>
 								<p>${recommandFund.getDescription()}</p>
 								<p>
-									<a href="ResearchFund.do?fund_id=${recommandFund.getFund_id()}" class="btn btn-primary" role="button">View More</a>
-									<a href="#" class="btn btn-default" role="button">Compare</a>
+									<a href="ResearchFund.do?fund_id=${recommandFund.getFund_id()}"
+										class="btn btn-primary" role="button">View More</a> <a
+										href="#" class="btn btn-default" role="button">Compare</a>
 								</p>
 							</div>
 						</div>
@@ -47,7 +49,7 @@
 								</p>
 							</li>
 						</c:forEach>
-					
+
 					</ol>
 				</div>
 
@@ -77,7 +79,7 @@
 									<td>Up</td>
 								</tr>
 							</c:forEach>
-						
+
 						</tbody>
 					</table>
 				</div>
