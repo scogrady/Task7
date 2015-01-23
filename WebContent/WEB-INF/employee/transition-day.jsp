@@ -45,7 +45,7 @@
 				
             	
             	<div class="col-md-4">
-	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date" pattern="" required>
+	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date"  required>
             	</div>
             	<input type="submit" class="btn btn-primary" name="action" value="Start Transition Day!">
             </div>
