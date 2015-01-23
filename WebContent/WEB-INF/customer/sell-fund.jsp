@@ -11,7 +11,7 @@
 	<div class="row-fluid">
 		<div class="col-md-12">
 			<div class="page-header">
-				<h1>Your Fund</h1>
+				<h1>SELL FUND</h1>
 
 			</div>
 			<table class="table table-hover">
