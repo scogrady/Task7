@@ -2,7 +2,7 @@
 //Andrew ID: hanzex
 //Title: Homework #9 ManageAction.java
 //Course Number: 08-600
-//Date: 2014-12-3
+//: 2014-12-3
 
 
 //oh my god

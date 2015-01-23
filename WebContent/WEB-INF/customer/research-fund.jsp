@@ -1,6 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="databeans.FavoriteBean"%>
+<%@ page import="databeans.FundBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
+
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+<script src="jquery.highchartTable.js" type="text/javascript"></script>
+
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
@@ -62,7 +68,33 @@
 					<dl>
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
-					<table class="table">
+
+
+					<table class="highchart"
+						data-graph-container=".. .. .highchart-container" data-graph-type="column">
+						
+						<caption>Column example</caption>
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Price</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
+								<tr>
+									<td>${fundPriceHistory.getPrice_date()}</td>
+									<td>${fundPriceHistory.getPrice()}</td>
+									
+								</tr>
+							</c:forEach>
+
+						</tbody>
+					</table>
+
+
+				<!-- 	<table class="table">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -71,7 +103,6 @@
 							</tr>
 						</thead>
 						<tbody>
-
 							<c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
 								<tr>
 									<td>${fundPriceHistory.getPrice_date()}</td>
@@ -82,6 +113,8 @@
 
 						</tbody>
 					</table>
+				 -->
+					
 				</div>
 			</div>
 
