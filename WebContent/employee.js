@@ -57,7 +57,10 @@ $(document).ready(function() {
 	$('#fund-operation').css('display', 'none');
 	$('#transaction-day').addClass('active');
 
-}) 
+})
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 function addSub() {
 	var listItems = $("#sub-operation li");
 	listItems.each(function(idx, li) {
