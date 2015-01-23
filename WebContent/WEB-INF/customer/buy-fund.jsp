@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="databeans.CustomerBean"%>
 <%@ page import="databeans.BuyFundBean"%>
 
@@ -40,12 +41,14 @@
 									<td>${fund.getName()}</td>
 									<td>${fund.getSymbol()}</td>
 									<td>
-										<div class="num">$${fund.getPrice()/100}</div>
+									<c:set var="getPrice"	value="${fund.getPrice()/100}" />
+										<div class="num">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${getPrice}" /></div>
 									</td>
-									<td>
-										<p id="change-a">$${fund.getChange()/100}</p>
+									<td><c:set var="getChange"	value="${fund.getChange()/100}" />
+										<p id="change-a">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${getPrice}" /></p>
 									</td>
-									<td id="change-b">${fund.getChgPer()}%</td>
+									<c:set var="getChgPer"	value="${fund.getChgPer()}" />
+									<td id="change-b"><fmt:formatNumber type="number" pattern="#,##0.00" value="${getChgPer}" />%</td>
 
 									<td>
 										<div class="form-inline">

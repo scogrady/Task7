@@ -1,3 +1,5 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row-fluid">
 <c:if test="${!empty customer}">
         <div class="col-md-6">
@@ -6,7 +8,8 @@
 
                 </div>
                 <div class="panel-body">
-                     <h4>${customer.getAvailable_cash()/100}</h4>
+                <c:set var="AvailBalance"	value="${customer.getAvailable_cash()/100}" />
+                     <h4>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${AvailBalance}" /></h4>
 
                 </div>
             </div>
@@ -17,7 +20,8 @@
 
                 </div>
                 <div class="panel-body">
-                     <h4>${customer.getCurrent_cash()/100}</h4>
+                	<c:set var="CurrBalance"	value="${customer.getCurrent_cash()/100}" />
+                     <h4>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${CurrBalance}" /></h4>
 
                 </div>
             </div>
