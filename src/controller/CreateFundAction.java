@@ -64,10 +64,10 @@ public class CreateFundAction extends Action{
 			return "employee/create-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "employee/error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "employee/error.jsp";
 		}
 	}
 

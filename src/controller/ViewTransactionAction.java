@@ -41,7 +41,7 @@ public class ViewTransactionAction extends Action {
 			return "employee/view-transaction.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "employee/error.jsp";
 
 		}
 		

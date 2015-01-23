@@ -80,9 +80,9 @@ public class RequestCheckAction extends Action {
 			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "customer/error.jsp";
 		} catch (FormBeanException e) {
-			return "error.jsp";
+			return "customer/error.jsp";
 		}
 	}
 }

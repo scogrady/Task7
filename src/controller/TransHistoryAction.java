@@ -41,7 +41,7 @@ public class TransHistoryAction extends Action {
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "customer/error.jsp";
 
 		}
 	}
