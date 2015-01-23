@@ -35,15 +35,8 @@ public class CreateEmployeeAction extends Action {
 
 		try {
 			
-			//-------------------------setting up session for test purpose-----------------
 			
-			 EmployeeBean employee = employeeDAO.read("ttt1");
-			 System.out.println("error2");
-			 HttpSession session = request.getSession();
-			 System.out.println("error3");
-		     session.setAttribute("employee",employee);
-		     System.out.println("error4");
-		    //----------------------------------------------------------------------------- 
+		   
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			EmployeeForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
@@ -54,7 +47,7 @@ public class CreateEmployeeAction extends Action {
 
 			errors.addAll(form.getValidationErrors());
 
-			employee = employeeDAO.read(form.getUsername());
+			EmployeeBean employee = employeeDAO.read(form.getUsername());
 			if (employee != null) {
 				System.out.println(" employee  is already exist");	
 				errors.add("Employee username is already exist.");
@@ -65,7 +58,6 @@ public class CreateEmployeeAction extends Action {
 			}
 
 			// Create new UserBean
-			System.out.println("create employee now!");
 			employee = new EmployeeBean();
 			employee.setUsername(form.getUsername());
 			System.out.println("username = "+form.getUsername());
@@ -78,6 +70,8 @@ public class CreateEmployeeAction extends Action {
 			System.out.println("pass = "+form.getPassword());
 			employee.setStatus(0);
 			employeeDAO.create(employee);
+			System.out.println("create employee now!");
+
 
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			return "employee/create-employee.jsp";

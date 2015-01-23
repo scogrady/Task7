@@ -39,7 +39,7 @@
 		}
 		.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, 
 		.navbar-inverse .navbar-nav>.active>a:focus {
-			color: blue;
+			color: #66ccff;
 		}
 		@media (min-width: 768px) {
   			.sidebar-nav .navbar .navbar-collapse {
