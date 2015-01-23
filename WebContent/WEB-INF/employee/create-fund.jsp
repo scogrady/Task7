@@ -2,34 +2,47 @@
 <%@ page import="databeans.FundBean"%>
 
 <jsp:include page="template-top.jsp" />
+<jsp:include page="error-list.jsp" />
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
+
+<div class="row-fluid">
+	<div class="form-group">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
 			<form method="post">
 				<fieldset>
-					<legend>Create Mutual Fund</legend>
 
+					<div class="page-header">
+						<h1>Create Mutual Fund</h1>
+					</div>
+					<div class="form-inline">
+						<div class="form-group">
 
-					<label>Fund Ticker</label>
-					<p>
-						<input type="text" id="fund_symbol" name="symbol"
-							placeholder="Fund Ticker" />
-					</p>
-					<label>Fund Name</label>
-					<p>
-						<input type="text" id="fund_name" name="name"
-							placeholder="Fund Name" />
-					</p>
-					<label>Fund Description</label>
-					<p>
-						<input type="text" id="fund_description" name="description"
-							placeholder="Fund Description" />
-					</p>
-					<p>
-						<input class="btn btn-primary" type="submit" name="action"
-							value="Create Mutual Fund"></input>
-					</p>
+							<label>Fund Ticker</label>
+							<p>
+								<input type="text" id="fund_symbol" class="form-control"
+									name="symbol" placeholder="Fund Ticker">
+							</p>
+							<label>Fund Name</label>
+							<p>
+								<input type="text" id="fund_name" class="form-control"
+									name="name" placeholder="Fund Name">
+						</div>
+					</div>
+					<div class="form-inline">
+						<label>Fund Description</label>
+
+						<p>
+							<input type="text" id="fund_description" class="form-control"
+								name="description" placeholder="Fund Description" />
+						</p>
+						<p>
+							<input class="btn btn-primary" type="submit" name="action"
+								value="Create"></input>
+						</p>
+						<div class="col-md-3"></div>
+					</div>
+
 				</fieldset>
 			</form>
 		</div>
