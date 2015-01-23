@@ -24,7 +24,7 @@ public class Controller extends HttpServlet {
         Action.add(new ChangePwdAction(model));
         Action.add(new TransHistoryAction(model));
         Action.add(new RequestCheckAction(model));
-        //Action.add(new BuyFundAction(model));
+        Action.add(new BuyFundAction(model));
         Action.add(new SellFundAction(model));
         Action.add(new ResearchFundAction(model));
         
@@ -34,9 +34,11 @@ public class Controller extends HttpServlet {
         Action.add(new ResetPasswordAction(model));
         Action.add(new ViewAccountAction(model));
         Action.add(new ViewTransactionAction(model));
+        Action.add(new EmployeeViewTransHistoryAction(model));
         Action.add(new CreateFundAction(model));
         Action.add(new DepositCheckAction(model));
-        Action.add(new TransactionDayAction(model));
+        Action.add(new TransitionDayAction(model));
+        Action.add(new ResetCustomerPwdAction(model));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

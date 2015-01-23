@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="databeans.FavoriteBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
 
@@ -65,18 +66,26 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>Date</th>
-								<th>Price</th>
-								<th>Status</th>
+								<th width="25%">Date</th>
+								<th width="20%" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price</th>
+								<th width="50%" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status</th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
 								<tr>
-									<td>${fundPriceHistory.getPrice_date()}</td>
-									<td>${fundPriceHistory.getPrice()}</td>
-									<td>Up</td>
+								<c:set var="getPrice_date" value="${fundPriceHistory.getPrice_date()}" />
+									<td><fmt:formatDate value="${getPrice_date}" pattern="MMM dd yyyy " /></td>
+									<c:set var="getPrice" value="${fundPriceHistory.getPrice()}" />
+									<td align="right"><fmt:formatNumber type="number" pattern="#,##0.00"	value="${getPrice}" /></td>
+									<td align="center">Up</td>
 								</tr>
 							</c:forEach>
 

@@ -10,6 +10,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databeans.CustomerBean;
 import databeans.EmployeeBean;
 import formbeans.EmployeeForm;
 import model.EmployeeDAO;
@@ -33,6 +34,9 @@ public class CreateEmployeeAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {
+			
+			
+		   
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			EmployeeForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
@@ -54,7 +58,6 @@ public class CreateEmployeeAction extends Action {
 			}
 
 			// Create new UserBean
-			System.out.println("create employee now!");
 			employee = new EmployeeBean();
 			employee.setUsername(form.getUsername());
 			System.out.println("username = "+form.getUsername());
@@ -67,16 +70,18 @@ public class CreateEmployeeAction extends Action {
 			System.out.println("pass = "+form.getPassword());
 			employee.setStatus(0);
 			employeeDAO.create(employee);
+			System.out.println("create employee now!");
+
 
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			return "employee/create-employee.jsp";
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "employee/error.jsp";
 		} catch (FormBeanException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "employee/error.jsp";
 		}
 	}
 

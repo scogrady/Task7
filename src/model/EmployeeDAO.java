@@ -26,7 +26,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean> {
 		return (customers.length > 0);
 	}
 	
-	public void setPassword(String username, String fullName, String password) throws RollbackException {
+	public void setPassword(String username, String password) throws RollbackException {
         try {
         	Transaction.begin();
         	
@@ -34,7 +34,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean> {
         	EmployeeBean dbUser = userList[0];
         	
 			if (dbUser == null) {
-				throw new RollbackException("Employee "+ fullName +" no longer exists");
+				throw new RollbackException("Employee does not exists");
 			}
 			
 			dbUser.setPassword(password);
@@ -54,6 +54,12 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean> {
 		else 
 			return userList[0];
 	}
-
-
+	
+	public EmployeeBean readByUsername(String username) throws RollbackException {
+		EmployeeBean[] employees = match(MatchArg.equals("username", username));
+		if (employees.length == 0)
+			return null;
+		else 
+			return employees[0];
+	}
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
@@ -10,16 +11,16 @@
 	<div class="row-fluid">
 		<div class="col-md-12">
 			<div class="page-header">
-				<h1>Your Fund</h1>
+				<h1>SELL FUND</h1>
 
 			</div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th width="30%">Fund Name</th>
-						<th width="15%">You own</th>
+						<th width="15%">Share</th>
 						<th width="10%">Price</th>
-						<th width="30%">Share</th>
+						<th width="30%">Sell Share</th>
 						<th width="15%">Sell</th>
 					</tr>
 				</thead>
@@ -30,10 +31,11 @@
 								<tr>
 									<div class="form-group">
 										<td>${fund.getName()}</td>
-										<td>
-											<div class="num">${fund.getShares() / 1000}shares</div>
+										<td><c:set var="getShare"	value="${fund.getShares() / 1000}" />
+											<div class="num"><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShare}" /></div>
 										</td>
-										<td id="change-p">$${fund.getPrice() / 100}</td>
+										<c:set var="getPrice"	value="${fund.getPrice() / 100}" />
+										<td id="change-p">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${getPrice}" /></td>
 										<td>
 											<div class="form-inline">
 												<input type="text" class="form-control" id="InputAmount1"

@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	$('#flash').hide();
 	var eaccountOp = ["CreateEmployee", "ChangeEmployeePwd"];
-	var caccountOp = ["CreateCustomer", "ResetPassword", "ViewAccount", "ViewTransaction"];
-	var fundOp = ["CreateFund", "DepositCheck"];
+	var caccountOp = ["CreateCustomer", "ResetPassword", "ViewAccount", "ViewTransaction", "DepositCheck"];
+	var fundOp = ["CreateFund"];
 	var active = false;
 	$.each(eaccountOp, function(idx, s) {
 		if (window.location.pathname.indexOf(s) != -1) {
@@ -46,7 +46,7 @@ $(document).ready(function() {
 		}
 	})
 	if (!active) {
-		$('#fund-manage').removeClass('active');
+		$('#transaction-day').removeClass('active');
 	} else {
 		addSub();
 		return;

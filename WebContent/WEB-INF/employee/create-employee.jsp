@@ -2,45 +2,44 @@
 <%@ page import="databeans.EmployeeBean"%>
 
 <jsp:include page="template-top.jsp" />
+<jsp:include page="error-list.jsp" />
 
 
-<div class="container-fluid">
-	<div class="row-fluid">
+<div class="col-xs-12 col-sm-12">
+  <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="page-header">
+                 <h1>Create Employee</h1>
 
-		<div class="span12">
-			<form method="post">
-				<fieldset>ssssssssf
-					<legend>Create Employee Account</legend>
-
-					<label>Username</label>
-					<p>
-						<input type="text" id="username" name="username"
-							placeholder="Username" class="form-control" maxlength="20" required />
-					</p>
-					<label>First Name</label>
-					<p>
-						<input type="text" id="firstname" name="firstname"
-							placeholder="First Name" class="form-control" maxlength="20" pattern="[a-zA-Z ]{3,30}" required />
-					</p>
-					<label>Last Name</label>
-					<p>
-						<input type="text" id="lastname" name="lastname"
-							placeholder="Last Name" class="form-control" maxlength="20" pattern="[a-zA-Z ]{3,30}" required />
-					</p>
-					<label>Password</label>
-					<p>
-						<input type="text" id="password" name="password"
-							placeholder="Password" class="form-control" maxlength="20" required/> <br /> <input type="text"
-							id="confirm" name="confirm" placeholder="Confirm Password" class="form-control" maxlength="20" required />
-					</p>
-					<p>
-						<input class="btn btn-primary" type="submit" name="action"
-							value="Create Employee"></input>
-					</p>
-				</fieldset>
-			</form>
-		</div>
-
+            </div>
+            <form  method="post" action="CreateEmployee.do">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username-new" name="username" placeholder="Username" maxlength="30" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="password-new-1"  name="password" placeholder="Password" maxlength="30" required>
+                    <br/>
+                    <input type="password" class="form-control" id="password-new-2"  name="confirm" placeholder="Confirm Password" maxlength="30" required >
+                </div>
+                        
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname-new" name="firstname" placeholder="First Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname-new" name="lastname" placeholder="Last Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct Last Name" required>
+                </div>
+                <input type="submit" class="btn btn-primary" id="submit-new-emlpoyee" name="action">
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+	
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-9">

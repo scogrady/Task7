@@ -73,9 +73,9 @@ public class DepositCheckAction extends Action {
 			return "employee/deposit-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "employee/error.jsp";
 		} catch (FormBeanException e) {
-			return "error.jsp";
+			return "employee/error.jsp";
 		}
 	}
 

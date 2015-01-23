@@ -63,7 +63,15 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		return transactionList;
 	}
 	public TransactionBean[] readByDate(Date date) throws RollbackException {
-		TransactionBean[] transactionList = match(MatchArg.equals("excution_date", date));
+		TransactionBean[] transactionList = match(MatchArg.equals("execute_date", date));
 		return transactionList;		
+	}
+	public TransactionBean readByLastDate() throws RollbackException {
+		TransactionBean[] transactionList = match(MatchArg.max("execute_date"));
+		if (transactionList.length == 0) { 
+			return null;
+		} else {
+			return transactionList[0];
+		}
 	}
 }

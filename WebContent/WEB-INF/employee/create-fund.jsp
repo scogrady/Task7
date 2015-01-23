@@ -1,43 +1,60 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="databeans.FundBean"%>
 
 <jsp:include page="template-top.jsp" />
+<jsp:include page="error-list.jsp" />
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
+
+<div class="row-fluid">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
 			<form method="post">
 				<fieldset>
-					<legend>Create Mutual Fund</legend>
 
+					<div class="page-header">
+						<h1>Create Mutual Fund</h1>
+					</div>
+					
+						<div class="form-group">
 
-					<label>Fund Ticker</label>
-					<p>
-						<input type="text" id="fund_symbol" name="symbol"
-							placeholder="Fund Ticker" class="form-control" />
-					</p>
-					<label>Fund Name</label>
-					<p>
-						<input type="text" id="fund_name" name="name"
-							placeholder="Fund Name" class="form-control" />
-					</p>
-					<label>Fund Description</label>
-					<p>
-						<input type="text" id="fund_description" name="description"
-							placeholder="Fund Description" class="form-control" />
-					</p>
-					<p>
-						<input class="btn btn-primary" type="submit" name="action"
-							value="Create Mutual Fund"></input>
-					</p>
+							<label>Fund Ticker</label>
+							
+								<input type="text" id="fund_symbol" class="form-control"
+									name="symbol" placeholder="Fund Ticker">
+							
+							<label>Fund Name</label>
+							
+								<input type="text" id="fund_name" class="form-control"
+									name="name" placeholder="Fund Name">
+						</div>
+					
+					
+						<label>Fund Description</label>
+
+						<p>
+							<input type="text" id="fund_description" class="form-control"
+								name="description" placeholder="Fund Description" />
+						</p>
+						<p>
+							<input class="btn btn-primary" type="submit" name="action"
+								value="Create"></input>
+						</p>
+						<div class="col-md-3"></div>
+					
+
 				</fieldset>
 			</form>
+				</div>
 		</div>
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-9">
-				<h3>Fund List.</h3>
+			
+			<div class="page-header">
+						<h3>Fund List</h3>
+					</div>
+				
 				<table class="table">
 					<thead>
 						<tr>
@@ -63,6 +80,6 @@
 		</div>
 
 
-	</div>
+
 </div>
 <jsp:include page="template-bottom.jsp" />

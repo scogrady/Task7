@@ -11,37 +11,33 @@ import org.mybeans.form.FormBeanFactory;
 
 import model.Model;
 import databeans.CustomerBean;
-import formbeans.IdForm;
+import formbeans.ChangePwdForm;
+import formbeans.ResetForm;
 import model.CustomerDAO;
 
-public class ResetPasswordAction extends Action {
+public class ResetCustomerPwdAction extends Action {
 	
-	private FormBeanFactory<IdForm> formBeanFactory = FormBeanFactory.getInstance(IdForm.class);
+	private FormBeanFactory<ResetForm> formBeanFactory = FormBeanFactory.getInstance(ResetForm.class);
 	
 	private CustomerDAO customerDAO;
 	
-	public ResetPasswordAction(Model model) {
+	public ResetCustomerPwdAction(Model model) {
 		customerDAO = model.getCustomerDAO();
 	}
 
-	public String getName() { return "ResetPassword.do"; }
+	public String getName() { return "ResetCustomerPwd.do"; }
 
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
-		request.setAttribute("errors", errors);
 		try{
 			request.setAttribute("customerList", customerDAO.getCustomers());
-			IdForm form = formBeanFactory.create(request);
-			
-			if(!form.isPresent()){
-				return "employee/reset-password.jsp";
-			}
-			
-			int id = form.getIdAsInt();
-			//customerDAO.resetPassword(id);
+			ResetForm form = formBeanFactory.create(request);
+			int id = Integer.parseInt((String) request.getParameter("id"));
+			System.out.println("id:"+id);
 			request.setAttribute("id", id);
-			
-			return "employee/reset-password-form.jsp";
+			customerDAO.resetPassword(id,form.getNewPassword());
+			request.setAttribute("message","Password Reset sucessfull");
+			return "employee/success.jsp";
 	    
 	} catch (RollbackException e) {
 		errors.add(e.getMessage());
