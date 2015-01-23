@@ -6,42 +6,53 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
+import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
 import databeans.TransactionBean;
+import formbeans.IdForm;
 import model.Model;
 import model.TransactionDAO;
 
-public class TransHistoryAction extends Action {
+public class EmployeeViewTransHistoryAction extends Action {
 	private TransactionDAO transactionDAO;
 	private TransactionBean[] transactionHistory;
+	private FormBeanFactory<IdForm> formBeanFactory = FormBeanFactory.getInstance(IdForm.class);
 
-	public TransHistoryAction(Model model) {
+
+	public EmployeeViewTransHistoryAction(Model model) {
 		transactionDAO = model.getTransactionDAO();
 	}
 
 	public String getName() {
-		return "TransHistory.do";
+		return "EmployeeViewTransHistory.do";
 	}
 
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		CustomerBean customer = (CustomerBean) request.getSession(false)
-				.getAttribute("customer");
-		try {
-			transactionHistory = transactionDAO.readByCustomerID(customer
-					.getCustomer_id());
+				try {
+			IdForm form = formBeanFactory.create(request);
+
+			int id = form.getIdAsInt();
+			request.setAttribute("id", id);
+			
+			transactionHistory = transactionDAO.readByCustomerID(id);
 
 			request.setAttribute("transactionHistory", transactionHistory);
 
-			return "customer/trans-history.jsp";
+			return "employee/trans-history.jsp";
 			
 			
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "customer/error.jsp";
+			return "employee/error.jsp";
+
+		} catch (FormBeanException e) {
+			errors.add(e.getMessage());
+			return "employee/error.jsp";
 
 		}
 	}
