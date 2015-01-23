@@ -58,6 +58,22 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 			return userList[0];
 	}
 	
+	public void resetPassword(int customer_id,String password) throws RollbackException {
+        try {
+        	Transaction.begin();
+        	
+        	CustomerBean[] userList = match(MatchArg.equals("customer_id", customer_id));
+        	CustomerBean dbUser = userList[0];
+			if (dbUser == null) {
+				throw new RollbackException("customer do not exist in database");
+			}
+			dbUser.setPassword(password);
+			update(dbUser);
+			Transaction.commit();
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
+	}
 	
 
 }
