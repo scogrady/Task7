@@ -48,6 +48,10 @@ public class TransitionDayAction extends Action {
 			//get form data
 			FundBean[] fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
+			
+			Date lastDate = transactionDAO.readByLastDate().getExecute_date();
+			request.setAttribute("lastDate", new SimpleDateFormat("yyyy-MM-dd").format(lastDate));
+			
 			if (request.getParameter("date") == null) {
 				return "employee/transition-day.jsp";
 			}

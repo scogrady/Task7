@@ -19,16 +19,14 @@
 	<form class="form-signin" role="form" method="post" action="login.do">
 		<h2 class="form-signin-heading">Please log in</h2>
 	    <label for="inputEmail" class="sr-only">Email address</label>
-    	<input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address" value="${form.email}">
+    	<input type="text" name="username" id="input-username" class="form-control" placeholder="Username" value="${form.username }">
     	<br>
     	<label for="inputPassword" class="sr-only">Password</label>
-	    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+	    <input type="password" name="password" id="input-password" class="form-control" placeholder="Password">
 		<br><br>
 		<h4>Login as:</h4>
 		<input type="submit" class="btn btn-lg btn-primary" name="action" value="Customer"/>
 		<input type="submit" class="btn btn-lg btn-primary" name="action" value="Employee"/>
-		<h4>Not register yet?</h4>
-		<h4>Click <a href="register.do">here</a> to register as a new user.</h4>
 	</form>
 </body>
 </html>

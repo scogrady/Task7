@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="databeans.EmployeeBean" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,7 +42,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-      	<li><a style="color: white">Welcome! 				Hanze Xu</a></li>
+        <%
+            EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
+		%>
+      	<li><a style="color: white">Welcome! <%=employee.getFirstname()%> <%=employee.getLastname()%></a></li>
 		<li><a href="logout.do">Logout</a></li>
 		<li>&nbsp;</li><br/>
       </ul>
@@ -72,6 +77,7 @@
             <li name = "ResetPassword"><a href="ResetPassword.do">Rest Password</a></li>
             <li name = "ViewAccount"><a href="ViewAccount.do">View Customer Account</a></li>
             <li name = "ViewTransaction"><a href="ViewTransaction.do">Customer Transaction History</a></li>
+            <li name = "DepositCheck"><a href="DepositCheck.do">Deposit Check</a></li>            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -84,7 +90,6 @@
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul id="sub-operation" class="nav navbar-nav">
             <li class="active" name = "CreateFund"><a href="CreateFund.do">Create Fund</a></li>
-            <li name = "DepositCheck"><a href="DepositCheck.do">Deposit Check</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

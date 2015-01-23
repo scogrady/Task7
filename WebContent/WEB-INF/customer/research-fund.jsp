@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="databeans.FundBean"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="databeans.FavoriteBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
+
 
 <jsp:include page="template-top.jsp" />
 
@@ -33,10 +35,10 @@
 							xAxis : {
 								//TODO find the right type not categories but ???
 								
-								  type: 'datetime',
+								//  type: 'datetime',
 								  //
             					  title: {
-						                    text: 'Date'
+						                    text: 'Time'
 						                }
 							},
 							yAxis : {
@@ -56,13 +58,17 @@
 									fillOpacity : 0.5
 								}
 							},
-							series : [ {
-								name : 'Fund Price',
-								data : [
+							series : [
+							    {
+							    	//<c:set var="fundName" value="${fundPriceHistoryName.getSymbol()}"/>
+									//name : <c:out value="${fundName}"/>,
+									name : "Fund #1",
+									data : [
 								        <c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
 											${fundPriceHistory.getPrice()},
 										</c:forEach>]
-							} ]
+							    }
+							]
 					});
 	});
 </script>
@@ -124,6 +130,8 @@
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
 
+		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		            
 					<table class="table">
 						<thead>
 							<tr>
@@ -144,7 +152,6 @@
 						</tbody>
 					</table>
 
-		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 				</div>
 
 

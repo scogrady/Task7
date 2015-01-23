@@ -29,7 +29,17 @@
               </tbody>
             </table>
             <div class="row">
-            	<div class="col-md-4"><h4>Last Transition Day: 2014-11-4</h4></div>
+            	<c:choose>
+      				<c:when test="${lastDate == null}">.
+      					<div class="col-md-4"><h4>No Transaction Before</h4></div>
+      				</c:when>
+
+      				<c:otherwise>
+      					<div class="col-md-4"><h4>Last Transition Day: ${lastDate }</h4></div>
+      				</c:otherwise>
+				</c:choose>
+				
+            	
             	<div class="col-md-4">
 	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date">
             	</div>

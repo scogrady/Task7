@@ -39,11 +39,8 @@ public class ResearchFundAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
-
 		try {
 			// Set up fund list for nav bar
-			
-			
 			
 			FundBean[] fundList = fundDAO.getFunds();
 			FundBean[] recommanList = Arrays.copyOf(fundList, 3);
