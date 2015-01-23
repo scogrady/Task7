@@ -1,65 +1,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
-<h1>View Customer Transaction</h1>
-<div class="col-md-8 col-md-offset-2">
-	<br> <br>
-	<h3>Customer: John Doe</h3>
-	<br>
-	<hr>
-	<br>
-	<h3>Transaction History</h3>
-	<br> <br>
-	<table class="table">
-		<tr>
-			<td><h4>
-					<strong>Transaction Date</strong>
-				</h4></td>
-			<td><h4>
-					<strong>Operation</strong>
-				</h4></td>
-			<td><h4>
-					<strong>Fund Name</strong>
-				</h4></td>
-			<td><h4>
-					<strong>Number of shares</strong>
-				</h4></td>
-			<td><h4>
-					<strong>Share Price</strong>
-				</h4></td>
-			<td><h4>
-					<strong>Dollar Amount</strong>
-				</h4></td>
-		</tr>
+<div class="page-header">
+	<h1>View Customer Transaction History</h1>
 
-		<c:if test="${!empty transactionHistory}">
-			<c:forEach items="${transactionHistory}" var="transactionBean">
-
-				<tr>
-					<td>${transactionBean.getExecute_date()}</td>
-				</tr>
-				<tr>
-					<td>${transactionBean.getTransaction_type()}</td>
-				</tr>
-				<tr>
-					<td>${transactionBean.getFund_id()}</td>
-				</tr>
-				<tr>
-					<td>${transactionBean.getShares()}</td>
-				</tr>
-				<tr>
-					<td>${transactionBean.getShareValue()}</td>
-				</tr>
-				<tr>
-					<td>${transactionBean.getAmount()}</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-			</c:forEach>
-		</c:if>
-	</table>
 </div>
 
+<div class="row">
+	<div class="col-xs-12 col-sm-12">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Customer ID</th>
+					<th>Customer Username</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>View History</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="customer" items="${customerList}">
+					<tr>
+						<td>${customer.getCustomer_id()}</td>
+						<td>${customer.getUsername()}</td>
+						<td>${customer.getFirstname()}</td>
+						<td>${customer.getLastname()}</td>
+						<td>
+							<form method="post" action="EmployeeViewTransHistory.do">
+								<input type="hidden" name="id"
+									value="${customer.getCustomer_id()}">
+
+								<button type="submit" class="btn btn-primary">View</button>
+							</form>
+					</tr>
+				</c:forEach>
+
+			</tbody>
+		</table>
+	</div>
+</div>
 <jsp:include page="template-bottom.jsp" />
