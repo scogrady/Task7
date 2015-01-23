@@ -46,7 +46,7 @@ $(document).ready(function() {
 		}
 	})
 	if (!active) {
-		$('#fund-manage').removeClass('active');
+		$('#transaction-day').removeClass('active');
 	} else {
 		addSub();
 		return;

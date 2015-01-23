@@ -10,6 +10,11 @@ public class EmployeeBean {
 	private String firstname;
 	private String lastname;
 	private int status;
+	
+	public boolean checkPassword(String password){
+		return this.password.equals(password) ? true:false;
+	}
+	
 	public boolean isLoged(){
 		return status==0 ? false:true;
 	}
