@@ -39,14 +39,14 @@
 
 						<c:set var="getShares" value="${transactionBean.getShares() / 1000 }" />
 						<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShares}" /></td>
-						
-						<c:set var="price" scope="session" value="${transactionBean.getAmount()/transactionBean.getShares()}" />
-						<c:set var="priceShares" value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
+
+						<c:set var="price" scope="session"
+							value="${transactionBean.getAmount()/transactionBean.getShares()}" />
+						<c:set var="priceShares" value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />	
 						<td><fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
 						
 						<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
-						
 					</tr>
 
 

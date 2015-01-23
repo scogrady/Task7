@@ -67,7 +67,7 @@ public class ResearchFundAction extends Action {
 		}
 		catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "customer/error.jsp";
 		}
     }
 }

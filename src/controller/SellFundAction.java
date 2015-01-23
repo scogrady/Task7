@@ -139,9 +139,9 @@ public class SellFundAction extends Action {
 			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "error.jsp";
+			return "customer/error.jsp";
 		} catch (FormBeanException e) {
-			return "error.jsp";
+			return "customer/error.jsp";
 		}
 
 	}
