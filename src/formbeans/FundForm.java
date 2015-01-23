@@ -55,7 +55,7 @@ public class FundForm extends FormBean {
 		if (action == null)
 			errors.add("Button is required");
 
-		if (!action.equals("Create Mutual Fund"))
+		if (!action.equals("Create"))
 			errors.add("Invalid button");
 
 		return errors;
