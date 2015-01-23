@@ -3,9 +3,77 @@
 <%@ page import="databeans.FavoriteBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
 
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 <jsp:include page="template-top.jsp" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#containerChart')
+				.highcharts(
+						{
+							chart : {
+								type : 'areaspline'
+							},
+							title : {
+								text : 'Fund Price History'
+							},
+							legend : {
+								layout : 'vertical',
+								align : 'left',
+								verticalAlign : 'top',
+								x : 150,
+								y : 100,
+								floating : true,
+								borderWidth : 1,
+								backgroundColor : (Highcharts.theme && Highcharts.theme.legendBackgroundColor)
+										|| '#FFFFFF'
+							},
+							xAxis : {
+								//TODO find the right type not categories but ???
+								
+								//  type: 'datetime',
+								  //
+            					  title: {
+						                    text: 'Time'
+						                }
+							},
+							yAxis : {
+								title : {
+									text : 'Fund Price'
+								}
+							},
+							tooltip : {
+								shared : true,
+								valueSuffix : ' $'
+							},
+							credits : {
+								enabled : false
+							},
+							plotOptions : {
+								areaspline : {
+									fillOpacity : 0.5
+								}
+							},
+							series : [
+							    {
+							    	//<c:set var="fundName" value="${fundPriceHistoryName.getSymbol()}"/>
+									//name : <c:out value="${fundName}"/>,
+									name : "Fund #1",
+									data : [
+								        <c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
+											${fundPriceHistory.getPrice()},
+										</c:forEach>]
+							    }
+							]
+					});
+	});
+</script>
+
+
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -17,7 +85,6 @@
 				<c:forEach var="recommandFund" items="${recommandFundList}">
 					<div class="col-sm-6 col-md-4">
 						<div class="thumbnail">
-							<img data-src="holder.js/300x300" alt="...">
 							<div class="caption">
 								<h3>${recommandFund.getName()}-
 									${recommandFund.getSymbol()}</h3>
@@ -54,7 +121,6 @@
 					</ol>
 				</div>
 
-
 				<div class="col-sm-6 col-md-8" id="detail-section">
 
 
@@ -63,39 +129,34 @@
 					<dl>
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
+
+		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		            
 					<table class="table">
 						<thead>
 							<tr>
-								<th width="25%">Date</th>
-								<th width="20%" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price</th>
-								<th width="50%" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status</th>
+								<th>Date</th>
+								<th>Price</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody>
-
 							<c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
 								<tr>
-								<c:set var="getPrice_date" value="${fundPriceHistory.getPrice_date()}" />
-									<td><fmt:formatDate value="${getPrice_date}" pattern="MMM dd yyyy " /></td>
-									<c:set var="getPrice" value="${fundPriceHistory.getPrice()}" />
-									<td align="right"><fmt:formatNumber type="number" pattern="#,##0.00"	value="${getPrice}" /></td>
-									<td align="center">Up</td>
+									<td>${fundPriceHistory.getPrice_date()}</td>
+									<td>${fundPriceHistory.getPrice()}</td>
+									<td>Up</td>
 								</tr>
 							</c:forEach>
 
 						</tbody>
 					</table>
+
 				</div>
+
+
+
 			</div>
-
-
-
 			<nav>
 				<ul class="pagination">
 					<li class="disabled"><a href="#" aria-label="Previous"><span
@@ -110,7 +171,10 @@
 					</a></li>
 				</ul>
 			</nav>
-
 		</div>
+
+		
 	</div>
-</div><jsp:include page="template-bottom.jsp" />
+	
+</div>
+<jsp:include page="template-bottom.jsp" />

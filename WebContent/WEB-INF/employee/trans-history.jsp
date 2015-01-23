@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="databeans.TransactionBean"%>
 
 <jsp:include page="template-top.jsp" />
@@ -36,14 +37,16 @@
 
 						<td>${transactionBean.getFund_id()}</td>
 
-
-						<td>${transactionBean.getShares() / 1000 }</td>
+						<c:set var="getShares" value="${transactionBean.getShares() / 1000 }" />
+						<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShares}" /></td>
 
 						<c:set var="price" scope="session"
 							value="${transactionBean.getAmount()/transactionBean.getShares()}" />
-						<td>${transactionBean.getAmount()/transactionBean.getShares() * 10}</td>
-
-						<td>${transactionBean.getAmount() / 100}</td>
+						<c:set var="priceShares" value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />	
+						<td><fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
+						
+						<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
+						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
 					</tr>
 
 
