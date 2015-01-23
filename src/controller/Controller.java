@@ -24,7 +24,7 @@ public class Controller extends HttpServlet {
         Action.add(new ChangePwdAction(model));
         Action.add(new TransHistoryAction(model));
         Action.add(new RequestCheckAction(model));
-        //Action.add(new BuyFundAction(model));
+        Action.add(new BuyFundAction(model));
         Action.add(new SellFundAction(model));
         Action.add(new ResearchFundAction(model));
         
