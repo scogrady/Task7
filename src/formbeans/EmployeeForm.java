@@ -8,10 +8,9 @@ import org.mybeans.form.FormBean;
 public class EmployeeForm extends FormBean {
 	private String username;
 	private String password;
+	private String confirm;
 	private String firstname;
 	private String lastname;
-	private String confirm;
-	private int status;
 	private String action;
 	
 	public String getConfirm() {
@@ -29,9 +28,7 @@ public class EmployeeForm extends FormBean {
 	public String getLastname() {
 		return lastname;
 	}
-	public int getStatus() {
-		return status;
-	}
+
 	public void setUsername(String username) {
 		this.username = trimAndConvert(username, "<>\"");
 	}
@@ -49,9 +46,7 @@ public class EmployeeForm extends FormBean {
 	public void setConfirm(String s) {
 		confirm = s.trim();
 	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
+
 	public String getAction() {
 		return action;
 	}
@@ -96,7 +91,7 @@ public class EmployeeForm extends FormBean {
 		if (action == null)
 			errors.add("Button is required");
 
-		if (!action.equals("Create Employee"))
+		if (!action.equals("Submit"))
 			errors.add("Invalid button");
 
 		return errors;

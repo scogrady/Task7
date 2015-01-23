@@ -65,7 +65,6 @@ public class CreateEmployeeAction extends Action {
 			}
 
 			// Create new UserBean
-			System.out.println("create employee now!");
 			employee = new EmployeeBean();
 			employee.setUsername(form.getUsername());
 			System.out.println("username = "+form.getUsername());
@@ -78,6 +77,8 @@ public class CreateEmployeeAction extends Action {
 			System.out.println("pass = "+form.getPassword());
 			employee.setStatus(0);
 			employeeDAO.create(employee);
+			System.out.println("create employee now!");
+
 
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			return "employee/create-employee.jsp";
