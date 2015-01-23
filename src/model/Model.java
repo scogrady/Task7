@@ -20,15 +20,12 @@ public class Model {
 			String jdbcURL    = config.getInitParameter("jdbcURL");
 		 	String user = "team2";
 			String password = "123zhxxhz321";
-			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL, user, password);
-			
-			
+			ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL, user, password);			
 				
 			customerDAO  = new CustomerDAO("customer", pool);
 			employeeDAO = new EmployeeDAO("employee", pool);
 			fundDAO = new FundDAO("fund", pool);
-			fundPriceHistoryDAO = new FundPriceHistoryDAO("fund_price_history",
-					pool);
+			fundPriceHistoryDAO = new FundPriceHistoryDAO("fund_price_history", pool);
 			positionDAO = new PositionDAO("position", pool);
 			transactionDAO = new TransactionDAO("transaction", pool);
 
