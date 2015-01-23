@@ -10,22 +10,22 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h1>Customer Account</h1>
+				<h4>Customer Account</h4>
 
 			</div>
 			<div class="panel-body">
 				<%
             CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 			%>
-				<table>
-					<tr>
-						<td>Name :</td>
+				<table class="table">
+					<tr >
+						<th scope="row" width="25%">Name :</th>
 						<td id="customer-name"><%=customer.getFirstname()%> <%=customer.getLastname()%></td>
 					</tr>
 					<tr>
-						<td>Address :</td>
+						<th scope="row">Address :</th>
 						<td id="customer-address-1"><%=customer.getAddr_line1()%></td>
 					</tr>
 					<tr>
@@ -33,23 +33,23 @@
 						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
 					</tr>
 					<tr>
-						<td>City,State,Zip:</td>
+						<th scope="row">City,State,Zip:</th>
 						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
 					</tr>
 					<tr>
 						<c:set var="currentBalance"	value="<%=customer.getCurrent_cash()/100%>" />
-						<td>Account balance:</td>
+						<th scope="row">Account balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
 					</tr>
 					<tr>
 						<c:set var="availableBalance" value="<%=customer.getAvailable_cash()/100%>" />
-						<td>Available balance:</td>
+						<th scope="row">Available balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>Last Trading Day:</td>
+						<th scope="row">Last Trading Day:</th>
 						<c:set var="lastTradingDay" value="<%=customer.getLast_login_time()%>" />
 						<td id="last-trading-day"><fmt:formatDate value="${lastTradingDay}" pattern="MMM dd yyyy " /></td>
 					</tr>

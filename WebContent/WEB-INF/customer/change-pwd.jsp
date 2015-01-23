@@ -6,7 +6,11 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">
 
-    <div class="jumbotron">
+    <div class="">
+    <div class="page-header">
+				<h1>Change Password</h1>
+
+			</div>
     
         <form class="form-horizontal" method="POST" action="ChangePwd.do">
            	<div class="form-group">
@@ -33,7 +37,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-5">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Change</button>
+                    <in type="submit" class="btn btn-primary">Change</button>
                   
                 </div>
             </div>

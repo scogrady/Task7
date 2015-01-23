@@ -33,7 +33,7 @@
                     <label for="lastname">Last Name</label>
                     <input type="text" class="form-control" id="lastname-new" name="lastname" placeholder="Last Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct Last Name" required>
                 </div>
-                <input type="submit" class="btn btn-default" id="submit-new-emlpoyee" name="action">
+                <input type="submit" class="btn btn-primary" id="submit-new-emlpoyee" name="action">
             </form>
         </div>
     </div>

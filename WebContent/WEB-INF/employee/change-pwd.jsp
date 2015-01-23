@@ -4,8 +4,11 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">
 <!-- EMPLOYEE FORM -->
-    <div class="jumbotron">
-    
+    <div class="">
+     <div class="page-header">
+				<h1>Change Password</h1>
+
+			</div>
         <form class="form-horizontal" method="POST" action="ChangeEmployeePwd.do">
         <div class="form-group">
                 <label for="inputPassword3" class="col-sm-4 control-label" id="old-password">Old Password</label>
@@ -30,7 +33,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-5">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Change</button>
+                    <button type="submit" class="btn btn-primary ">Change</button>
                   
                 </div>
             </div>
