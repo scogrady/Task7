@@ -76,7 +76,7 @@ public class AccountInfoAction extends Action {
 	        return "customer/account-info.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "customer/error.jsp";
         }
     }
 }

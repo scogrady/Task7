@@ -103,7 +103,7 @@
                     <input type="text" class="form-control" id="zip-new" name="zip" placeholder="Zip Code" pattern="[0-9]{5}" title="Please enter 5 digit Zip code" required>
                 </div>
                
-                <input type="submit" class="btn btn-default" id="submit-new-customer" name="action">
+                <input type="submit" class="btn btn-primary" id="submit-new-customer" name="action">
             </form>
         </div>
     </div>

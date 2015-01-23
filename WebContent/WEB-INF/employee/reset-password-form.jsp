@@ -3,12 +3,17 @@
 
 <jsp:include page="template-top.jsp" />
 
-<p style="font-size:medium">
-    Reset password form
-    ${id }
-</p>
+
+
 <div class="col-md-3"></div>
 <div class="col-md-6">
+
+<div class="page-header">
+	<h2> Reset password for
+    ${id }</h2>
+
+</div>
+
  <form class="form-horizontal" method="POST" action="ResetCustomerPwd.do">
         <input type="hidden" name="id" value="${id}">
             <div class="form-group">
@@ -28,7 +33,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-5">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Change</button>
+                    <button type="submit" class="btn btn-primary ">Change</button>
                   
                 </div>
             </div>

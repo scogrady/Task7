@@ -71,10 +71,10 @@ public class ChangePwdAction extends Action {
 	        return "customer/success.jsp";
         } catch (RollbackException e) {
         	errors.add(e.toString());
-        	return "error.jsp";
+        	return "employee/error.jsp";
         } catch (FormBeanException e) {
         	errors.add(e.toString());
-        	return "error.jsp";
+        	return "employee/error.jsp";
         }
     }
 }

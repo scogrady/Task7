@@ -66,10 +66,10 @@ public class ChangeEmployeePwdAction extends Action {
 	        return "employee/success.jsp";
         } catch (RollbackException e) {
         	errors.add(e.toString());
-        	return "error.jsp";
+        	return "employee/error.jsp";
         } catch (FormBeanException e) {
         	errors.add(e.toString());
-        	return "error.jsp";
+        	return "employee/error.jsp";
         }
     }
 }

@@ -6,30 +6,30 @@
 
 
 <div class="row-fluid">
-	<div class="form-group">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
+			<div class="form-group">
 			<form method="post">
 				<fieldset>
 
 					<div class="page-header">
 						<h1>Create Mutual Fund</h1>
 					</div>
-					<div class="form-inline">
+					
 						<div class="form-group">
 
 							<label>Fund Ticker</label>
-							<p>
+							
 								<input type="text" id="fund_symbol" class="form-control"
 									name="symbol" placeholder="Fund Ticker">
-							</p>
+							
 							<label>Fund Name</label>
-							<p>
+							
 								<input type="text" id="fund_name" class="form-control"
 									name="name" placeholder="Fund Name">
 						</div>
-					</div>
-					<div class="form-inline">
+					
+					
 						<label>Fund Description</label>
 
 						<p>
@@ -41,15 +41,20 @@
 								value="Create"></input>
 						</p>
 						<div class="col-md-3"></div>
-					</div>
+					
 
 				</fieldset>
 			</form>
+				</div>
 		</div>
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-9">
-				<h3>Fund List.</h3>
+			
+			<div class="page-header">
+						<h3>Fund List</h3>
+					</div>
+				
 				<table class="table">
 					<thead>
 						<tr>
@@ -75,6 +80,6 @@
 		</div>
 
 
-	</div>
+
 </div>
 <jsp:include page="template-bottom.jsp" />
