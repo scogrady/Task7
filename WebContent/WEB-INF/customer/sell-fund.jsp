@@ -17,9 +17,9 @@
 				<thead>
 					<tr>
 						<th width="30%">Fund Name</th>
-						<th width="15%">You own</th>
+						<th width="15%">Share</th>
 						<th width="10%">Price</th>
-						<th width="30%">Share</th>
+						<th width="30%">Sell Share</th>
 						<th width="15%">Sell</th>
 					</tr>
 				</thead>
@@ -31,7 +31,7 @@
 									<div class="form-group">
 										<td>${fund.getName()}</td>
 										<td>
-											<div class="num">${fund.getShares() / 1000}shares</div>
+											<div class="num">${fund.getShares() / 1000}</div>
 										</td>
 										<td id="change-p">$${fund.getPrice() / 100}</td>
 										<td>
