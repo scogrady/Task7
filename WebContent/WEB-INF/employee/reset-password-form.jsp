@@ -3,19 +3,14 @@
 
 <jsp:include page="template-top.jsp" />
 
+<p style="font-size:medium">
+    Reset password form
+    ${id }
+</p>
 <div class="col-md-3"></div>
 <div class="col-md-6">
-
-    <div class="jumbotron">
-    
-        <form class="form-horizontal" method="POST" action="ChangePwd.do">
-           	<div class="form-group">
-                <label for="inputPassword3" class="col-sm-4 control-label" id="old-password">Old Password</label>
-                <div class="col-sm-7">
-                    <input type="password" class="form-control" name="oldPassword" placeholder="Password">
-                </div>
-            </div>
-           	
+ <form class="form-horizontal" method="POST" action="ResetCustomerPwd.do">
+        <input type="hidden" name="id" value="${id}">
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-4 control-label" id="new-password">New Password</label>
                 <div class="col-sm-7">
@@ -38,8 +33,11 @@
                 </div>
             </div>
         </form>
-    </div>
+   
                       <jsp:include page="error-list.jsp" />
-    
-</div>
-<div class="col-md-3"></div><jsp:include page="template-bottom.jsp" />
+    </div>
+    <div class="col-md-3"></div>
+
+
+
+<jsp:include page="template-bottom.jsp" />

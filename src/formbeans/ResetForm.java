@@ -1,8 +1,3 @@
-//Name: Hanze Xu
-//Andrew ID: hanzex
-//Title: Homework #9 ChangePwdForm.java
-//Course Number: 08-600
-//Date: 2014-12-3
 package formbeans;
 
 import java.util.ArrayList;
@@ -10,15 +5,25 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-public class ChangePwdForm extends FormBean {
+public class ResetForm extends FormBean {
 	private String confirmPassword;
 	private String newPassword;
-	private String oldPassword;
+	private String id;
+public String getId() { return id;    }
+	
+	public int getIdAsInt() {
+		try {
+			return Integer.parseInt(id);
+		} catch (NumberFormatException e) {
+			// call getValidationErrors() to detect this
+			return -1;
+		}
+	}
 	public String getConfirmPassword() { return confirmPassword; }
 	public String getNewPassword()     { return newPassword;     }
-	public String getOldPassword()     { return oldPassword;     }
 	
-	public void setOldPassword(String s) {oldPassword = s.trim();}
+	
+
 	public void setConfirmPassword(String s) { confirmPassword = s.trim(); }
 	public void setNewPassword(String s)     { newPassword     = s.trim(); }
 	
@@ -33,9 +38,7 @@ public class ChangePwdForm extends FormBean {
 		if (confirmPassword == null || confirmPassword.length() == 0) {
 			errors.add("Confirm Pwd is required");
 		}
-		if (oldPassword == null || oldPassword.length() == 0) {
-			errors.add("Old Pwd is required");
-		}
+		
 		
 		if (errors.size() > 0) {
 			return errors;
