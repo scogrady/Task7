@@ -58,6 +58,13 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 			return userList[0];
 	}
 	
-	
+	public CustomerBean readByUsername(String username) throws RollbackException{
+		CustomerBean[] customers = match(MatchArg.equals("username", username));
+		if (customers.length == 0) {
+			return null;
+		} else {
+			return customers[0];
+		}
+	}
 
 }
