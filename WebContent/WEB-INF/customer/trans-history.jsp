@@ -30,7 +30,7 @@
 				<c:forEach items="${transactionHistory}" var="transactionBean">
 					<c:if
 						test="${transactionBean.getTransaction_type() == 'Buy Fund' }">
-						<tr class="danger">
+						<tr class="active">
 
 							<td>${transactionBean.getExecute_date()}</td>
 							<td>${transactionBean.getTransaction_type()}</td>
