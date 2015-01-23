@@ -2,15 +2,72 @@
 <%@ page import="databeans.FundBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
 
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
-<script src="jquery.highchartTable.js" type="text/javascript"></script>
-
-
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
 <jsp:include page="template-top.jsp" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#containerChart')
+				.highcharts(
+						{
+							chart : {
+								type : 'areaspline'
+							},
+							title : {
+								text : 'Fund Price History'
+							},
+							legend : {
+								layout : 'vertical',
+								align : 'left',
+								verticalAlign : 'top',
+								x : 150,
+								y : 100,
+								floating : true,
+								borderWidth : 1,
+								backgroundColor : (Highcharts.theme && Highcharts.theme.legendBackgroundColor)
+										|| '#FFFFFF'
+							},
+							xAxis : {
+								//TODO find the right type not categories but ???
+								
+								  type: 'datetime',
+								  //
+            					  title: {
+						                    text: 'Date'
+						                }
+							},
+							yAxis : {
+								title : {
+									text : 'Fund Price'
+								}
+							},
+							tooltip : {
+								shared : true,
+								valueSuffix : ' $'
+							},
+							credits : {
+								enabled : false
+							},
+							plotOptions : {
+								areaspline : {
+									fillOpacity : 0.5
+								}
+							},
+							series : [ {
+								name : 'Fund Price',
+								data : [
+								        <c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
+											${fundPriceHistory.getPrice()},
+										</c:forEach>]
+							} ]
+					});
+	});
+</script>
+
+
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -22,7 +79,6 @@
 				<c:forEach var="recommandFund" items="${recommandFundList}">
 					<div class="col-sm-6 col-md-4">
 						<div class="thumbnail">
-							<img data-src="holder.js/300x300" alt="...">
 							<div class="caption">
 								<h3>${recommandFund.getName()}-
 									${recommandFund.getSymbol()}</h3>
@@ -59,7 +115,6 @@
 					</ol>
 				</div>
 
-
 				<div class="col-sm-6 col-md-8" id="detail-section">
 
 
@@ -69,32 +124,7 @@
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
 
-
-					<table class="highchart"
-						data-graph-container=".. .. .highchart-container" data-graph-type="column">
-						
-						<caption>Column example</caption>
-						<thead>
-							<tr>
-								<th>Date</th>
-								<th>Price</th>
-								
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
-								<tr>
-									<td>${fundPriceHistory.getPrice_date()}</td>
-									<td>${fundPriceHistory.getPrice()}</td>
-									
-								</tr>
-							</c:forEach>
-
-						</tbody>
-					</table>
-
-
-				<!-- 	<table class="table">
+					<table class="table">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -113,13 +143,13 @@
 
 						</tbody>
 					</table>
-				 -->
-					
+
+		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 				</div>
+
+
+
 			</div>
-
-
-
 			<nav>
 				<ul class="pagination">
 					<li class="disabled"><a href="#" aria-label="Previous"><span
@@ -134,7 +164,10 @@
 					</a></li>
 				</ul>
 			</nav>
-
 		</div>
+
+		
 	</div>
-</div><jsp:include page="template-bottom.jsp" />
+	
+</div>
+<jsp:include page="template-bottom.jsp" />
