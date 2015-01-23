@@ -14,35 +14,34 @@
 					<label>Username</label>
 					<p>
 						<input type="text" id="username" name="username"
-							placeholder="Username" />
+							placeholder="Username" class="form-control" maxlength="20" required />
 					</p>
 					<label>First Name</label>
 					<p>
 						<input type="text" id="firstname" name="firstname"
-							placeholder="First Name" />
+							placeholder="First Name" class="form-control" maxlength="50" pattern="[a-zA-Z ]{3,30}" title="Please enter correct First Name" required />
 					</p>
 					<label>Last Name</label>
 					<p>
 						<input type="text" id="lastname" name="lastname"
-							placeholder="Last Name" />
+							placeholder="Last Name" class="form-control" maxlength="50" pattern="[a-zA-Z ]{3,30}" title="Please enter correct Last Name" required />
 					</p>
 					<label>Password</label>
 					<p>
-						<input type="text" id="password" name="password"
-							placeholder="Password" /> <br /> <input type="text"
-							id="confirm" name="confirm" placeholder="Confirm Password" />
+						<input type="text" id="password" name="password" placeholder="Password" class="form-control" maxlength="50" required /> <br /> 
+						<input type="text" id="confirm" name="confirm" placeholder="Confirm Password" class="form-control" maxlength="50" required />
 					</p>
 
 
 					<label>Address Line</label>
 					<p>
 						<input type="text" id="addr_line1" name="addr_line1"
-							placeholder="Address Line 1" /> <br /> <input type="text"
-							id="addr_line2" name="addr_line2" placeholder="Address Line 2" />
+							placeholder="Address Line 1" class="form-control" maxlength="50" required /> <br /> <input type="text"
+							id="addr_line2" name="addr_line2" placeholder="Address Line 2" class="form-control" maxlength="50" required />
 					</p>
 					<label>City</label>
 					<p>
-						<input type="text" id="city" name="city" placeholder="City" />
+						<input type="text" id="city" name="city" placeholder="City" class="form-control" maxlength="30" pattern="[a-zA-Z ]{3,30}" title="Please enter correct City" required />
 					</p>
 
 					<label for="State">State</label> <select class="form-control"
@@ -100,7 +99,7 @@
 						<option value="WY">Wyoming</option>
 					</select> <label>Zip Code</label>
 					<p>
-						<input type="text" id="zip" name="zip" placeholder="Zip Code" />
+						<input type="text" id="zip" name="zip" placeholder="Zip Code" class="form-control" pattern="[0-9]{5}" title="Please enter 5 digit Zip code" required />
 					</p>
 					<p>
 						<input class="btn btn-primary" type="submit" name="action"

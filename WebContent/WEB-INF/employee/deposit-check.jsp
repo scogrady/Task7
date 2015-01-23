@@ -14,12 +14,12 @@
 					<label>Customer Username</label>
 					<p>
 						<input type="text" id="username" name="username"
-							placeholder="Customer Username" />
+							placeholder="Customer Username" class="form-control" />
 					</p>
 					<label>Deposit Amount</label>
 					<p>
 						<input type="text" id="amount" name="amount"
-							placeholder="Deposit Amount" />
+							placeholder="Deposit Amount" class="form-control" />
 					</p>
 
 					<p>

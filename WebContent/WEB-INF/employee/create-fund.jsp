@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="databeans.FundBean"%>
 
@@ -14,17 +15,17 @@
 					<label>Fund Ticker</label>
 					<p>
 						<input type="text" id="fund_symbol" name="symbol"
-							placeholder="Fund Ticker" />
+							placeholder="Fund Ticker" class="form-control" />
 					</p>
 					<label>Fund Name</label>
 					<p>
 						<input type="text" id="fund_name" name="name"
-							placeholder="Fund Name" />
+							placeholder="Fund Name" class="form-control" />
 					</p>
 					<label>Fund Description</label>
 					<p>
 						<input type="text" id="fund_description" name="description"
-							placeholder="Fund Description" />
+							placeholder="Fund Description" class="form-control" />
 					</p>
 					<p>
 						<input class="btn btn-primary" type="submit" name="action"

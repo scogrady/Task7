@@ -9,29 +9,29 @@
 
 		<div class="span12">
 			<form method="post">
-				<fieldset>
+				<fieldset>ssssssssf
 					<legend>Create Employee Account</legend>
 
 					<label>Username</label>
 					<p>
 						<input type="text" id="username" name="username"
-							placeholder="Username" />
+							placeholder="Username" class="form-control" maxlength="20" required />
 					</p>
 					<label>First Name</label>
 					<p>
 						<input type="text" id="firstname" name="firstname"
-							placeholder="First Name" />
+							placeholder="First Name" class="form-control" maxlength="20" pattern="[a-zA-Z ]{3,30}" required />
 					</p>
 					<label>Last Name</label>
 					<p>
 						<input type="text" id="lastname" name="lastname"
-							placeholder="Last Name" />
+							placeholder="Last Name" class="form-control" maxlength="20" pattern="[a-zA-Z ]{3,30}" required />
 					</p>
 					<label>Password</label>
 					<p>
 						<input type="text" id="password" name="password"
-							placeholder="Password" /> <br /> <input type="text"
-							id="confirm" name="confirm" placeholder="Confirm Password" />
+							placeholder="Password" class="form-control" maxlength="20" required/> <br /> <input type="text"
+							id="confirm" name="confirm" placeholder="Confirm Password" class="form-control" maxlength="20" required />
 					</p>
 					<p>
 						<input class="btn btn-primary" type="submit" name="action"
