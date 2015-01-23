@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function () {
 	$('#flash').hide();
 	var eaccountOp = ["CreateEmployee", "ChangeEmployeePwd"];
 	var caccountOp = ["CreateCustomer", "ResetPassword", "ViewAccount", "ViewTransaction", "DepositCheck"];
