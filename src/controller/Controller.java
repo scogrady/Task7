@@ -38,6 +38,8 @@ public class Controller extends HttpServlet {
         Action.add(new DepositCheckAction(model));
         Action.add(new TransitionDayAction(model));
         Action.add(new ResetCustomerPwdAction(model));
+        
+        Action.add(new LogoutAction(model));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
