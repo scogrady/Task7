@@ -52,17 +52,17 @@
 
 									<td>
 										<div class="form-inline">
-											$ <input type="text" class="form-control" id="InputAmount1"
-												placeholder="100,000,000" size="13px" maxlength="9"
-												name="num_1">. <input type="text"
-												class="form-control" id="InputAmount2" placeholder="00"
-												size="3px" maxlength="2" name="num_2">
+											$ <input type="text" name="num" class="form-control"
+													pattern="\d+(\.\d{1,2})?" placeholder="Share"
+													data-placement="bottom" min="0" max="100000000"
+													title="You can buy between 10 dollars to your available cash. Only two digits after decimal."
+													required>
 										</div>
 									</td>
 									<td><input type="hidden" name="fund_id"
 										value="${fund.getFund_id()}"> <input type="hidden"
 										name="avail_cash" value="${customer.getAvailable_cash()}"><input
-										class="btn btn-default" type="submit" value="Buy"></td>
+										class="btn btn-default" type="submit" name="action" value="Buy"></td>
 
 
 								</tr>

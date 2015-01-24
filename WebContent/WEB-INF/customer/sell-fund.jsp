@@ -31,18 +31,22 @@
 								<tr>
 									<div class="form-group">
 										<td>${fund.getName()}</td>
-										<td><c:set var="getShare"	value="${fund.getShares() / 1000}" />
-											<div class="num"><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShare}" /></div>
-										</td>
-										<c:set var="getPrice"	value="${fund.getPrice() / 100}" />
-										<td id="change-p">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${getPrice}" /></td>
+										<td><c:set var="getShare"
+												value="${fund.getShares() / 1000}" />
+											<div class="num">
+												<fmt:formatNumber type="number" pattern="#,##0.000"
+													value="${getShare}" />
+											</div></td>
+										<c:set var="getPrice" value="${fund.getPrice() / 100}" />
+										<td id="change-p">$<fmt:formatNumber type="number"
+												pattern="#,##0.00" value="${getPrice}" /></td>
 										<td>
 											<div class="form-inline">
-												<input type="text" class="form-control" id="InputAmount1"
-													placeholder="100,000,000" size="13px" maxlength="9"
-													name="num_1">. <input type="text"
-													class="form-control" id="InputAmount2" placeholder="000"
-													size="3px" maxlength="3" name="num_2"> shares
+												<input type="text" name="num" class="form-control"
+													pattern="\d+(\.\d{1,3})?" placeholder="Share"
+													data-placement="bottom" min="0" max="100000000"
+													title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
+													required>
 
 											</div>
 										</td>
