@@ -18,9 +18,10 @@
 				<th width="25%">Date of Execution</th>
 				<th width="15%">Operation</th>
 				<th width="10%">Fund ID</th>
-				<th width="15%">Number of shares</th>
-				<th width="15%">Share Price</th>
-				<th width="20%">Dollar Amount</th>
+				<th width="15%">&nbsp;&nbsp;&nbsp;Number of shares</th>
+				<th width="15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Share Price</th>
+				<th width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;Dollar Amount</th>
 
 			</tr>
 		</thead>
@@ -38,15 +39,15 @@
 						<td>${transactionBean.getFund_id()}</td>
 
 						<c:set var="getShares" value="${transactionBean.getShares() / 1000 }" />
-						<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShares}" /></td>
+						<td align="right"><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShares}" /></td>
 
 						<c:set var="price" scope="session"
 							value="${transactionBean.getAmount()/transactionBean.getShares()}" />
 						<c:set var="priceShares" value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />	
-						<td><fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
+						<td align="right"><fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
 						
 						<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
+						<td align="right">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
 					</tr>
 
 
