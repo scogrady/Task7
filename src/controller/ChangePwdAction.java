@@ -30,24 +30,27 @@ public class ChangePwdAction extends Action {
 	public String getName() { return "ChangePwd.do"; }
 
 	public String perform(HttpServletRequest request) {
+		
+		
     	// Set up error list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
 
-        try {
+        try {System.out.println("Coming in ChangePwd.do");
         	CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
 	        // Load the form parameters into a form bean
 	        ChangePwdForm form = formBeanFactory.create(request);
-	        
+	        System.out.println(form.isPresent());
 	        // If no params were passed, return with no errors so that the form will be
 	        // presented (we assume for the first time).
 	        if (!form.isPresent()) {
-	        	
+	        	System.out.println("put form");
 	            return "customer/change-pwd.jsp";
 	        }
-	
+	        System.out.println("Coming in after putting form");
 	        // Check for any validation errors
 	        errors.addAll(form.getValidationErrors());
+	        System.out.println("after validation");
 	        if (errors.size() != 0) {
 	            return "customer/change-pwd.jsp";
 	        }

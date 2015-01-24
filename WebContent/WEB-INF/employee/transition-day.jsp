@@ -2,7 +2,7 @@
 <%@ page import="databeans.FavoriteBean" %>
 
 <jsp:include page="template-top.jsp" />
-<div class="col-md-10 col-md-offset-2">
+<div class=" col-md-offset-2">
 <div class="table-responsive">
 		<form role="form" method="post" action="Transition.do">
 
@@ -23,7 +23,11 @@
               	  	  	  <td>${fund.name }</td>
               	  	  	  <td>${fund.symbol }</td>
               	  	  	  <td>${fund.description }</td>
-              	  	  	  <td class="col-md-2"><input type="text" name=${fund.fund_id } class="form-control" placeholder="Price"></td>
+              	  	  	  <td class="col-md-2">
+              	  	  	  	<input type="number" name=${fund.fund_id } class="form-control" pattern="\d+(\.\d{1,2})?" 
+              	  	  	  	placeholder="Price" data-placement="bottom"  min="0" max="100000000" title="Input should be......" required>
+              	  	  	  	
+              	  	  	  </td>
               	  	  </tr>	
 				  </c:forEach>
               </tbody>
@@ -41,7 +45,7 @@
 				
             	
             	<div class="col-md-4">
-	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date">
+	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date"  required>
             	</div>
             	<input type="submit" class="btn btn-primary" name="action" value="Start Transition Day!">
             </div>

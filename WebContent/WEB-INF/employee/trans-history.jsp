@@ -18,10 +18,9 @@
 				<th width="25%">Date of Execution</th>
 				<th width="15%">Operation</th>
 				<th width="10%">Fund ID</th>
-				<th width="15%">&nbsp;&nbsp;&nbsp;Number of shares</th>
-				<th width="15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Share Price</th>
-				<th width="20%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;Dollar Amount</th>
+				<th width="15%">Number of shares</th>
+				<th width="15%">Share Price</th>
+				<th width="20%">Dollar Amount</th>
 
 			</tr>
 		</thead>
@@ -30,25 +29,93 @@
 			<c:if test="${!empty transactionHistory}">
 				<c:forEach items="${transactionHistory}" var="transactionBean">
 
-					<tr>
-						<td>${transactionBean.getExecute_date()}</td>
+					<c:if
+						test="${transactionBean.getTransaction_type() == 'Buy Fund' }">
+						<tr class="active">
+
+							<td>${transactionBean.getExecute_date()}</td>
+							<td>${transactionBean.getTransaction_type()}</td>
+							<td>${transactionBean.getFund_id()}</td>
+
+							<c:set var="getShares"
+								value="${transactionBean.getShares() / 1000 }" />
+							<td><fmt:formatNumber type="number" pattern="#,##0.000"
+									value="${getShares}" /></td>
+
+							<c:set var="price" scope="session"
+								value="${transactionBean.getAmount()/transactionBean.getShares()}" />
+							<c:set var="priceShares"
+								value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
+							<td><fmt:formatNumber type="number" pattern="#,##0.00"
+									value="${priceShares}" /></td>
+
+							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
+							<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
+									value="${priceShares}" /></td>
 
 
-						<td>${transactionBean.getTransaction_type()}</td>
+						</tr>
+					</c:if>
 
-						<td>${transactionBean.getFund_id()}</td>
+					<c:if
+						test="${transactionBean.getTransaction_type() == 'Sell Fund' }">
+						<tr class="success">
+							<td>${transactionBean.getExecute_date()}</td>
+							<td>${transactionBean.getTransaction_type()}</td>
+							<td>${transactionBean.getFund_id()}</td>
 
-						<c:set var="getShares" value="${transactionBean.getShares() / 1000 }" />
-						<td align="right"><fmt:formatNumber type="number" pattern="#,##0.000"	value="${getShares}" /></td>
+							<c:set var="getShares"
+								value="${transactionBean.getShares() / 1000 }" />
+							<td><fmt:formatNumber type="number" pattern="#,##0.000"
+									value="${getShares}" /></td>
 
-						<c:set var="price" scope="session"
-							value="${transactionBean.getAmount()/transactionBean.getShares()}" />
-						<c:set var="priceShares" value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />	
-						<td align="right"><fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
-						
-						<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
-						<td align="right">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${priceShares}" /></td>
-					</tr>
+							<c:set var="price" scope="session"
+								value="${transactionBean.getAmount()/transactionBean.getShares()}" />
+							<c:set var="priceShares"
+								value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
+							<td><fmt:formatNumber type="number" pattern="#,##0.00"
+									value="${priceShares}" /></td>
+
+							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
+							<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
+									value="${priceShares}" /></td>
+
+
+
+						</tr>
+					</c:if>
+
+					<c:if
+						test="${transactionBean.getTransaction_type() == 'Request Check' }">
+						<tr class="info">
+
+							<td>${transactionBean.getExecute_date()}</td>
+							<td>${transactionBean.getTransaction_type()}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
+							<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
+									value="${priceShares}" /></td>
+
+
+						</tr>
+					</c:if>
+					<c:if
+						test="${transactionBean.getTransaction_type() == 'Deposit Check' }">
+						<tr class="warning">
+
+							<td>${transactionBean.getExecute_date()}</td>
+							<td>${transactionBean.getTransaction_type()}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
+							<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
+									value="${priceShares}" /></td>
+
+						</tr>
+					</c:if>
 
 
 				</c:forEach>

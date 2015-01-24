@@ -24,6 +24,7 @@ public class ChangePwdForm extends FormBean {
 	
 
 	public List<String> getValidationErrors() {
+		System.out.println("coming to form validation");
 		List<String> errors = new ArrayList<String>();
 		
 		if (newPassword == null || newPassword.length() == 0) {
