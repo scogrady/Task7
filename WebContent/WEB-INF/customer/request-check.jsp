@@ -22,7 +22,7 @@
 	<div class="row-fluid">
 	
 		<div class="col-md-12">
-			<form class="form-inline">
+			<form class="form-inline"  method="post" action="RequestCheck.do">
 				<div class="form-group">
 					<label class="sr-only" for="InputAmount">Amount (in
 						dollars)</label>

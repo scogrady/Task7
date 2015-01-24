@@ -63,7 +63,7 @@ public class BuyFundAction extends Action {
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = fundDAO.getFunds();
-			System.out.println("==========" + fundList.length);
+			//System.out.println("==========" + fundList.length);
 			buyFundList = new BuyFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {
 				buyFundList[i] = new BuyFundBean();
@@ -104,19 +104,14 @@ public class BuyFundAction extends Action {
 			
 			//handle amount from form
 
-			long num_1, num_2;
-			if (form.getNum_1() == "") {
-				num_1 = 0;
+			double num;
+			if (form.getNum() == "") {
+				num = 0;
 
 			} else {
-				num_1 = Long.parseLong(form.getNum_1());
+				num = Double.parseDouble(form.getNum());
 			}
-			if (form.getNum_2() == "") {
-				num_2 = 0;
 
-			} else {
-				num_2 = Long.parseLong(form.getNum_2());
-			}
 
 
 			TransactionBean buyFund = new TransactionBean();
@@ -128,7 +123,7 @@ public class BuyFundAction extends Action {
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
 			
-			long amount = num_1 * 100 + num_2;
+			long amount = (long) (num * 100);
 			
 			buyFund.setAmount(amount);
 			transactionDAO.create(buyFund);

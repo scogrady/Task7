@@ -40,8 +40,39 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	}
 
 	public PositionBean[] readByCustomerID(int customer_id) throws RollbackException {
-		PositionBean[] positionList = match(MatchArg.equals("customer_id", customer_id));
-		return positionList;
+		
+		try {
+			Transaction.begin();
+			
+
+			PositionBean[] positionList = match(MatchArg.equals("customer_id", customer_id));
+			
+			Transaction.commit();
+			
+			return positionList;
+			
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}		
+		
+		
+	}
+	
+	public PositionBean readByIdFundId(int fund_id, int customer_id) throws RollbackException{
+		try {
+			Transaction.begin();
+
+			PositionBean[] positionList = match(MatchArg.equals("customer_id", customer_id),MatchArg.equals("fund_id", fund_id));
+			
+			Transaction.commit();
+			
+			return positionList[0];
+
+		
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}		
+		
 	}
 	
 		
