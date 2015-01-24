@@ -43,18 +43,20 @@ public class DepositCheckAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "employee/deposit-check.jsp";
+				return "ViewAccount.do";
 			}
 
 			errors.addAll(form.getValidationErrors());
-
+			CustomerBean customer = customerDAO.read(form.getUsername());
 			if (errors.size() != 0) {
-				return "employee/deposit-check.jsp";
+				String page="ViewAccount.do?customer_id="+customer.getCustomer_id();
+				System.out.println(page);
+				return page;
 			}
 
 			TransactionBean depositCheck = new TransactionBean();
 
-			CustomerBean customer = customerDAO.read(form.getUsername());
+			
 			depositCheck.setCustomer_id(customer.getCustomer_id());
 			depositCheck.setTransaction_type("Request Check");
 			depositCheck.setStatus("Pending");
@@ -69,8 +71,9 @@ public class DepositCheckAction extends Action {
 			customerDAO.update(customer);
 			
 			request.setAttribute("transactionList", transactionDAO.getTransactions());//TODO DELETE
-			
-			return "employee/deposit-check.jsp";
+			String page="employee/view-account.jsp?customer_id="+customer.getCustomer_id();
+			System.out.println(page);
+			return "employee/view-account.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "employee/error.jsp";

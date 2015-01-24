@@ -28,10 +28,10 @@
 						<th scope="row">Address :</th>
 						<td id="customer-address-1"><%=customer.getAddr_line1()%></td>
 					</tr>
-					<tr>
+					<tr><% if(customer.getAddr_line2()!=null){ %>
 						<td></td>
 						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
-					</tr>
+					</tr><%} %>
 					<tr>
 						<th scope="row">City,State,Zip:</th>
 						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
@@ -111,7 +111,8 @@
 				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${total}" /></td>
 			<tr>
 		</table>
+		</div>
 		<div class="col-md-2"></div>
 	</div>
-</div>
+
 <jsp:include page="template-bottom.jsp" />
