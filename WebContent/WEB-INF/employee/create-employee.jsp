@@ -16,7 +16,7 @@
             <form  method="post" action="CreateEmployee.do">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username-new" name="username" placeholder="Username" maxlength="30" required>
+                    <input type="text" class="form-control" id="username-new" name="username" placeholder="Username" value="${form.getUsername()}" maxlength="30" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
@@ -27,13 +27,13 @@
                         
                 <div class="form-group">
                     <label for="firstname">First Name</label>
-                    <input type="text" class="form-control" id="firstname-new" name="firstname" placeholder="First Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct First Name" required>
+                    <input type="text" class="form-control" id="firstname-new" name="firstname" placeholder="First Name" value="${form.getFirstname()}" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct First Name" required>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Last Name</label>
-                    <input type="text" class="form-control" id="lastname-new" name="lastname" placeholder="Last Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct Last Name" required>
+                    <input type="text" class="form-control" id="lastname-new" name="lastname" placeholder="Last Name" value="${form.getLastname()}" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct Last Name" required>
                 </div>
-                <input type="submit" class="btn btn-primary" id="submit-new-emlpoyee" name="action" value="submit">
+                <input type="submit" class="btn btn-primary" id="submit-new-emlpoyee" name="action" value="Create">
             </form>
         </div>
     </div>

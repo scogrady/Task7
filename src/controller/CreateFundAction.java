@@ -29,10 +29,10 @@ public class CreateFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-
+		FundForm form;
 		try {
 			request.setAttribute("fundList", fundDAO.getFunds());
-			FundForm form = formBeanFactory.create(request);
+			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			if (!form.isPresent()) {
 

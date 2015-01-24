@@ -54,14 +54,12 @@ public class ViewAccountAction extends Action {
         
 		try {
 			 IdForm form = formBeanFactory.create(request);
-			 
-			if(!form.isPresent()){
-				request.setAttribute("customerList", customerDAO.getCustomers());
-				return "employee/view-account.jsp";
-			}
-			
-			
-			int id = form.getIdAsInt();
+			 int id;
+			if(request.getParameter("customer_id")==null)
+				 id=1;
+			 else
+			 id = Integer.parseInt(request.getParameter("customer_id"));
+			request.setAttribute("customerList", customerDAO.getCustomers());
 			request.setAttribute("id", id);
 			request.setAttribute("customer", customerDAO.readFromID(id)); 
 		    //set up portfolio list for customer 
@@ -71,14 +69,14 @@ public class ViewAccountAction extends Action {
 			//to get fund price 
 			request.setAttribute("priceList", fundPriceHistoryDAO.getFundPriceHistorys());
 		
-	        return "employee/view-account-by-id.jsp";
+			return "employee/view-account.jsp";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
-        	return "employee/error.jsp";
+        	return "error.jsp";
         }
 		 catch (FormBeanException e) {
 				errors.add(e.getMessage());
-				return "employee/error.jsp";
+				return "error.jsp";
 
 			}
     }

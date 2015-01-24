@@ -43,13 +43,13 @@ public class DepositCheckAction extends Action {
 			request.setAttribute("form", form);
 
 			if (!form.isPresent()) {
-				return "employee/deposit-check.jsp";
+				return "ViewAccount.do";
 			}
 
 			errors.addAll(form.getValidationErrors());
 
 			if (errors.size() != 0) {
-				return "employee/deposit-check.jsp";
+				return "ViewAccount.do";
 			}
 
 			TransactionBean depositCheck = new TransactionBean();
@@ -68,9 +68,8 @@ public class DepositCheckAction extends Action {
 			customer.setAvailable_cash(customer.getAvailable_cash() + Long.parseLong(form.getAmount()) * 100);
 			customerDAO.update(customer);
 			
-			request.setAttribute("transactionList", transactionDAO.getTransactions());//TODO DELETE
-			
-			return "employee/deposit-check.jsp";
+			request.setAttribute("transactionList", transactionDAO.getTransactions());
+			return "ViewAccount.do";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "employee/error.jsp";
