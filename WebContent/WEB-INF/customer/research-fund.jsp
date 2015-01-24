@@ -9,11 +9,19 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 <style type="text/css">
-.scrollspy-example {
+.scrollspy-fundlist {
 height: 450px;
+width: 100%;
 overflow: auto;
 position: relative;
 }
+.scrollspy-chart {
+height: 390px;
+width: 100%;
+overflow: auto;
+position: relative;
+}
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -72,6 +80,12 @@ position: relative;
 							]
 					});
 	});
+	
+	
+	$('#myTab a').click(function (e) {
+		  e.preventDefault()
+		  $(this).tab('show')
+		})
 </script>
 
 
@@ -106,20 +120,18 @@ position: relative;
 				<div class="col-sm-6 col-md-4">
 					<h3>Mutual Funds.</h3>
 
-					<div data-spy="scroll" data-offset="50" class="scrollspy-example">
-					<ol>
+					<div data-spy="scroll" data-offset="50" class="scrollspy-fundlist">
+					<ul class="list-group">
 						<c:forEach var="fund" items="${fundList}">
-							<li>
-								<h4>${fund.getName()}-${fund.getSymbol()}</h4>
+							<li class="list-group-item">
+								<a href="ResearchFund.do?fund_id=${fund.getFund_id()}"
+										class="btn">${fund.getName()}-${fund.getSymbol()}</a>
 								<p>${fund.getDescription()}</p>
-								<p>
-									<a href="ResearchFund.do?fund_id=${fund.getFund_id()}"
-										class="btn">View More »</a>
-								</p>
+							
 							</li>
 						</c:forEach>
 
-					</ol>
+					</ul>
 					</div>
 				</div>
 
@@ -130,15 +142,24 @@ position: relative;
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
 					
-<ul class="nav nav-tabs" >
-  <li role="presentation" class="active"><a href="#">Chart</a></li>
-  <li role="presentation"><a href="#">Table</a></li>
-</ul>
+					<div role="tabpanel">
 
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Graphic</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Chart</a></li>
+  </ul>
 
-		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		            
-					<table class="table">
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+    	 <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+
+    	<div data-spy="scroll" data-offset="50" class="scrollspy-chart">
+				
+    						<table class="table">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -157,6 +178,15 @@ position: relative;
 
 						</tbody>
 					</table>
+					
+    </div>
+  </div>
+
+</div>
+					
+
+
+		          
 				</div>
 
 			</div>
