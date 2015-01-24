@@ -16,13 +16,13 @@
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-4 control-label" id="new-password">New Password</label>
                 <div class="col-sm-7">
-                    <input type="password" class="form-control" name="newPassword" placeholder="Password">
+                    <input type="password" class="form-control" name="newPassword" placeholder="Password" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-4 control-label" id="confirm-password">Confirm Password</label>
                 <div class="col-sm-7">
-                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
                 </div>
             </div>
             <div class="form-group">
