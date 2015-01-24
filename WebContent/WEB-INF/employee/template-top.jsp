@@ -80,7 +80,6 @@
             <li name = "ResetPassword"><a href="ResetPassword.do">Rest Password</a></li>
             <li name = "ViewAccount"><a href="ViewAccount.do">View Customer Account</a></li>
             <li name = "ViewTransaction"><a href="ViewTransaction.do">Customer Transaction History</a></li>
-            <li name = "DepositCheck"><a href="DepositCheck.do">Deposit Check</a></li>            
           </ul>
         </div><!--/.nav-collapse -->
       </div>

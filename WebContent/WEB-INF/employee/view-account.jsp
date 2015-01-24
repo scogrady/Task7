@@ -6,34 +6,25 @@
 <%@ page import="databeans.FundPriceHistoryBean"%>
 
 <jsp:include page="template-top.jsp" />
-<div class="page-header">
-	<h1>View Customer Account</h1>
+	<h3>View Customer Account</h3>
 
-</div>
 
 <div class="row">
-	<div class="col-md-4">
-		<h2>Customer list</h2>
+	<div class="col-md-3">
 	<jsp:include page="error-list.jsp" />
-		<ol>
-
+		<ul class="list-group">
 			<c:forEach var="customer" items="${customerList}">
-				<li>
+				<li class="list-group-item">
 					<a href="ViewAccount.do?customer_id=${customer.getCustomer_id()}" class="btn"><h4>${customer.getFirstname()} ${customer.getLastname()}</h4></a>
-					<p>User Name:${customer.getUsername()}</p>
 					
 				</li>
 			</c:forEach>
-		</ol>
+		</ul>
 		
 	</div>
 	
 	<div class="col-md-8" id="customer-account-info">
 		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h4>Customer Account</h4>
-
-			</div>
 			<div class="panel-body">
 				<%
             CustomerBean customer = (CustomerBean) request.getAttribute("customer");
@@ -63,19 +54,21 @@
 					<tr>
 						<c:set var="availableBalance" value="<%=customer.getAvailable_cash()/100%>" />
 						<th scope="row">Available balance:</th>
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
-						</td>
 						<td>
-						
-					</tr>
-					<tr><th></th>
-					<td>$<form   role="form"  method="post" action="DepositCheck.do">
-					<input type="text" id="amount" 
-										name="amount" >
-										<input type="hidden"
-										name="username" value="${customer.getUsername()}">
-						<input class="btn btn-primary" type="submit"
-								name="action" value="Deposit"></td></form></td>
+							<div class="row">
+							<p class="col-md-3">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" /></p>
+							<form role="form"  method="post" action="DepositCheck.do">
+								<div class="input-group col-md-5">
+									<span class="input-group-addon" id="basic-addon1">$</span>
+									<input type="hidden" name="username" value="${customer.getUsername()}">
+									<input type="text" class="form-control" id="amount" name="amount" >
+									<span class="input-group-btn">					
+										<input class="btn btn-default" type="submit" name="action" value="Deposit">
+									</span>
+								</div>
+							</form>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">Last Trading Day:</th>

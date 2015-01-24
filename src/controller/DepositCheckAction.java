@@ -56,7 +56,7 @@ public class DepositCheckAction extends Action {
 
 			CustomerBean customer = customerDAO.read(form.getUsername());
 			depositCheck.setCustomer_id(customer.getCustomer_id());
-			depositCheck.setTransaction_type("Request Check");
+			depositCheck.setTransaction_type("Deposit Check");
 			depositCheck.setStatus("Pending");
 			depositCheck.setAmount(Long.parseLong(form.getAmount()) * 100);
 			depositCheck.setFund_id(1);
