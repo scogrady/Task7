@@ -127,6 +127,8 @@ public class BuyFundAction extends Action {
 			
 			buyFund.setAmount(amount);
 			transactionDAO.create(buyFund);
+			
+			String message = "";
 
 			// put it into queue
 			// change available balance
