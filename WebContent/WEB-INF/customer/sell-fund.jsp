@@ -41,20 +41,34 @@
 										<td id="change-p">$<fmt:formatNumber type="number"
 												pattern="#,##0.00" value="${getPrice}" /></td>
 										<td>
-											<div class="form-inline">
-												<input type="text" name="num" class="form-control"
-													pattern="\d+(\.\d{1,3})?" placeholder="Share"
-													data-placement="bottom" min="0" max="100000000"
-													title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
-													required>
+										<c:choose>
+												<c:when test="${fund.getFund_id() == form.getFund_id()}">
+													<div class="form-inline">
+														<input type="text" name="num" class="form-control"
+															pattern="\d+(\.\d{1,3})?" placeholder="Share"
+															data-placement="bottom" min="0" max="100000000"
+															value="${form.getNum()}"
+															title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
+															required>
 
-											</div>
-										</td>
-										<td><input type="hidden" name="fund_id"
-											value="${fund.getFund_id()}"> <input type="hidden"
-											name="shares" value="${fund.getShares()}"> <input
-											class="btn btn-default" type="submit" value="Sell"
-											name="action"></td>
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="form-inline">
+														<input type="text" name="num" class="form-control"
+															pattern="\d+(\.\d{1,3})?" placeholder="Share"
+															data-placement="bottom" min="0" max="100000000"
+															title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
+															required>
+
+													</div>
+												</c:otherwise>
+											</c:choose></td>
+									<td><input type="hidden" name="fund_id"
+										value="${fund.getFund_id()}"> <input type="hidden"
+										name="shares" value="${fund.getShares()}"> <input
+										class="btn btn-default" type="submit" value="Sell"
+										name="action"></td>
 									</div>
 								</tr>
 							</form>

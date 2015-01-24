@@ -60,11 +60,7 @@ public class SellFundAction extends Action {
 		FundPriceHistoryBean price;
 
 		try {
-			/*
-			 * customer = customerDAO.read("duhl09"); if (customer == null)
-			 * System.out.println("customer = null!");
-			 */
-			// customer = customerDAO.readFromID(customer.getCustomer_id());
+			
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
@@ -135,6 +131,26 @@ public class SellFundAction extends Action {
 			position.setAvailable_shares(position.getAvailable_shares() - share);
 			positionDAO.update(position);
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
+			
+			sellFundList = new SellFundBean[fundList.length];
+			for (int i = 0; i < fundList.length; i++) {
+				sellFundList[i] = new SellFundBean();
+				sellFundList[i].setFund_id(fundList[i].getFund_id());
+				sellFundList[i].setShares(fundList[i].getAvailable_shares());
+
+				fund = fundDAO.read(fundList[i].getFund_id());
+				sellFundList[i].setName(fund.getName());
+
+				price = fundPriceHistoryDAO.readLastPrice(fundList[i]
+						.getFund_id());
+				if (price == null) {
+					price = new FundPriceHistoryBean();
+					price.setPrice(-1);
+				}
+				sellFundList[i].setPrice(price.getPrice());
+			}
+			request.setAttribute("sellFundList", sellFundList);
+			
 
 			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {
