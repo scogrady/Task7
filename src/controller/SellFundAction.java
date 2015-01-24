@@ -73,7 +73,7 @@ public class SellFundAction extends Action {
 			for (int i = 0; i < fundList.length; i++) {
 				sellFundList[i] = new SellFundBean();
 				sellFundList[i].setFund_id(fundList[i].getFund_id());
-				sellFundList[i].setShares(fundList[i].getAvailShares());
+				sellFundList[i].setShares(fundList[i].getAvailable_shares());
 
 				fund = fundDAO.read(fundList[i].getFund_id());
 				sellFundList[i].setName(fund.getName());
@@ -132,7 +132,7 @@ public class SellFundAction extends Action {
 			PositionBean position = positionDAO.readByIdFundId(
 					Integer.parseInt(form.getFund_id()),
 					customer.getCustomer_id());
-			position.setAvailShares(position.getAvailShares() - share);
+			position.setAvailable_shares(position.getAvailable_shares() - share);
 			positionDAO.update(position);
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
 
