@@ -67,7 +67,7 @@ public class BuyForm extends FormBean {
 
 			long avail_cash = Long.parseLong(this.avail_cash);
 
-			if (!(num >= 0 && num < Double.MAX_VALUE)) {
+			if (!(num > 10 && num < Double.MAX_VALUE)) {
 				errors.add("Please double check your 1st input.");
 			}
 			
