@@ -124,6 +124,9 @@ public class SellFundAction extends Action {
 			sellFund.setStatus("Pending");
 			// sellFund.setAmount(amount);
 			transactionDAO.create(sellFund);
+			
+			String message = "Successfully recieve your request.";
+			request.setAttribute("message", message);
 
 			PositionBean position = positionDAO.readByIdFundId(
 					Integer.parseInt(form.getFund_id()),

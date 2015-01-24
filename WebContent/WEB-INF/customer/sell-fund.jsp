@@ -5,6 +5,8 @@
 <jsp:include page="template-top.jsp" />
 <jsp:include page="balance.jsp" />
 <jsp:include page="error-list.jsp" />
+<jsp:include page="success.jsp" />
+
 
 <div class="col-xs-12 col-sm-12">
 
@@ -18,9 +20,9 @@
 				<thead>
 					<tr>
 						<th width="30%">Fund Name</th>
-						<th width="15%">Share</th>
-						<th width="10%">Price</th>
-						<th width="30%">Sell Share</th>
+						<th width="15%" class="title_right">Share</th>
+						<th width="10%" class="title_right">Price</th>
+						<th width="30%" class="title_center">Sell Share</th>
 						<th width="15%">Sell</th>
 					</tr>
 				</thead>
@@ -31,16 +33,16 @@
 								<tr>
 									<div class="form-group">
 										<td>${fund.getName()}</td>
-										<td><c:set var="getShare"
+										<td class="title_right"><c:set var="getShare"
 												value="${fund.getShares() / 1000}" />
 											<div class="num">
 												<fmt:formatNumber type="number" pattern="#,##0.000"
 													value="${getShare}" />
 											</div></td>
 										<c:set var="getPrice" value="${fund.getPrice() / 100}" />
-										<td id="change-p">$<fmt:formatNumber type="number"
+										<td id="change-p" class="title_right">$<fmt:formatNumber type="number"
 												pattern="#,##0.00" value="${getPrice}" /></td>
-										<td>
+										<td class="title_center">
 										<c:choose>
 												<c:when test="${fund.getFund_id() == form.getFund_id()}">
 													<div class="form-inline">

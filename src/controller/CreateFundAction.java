@@ -2,11 +2,14 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
+
 import databeans.FundBean;
 import formbeans.FundForm;
 import model.FundDAO;
@@ -58,6 +61,8 @@ public class CreateFundAction extends Action{
 			fund.setSymbol(form.getSymbol());
 			
 			fundDAO.createAutoIncrement(fund);
+			String message = "Successfully create a new fund.";
+			request.setAttribute("message", message);
 
 			request.setAttribute("fundList", fundDAO.getFunds());
 			

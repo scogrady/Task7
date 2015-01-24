@@ -68,7 +68,7 @@ public class ChangePwdAction extends Action {
 	
 			request.setAttribute("message","Password changed for "+customer.getFirstname() +" "+customer.getLastname());
 			
-	        return "customer/success.jsp";
+	        return "customer/change-pwd.jsp";
         } catch (RollbackException e) {
         	errors.add(e.toString());
         	return "error.jsp";
