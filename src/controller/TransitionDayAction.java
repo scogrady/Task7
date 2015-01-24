@@ -108,9 +108,11 @@ public class TransitionDayAction extends Action {
 					int fundId = transaction.getFund_id();
 					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
 					long amount = transaction.getAmount();
-					long shares = Math.round((amount / price) * 1000);
+					long shares = Math.round((amount / price) * 1000);					
+					long newAmount = Math.round(shares * price / 1000.000);
 					
-					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
+					
+					customer.setCurrent_cash(customer.getCurrent_cash() - newAmount < 0 ? 0 : customer.getCurrent_cash() - newAmount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
