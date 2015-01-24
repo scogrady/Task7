@@ -3,6 +3,8 @@
 
 <jsp:include page="template-top.jsp" />
 <jsp:include page="error-list.jsp" />
+<jsp:include page="success.jsp" />
+
 
 
 <div class="col-xs-12 col-sm-12">

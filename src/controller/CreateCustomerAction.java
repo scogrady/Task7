@@ -81,6 +81,9 @@ public class CreateCustomerAction extends Action {
 			customer.setAvailable_cash(1000);
 			customerDAO.create(customer);
 			
+			String message = "Successfully create a new customer account.";
+			request.setAttribute("message", message);
+			
 
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			return "employee/create-customer.jsp";
