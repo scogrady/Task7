@@ -37,7 +37,8 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-5">
-                    <in type="submit" class="btn btn-primary">Change</button>
+                   
+                     <button type="submit" class="btn btn-primary">Change</button>
                   
                 </div>
             </div>

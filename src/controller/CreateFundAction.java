@@ -43,7 +43,7 @@ public class CreateFundAction extends Action{
 
 			FundBean fund = fundDAO.readBySymbol(form.getSymbol());
 			if (fund != null) {
-				errors.add("Fund Symbol is already exist.");
+				errors.add("Fund Symbol already exists.");
 			}
 
 			if (errors.size() != 0) {
