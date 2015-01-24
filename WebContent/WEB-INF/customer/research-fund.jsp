@@ -8,6 +8,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style type="text/css">
+.scrollspy-example {
+height: 450px;
+overflow: auto;
+position: relative;
+}
+</style>
 <script type="text/javascript">
 	$(function() {
 		$('#containerChart')
@@ -99,8 +106,8 @@
 				<div class="col-sm-6 col-md-4">
 					<h3>Mutual Funds.</h3>
 
+					<div data-spy="scroll" data-offset="50" class="scrollspy-example">
 					<ol>
-
 						<c:forEach var="fund" items="${fundList}">
 							<li>
 								<h4>${fund.getName()}-${fund.getSymbol()}</h4>
@@ -113,16 +120,21 @@
 						</c:forEach>
 
 					</ol>
+					</div>
 				</div>
 
 				<div class="col-sm-6 col-md-8" id="detail-section">
-
-
-					<h3>Detail Information of ${fundPriceHistoryName.getName()} -
+				<h3>Detail Information of ${fundPriceHistoryName.getName()} -
 						${fundPriceHistoryName.getSymbol()}</h3>
 					<dl>
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
+					
+<ul class="nav nav-tabs" >
+  <li role="presentation" class="active"><a href="#">Chart</a></li>
+  <li role="presentation"><a href="#">Table</a></li>
+</ul>
+
 
 		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		            
@@ -148,20 +160,6 @@
 				</div>
 
 			</div>
-			<nav>
-				<ul class="pagination">
-					<li class="disabled"><a href="#" aria-label="Previous"><span
-							aria-hidden="true">&laquo;</span></a></li>
-					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#" aria-label="Next"> <span
-							aria-hidden="true">&raquo;</span>
-					</a></li>
-				</ul>
-			</nav>
 		</div>
 		
 	</div>
