@@ -2,20 +2,18 @@ package formbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
 import org.mybeans.form.FormBean;
 
 public class BuyForm extends FormBean {
-	String num_1;
-	String num_2;
+	String num;
 	String fund_id;
 	String avail_cash;
+	String action;
 
-	public String getNum_1() {
-		return num_1;
-	}
-
-	public String getNum_2() {
-		return num_2;
+	public String getNum() {
+		return num;
 	}
 
 	public String getFund_id() {
@@ -26,12 +24,12 @@ public class BuyForm extends FormBean {
 		return avail_cash;
 	}
 
-	public void setNum_1(String s) {
-		num_1 = s.trim();
+	public String getAction() {
+		return action;
 	}
 
-	public void setNum_2(String s) {
-		num_2 = s.trim();
+	public void setNum(String s) {
+		num = s.trim();
 	}
 
 	public void setFund_id(String s) {
@@ -42,41 +40,43 @@ public class BuyForm extends FormBean {
 		avail_cash = s.trim();
 	}
 
+	public void setAction(String s) {
+		action = s.trim();
+	}
+
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		if (this.num_1 == null || this.num_2 == null || this.fund_id == null) {
+		if (this.num == null || this.fund_id == null) {
 			errors.add("Connection error. Please refresh the page and try again.");
+		}
+		if (!action.equals("Buy")) {
+			errors.add("Invalid button.");
+			return errors;
 		}
 
 		try {
-			long num_1;
-			long num_2;
-			if (this.num_1 == "") {
-				num_1 = 0;
-			} else {
-				num_1 = Long.parseLong(this.num_1);
+			Double num;
+			if (this.num == "") {
+				num = 0.0;
+			} else if (!Pattern.matches("\\d+(\\.\\d{1,2})?", this.num)) {
+				errors.add("Please double check your input. Only two digits after decimal are allowed.");
 			}
-			if (this.num_2 == "") {
-				num_2 = 0;
-			} else {
-				num_2 = Long.parseLong(this.num_2);
-			}
+
+			num = Double.parseDouble(this.num);
+
 
 			long avail_cash = Long.parseLong(this.avail_cash);
 
-			if (!(num_1 >= 0 && num_1 < Integer.MAX_VALUE)) {
+			if (!(num > 10 && num < Double.MAX_VALUE)) {
 				errors.add("Please double check your 1st input.");
 			}
-			if (!(num_2 >= 0 && num_2 < 100)) {
-				errors.add("Please double check your 2nd input.");
-			}
-
-			if (num_1 == 0 && num_2 == 0) {
+			
+			if (num == 0 ) {
 				errors.add("You can't buy 0 share.");
 
 			}
 
-			if ((num_1 + 1) * 100 > avail_cash) {
+			if ((num) * 100 > avail_cash) {
 				errors.add("Not enough money in Available Cash");
 			}
 
