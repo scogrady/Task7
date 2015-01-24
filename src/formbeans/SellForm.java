@@ -2,21 +2,18 @@ package formbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.mybeans.form.FormBean;
 
 public class SellForm extends FormBean {
-	String num_1;
-	String num_2;
+	String num;
 	String fund_id;
 	String shares;
+	String action;
 
-	public String getNum_1() {
-		return num_1;
-	}
-
-	public String getNum_2() {
-		return num_2;
+	public String getNum() {
+		return num;
 	}
 
 	public String getFund_id() {
@@ -27,12 +24,12 @@ public class SellForm extends FormBean {
 		return shares;
 	}
 
-	public void setNum_1(String s) {
-		num_1 = s.trim();
+	public String getAction() {
+		return action;
 	}
 
-	public void setNum_2(String s) {
-		num_2 = s.trim();
+	public void setNum(String s) {
+		num = s.trim();
 	}
 
 	public void setFund_id(String s) {
@@ -43,42 +40,42 @@ public class SellForm extends FormBean {
 		shares = s.trim();
 	}
 
+	public void setAction(String s) {
+		action = s.trim();
+	}
+
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (this.num_1 == null || this.num_2 == null || this.shares == null
-				|| this.fund_id == null) {
+		if (this.num == null || this.shares == null || this.fund_id == null) {
 			errors.add("Connection error. Please refresh the page and try again.");
+		}
+		if (!action.equals("Sell")) {
+			errors.add("Invalid button.");
+			return errors;
 		}
 
 		try {
-			long num_1;
-			long num_2;
-			if (this.num_1 == "") {
-				num_1 = 0;
-			} else {
-				num_1 = Long.parseLong(this.num_1);
-			}
-			if (this.num_2 == "") {
-				num_2 = 0;
-			} else {
-				num_2 = Long.parseLong(this.num_2);
+			Double num;
+			if (this.num == "") {
+				num = 0.0;
+			} else if (!Pattern.matches("\\d+(\\.\\d{1,3})?", this.num)) {
+				errors.add("Please double check your input. Only three digits after decimal are allowed.");
 			}
 
-			long shares = Long.parseLong(this.shares);
+			num = Double.parseDouble(this.num);
 
-			if (!(num_1 >= 0 && num_1 < Integer.MAX_VALUE)) {
-				errors.add("Please double check your 1st input.");
+			double shares = Double.parseDouble(this.shares);
+
+			if (!(num >= 0 && num < Double.MAX_VALUE)) {
+				errors.add("Please double check your input.");
 			}
-			if (!(num_2 >= 0 && num_2 < 1000)) {
-				errors.add("Please double check your 2nd input.");
-			}
-			if (num_1 == 0 && num_2 == 0) {
+
+			if (num == 0.0) {
 				errors.add("You can't sell 0 share.");
-
 			}
 
-			if (num_1 + 1 > (shares / 1000)) {
+			if (num > (shares / 1000)) {
 				errors.add("You can't sell more than what you have.");
 			}
 

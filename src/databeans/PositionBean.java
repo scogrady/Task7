@@ -9,6 +9,7 @@ public class PositionBean {
 	private int customer_id;
 	private int fund_id;
 	private long shares;
+	private long available_shares;
 
 	public int getCustomer_id() {
 		return customer_id;
@@ -22,6 +23,10 @@ public class PositionBean {
 		return shares;
 	}
 
+	public long getAvailable_shares() {
+		return available_shares;
+	}
+
 	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
 	}
@@ -32,6 +37,10 @@ public class PositionBean {
 
 	public void setShares(long shares) {
 		this.shares = shares;
+	}
+
+	public void setAvailable_shares(long available_shares) {
+		this.available_shares = available_shares;
 	}
 
 }
