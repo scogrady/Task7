@@ -32,13 +32,10 @@ public class CreateEmployeeAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-
+		EmployeeForm form;
 		try {
-			
-			
-		   
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
-			EmployeeForm form = formBeanFactory.create(request);
+			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			if (!form.isPresent()) {
 				System.out.println("create employee form is not present!");

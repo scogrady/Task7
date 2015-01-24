@@ -18,7 +18,7 @@ public class CustomerForm extends FormBean {
 	private String state;
 	private String zip;
 	private long current_cash;
-
+	private String action;
 
 	public String getConfirm() {
 		return confirm;
@@ -113,6 +113,13 @@ public class CustomerForm extends FormBean {
 		confirm = s.trim();
 	}
 
+
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
 	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
@@ -163,7 +170,12 @@ public class CustomerForm extends FormBean {
 			errors.add("Passwords are not the same");
 		}
 	
-	
+		if (action == null)
+			errors.add("Button is required");
+
+		if (!action.equals("Create"))
+			errors.add("Invalid button");
+
 		return errors;
 	}
 }

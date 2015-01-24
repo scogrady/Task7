@@ -3,11 +3,9 @@
 <%@ page import="databeans.FavoriteBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
 
-
 <jsp:include page="template-top.jsp" />
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 <script type="text/javascript">
@@ -33,10 +31,6 @@
 										|| '#FFFFFF'
 							},
 							xAxis : {
-								//TODO find the right type not categories but ???
-								
-								//  type: 'datetime',
-								  //
             					  title: {
 						                    text: 'Time'
 						                }
@@ -78,7 +72,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="page-header">
-				<h3>The most popular chooses.</h3>
+				<h3>The most popular choices.</h3>
 			</div>
 			<div class="row">
 
@@ -151,10 +145,7 @@
 
 						</tbody>
 					</table>
-
 				</div>
-
-
 
 			</div>
 			<nav>
@@ -172,7 +163,6 @@
 				</ul>
 			</nav>
 		</div>
-
 		
 	</div>
 	

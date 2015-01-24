@@ -36,11 +36,10 @@ public class CreateCustomerAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-
+		CustomerForm form;
 		try {
-
 			request.setAttribute("customerList", customerDAO.getCustomers());
-			CustomerForm form = formBeanFactory.create(request);
+			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			if (!form.isPresent()) {
 				System.out.println("create customer form is not present!");
