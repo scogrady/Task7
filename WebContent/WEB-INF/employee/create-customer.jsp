@@ -2,7 +2,8 @@
 <%@ page import="databeans.CustomerBean"%>
 
 <jsp:include page="template-top.jsp" />
-
+<jsp:include page="error-list.jsp" />
+<jsp:include page="success.jsp" />
 
 <div class="container-fluid">
 
@@ -16,7 +17,7 @@
             <form method="post" action="CreateCustomer.do">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username-new"  name="username" placeholder="Username" maxlength="20" required>
+                    <input type="text" class="form-control" id="username-new"  name="username" placeholder="Username" value="${form.getUsername()}" maxlength="20" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
@@ -26,25 +27,25 @@
                 </div>
                 <div class="form-group">
                     <label for="firstname">First Name</label>
-                    <input type="text" class="form-control" id="firstname-new" name="firstname" placeholder="First Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct First Name" required>
+                    <input type="text" class="form-control" id="firstname-new" name="firstname" placeholder="First Name" value="${form.getFirstname()}" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct First Name" required>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Last Name</label>
-                    <input type="text" class="form-control" id="lastname-new" name="lastname" placeholder="Last Name" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct Last Name" required>
+                    <input type="text" class="form-control" id="lastname-new" name="lastname" placeholder="Last Name" value="${form.getLastname()}" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct Last Name" required>
                 </div>
                 <div class="form-group">
                     <label for="addressline-1">Address Line</label>
-                    <input type="text" class="form-control" id="address-new-1" name="addr_line1" placeholder="Address Line 1"maxlength="50" required>
+                    <input type="text" class="form-control" id="address-new-1" name="addr_line1" placeholder="Address Line 1" value="${form.getAddr_line1()}" maxlength="50" required>
                     <br/>
-                    <input type="text" class="form-control" id="address-new-2" name="addr_line2" placeholder="Address Line 2" maxlength="50" required>
+                    <input type="text" class="form-control" id="address-new-2" name="addr_line2" placeholder="Address Line 2" value="${form.getAddr_line2()}" maxlength="50">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" class="form-control" id="city-new" name="city" placeholder="City" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct City" required>
+                    <input type="text" class="form-control" id="city-new" name="city" placeholder="City" value="${form.getCity()}" maxlength="20" pattern="[a-zA-Z ]{2,30}" title="Please enter correct City" required>
                 </div>
                 <div class="form-group">
                     <label for="State">State</label>
-                    <select class="form-control"  name="state">
+                    <select class="form-control" name="state">
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -100,20 +101,15 @@
                 </div>
                 <div class="form-group">
                     <label for="zip">Zip Code</label>
-                    <input type="text" class="form-control" id="zip-new" name="zip" placeholder="Zip Code" pattern="[0-9]{5}" title="Please enter 5 digit Zip code" required>
+                    <input type="text" class="form-control" id="zip-new" name="zip" placeholder="Zip Code" value="${form.getZip()}" pattern="[0-9a-zA-Z]{5}" title="Please enter 5 digit Zip code" required>
                 </div>
                
-                <input type="submit" class="btn btn-primary" id="submit-new-customer" name="action">
+                <input type="submit" class="btn btn-primary" id="submit-new-customer" name="action" value="Create">
             </form>
         </div>
     </div>
     <div class="col-md-3"></div>
 </div>
-
-
-
-	
-
 
 
 <div class="row">
@@ -146,12 +142,10 @@
 						<td>${customer.getPassword()}-delete</td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
 		</table>
 	</div>
 </div>
-
 
 
 

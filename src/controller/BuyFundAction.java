@@ -127,6 +127,9 @@ public class BuyFundAction extends Action {
 			
 			buyFund.setAmount(amount);
 			transactionDAO.create(buyFund);
+			
+			String message = "Successfully recieve your request.";
+			request.setAttribute("message", message);
 
 			// put it into queue
 			// change available balance

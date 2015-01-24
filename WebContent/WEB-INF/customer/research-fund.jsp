@@ -3,13 +3,26 @@
 <%@ page import="databeans.FavoriteBean"%>
 <%@ page import="databeans.FundPriceHistoryBean"%>
 
-
 <jsp:include page="template-top.jsp" />
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style type="text/css">
+.scrollspy-fundlist {
+height: 450px;
+width: 100%;
+overflow: auto;
+position: relative;
+}
+.scrollspy-chart {
+height: 390px;
+width: 100%;
+overflow: auto;
+position: relative;
+}
+
+</style>
 <script type="text/javascript">
 	$(function() {
 		$('#containerChart')
@@ -33,10 +46,6 @@
 										|| '#FFFFFF'
 							},
 							xAxis : {
-								//TODO find the right type not categories but ???
-								
-								//  type: 'datetime',
-								  //
             					  title: {
 						                    text: 'Time'
 						                }
@@ -71,6 +80,12 @@
 							]
 					});
 	});
+	
+	
+	$('#myTab a').click(function (e) {
+		  e.preventDefault()
+		  $(this).tab('show')
+		})
 </script>
 
 
@@ -78,7 +93,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="page-header">
-				<h3>The most popular chooses.</h3>
+				<h3>The most popular choices.</h3>
 			</div>
 			<div class="row">
 
@@ -105,34 +120,46 @@
 				<div class="col-sm-6 col-md-4">
 					<h3>Mutual Funds.</h3>
 
-					<ol>
-
+					<div data-spy="scroll" data-offset="50" class="scrollspy-fundlist">
+					<ul class="list-group">
 						<c:forEach var="fund" items="${fundList}">
-							<li>
-								<h4>${fund.getName()}-${fund.getSymbol()}</h4>
+							<li class="list-group-item">
+								<a href="ResearchFund.do?fund_id=${fund.getFund_id()}"
+										class="btn">${fund.getName()}-${fund.getSymbol()}</a>
 								<p>${fund.getDescription()}</p>
-								<p>
-									<a href="ResearchFund.do?fund_id=${fund.getFund_id()}"
-										class="btn">View More »</a>
-								</p>
+							
 							</li>
 						</c:forEach>
 
-					</ol>
+					</ul>
+					</div>
 				</div>
 
 				<div class="col-sm-6 col-md-8" id="detail-section">
-
-
-					<h3>Detail Information of ${fundPriceHistoryName.getName()} -
+				<h3>Detail Information of ${fundPriceHistoryName.getName()} -
 						${fundPriceHistoryName.getSymbol()}</h3>
 					<dl>
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
+					
+					<div role="tabpanel">
 
-		            <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		            
-					<table class="table">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Graphic</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Chart</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+    	 <div id="containerChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+
+    	<div data-spy="scroll" data-offset="50" class="scrollspy-chart">
+				
+    						<table class="table">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -151,28 +178,19 @@
 
 						</tbody>
 					</table>
+					
+    </div>
+  </div>
 
+</div>
+					
+
+
+		          
 				</div>
 
-
-
 			</div>
-			<nav>
-				<ul class="pagination">
-					<li class="disabled"><a href="#" aria-label="Previous"><span
-							aria-hidden="true">&laquo;</span></a></li>
-					<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#" aria-label="Next"> <span
-							aria-hidden="true">&raquo;</span>
-					</a></li>
-				</ul>
-			</nav>
 		</div>
-
 		
 	</div>
 	

@@ -68,6 +68,9 @@ public class RequestCheckAction extends Action {
 			long amount = Long.parseLong(form.getNum()) * 100 ;
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
+			
+			String message = "Successfully recieve your request.";
+			request.setAttribute("message", message);
 
 
 			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
