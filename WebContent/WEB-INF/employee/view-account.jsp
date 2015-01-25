@@ -209,9 +209,9 @@
 								<tr>
 									<th width="25%">Date of Execution</th>
 									<th width="15%">Operation</th>
-									<th width="10%" class="title_right">Fund ID</th>
-									<th width="15%" class="title_right">Number of shares</th>
-									<th width="15%" class="title_right">Share Price</th>
+									<th width="10%" class="title_right">FundID</th>
+									<th width="15%" class="title_right">Shares</th>
+									<th width="15%" class="title_right">Price</th>
 									<th width="20%" class="title_right">Dollar Amount</th>
 
 								</tr>
