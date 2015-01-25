@@ -103,7 +103,7 @@ public class Controller extends HttpServlet {
     	}
     	
     	if (nextPage.endsWith(".jsp")) {
-	   		RequestDispatcher d = request.getRequestDispatcher("WEB-INF/" + nextPage);
+    		RequestDispatcher d =  request.getRequestDispatcher("WEB-INF/" + nextPage);
 	   		d.forward(request,response);
 	   		return;
     	} 

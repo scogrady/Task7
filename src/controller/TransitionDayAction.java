@@ -1,12 +1,17 @@
 package controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
+import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
 import databeans.FundBean;
@@ -19,9 +24,10 @@ import model.FundPriceHistoryDAO;
 import model.Model;
 import model.PositionDAO;
 import model.TransactionDAO;
+import formbeans.PriceForm;
 
 public class TransitionDayAction extends Action {
-	//private FormBeanFactory<TransactionForm> formBeanFactory = FormBeanFactory.getInstance(TransactionForm.class);
+	private FormBeanFactory<PriceForm> formBeanFactory = FormBeanFactory.getInstance(PriceForm.class);
 	TransactionDAO transactionDAO;
 	CustomerDAO customerDAO;
 	FundPriceHistoryDAO fundPriceHistoryDAO;
@@ -39,30 +45,42 @@ public class TransitionDayAction extends Action {
 
 	public String perform(HttpServletRequest request) {
 		try {
-			//TransactionForm transactionForm = formBeanFactory.create(request);
-			//not present
-			//if (!transactionForm.isPresent()) {
-				//return "transaction-day.jsp";
-			//}
-			
-			//get form data
+
 			FundBean[] fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
 			
-			Date lastDate = transactionDAO.readByLastDate().getExecute_date();
-			request.setAttribute("lastDate", new SimpleDateFormat("yyyy-MM-dd").format(lastDate));
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date lastDate = transactionDAO.readByLastDate().getExecute_date();		
+			request.setAttribute("lastDate", formatter.format(lastDate));
+			
+			PriceForm form = formBeanFactory.create(request);
+			if (!form.isPresent()) {
+				return "employee/transition-day.jsp";
+			}
+			List<String> errors = new ArrayList<String>();
+			request.setAttribute("errors", errors);
+			errors.addAll(form.getValidationErrors());
+			
+			Date date = formatter.parse(form.getDate());
+			if (lastDate != null && date.compareTo(lastDate) <= 0) {
+				errors.add("Transition Day should be later than last transition day.");
+			}
+			
+			if (errors.size() != 0) {
+				return "employee/transition-day.jsp";
+			}
+			
+			//get form data
+			
 			
 			if (request.getParameter("date") == null) {
 				return "employee/transition-day.jsp";
 			}
 			
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
-			for (FundBean fund: fundList) {
-				int fundId = fund.getFund_id();
-				if (request.getParameter(Integer.toString(fundId)) == null) {
-					break;
-				}
-				long price = Math.round(Double.parseDouble(request.getParameter(Integer.toString(fundId))) * 100);
+			System.out.println(form.getId().length);
+			for (int i = 0; i < form.getId().length; i++) {
+				int fundId = form.getId()[i];
+				long price = Math.round(form.getPrice()[i] * 100);
 				FundPriceHistoryBean fundPrice = new FundPriceHistoryBean();
 				fundPrice.setFund_id(fundId);
 				fundPrice.setPrice(price);
@@ -108,9 +126,11 @@ public class TransitionDayAction extends Action {
 					int fundId = transaction.getFund_id();
 					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
 					long amount = transaction.getAmount();
-					long shares = Math.round((amount / price) * 1000);
+					long shares = Math.round((amount / price) * 1000);					
+					long newAmount = Math.round(shares * price / 1000.000);
 					
-					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
+					
+					customer.setCurrent_cash(customer.getCurrent_cash() - newAmount < 0 ? 0 : customer.getCurrent_cash() - newAmount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
@@ -155,6 +175,8 @@ public class TransitionDayAction extends Action {
 					continue;
 				}
 			}
+			String message = "Successfully simulate transition day.";
+			request.setAttribute("message", message);
 			
 		} 
 		catch (RollbackException e) {
@@ -164,6 +186,10 @@ public class TransitionDayAction extends Action {
 		//	e.printStackTrace();
 		//} 
 		catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

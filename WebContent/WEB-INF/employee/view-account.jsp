@@ -23,13 +23,13 @@
 </style>
 
 <div class="page-header">
-	<h1>View Customer Account</h1>
+	<h3>View Customer Account</h3>
 
 	<jsp:include page="error-list.jsp" />
 </div>
 
 <div class="row">
-	<div class="col-sm-6 col-md-3">
+	<div class="col-md-3">
 		<h3>Customer list</h3>
 			
 		<div data-spy="scroll" data-offset="50" class="scrollspy-customerlist">
@@ -88,8 +88,20 @@
 						<c:set var="availableBalance"
 							value="<%=customer.getAvailable_cash() / 100%>" />
 						<th scope="row">Available balance:</th>
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
-								value="${availableBalance}" />
+						<td>
+							<div class="row">
+							<p class="col-md-3">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" /></p>
+							<form role="form"  method="post" action="DepositCheck.do">
+								<div class="input-group col-md-5">
+									<span class="input-group-addon" id="basic-addon1">$</span>
+									<input type="hidden" name="username" value="${customer.getUsername()}">
+									<input type="text" class="form-control" id="amount" name="amount" >
+									<span class="input-group-btn">					
+										<input class="btn btn-default" type="submit" name="action" value="Deposit">
+									</span>
+								</div>
+							</form>
+							</div>
 						</td>
 						<td>
 					</tr>
