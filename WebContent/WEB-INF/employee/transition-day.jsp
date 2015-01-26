@@ -2,6 +2,9 @@
 <%@ page import="databeans.FavoriteBean" %>
 
 <jsp:include page="template-top.jsp" />
+<jsp:include page="error-list.jsp" />
+<jsp:include page="success.jsp" />
+
 <div class=" col-md-offset-2">
 <div class="table-responsive">
 		<form role="form" method="post" action="Transition.do">
@@ -24,9 +27,9 @@
               	  	  	  <td>${fund.symbol }</td>
               	  	  	  <td>${fund.description }</td>
               	  	  	  <td class="col-md-2">
-              	  	  	  	<input type="number" name=${fund.fund_id } class="form-control" pattern="\d+(\.\d{1,2})?" 
-              	  	  	  	placeholder="Price" data-placement="bottom"  min="0" max="100000000" title="Input should be......" required>
-              	  	  	  	
+              	  	  	  	<input type="hidden" name="id" value="${fund.fund_id}">
+              	  	  	  	<input type="text" name="price" class="form-control" pattern="\d+(\.\d{1,2})?" 
+              	  	  	  	placeholder="Price" title="Input should be......" required>
               	  	  	  </td>
               	  	  </tr>	
 				  </c:forEach>

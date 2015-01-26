@@ -27,6 +27,14 @@ body {
 	font-size: 16px;
 }
 
+.title_center {
+	text-align: center;
+}
+
+.title_right {
+	text-align: right;
+}
+
 #footer {
 	height: 60px;
 	background-color: #f5f5f5;

@@ -39,7 +39,7 @@ public class EmployeeViewTransHistoryAction extends Action {
 			request.setAttribute("id", id);
 			
 			transactionHistory = transactionDAO.readByCustomerID(id);
-
+			
 			request.setAttribute("transactionHistory", transactionHistory);
 
 			return "employee/trans-history.jsp";

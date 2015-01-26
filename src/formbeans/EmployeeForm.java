@@ -59,7 +59,6 @@ public class EmployeeForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-
 		if (username == null || username.length() == 0) {
 			errors.add("Employee username is required");
 		}
@@ -79,19 +78,16 @@ public class EmployeeForm extends FormBean {
 		if (confirm == null || confirm.length() == 0) {
 			errors.add("Confirm Password is required");
 		}
-
 		if (errors.size() > 0) {
 			return errors;
 		}
-
 		if (!password.equals(confirm)) {
 			errors.add("Passwords are not the same");
 		}
-//TODO
 		if (action == null)
 			errors.add("Button is required");
 
-		if (!action.equals("Submit"))
+		if (!action.equals("Create"))
 			errors.add("Invalid button");
 
 		return errors;

@@ -2,11 +2,14 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
+
 import databeans.FundBean;
 import formbeans.FundForm;
 import model.FundDAO;
@@ -29,10 +32,10 @@ public class CreateFundAction extends Action{
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-
+		FundForm form;
 		try {
 			request.setAttribute("fundList", fundDAO.getFunds());
-			FundForm form = formBeanFactory.create(request);
+			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			if (!form.isPresent()) {
 
@@ -58,6 +61,8 @@ public class CreateFundAction extends Action{
 			fund.setSymbol(form.getSymbol());
 			
 			fundDAO.createAutoIncrement(fund);
+			String message = "Successfully create a new fund.";
+			request.setAttribute("message", message);
 
 			request.setAttribute("fundList", fundDAO.getFunds());
 			

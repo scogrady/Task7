@@ -2,6 +2,9 @@
 
 
 <jsp:include page="template-top.jsp" />
+   <jsp:include page="error-list.jsp" />
+   <jsp:include page="success.jsp" />
+   
 
 <div class="col-md-3"></div>
 <div class="col-md-6">
@@ -44,7 +47,7 @@
             </div>
         </form>
     </div>
-                      <jsp:include page="error-list.jsp" />
+                   
     
 </div>
 <div class="col-md-3"></div><jsp:include page="template-bottom.jsp" />
