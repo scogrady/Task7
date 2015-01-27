@@ -16,8 +16,12 @@
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+
+
 	<form class="form-signin" role="form" method="post" action="login.do">
 		<h2 class="form-signin-heading">Please log in</h2>
+			<jsp:include page="error.jsp" />
 	    <label for="inputEmail" class="sr-only">Email address</label>
     	<input type="text" name="username" id="input-username" class="form-control" placeholder="Username" value="${form.username }" required>
     	<br>
