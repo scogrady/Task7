@@ -1,16 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="databeans.CustomerBean"%>
 
 <jsp:include page="template-top.jsp" />
 
 <div class="col-md-3"></div>
 <div class="col-md-6">
-
+<%
+CustomerBean customerClicked = (CustomerBean) request.getSession(false).getAttribute("customerClicked");
+				%>
 	<div class="page-header">
-		<h2>Reset password for ${id }</h2>
+		<h2>Reset password for <%=customerClicked.getFirstname()%> <%=customerClicked.getLastname()%></h2>
 	</div>
 	<jsp:include page="error-list.jsp" />
 	<jsp:include page="success.jsp" />
-
+	
+	
 
 	<form class="form-horizontal" method="POST"
 		action="ResetCustomerPwd.do">
