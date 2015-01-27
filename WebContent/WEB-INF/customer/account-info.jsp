@@ -84,7 +84,7 @@
             	}
             		%>
 				<td><%=symbol%></td>
-				<c:set var="shares" value="<%=pos.getShares() / 1000 %>" />
+				<c:set var="shares" value="<%=pos.getShares() / 1000.0 %>" />
 				<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${shares}" /></td>
 				<%
             	long price=-1;

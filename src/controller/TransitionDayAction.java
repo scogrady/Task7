@@ -100,7 +100,7 @@ public class TransitionDayAction extends Action {
 					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
 					long shares = transaction.getShares(); 
 					//positionDAO.readByCustomerIDAndFundId(customerId, fundId)[0].getShares();
-					long moneyGot = (long)shares / 1000 * price;
+					long moneyGot = Math.round(shares * 1.000000 / 1000 * price);
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + moneyGot);
 					customer.setAvailable_cash(customer.getCurrent_cash());
@@ -123,7 +123,7 @@ public class TransitionDayAction extends Action {
 					int fundId = transaction.getFund_id();
 					long price = fundPriceHistoryDAO.readByDateAndFundID(new java.sql.Date(date.getTime()), fundId)[0].getPrice();
 					long amount = transaction.getAmount();
-					long shares = Math.round((amount / price) * 1000);					
+					long shares = Math.round((amount * 1.000000 / price) * 1000);					
 					long newAmount = Math.round(shares * price / 1000.000);
 					
 					
@@ -142,7 +142,7 @@ public class TransitionDayAction extends Action {
 					} else {
 						PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
 						position.setShares(position.getShares() + shares);
-						position.setAvailable_shares(position.getAvailable_shares());
+						position.setAvailable_shares(position.getShares());
 						positionDAO.update(position);						
 					}
 					
