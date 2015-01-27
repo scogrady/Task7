@@ -60,7 +60,7 @@ public class SellFundAction extends Action {
 		FundPriceHistoryBean price;
 
 		try {
-			
+
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
@@ -93,6 +93,24 @@ public class SellFundAction extends Action {
 				return "customer/sell-fund.jsp";
 			}
 
+			long num = -1;
+
+			try {
+
+				num = (long) (Double.parseDouble(form.getNum()) * 1000);
+				PositionBean sellFund = positionDAO.readByIdFundId(
+						Integer.parseInt(form.getFund_id()),
+						customer.getCustomer_id());
+
+				if (num > sellFund.getAvailable_shares()) {
+					errors.add("You can't sell more than what you have.");
+				}
+
+				// 找到fund 找到available share
+			} catch (NumberFormatException e) {
+				errors.add("Please double check your input.");
+			}
+
 			errors.addAll(form.getValidationErrors());
 
 			if (errors.size() != 0) {
@@ -101,13 +119,6 @@ public class SellFundAction extends Action {
 
 			// handle amount from form
 
-			double num;
-			if (form.getNum() == "") {
-				num = 0;
-
-			} else {
-				num = Double.parseDouble(form.getNum());
-			}
 
 			// create transaction
 
@@ -117,24 +128,24 @@ public class SellFundAction extends Action {
 			sellFund.setFund_id(Integer.parseInt(form.getFund_id()));
 			sellFund.setGenerate_date(date);
 
-			long share = (long) (num * 1000);
+		
 
-			sellFund.setShares(share);
+			sellFund.setShares(num);
 			sellFund.setTransaction_type("Sell Fund");
 			sellFund.setStatus("Pending");
 			// sellFund.setAmount(amount);
 			transactionDAO.create(sellFund);
-			
-			String message = "Successfully recieve your request.";
+
+			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 
 			PositionBean position = positionDAO.readByIdFundId(
 					Integer.parseInt(form.getFund_id()),
 					customer.getCustomer_id());
-			position.setAvailable_shares(position.getAvailable_shares() - share);
+			position.setAvailable_shares(position.getAvailable_shares() - num);
 			positionDAO.update(position);
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
-			
+
 			sellFundList = new SellFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {
 				sellFundList[i] = new SellFundBean();
@@ -153,7 +164,6 @@ public class SellFundAction extends Action {
 				sellFundList[i].setPrice(price.getPrice());
 			}
 			request.setAttribute("sellFundList", sellFundList);
-			
 
 			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {

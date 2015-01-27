@@ -37,9 +37,7 @@
 							title="You can request between $0.01 to your available cash. Only two digits after decimal."
 							required>
 					</div>
-					<input type="hidden" name="avail_cash"
-						value="${customer.getAvailable_cash()}"> <input
-						type="submit" class="btn btn-primary" name="action"
+					<input type="submit" class="btn btn-primary" name="action"
 						value="Request Check">
 				</div>
 			</form>

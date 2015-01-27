@@ -81,7 +81,7 @@ public class CreateCustomerAction extends Action {
 			customer.setAvailable_cash(1000);
 			customerDAO.create(customer);
 			
-			String message = "Successfully create a new customer account.";
+			String message = "Successfully created a new customer account.";
 			request.setAttribute("message", message);
 			
 
