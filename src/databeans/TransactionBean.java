@@ -97,15 +97,11 @@ public class TransactionBean implements Comparable<TransactionBean> {
 	}
 
 	
-	
-	public int compare(TransactionBean tran1, TransactionBean tran2) {
-		return -(tran1.getGenerate_date().compareTo(tran2.getGenerate_date()));
-	}
 
 	@Override
 	public int compareTo(TransactionBean tran2) {
 		// TODO Auto-generated method stub
-		return  -(this.getGenerate_date().compareTo(tran2.getGenerate_date()));
+		return  - (this.getGenerate_date().compareTo(tran2.getGenerate_date()));
 	}
 
 }
