@@ -53,9 +53,6 @@ public class AccountInfoAction extends Action {
         request.setAttribute("errors",errors);
         
 		try {
-           
-			
-			
 			 CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 		    //set up portfolio list for customer 
 			request.setAttribute("position",positionDAO.readByCustomerID(customer.getCustomer_id()));

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import model.Model;
 import model.CustomerDAO;
@@ -51,21 +52,37 @@ public class ViewAccountAction extends Action {
 
 	public String perform(HttpServletRequest request) {
 		// Set up the errors list
-
+		 HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		TransactionBean[] transactionHistory;
 		try {
 			IdForm form = formBeanFactory.create(request);
 			int id;
+			if(session.getAttribute("customerClicked")==null)//for first time coming to page
+				 {session.setAttribute("customerClicked", customerDAO.readFromID(1));
+				 id = 1;
+				 }
+			CustomerBean customerClicked = (CustomerBean) request.getSession(false).getAttribute("customerClicked");
+			System.out.println("customer clicked"+customerClicked.getCustomer_id());
+			//id setting
 			if (request.getParameter("customer_id") == null)
-				id = 1;
+				{
+				
+				 id = customerClicked.getCustomer_id();
+				}
 			else {
 				id = Integer.parseInt(request.getParameter("customer_id"));
+				session.setAttribute("customerClicked",null);
+				session.setAttribute("customerClicked", customerDAO.readFromID(id));
+				System.out.println(id);
 			}
+			
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			request.setAttribute("id", id);
 			request.setAttribute("customer", customerDAO.readFromID(id));
+			//Setting up loacl session for clicked customer
+			 session.setAttribute("customerClicked", customerDAO.readFromID(id));
 			// set up portfolio list for customer
 			request.setAttribute("position", positionDAO.readByCustomerID(id));
 			// to get fund symbol list
