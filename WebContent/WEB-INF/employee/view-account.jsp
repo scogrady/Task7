@@ -67,7 +67,7 @@
 						<td id="customer-password">
 							<div class="row">
 								<p class="col-md-3">******</p>
-								<a class="btn btn-default" href="ResetPassword.do?id=${customer.getCustomer_id()}">Reset
+								<a class="btn btn-default" href="ResetCustomerPwd.do">Reset
 									Password</a>
 							</div>
 						</td>

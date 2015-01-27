@@ -33,6 +33,7 @@ public class LogoutAction extends Action {
     public String perform(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         session.setAttribute("user",null);
+        session.setAttribute("customerClicked", null);
 	    return "login.jsp"; 
     }
 }
