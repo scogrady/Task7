@@ -9,7 +9,6 @@ import org.mybeans.form.FormBean;
 public class SellForm extends FormBean {
 	String num;
 	String fund_id;
-	String shares;
 	String action;
 
 	public String getNum() {
@@ -20,10 +19,7 @@ public class SellForm extends FormBean {
 		return fund_id;
 	}
 
-	public String getShares() {
-		return shares;
-	}
-
+	
 	public String getAction() {
 		return action;
 	}
@@ -36,9 +32,6 @@ public class SellForm extends FormBean {
 		fund_id = s.trim();
 	}
 
-	public void setShares(String s) {
-		shares = s.trim();
-	}
 
 	public void setAction(String s) {
 		action = s.trim();
@@ -47,7 +40,7 @@ public class SellForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (this.num == null || this.shares == null || this.fund_id == null) {
+		if (this.num == null  || this.fund_id == null) {
 			errors.add("Connection error. Please refresh the page and try again.");
 		}
 		if (!action.equals("Sell")) {
@@ -65,7 +58,6 @@ public class SellForm extends FormBean {
 
 			num = Double.parseDouble(this.num);
 
-			double shares = Double.parseDouble(this.shares);
 
 			if (!(num >= 0 && num < Double.MAX_VALUE)) {
 				errors.add("Please double check your input.");
@@ -75,9 +67,7 @@ public class SellForm extends FormBean {
 				errors.add("You can't sell 0 share.");
 			}
 
-			if (num > (shares / 1000)) {
-				errors.add("You can't sell more than what you have.");
-			}
+		
 
 			return errors;
 		} catch (NumberFormatException e) {

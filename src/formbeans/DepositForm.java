@@ -9,7 +9,6 @@ import org.mybeans.form.FormBean;
 public class DepositForm extends FormBean {
 	private String amount;
 	private String username;
-	String avail_cash;
 	String action;
 
 	public String getUsername() {
@@ -23,10 +22,7 @@ public class DepositForm extends FormBean {
 	public String getAmount() {
 		return amount;
 	}
-	public String getAvail_cash() {
-		return avail_cash;
-	}
-
+	
 	public void setUsername(String username) {
 		this.username = trimAndConvert(username, "<>\"");
 	}
@@ -38,10 +34,7 @@ public class DepositForm extends FormBean {
 	public void setAction(String action) {
 		this.action = trimAndConvert(action, "<>\"");
 	}
-	public void setAvail_cash(String s) {
-		avail_cash = s.trim();
-	}
-
+	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
@@ -67,8 +60,6 @@ public class DepositForm extends FormBean {
 
 			num = Double.parseDouble(this.amount);
 			
-			long avail_cash = Long.parseLong(this.avail_cash);
-
 			if (!(num > 0 && num < Double.MAX_VALUE)) {
 				errors.add("Please double check your input.");
 			}
@@ -76,9 +67,7 @@ public class DepositForm extends FormBean {
 				errors.add("You can't deposit $0.");
 			}
 			
-			if ((num * 100 + avail_cash)>Long.MAX_VALUE) {
-				errors.add("The available balance will beyond the maximum amount after this deposit.");
-			}
+			
 
 			
 			return errors;
