@@ -213,7 +213,6 @@
 									<th width="15%" class="title_right">Shares</th>
 									<th width="15%" class="title_right">Price</th>
 									<th width="20%" class="title_right">Dollar Amount</th>
-
 								</tr>
 							</thead>
 							<tbody>
