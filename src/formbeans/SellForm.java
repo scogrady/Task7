@@ -52,7 +52,7 @@ public class SellForm extends FormBean {
 			Double num;
 			if (this.num == "") {
 				num = 0.0;
-			} else if (!Pattern.matches("\\d+(\\.\\d{1,3})?", this.num)) {
+			} else if (!Pattern.matches("\\d*(\\.\\d{1,3})?", this.num)) {
 				errors.add("Please double check your input. Only three digits after decimal are allowed.");
 			}
 

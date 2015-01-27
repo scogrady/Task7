@@ -37,12 +37,12 @@
 						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
 					</tr>
 					<tr>
-						<c:set var="currentBalance"	value="<%=customer.getCurrent_cash()/100%>" />
+						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
 						<th scope="row">Account balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
 					</tr>
 					<tr>
-						<c:set var="availableBalance" value="<%=customer.getAvailable_cash()/100%>" />
+						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
 						<th scope="row">Available balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
 						</td>

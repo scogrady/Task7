@@ -131,6 +131,8 @@ public class BuyFundAction extends Action {
 
 			customer.setAvailable_cash(customer.getAvailable_cash() - num);
 			customerDAO.update(customer);
+			
+			
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);

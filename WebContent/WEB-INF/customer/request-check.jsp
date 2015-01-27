@@ -32,7 +32,7 @@
 						<div class="input-group-addon">$</div>
 
 						<input type="text" name="num" class="form-control"
-							pattern="\d+(\.\d{1,2})?" placeholder="Amount"
+							pattern="\d*(\.\d{1,2})?" placeholder="Amount"
 							value="${form.getNum()}"
 							title="You can request between $0.01 to your available cash. Only two digits after decimal."
 							required>
