@@ -43,16 +43,26 @@ public class RequestCheckAction extends Action {
 		try {
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-			
+
 			RequestCheckForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
+			long amount = -1;;
 
 			if (!form.isPresent()) {
 				return "customer/request-check.jsp";
 			}
-			
+
 			errors.addAll(form.getValidationErrors());
-			
+
+			try {
+
+				amount = (long) (Double.parseDouble(form.getNum()) * 100);
+				if (amount > customer.getAvailable_cash()) {
+					errors.add("Not enough money in Available Cash");
+				}
+			} catch (NumberFormatException e) {
+				errors.add("Please double check your input.");
+			}
 
 			if (errors.size() != 0) {
 				return "customer/request-check.jsp";
@@ -60,26 +70,21 @@ public class RequestCheckAction extends Action {
 			TransactionBean requestCheck = new TransactionBean();
 
 			requestCheck.setCustomer_id(customer.getCustomer_id());
-			requestCheck.setFund_id(1);
 			requestCheck.setGenerate_date(date);
-		
 			requestCheck.setTransaction_type("Request Check");
 			requestCheck.setStatus("Pending");
-			long amount = (long)(Double.parseDouble(form.getNum())* 100) ;
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
-		
+
 			String message = "Successfully recieve your request.";
 			request.setAttribute("message", message);
 
-
 			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
 			customerDAO.update(customer);
-			
+
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-		
-			
+
 			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

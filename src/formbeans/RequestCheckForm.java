@@ -8,15 +8,10 @@ import org.mybeans.form.FormBean;
 
 public class RequestCheckForm extends FormBean {
 	String num;
-	String avail_cash;
 	String action;
 
 	public String getNum() {
 		return num;
-	}
-
-	public String getAvail_cash() {
-		return avail_cash;
 	}
 
 	public String getAction() {
@@ -27,10 +22,6 @@ public class RequestCheckForm extends FormBean {
 		num = s.trim();
 	}
 
-	public void setAvail_cash(String s) {
-		avail_cash = s.trim();
-	}
-
 	public void setAction(String s) {
 		action = s.trim();
 	}
@@ -38,7 +29,7 @@ public class RequestCheckForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (this.num == null || this.avail_cash == null) {
+		if (this.num == null ) {
 			errors.add("Connection error. Please refresh the page and try again.");
 		}
 		if (!action.equals("Request Check")) {
@@ -56,11 +47,7 @@ public class RequestCheckForm extends FormBean {
 
 			num = Double.parseDouble(this.num);
 
-			long avail_cash = Long.parseLong(this.avail_cash);
 
-			if (num * 100 > avail_cash) {
-				errors.add("Not enough money in Available Cash");
-			}
 
 			if (num == 0) {
 				errors.add("You can't request $0.");
