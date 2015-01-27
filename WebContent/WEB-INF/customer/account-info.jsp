@@ -87,11 +87,11 @@
 				<c:set var="shares" value="<%=pos.getShares() / 1000.0 %>" />
 				<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${shares}" /></td>
 				<%
-            	long price=-1;
+            	double price=-1;
             	for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[])request.getAttribute("priceList")){
             		
             		if(fundprice.getFund_id()==pos.getFund_id())
-            			price=fundprice.getPrice() / 100;
+            			price=fundprice.getPrice() / 100.00;
             	}
             		%>
             		<c:set var="price" value="<%=price %>" />
