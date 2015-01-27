@@ -77,7 +77,7 @@
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul id="sub-operation" class="nav navbar-nav">
             <li class="active" name = "CreateCustomer"><a href="CreateCustomer.do">Create Customer Account</a></li>
-            <li name = "ResetPassword"><a href="ResetPassword.do">Rest Password</a></li>
+            <li name = "ResetPassword"><a href="ResetPassword.do">Reset Password</a></li>
             <li name = "ViewAccount"><a href="ViewAccount.do">View Customer Account</a></li>
             <li name = "ViewTransaction"><a href="ViewTransaction.do">Customer Transaction History</a></li>
           </ul>
