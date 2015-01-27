@@ -13,12 +13,8 @@
 
 <jsp:include page="error-list.jsp" />
 		<jsp:include page="success.jsp" />
-	
-
+		<div class="col-md-6">
 			<form method="post" action="CreateFund.do">
-				<fieldset>
-
-
 					<div class="form-group">
 
 						<label>Fund Ticker</label> <input type="text" id="fund_symbol"
@@ -42,8 +38,9 @@
 					</p>
 					<div class="col-md-3"></div>
 
-				</fieldset>
+			
 			</form>
+		</div>
 	</div>
 
 	<div class="row">
