@@ -55,6 +55,7 @@
 				<%
 					CustomerBean customer = (CustomerBean) request
 							.getAttribute("customer");
+				
 				%>
 				<table class="table">
 					<tr>
@@ -66,7 +67,7 @@
 						<td id="customer-password">
 							<div class="row">
 								<p class="col-md-3">******</p>
-								<a class="btn btn-default" href="ResetPassword.do">Reset
+								<a class="btn btn-default" href="ResetPassword.do?id=${customer.getCustomer_id()}">Reset
 									Password</a>
 							</div>
 						</td>
