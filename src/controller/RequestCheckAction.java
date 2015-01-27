@@ -65,10 +65,10 @@ public class RequestCheckAction extends Action {
 		
 			requestCheck.setTransaction_type("Request Check");
 			requestCheck.setStatus("Pending");
-			long amount = Long.parseLong(form.getNum()) * 100 ;
+			long amount = (long)(Double.parseDouble(form.getNum())* 100) ;
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
-			
+		
 			String message = "Successfully recieve your request.";
 			request.setAttribute("message", message);
 

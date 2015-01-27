@@ -156,10 +156,10 @@
 				<div role="tabpanel" class="tab-pane active" id="home">
 					<table class="table table-striped">
 						<tr>
-							<th>Fund Code</th>
-							<th>Number of Shares</th>
-							<th>Share Price</th>
-							<th>Worth</th>
+							<th>Ticker</th>
+							<th class="title_right">Number of Shares</th>
+							<th class="title_right">Share Price</th>
+							<th class="title_right">Worth</th>
 						</tr>
 						<%
 							long total = 0;
@@ -177,7 +177,7 @@
 							%>
 							<td><%=symbol%></td>
 							<c:set var="shares" value="<%=pos.getShares() / 1000%>" />
-							<td><fmt:formatNumber type="number" pattern="#,##0.000"
+							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.000"
 									value="${shares}" /></td>
 							<%
 								long price = -1;
@@ -189,10 +189,10 @@
 									}
 							%>
 							<c:set var="price" value="<%=price%>" />
-							<td><fmt:formatNumber type="number" pattern="#,##0.00"
+							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
 									value="${price}" /></td>
 							<c:set var="worth" value="<%=pos.getShares() * price / 1000%>" />
-							<td><fmt:formatNumber type="number" pattern="#,##0.00"
+							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
 									value="${worth}" /></td>
 						</tr>
 						<%
@@ -202,9 +202,9 @@
 						<tr>
 							<td></td>
 							<td></td>
-							<td>Total Investment:</td>
+							<td class="title_right">Total Investment:</td>
 							<c:set var="total" value="<%=total%>" />
-							<td><fmt:formatNumber type="number" pattern="#,##0.00"
+							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
 									value="${total}" /></td>
 						<tr>
 					</table>
