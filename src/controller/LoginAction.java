@@ -37,7 +37,13 @@ public class LoginAction extends Action {
     	String role = request.getParameter("action");
     	
     	LoginForm form;
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
+        if (session.getAttribute("customer") != null) {
+        	return "AccountInfo.do";
+        }
+        if (session.getAttribute("employee") != null) {
+        	return "CreateEmployee.do";
+        }
 		try {
 			form = formBeanFactory.create(request);
 			request.setAttribute("form",form);
@@ -63,6 +69,7 @@ public class LoginAction extends Action {
 					errors.add("Invalid Password");
 					return "login.jsp";
 				}
+				
 		        session.setAttribute("customer", customer);
 				return "AccountInfo.do";
 			}
@@ -78,7 +85,9 @@ public class LoginAction extends Action {
 					errors.add("Invalid Password");
 					return "login.jsp";
 				}	
+				
 				session.setAttribute("employee", employee);
+				return "CreateEmployee.do";
 			}
 			if (role != null) {
 				if (role.equals("Customer")) return "AccountInfo.do";
