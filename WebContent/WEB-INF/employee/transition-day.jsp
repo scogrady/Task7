@@ -2,10 +2,14 @@
 <%@ page import="databeans.FavoriteBean" %>
 
 <jsp:include page="template-top.jsp" />
-<jsp:include page="error-list.jsp" />
-<jsp:include page="success.jsp" />
+
 
 <div class=" col-md-offset-2">
+<div class="page-header">
+		<h1>Transition Day</h1>
+	</div>
+	<jsp:include page="error-list.jsp" />
+<jsp:include page="success.jsp" />
 <div class="table-responsive">
 		<form role="form" method="post" action="Transition.do">
 

@@ -6,26 +6,25 @@
 
 <jsp:include page="template-top.jsp" />
 <jsp:include page="balance.jsp" />
-<jsp:include page="error-list.jsp" />
-<jsp:include page="success.jsp" />
+
 
 <div class="col-xs-12 col-sm-12">
 
-
+	<!-- 新建股票的价格显示 -->
 
 	<div class="row-fluid">
 		<div class="col-md-12">
 			<div class="page-header">
 				<h1>BUY FUND</h1>
 			</div>
+			<jsp:include page="error-list.jsp" />
+			<jsp:include page="success.jsp" />
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th width="20%">Fund Name</th>
 						<th width="10%">Ticker</th>
-						<th width="8%" class="title_right">Price</th>
-						<th width="8%" class="title_right">Change</th>
-						<th width="8%" class="title_right">Chg%</th>
+						<th width="10%" class="title_right">Price</th>
 						<th width="30%" class="title_center">Amount</th>
 						<th width="11%">Buy</th>
 					</tr>
@@ -40,22 +39,24 @@
 
 									<td>${fund.getName()}</td>
 									<td>${fund.getSymbol()}</td>
-									<td  align="right"><c:set var="getPrice" value="${fund.getPrice()/100}" />
-										<div class="num">
-											$
-											<fmt:formatNumber type="number" pattern="#,##0.00"
-												value="${getPrice}" />
-										</div></td>
-									<td align="right"><c:set var="getChange" value="${fund.getChange()/100}" />
-										<p id="change-a">
-											$
-											<fmt:formatNumber type="number" pattern="#,##0.00"
-												value="${getPrice}" />
-										</p></td>
-									<c:set var="getChgPer" value="${fund.getChgPer()}" />
-									<td id="change-b" align="right"><fmt:formatNumber type="number"
-											pattern="#,##0.00" value="${getChgPer}" />%</td>
+									<c:choose>
 
+										<c:when test="${fund.getPrice() == -1}">
+											<td></td>
+										
+
+										</c:when>
+										<c:otherwise>
+											<td align="right"><c:set var="getPrice"
+													value="${fund.getPrice()/100}" />
+												<div class="num">
+													$
+													<fmt:formatNumber type="number" pattern="#,##0.00"
+														value="${getPrice}" />
+												</div></td>
+											
+										</c:otherwise>
+									</c:choose>
 									<td align="center"><c:choose>
 											<c:when test="${fund.getFund_id() == form.getFund_id()}">
 												<div class="form-inline">
@@ -81,7 +82,7 @@
 									<td><input type="hidden" name="fund_id"
 										value="${fund.getFund_id()}"> <input type="hidden"
 										name="avail_cash" value="${customer.getAvailable_cash()}"><input
-										class="btn btn-default" type="submit" name="action"
+										class="btn btn-primary" type="submit" name="action"
 										value="Buy"></td>
 
 

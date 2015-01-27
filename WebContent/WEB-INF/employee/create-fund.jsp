@@ -2,38 +2,41 @@
 <%@ page import="databeans.FundBean"%>
 
 <jsp:include page="template-top.jsp" />
-<jsp:include page="error-list.jsp" />
-<jsp:include page="success.jsp" />
-
-
 
 <div class="row-fluid">
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
+		<div class="page-header">
+			<h1>Create Mutual Fund</h1>
+		</div>
+		<jsp:include page="error-list.jsp" />
+		<jsp:include page="success.jsp" />
+
 		<div class="form-group">
 			<form method="post">
 				<fieldset>
 
-					<div class="page-header">
-						<h1>Create Mutual Fund</h1>
-					</div>
 
 					<div class="form-group">
 
-						<label>Fund Ticker</label>
-						<input type="text" id="fund_symbol" class="form-control" name="symbol" placeholder="Fund Ticker" value="${form.getSymbol()}" maxlength="30" required> 
-						<label>Fund Name</label>
-						<input type="text" id="fund_name" class="form-control" name="name" placeholder="Fund Name" value="${form.getName()}" maxlength="30" required>
+						<label>Fund Ticker</label> <input type="text" id="fund_symbol"
+							class="form-control" name="symbol" placeholder="Fund Ticker"
+							value="${form.getSymbol()}" maxlength="30" required> <label>Fund
+							Name</label> <input type="text" id="fund_name" class="form-control"
+							name="name" placeholder="Fund Name" value="${form.getName()}"
+							maxlength="30" required>
 					</div>
 
 					<label>Fund Description</label>
 
 					<p>
 						<input type="text" id="fund_description" class="form-control"
-							name="description" placeholder="Fund Description"  value="${form.getDescription()}">
+							name="description" placeholder="Fund Description"
+							value="${form.getDescription()}">
 					</p>
 					<p>
-						<input class="btn btn-primary" type="submit" name="action" value="Create">
+						<input class="btn btn-primary" type="submit" name="action"
+							value="Create">
 					</p>
 					<div class="col-md-3"></div>
 

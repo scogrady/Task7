@@ -4,8 +4,7 @@
 
 <jsp:include page="template-top.jsp" />
 <jsp:include page="balance.jsp" />
-<jsp:include page="error-list.jsp" />
-<jsp:include page="success.jsp" />
+
 
 
 <div class="col-xs-12 col-sm-12">
@@ -14,8 +13,9 @@
 		<div class="col-md-12">
 			<div class="page-header">
 				<h1>SELL FUND</h1>
-
 			</div>
+			<jsp:include page="error-list.jsp" />
+			<jsp:include page="success.jsp" />
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -40,10 +40,9 @@
 													value="${getShare}" />
 											</div></td>
 										<c:set var="getPrice" value="${fund.getPrice() / 100}" />
-										<td id="change-p" class="title_right">$<fmt:formatNumber type="number"
-												pattern="#,##0.00" value="${getPrice}" /></td>
-										<td class="title_center">
-										<c:choose>
+										<td id="change-p" class="title_right">$<fmt:formatNumber
+												type="number" pattern="#,##0.00" value="${getPrice}" /></td>
+										<td class="title_center"><c:choose>
 												<c:when test="${fund.getFund_id() == form.getFund_id()}">
 													<div class="form-inline">
 														<input type="text" name="num" class="form-control"
@@ -66,11 +65,11 @@
 													</div>
 												</c:otherwise>
 											</c:choose></td>
-									<td><input type="hidden" name="fund_id"
-										value="${fund.getFund_id()}"> <input type="hidden"
-										name="shares" value="${fund.getShares()}"> <input
-										class="btn btn-default" type="submit" value="Sell"
-										name="action"></td>
+										<td><input type="hidden" name="fund_id"
+											value="${fund.getFund_id()}"> <input type="hidden"
+											name="shares" value="${fund.getShares()}"> <input
+											class="btn btn-primary" type="submit" value="Sell"
+											name="action"></td>
 									</div>
 								</tr>
 							</form>

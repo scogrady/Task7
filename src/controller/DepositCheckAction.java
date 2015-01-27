@@ -2,10 +2,13 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
+
 import databeans.CustomerBean;
 import databeans.TransactionBean;
 import formbeans.DepositForm;
@@ -64,8 +67,12 @@ public class DepositCheckAction extends Action {
 			//TODO new java.sql.Date(date.getTime())
 			depositCheck.setGenerate_date(date);
 			transactionDAO.create(depositCheck);
+			
+			String message = "Successfully recieve your request.";
+			request.setAttribute("message", message);
 
-			customer.setAvailable_cash(customer.getAvailable_cash() + Long.parseLong(form.getAmount()) * 100);
+
+			customer.setAvailable_cash(customer.getAvailable_cash() + (long)Double.parseDouble(form.getAmount()) * 100);
 			customerDAO.update(customer);
 			
 			request.setAttribute("transactionList", transactionDAO.getTransactions());
