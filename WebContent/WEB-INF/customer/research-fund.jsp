@@ -23,6 +23,17 @@
 	overflow: auto;
 	position: relative;
 }
+.texthead{  
+ height:30px;  
+ overflow:hidden;  
+ text-overflow:ellipsis;   
+}  
+.texthidden{  
+ height:80px;  
+ overflow:hidden;  
+ text-overflow:ellipsis;   
+}  
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -107,11 +118,12 @@
 
 				<c:forEach var="recommandFund" items="${recommandFundList}">
 					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
+						<div class="thumbnail recommandationSection">
 							<div class="caption">
-								<h3>${recommandFund.getName()}-
+								<h3 class="texthead">${recommandFund.getName()}-
 									${recommandFund.getSymbol()}</h3>
-								<p>${recommandFund.getDescription()}</p>
+								<p>
+								<div class="texthidden">   ${recommandFund.getDescription()}</div></p>
 								<p>
 									<a href="ResearchFund.do?fund_id=${recommandFund.getFund_id()}"
 										class="btn btn-primary" role="button">View More</a> <a
