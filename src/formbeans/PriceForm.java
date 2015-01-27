@@ -41,7 +41,7 @@ public class PriceForm extends FormBean {
 	public void setPrice(String[] s ) {
 		price = new double[s.length];
 		for (int i = 0; i < s.length; i++)
-			price[i] = Integer.parseInt(s[i]);
+			price[i] = s[i] == null ? -1 : Double.parseDouble(s[i]);
 	}
 	
 	public void setDate(String s) {

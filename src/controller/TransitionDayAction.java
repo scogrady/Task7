@@ -57,25 +57,26 @@ public class TransitionDayAction extends Action {
 			if (!form.isPresent()) {
 				return "employee/transition-day.jsp";
 			}
+			request.setAttribute("form", form);
 			List<String> errors = new ArrayList<String>();
 			request.setAttribute("errors", errors);
-			errors.addAll(form.getValidationErrors());
 			
+			errors.addAll(form.getValidationErrors());
 			Date date = formatter.parse(form.getDate());
 			if (lastDate != null && date.compareTo(lastDate) <= 0) {
 				errors.add("Transition Day should be later than last transition day.");
-			}
-			
+			}			
 			if (errors.size() != 0) {
 				return "employee/transition-day.jsp";
 			}
+
+			
 			
 			//get form data
 			if (request.getParameter("date") == null) {
 				return "employee/transition-day.jsp";
 			}
 			
-			System.out.println(form.getId().length);
 			for (int i = 0; i < form.getId().length; i++) {
 				int fundId = form.getId()[i];
 				long price = Math.round(form.getPrice()[i] * 100);

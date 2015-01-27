@@ -24,7 +24,7 @@
                 </tr>
               </thead>
               <tbody>
-                  <c:forEach var = "fund" items = "${fundList}">
+                  <c:forEach var = "fund" items = "${fundList}" varStatus="inner">
               	  	  <tr>
               	  	  	  <td>${fund.fund_id }</td>
               	  	  	  <td>${fund.name }</td>
@@ -33,7 +33,7 @@
               	  	  	  <td class="col-md-2">
               	  	  	  	<input type="hidden" name="id" value="${fund.fund_id}">
               	  	  	  	<input type="text" name="price" class="form-control" pattern="\d+(\.\d{1,2})?" 
-              	  	  	  	placeholder="Price" title="Input should be......" required>
+              	  	  	  	placeholder="Price" title="Input should be......" required value="${form.price[inner.index] }">
               	  	  	  </td>
               	  	  </tr>	
 				  </c:forEach>
@@ -52,7 +52,8 @@
 				
             	
             	<div class="col-md-4">
-	            	<input type="text" class="form-control col-md-2" name="date" placeholder="Transition Date"  required>
+	            	<input type="text" class="form-control col-md-2" name="date" pattern="\\d{4}-\\d{2}-\\d{2}" title="Please input the right date as yyyy-MM-dd and make sure it is later than last transition day" 
+	            	placeholder="Transition Date"  required value=${form.date }>
             	</div>
             	<input type="submit" class="btn btn-primary" name="action" value="Start Transition Day!">
             </div>
