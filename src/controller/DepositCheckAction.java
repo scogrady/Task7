@@ -55,7 +55,7 @@ public class DepositCheckAction extends Action {
 			try {
 
 				amount = (long) (Double.parseDouble(form.getAmount()) * 100);
-				System.out.println("depositAmount:  " + amount);
+				//System.out.println("depositAmount:  " + amount);
 
 				CustomerBean customer = customerDAO.read(form.getUsername());
 

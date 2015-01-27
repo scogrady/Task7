@@ -25,8 +25,12 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 	
 	
 	public boolean transactionExist() throws RollbackException {
+		try {
 		TransactionBean[] transaction = match();		
 		return (transaction.length > 0);
+		} finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}
 	}
 	
 	public void create(TransactionBean bean) throws RollbackException {
