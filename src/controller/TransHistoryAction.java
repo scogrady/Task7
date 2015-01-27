@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +33,20 @@ public class TransHistoryAction extends Action {
 		try {
 			transactionHistory = transactionDAO.readByCustomerID(customer
 					.getCustomer_id());
+			ArrayList<TransactionBean> transactions = new ArrayList<TransactionBean>();
 
-			request.setAttribute("transactionHistory", transactionHistory);
+			for (int i = 0; i < transactionHistory.length; i++) {
+				transactions.add(transactionHistory[i]);
+			}
+			
+			//System.out.println("--------------"+ transactions.get(0).getGenerate_date());
+			//System.out.println("--------------"+ transactions.get(1).getGenerate_date());
+
+			Collections.sort(transactions);
+
+			request.setAttribute("transactionHistory", transactions);
 
 			return "customer/trans-history.jsp";
-			
-			
 
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

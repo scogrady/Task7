@@ -55,7 +55,6 @@
 				<%
 					CustomerBean customer = (CustomerBean) request
 							.getAttribute("customer");
-				
 				%>
 				<table class="table">
 					<tr>
@@ -92,21 +91,23 @@
 					</tr>
 					<tr>
 						<c:set var="currentBalance"
-							value="<%=customer.getCurrent_cash() / 100%>" />
+							value="${customer.getCurrent_cash()/100}"  />
 						<th scope="row">Current balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
 								value="${currentBalance}" /></td>
 					</tr>
 					<tr>
-						<c:set var="availableBalance"
-							value="<%=customer.getAvailable_cash() / 100%>" />
+
 						<th scope="row">Available balance:</th>
 						<td>
 							<div class="row">
 								<p class="col-md-3">
+									<c:set var="AvailBalance"
+										value="${customer.getAvailable_cash()/100}" />
 									$
 									<fmt:formatNumber type="number" pattern="#,##0.00"
-										value="${availableBalance}" />
+										value="${AvailBalance}" />
+
 								</p>
 								<form role="form" method="post" action="DepositCheck.do">
 									<div class="input-group col-md-5">
@@ -114,11 +115,12 @@
 											type="hidden" name="username"
 											value="${customer.getUsername()}"><input
 											type="hidden" name="avail_cash"
-											value="${customer.getAvailable_cash()}"> <input type="text"
-											name="amount" class="form-control" pattern="\d+(\.\d{1,2})?"
-											placeholder="Amount" value="${form.getAmount()}"
-											title="Only two digits after decimal are allowed."
-											required> <span class="input-group-btn"> <input
+											value="${customer.getAvailable_cash()}"> <input
+											type="text" name="amount" class="form-control"
+											pattern="\d*(\.\d{1,2})?" placeholder="Amount"
+											value="${form.getAmount()}"
+											title="Only two digits after decimal are allowed." required>
+										<span class="input-group-btn"> <input
 											class="btn btn-default" type="submit" name="action"
 											value="Deposit">
 										</span>
@@ -178,8 +180,8 @@
 							%>
 							<td><%=symbol%></td>
 							<c:set var="shares" value="<%=pos.getShares() / 1000%>" />
-							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.000"
-									value="${shares}" /></td>
+							<td class="title_right"><fmt:formatNumber type="number"
+									pattern="#,##0.000" value="${shares}" /></td>
 							<%
 								long price = -1;
 									for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[]) request
@@ -190,11 +192,11 @@
 									}
 							%>
 							<c:set var="price" value="<%=price%>" />
-							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${price}" /></td>
+							<td class="title_right"><fmt:formatNumber type="number"
+									pattern="#,##0.00" value="${price}" /></td>
 							<c:set var="worth" value="<%=pos.getShares() * price / 1000%>" />
-							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${worth}" /></td>
+							<td class="title_right"><fmt:formatNumber type="number"
+									pattern="#,##0.00" value="${worth}" /></td>
 						</tr>
 						<%
 							total += pos.getShares() * price / 1000;
@@ -205,8 +207,8 @@
 							<td></td>
 							<td class="title_right">Total Investment:</td>
 							<c:set var="total" value="<%=total%>" />
-							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${total}" /></td>
+							<td class="title_right"><fmt:formatNumber type="number"
+									pattern="#,##0.00" value="${total}" /></td>
 						<tr>
 					</table>
 
@@ -225,6 +227,7 @@
 									<th width="15%" class="title_right">Shares</th>
 									<th width="15%" class="title_right">Share Price</th>
 									<th width="20%" class="title_right">Dollar Amount</th>
+
 								</tr>
 							</thead>
 

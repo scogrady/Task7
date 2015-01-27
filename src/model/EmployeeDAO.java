@@ -17,6 +17,7 @@ public class EmployeeDAO extends GenericDAO<EmployeeBean> {
 	}
 
 	public EmployeeBean[] getEmployees() throws RollbackException {
+		
 		EmployeeBean[] users = match();
 		return users;
 	}

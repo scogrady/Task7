@@ -54,7 +54,7 @@ public class DepositForm extends FormBean {
 			Double num;
 			if (this.amount == "") {
 				num = 0.0;
-			} else if (!Pattern.matches("\\d+(\\.\\d{1,2})?", this.amount)) {
+			} else if (!Pattern.matches("\\d*(\\.\\d{1,2})?", this.amount)) {
 				errors.add("Please double check your input. Only two digits after decimal are allowed.");
 			}
 

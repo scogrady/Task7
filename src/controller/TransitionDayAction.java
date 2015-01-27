@@ -57,25 +57,26 @@ public class TransitionDayAction extends Action {
 			if (!form.isPresent()) {
 				return "employee/transition-day.jsp";
 			}
+			request.setAttribute("form", form);
 			List<String> errors = new ArrayList<String>();
 			request.setAttribute("errors", errors);
-			errors.addAll(form.getValidationErrors());
 			
+			errors.addAll(form.getValidationErrors());
 			Date date = formatter.parse(form.getDate());
 			if (lastDate != null && date.compareTo(lastDate) <= 0) {
 				errors.add("Transition Day should be later than last transition day.");
-			}
-			
+			}			
 			if (errors.size() != 0) {
 				return "employee/transition-day.jsp";
 			}
+
+			
 			
 			//get form data
 			if (request.getParameter("date") == null) {
 				return "employee/transition-day.jsp";
 			}
 			
-			System.out.println(form.getId().length);
 			for (int i = 0; i < form.getId().length; i++) {
 				int fundId = form.getId()[i];
 				long price = Math.round(form.getPrice()[i] * 100);
@@ -130,10 +131,20 @@ public class TransitionDayAction extends Action {
 					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
-					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
-					position.setShares(position.getShares() + shares);
-					position.setAvailable_shares(position.getAvailable_shares());
-					positionDAO.update(position);
+					PositionBean[] positions = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId);
+					if (positions.length == 0) {
+						PositionBean position = new PositionBean();
+						position.setCustomer_id(customer.getCustomer_id());
+						position.setFund_id(fundId);
+						position.setShares(shares);
+						position.setAvailable_shares(shares);
+						positionDAO.create(position);
+					} else {
+						PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
+						position.setShares(position.getShares() + shares);
+						position.setAvailable_shares(position.getAvailable_shares());
+						positionDAO.update(position);						
+					}
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
@@ -147,7 +158,7 @@ public class TransitionDayAction extends Action {
 				if (transactionType.equals("Request Check")) {
 					long amount = transaction.getAmount();
 					
-					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
+					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
@@ -161,7 +172,7 @@ public class TransitionDayAction extends Action {
 				if (transactionType.equals("Deposit Check")) {
 					long amount = transaction.getAmount();
 					
-					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
+					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
@@ -174,23 +185,23 @@ public class TransitionDayAction extends Action {
 			}
 			String message = "Successfully simulate transition day.";
 			request.setAttribute("message", message);
-			
+			request.setAttribute("lastDate", form.getDate());
+			request.setAttribute("form", null );
+			return "employee/transition-day.jsp";			
 		} 
 		catch (RollbackException e) {
 			e.printStackTrace();
+			return "error.jsp";
 		}	
-		//catch (FormBeanException e) {
-		//	e.printStackTrace();
-		//} 
 		catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "error.jsp";
 		}
 		catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return "employee/transition-day.jsp";
-		
+			return "error.jsp";
+		}		
     }
 }
