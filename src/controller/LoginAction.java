@@ -63,6 +63,13 @@ public class LoginAction extends Action {
 					errors.add("Invalid Password");
 					return "login.jsp";
 				}
+				
+				if (customer.isLoged()) {
+					errors.add("You login somewhere else");
+					return "login.jsp";					
+				}
+				customer.setStatus(1);
+				customerDAO.update(customer);
 		        session.setAttribute("customer", customer);
 				return "AccountInfo.do";
 			}
@@ -78,6 +85,13 @@ public class LoginAction extends Action {
 					errors.add("Invalid Password");
 					return "login.jsp";
 				}	
+				
+				if (employee.isLoged()) {
+					errors.add("You login somewhere else");
+					return "login.jsp";					
+				}
+				employee.setStatus(1);
+				employeeDAO.update(employee);
 				session.setAttribute("employee", employee);
 			}
 			if (role != null) {
