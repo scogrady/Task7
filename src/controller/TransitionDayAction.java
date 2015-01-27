@@ -138,6 +138,7 @@ public class TransitionDayAction extends Action {
 						position.setFund_id(fundId);
 						position.setShares(shares);
 						position.setAvailable_shares(shares);
+						positionDAO.create(position);
 					} else {
 						PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
 						position.setShares(position.getShares() + shares);
