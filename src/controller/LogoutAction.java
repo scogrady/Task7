@@ -1,24 +1,17 @@
 
 package controller;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
-import org.mybeans.form.FormBeanException;
-import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
 import databeans.EmployeeBean;
-import formbeans.LoginForm;
 import model.CustomerDAO;
 import model.EmployeeDAO;
 import model.Model;
 
 public class LogoutAction extends Action {	
-	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory.getInstance(LoginForm.class);
 	
 	private CustomerDAO customerDAO;
 	private EmployeeDAO employeeDAO;
@@ -31,8 +24,13 @@ public class LogoutAction extends Action {
 	public String getName() { return "logout.do"; }
     
     public String perform(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        session.setAttribute("user",null);
-	    return "login.jsp"; 
+    		HttpSession session = request.getSession(false);
+    		if (session.getAttribute("customer") != null) {
+    			session.setAttribute("customer", null);
+    		}
+    		if (session.getAttribute("employee") != null) {
+    			session.setAttribute("employee", null);
+    		}
+            return "login.jsp";
     }
 }

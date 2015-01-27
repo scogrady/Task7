@@ -77,8 +77,8 @@ public class CreateCustomerAction extends Action {
 			customer.setState(form.getState());
 			customer.setStatus(0);
 			customer.setZip(form.getZip());
-			customer.setCurrent_cash(1000);
-			customer.setAvailable_cash(1000);
+			customer.setCurrent_cash(0);
+			customer.setAvailable_cash(0);
 			customerDAO.create(customer);
 			
 			String message = "Successfully created a new customer account.";

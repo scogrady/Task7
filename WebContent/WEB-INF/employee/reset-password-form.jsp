@@ -6,8 +6,7 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">
 <%
-CustomerBean customerClicked = (CustomerBean) request.getSession(false).getAttribute("customerClicked");
-				%>
+CustomerBean customerClicked = (CustomerBean) request.getSession(false).getAttribute("customerClicked"); %>
 	<div class="page-header">
 		<h2>Reset password for <%=customerClicked.getFirstname()%> <%=customerClicked.getLastname()%></h2>
 	</div>
@@ -18,7 +17,7 @@ CustomerBean customerClicked = (CustomerBean) request.getSession(false).getAttri
 
 	<form class="form-horizontal" method="POST"
 		action="ResetCustomerPwd.do">
-		<input type="hidden" name="id" value="${id}">
+		<input type="hidden" name="id" value="<%=customerClicked.getCustomer_id()%>">
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-4 control-label"
 				id="new-password">New Password</label>
