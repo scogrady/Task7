@@ -17,7 +17,7 @@
 				<th width="25%">Date of Execution</th>
 				<th width="15%">Operation</th>
 				<th width="10%" class="title_right">Fund ID</th>
-				<th width="15%" class="title_right">Number of shares</th>
+				<th width="15%" class="title_right">Shares</th>
 				<th width="15%" class="title_right">Share Price</th>
 				<th width="20%" class="title_right">Dollar Amount</th>
 
@@ -59,7 +59,7 @@
 
 							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
 							<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${transactionBean.getAmount()}" /></td>
+									value="${getAmt}" /></td>
 
 						</tr>
 					</c:if>
@@ -88,7 +88,7 @@
 									<c:set var="getAmt"
 										value="${transactionBean.getAmount() / 100}" />
 									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-											value="${transactionBean.getAmount()}" /></td>
+											value="${getAmt}" /></td>
 								</c:when>
 								<c:otherwise>
 									<td></td>
@@ -110,7 +110,7 @@
 							<td></td>
 							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
 							<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${transactionBean.getAmount()}" /></td>
+									value="${getAmt}" /></td>
 
 
 						</tr>
@@ -126,7 +126,7 @@
 							<td></td>
 							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
 							<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${transactionBean.getAmount()}" /></td>
+									value="${getAmt}" /></td>
 
 						</tr>
 					</c:if>

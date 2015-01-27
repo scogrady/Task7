@@ -67,9 +67,10 @@ public class BuyForm extends FormBean {
 
 			long avail_cash = Long.parseLong(this.avail_cash);
 
-			if (!(num > 10 && num < Double.MAX_VALUE)) {
-				errors.add("Please double check your 1st input.");
+			if (!(num > 10)) {
+				errors.add("The minimum amount is $10 when buying a fund.");
 			}
+			
 			
 			if (num == 0 ) {
 				errors.add("You can't buy 0 share.");

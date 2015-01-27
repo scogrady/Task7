@@ -47,17 +47,6 @@ public class FundPriceHistoryDAO extends GenericDAO<FundPriceHistoryBean> {
 		}
 	}
 
-	public long readChange(int fund_id) throws RollbackException {
-		FundPriceHistoryBean[] fundList = match(MatchArg.equals("fund_id",
-				fund_id));
-		
-		if (fundList.length == 0 || fundList.length == 1) {
-			return -1;
-		} else {
-		return fundList[fundList.length - 1].getPrice()
-				- fundList[fundList.length - 2].getPrice();
-		}
-	}
 
 	public FundPriceHistoryBean[] readByDate(Date price_date)
 			throws RollbackException {
