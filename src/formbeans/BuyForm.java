@@ -9,7 +9,6 @@ import org.mybeans.form.FormBean;
 public class BuyForm extends FormBean {
 	String num;
 	String fund_id;
-	String avail_cash;
 	String action;
 
 	public String getNum() {
@@ -20,10 +19,7 @@ public class BuyForm extends FormBean {
 		return fund_id;
 	}
 
-	public String getAvail_cash() {
-		return avail_cash;
-	}
-
+	
 	public String getAction() {
 		return action;
 	}
@@ -36,10 +32,7 @@ public class BuyForm extends FormBean {
 		fund_id = s.trim();
 	}
 
-	public void setAvail_cash(String s) {
-		avail_cash = s.trim();
-	}
-
+	
 	public void setAction(String s) {
 		action = s.trim();
 	}
@@ -65,7 +58,6 @@ public class BuyForm extends FormBean {
 			num = Double.parseDouble(this.num);
 
 
-			long avail_cash = Long.parseLong(this.avail_cash);
 
 			if (num < 10) {
 				errors.add("The minimum amount is $10 when buying a fund.");
@@ -77,9 +69,6 @@ public class BuyForm extends FormBean {
 
 			}
 
-			if ((num) * 100 > avail_cash) {
-				errors.add("Not enough money in Available Cash");
-			}
 
 			return errors;
 		} catch (NumberFormatException e) {

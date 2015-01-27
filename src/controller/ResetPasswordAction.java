@@ -34,7 +34,7 @@ public class ResetPasswordAction extends Action {
 			IdForm form = formBeanFactory.create(request);
 			
 			if(!form.isPresent()){
-				return "employee/reset-password.jsp";
+				return "employee/reset-password-form.jsp";
 			}
 			
 			int id = form.getIdAsInt();
