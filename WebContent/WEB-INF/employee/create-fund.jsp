@@ -6,14 +6,16 @@
 <div class="row-fluid">
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
+			
 		<div class="page-header">
 			<h1>Create Mutual Fund</h1>
 		</div>
-		<jsp:include page="error-list.jsp" />
-		<jsp:include page="success.jsp" />
 
-		<div class="form-group">
-			<form method="post">
+<jsp:include page="error-list.jsp" />
+		<jsp:include page="success.jsp" />
+	
+
+			<form method="post" action="CreateFund.do">
 				<fieldset>
 
 
@@ -42,7 +44,6 @@
 
 				</fieldset>
 			</form>
-		</div>
 	</div>
 
 	<div class="row">

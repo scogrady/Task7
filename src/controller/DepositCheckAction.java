@@ -71,10 +71,10 @@ public class DepositCheckAction extends Action {
 			if (errors.size() != 0) {
 				return "ViewAccount.do";
 			}
-
+			
 			TransactionBean depositCheck = new TransactionBean();
-
 			CustomerBean customer = customerDAO.read(form.getUsername());
+			
 			depositCheck.setCustomer_id(customer.getCustomer_id());
 			depositCheck.setTransaction_type("Deposit Check");
 			depositCheck.setStatus("Pending");

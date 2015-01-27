@@ -70,14 +70,21 @@
 							},
 							series : [
 							    {
-							    	//<c:set var="fundName" value="${fundPriceHistoryName.getSymbol()}"/>
-									//name : <c:out value="${fundName}"/>,
-									name : "Fund #1",
+									name : "${fundPriceHistoryName.getSymbol()}",
 									data : [
 								        <c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
-											${fundPriceHistory.getPrice()},
+											${fundPriceHistory.getPrice()/100},
 										</c:forEach>]
-							    }
+							    },
+							    
+							    <c:if test="${!empty comparePriceHistoryList}">
+							    {
+							    	name : "${comparePriceHistoryName.getSymbol()}",
+									data : [
+								        <c:forEach var="comparePriceHistory" items="${comparePriceHistoryList}">
+											${comparePriceHistory.getPrice()/100},
+										</c:forEach>]
+							    }</c:if>
 							]
 					});
 	});
@@ -108,7 +115,7 @@
 								<p>
 									<a href="ResearchFund.do?fund_id=${recommandFund.getFund_id()}"
 										class="btn btn-primary" role="button">View More</a> <a
-										href="#" class="btn btn-default" role="button">Compare</a>
+										href="ResearchFund.do?fund_id=${now_id}&compare_id=${recommandFund.getFund_id()}" class="btn btn-default" role="button">Compare</a>
 								</p>
 							</div>
 						</div>
@@ -133,12 +140,23 @@
 				</div>
 
 				<div class="col-sm-6 col-md-9" id="detail-section">
+				   <c:if test="${empty comparePriceHistoryList}">
 					<h3>Detail Information of ${fundPriceHistoryName.getName()} -
 						${fundPriceHistoryName.getSymbol()}</h3>
 					<dl>
 						<dt>${fundPriceHistoryName.getDescription()}</dt>
 					</dl>
-
+					</c:if>
+					
+					<c:if test="${!empty comparePriceHistoryList}">
+					<h3>Compare ${fundPriceHistoryName.getSymbol()} v.s. ${comparePriceHistoryName.getSymbol()}</h3>
+					<dl>
+						<dt>${fundPriceHistoryName.getSymbol()}: ${fundPriceHistoryName.getDescription()}</dt>
+						<dt>${comparePriceHistoryName.getSymbol()}: ${comparePriceHistoryName.getDescription()}</dt>
+					</dl>
+					</c:if>
+					
+					
 					<div role="tabpanel">
 
 						<!-- Nav tabs -->
@@ -159,6 +177,7 @@
 
 								<div data-spy="scroll" data-offset="50" class="scrollspy-chart">
 
+									
 									<table class="table">
 										<thead>
 											<tr>
@@ -172,7 +191,8 @@
 												items="${fundPriceHistoryList}">
 												<tr>
 													<td>${fundPriceHistory.getPrice_date()}</td>
-													<td>${fundPriceHistory.getPrice()}</td>
+													<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${fundPriceHistory.getPrice()/100}" /></td>
+													
 													<td>Up</td>
 												</tr>
 											</c:forEach>
