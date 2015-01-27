@@ -64,7 +64,7 @@ public class ViewAccountAction extends Action {
 				 id = 1;
 				 }
 			CustomerBean customerClicked = (CustomerBean) request.getSession(false).getAttribute("customerClicked");
-			System.out.println("customer clicked"+customerClicked.getCustomer_id());
+
 			//id setting
 			if (request.getParameter("customer_id") == null)
 				{

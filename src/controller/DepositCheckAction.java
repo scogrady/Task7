@@ -50,27 +50,40 @@ public class DepositCheckAction extends Action {
 			if (!form.isPresent()) {
 				return "ViewAccount.do";
 			}
+			long amount = -1;
+
+			try {
+
+				amount = (long) (Double.parseDouble(form.getAmount()) * 100);
+
+				CustomerBean customer = customerDAO.read(form.getUsername());
+
+				if ((amount + customer.getAvailable_cash()) > Long.MAX_VALUE) {
+					errors.add("The available balance will beyond the maximum amount after this deposit.");
+				}
+
+			} catch (NumberFormatException e) {
+				errors.add("Please double check your input.");
+			}
 
 			errors.addAll(form.getValidationErrors());
 
 			if (errors.size() != 0) {
 				return "ViewAccount.do";
 			}
-
+			
 			TransactionBean depositCheck = new TransactionBean();
-
 			CustomerBean customer = customerDAO.read(form.getUsername());
+			
 			depositCheck.setCustomer_id(customer.getCustomer_id());
 			depositCheck.setTransaction_type("Deposit Check");
 			depositCheck.setStatus("Pending");
-			long amount = (long) (Double.parseDouble(form.getAmount()) * 100);
 			depositCheck.setAmount(amount);
-			depositCheck.setFund_id(1);
 			// TODO new java.sql.Date(date.getTime())
 			depositCheck.setGenerate_date(date);
 			transactionDAO.create(depositCheck);
 
-			String message = "Successfully recieve your request.";
+			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 
 			customer.setAvailable_cash(customer.getAvailable_cash()

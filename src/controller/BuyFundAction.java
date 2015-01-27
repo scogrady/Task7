@@ -55,15 +55,14 @@ public class BuyFundAction extends Action {
 		FundBean[] fundList;
 		BuyFundBean[] buyFundList;
 		FundPriceHistoryBean price;
-		long change;
-
+		
 		try {
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = fundDAO.getFunds();
-			//System.out.println("==========" + fundList.length);
+			// System.out.println("==========" + fundList.length);
 			buyFundList = new BuyFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {
 				buyFundList[i] = new BuyFundBean();
@@ -79,7 +78,6 @@ public class BuyFundAction extends Action {
 				}
 				buyFundList[i].setPrice(price.getPrice());
 
-
 			}
 
 			request.setAttribute("buyFundList", buyFundList);
@@ -93,23 +91,25 @@ public class BuyFundAction extends Action {
 
 			// check if it's within available balance?
 
+			long num = -1;
+
+			try {
+
+				num = (long) (Double.parseDouble(form.getNum()) * 100);
+				if (num > customer.getAvailable_cash()) {
+					errors.add("Not enough money in Available Cash");
+				}
+			} catch (NumberFormatException e) {
+				errors.add("Please double check your input.");
+			}
+
 			errors.addAll(form.getValidationErrors());
-			
+
 			if (errors.size() != 0) {
 				return "customer/buy-fund.jsp";
 			}
-			
-			//handle amount from form
 
-			double num;
-			if (form.getNum() == "") {
-				num = 0;
-
-			} else {
-				num = Double.parseDouble(form.getNum());
-			}
-
-
+			// handle amount from form
 
 			TransactionBean buyFund = new TransactionBean();
 
@@ -119,19 +119,17 @@ public class BuyFundAction extends Action {
 			// buyFund.setShares();
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
-			
-			long amount = (long) (num * 100);
-			
-			buyFund.setAmount(amount);
+
+			buyFund.setAmount(num);
 			transactionDAO.create(buyFund);
-			
-			String message = "Successfully recieve your request.";
+
+			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 
 			// put it into queue
 			// change available balance
 
-			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
+			customer.setAvailable_cash(customer.getAvailable_cash() - num);
 			customerDAO.update(customer);
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());

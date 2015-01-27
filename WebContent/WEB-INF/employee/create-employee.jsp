@@ -12,6 +12,7 @@
 			</div>
 			<jsp:include page="error-list.jsp" />
 			<jsp:include page="success.jsp" />
+			<div class="col-md-6">
 			<form method="post" action="CreateEmployee.do">
 				<div class="form-group">
 					<label for="username">Username</label> <input type="text"
@@ -45,6 +46,7 @@
 				<input type="submit" class="btn btn-primary"
 					id="submit-new-emlpoyee" name="action" value="Create">
 			</form>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-3"></div>
