@@ -61,7 +61,7 @@ public class CreateFundAction extends Action{
 			fund.setSymbol(form.getSymbol());
 			
 			fundDAO.createAutoIncrement(fund);
-			String message = "Successfully create a new fund.";
+			String message = "Successfully created a new fund.";
 			request.setAttribute("message", message);
 
 			request.setAttribute("fundList", fundDAO.getFunds());

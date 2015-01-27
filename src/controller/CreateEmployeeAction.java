@@ -68,7 +68,7 @@ public class CreateEmployeeAction extends Action {
 			employee.setStatus(0);
 			employeeDAO.create(employee);
 			System.out.println("create employee now!");
-			String message = "Successfully create a new employee account.";
+			String message = "Successfully created a new employee account.";
 			request.setAttribute("message", message);
 
 			request.setAttribute("employeeList", employeeDAO.getEmployees());

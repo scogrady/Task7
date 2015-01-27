@@ -136,7 +136,7 @@ public class SellFundAction extends Action {
 			// sellFund.setAmount(amount);
 			transactionDAO.create(sellFund);
 
-			String message = "Successfully recieve your request.";
+			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 
 			PositionBean position = positionDAO.readByIdFundId(

@@ -46,7 +46,7 @@ public class RequestCheckAction extends Action {
 
 			RequestCheckForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			long amount = -1;;
+			long amount = -1;
 
 			if (!form.isPresent()) {
 				return "customer/request-check.jsp";

@@ -123,7 +123,7 @@ public class BuyFundAction extends Action {
 			buyFund.setAmount(num);
 			transactionDAO.create(buyFund);
 
-			String message = "Successfully recieve your request.";
+			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 
 			// put it into queue
