@@ -5,14 +5,14 @@ import java.util.Date;
 import org.genericdao.PrimaryKey;
 
 @PrimaryKey("transaction_id")
-public class TransactionBean {
+public class TransactionBean implements Comparable<TransactionBean> {
 
 	private int transaction_id;
 	private int customer_id;
 	private int fund_id;
 	private Date execute_date;
 	private long shares;
-	
+
 	/**
 	 * Transaction Type: Sell Fund Buy Fund Request Check Deposit Check
 	 * */
@@ -64,7 +64,6 @@ public class TransactionBean {
 		return amount;
 	}
 
-	
 	public void setTransaction_id(int transaction_id) {
 		this.transaction_id = transaction_id;
 	}
@@ -96,4 +95,17 @@ public class TransactionBean {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
+
+	
+	
+	public int compare(TransactionBean tran1, TransactionBean tran2) {
+		return -(tran1.getGenerate_date().compareTo(tran2.getGenerate_date()));
+	}
+
+	@Override
+	public int compareTo(TransactionBean tran2) {
+		// TODO Auto-generated method stub
+		return  -(this.getGenerate_date().compareTo(tran2.getGenerate_date()));
+	}
+
 }
