@@ -26,18 +26,20 @@
 	<h3>View Customer Account</h3>
 
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success.jsp" />
+	
 </div>
 
 <div class="row">
 	<div class="col-md-3">
 		<h3>Customer list</h3>
-			
+
 		<div data-spy="scroll" data-offset="50" class="scrollspy-customerlist">
 			<ul class="list-group">
 				<c:forEach var="customer" items="${customerList}">
 					<li class="list-group-item"><a
 						href="ViewAccount.do?customer_id=${customer.getCustomer_id()}">${customer.getFirstname()}
-								${customer.getLastname()}</a>
+							${customer.getLastname()}</a>
 						<p>User Name:${customer.getUsername()}</p></li>
 				</c:forEach>
 			</ul>
@@ -64,7 +66,8 @@
 						<td id="customer-password">
 							<div class="row">
 								<p class="col-md-3">******</p>
-								<a class="btn btn-default" href="ResetPassword.do">Reset Password</a>
+								<a class="btn btn-default" href="ResetPassword.do">Reset
+									Password</a>
 							</div>
 						</td>
 					</tr>
@@ -99,17 +102,27 @@
 						<th scope="row">Available balance:</th>
 						<td>
 							<div class="row">
-							<p class="col-md-3">$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" /></p>
-							<form role="form"  method="post" action="DepositCheck.do">
-								<div class="input-group col-md-5">
-									<span class="input-group-addon" id="basic-addon1">$</span>
-									<input type="hidden" name="username" value="${customer.getUsername()}">
-									<input type="text" class="form-control" id="amount" name="amount" >
-									<span class="input-group-btn">					
-										<input class="btn btn-default" type="submit" name="action" value="Deposit">
-									</span>
-								</div>
-							</form>
+								<p class="col-md-3">
+									$
+									<fmt:formatNumber type="number" pattern="#,##0.00"
+										value="${availableBalance}" />
+								</p>
+								<form role="form" method="post" action="DepositCheck.do">
+									<div class="input-group col-md-5">
+										<span class="input-group-addon" id="basic-addon1">$</span> <input
+											type="hidden" name="username"
+											value="${customer.getUsername()}"><input
+											type="hidden" name="avail_cash"
+											value="${customer.getAvailable_cash()}"> <input type="text"
+											name="amount" class="form-control" pattern="\d+(\.\d{1,2})?"
+											placeholder="Amount" value="${form.getAmount()}"
+											title="Only two digits after decimal are allowed."
+											required> <span class="input-group-btn"> <input
+											class="btn btn-default" type="submit" name="action"
+											value="Deposit">
+										</span>
+									</div>
+								</form>
 							</div>
 						</td>
 						<td>
@@ -201,25 +214,27 @@
 				<div role="tabpanel" class="tab-pane" id="profile">
 					<div data-spy="scroll" data-offset="50"
 						class="scrollspy-transactionHistory">
-
 						<table class="table">
+
 							<thead>
 								<tr>
 									<th width="25%">Date of Execution</th>
 									<th width="15%">Operation</th>
-									<th width="10%" class="title_right">FundID</th>
+									<th width="10%" class="title_right">Fund ID</th>
 									<th width="15%" class="title_right">Shares</th>
-									<th width="15%" class="title_right">Price</th>
+									<th width="15%" class="title_right">Share Price</th>
 									<th width="20%" class="title_right">Dollar Amount</th>
 
 								</tr>
 							</thead>
+
 							<tbody>
 								<c:if test="${!empty transactionHistory}">
 									<c:forEach items="${transactionHistory}" var="transactionBean">
 										<c:if
 											test="${transactionBean.getTransaction_type() == 'Buy Fund' }">
 											<tr class="active">
+
 												<td><fmt:formatDate type="both" pattern="yyyy-MM-dd"
 														value="${transactionBean.getExecute_date()}" /></td>
 												<td>${transactionBean.getTransaction_type()}</td>
@@ -250,8 +265,8 @@
 												<c:set var="getAmt"
 													value="${transactionBean.getAmount() / 100}" />
 												<td class="title_right">$<fmt:formatNumber
-														type="number" pattern="#,##0.00"
-														value="${transactionBean.getAmount()}" /></td>
+														type="number" pattern="#,##0.00" value="${getAmt}" /></td>
+
 											</tr>
 										</c:if>
 
@@ -260,12 +275,14 @@
 											<tr class="success">
 												<td><fmt:formatDate type="both" pattern="yyyy-MM-dd"
 														value="${transactionBean.getExecute_date()}" /></td>
+
 												<td>${transactionBean.getTransaction_type()}</td>
 												<td class="title_right">${transactionBean.getFund_id()}</td>
 												<c:set var="getShares"
 													value="${transactionBean.getShares() / 1000 }" />
 												<td class="title_right"><fmt:formatNumber type="number"
 														pattern="#,##0.000" value="${getShares}" /></td>
+
 												<c:choose>
 													<c:when test="${!empty transactionBean.getExecute_date()}">
 														<c:set var="price" scope="session"
@@ -274,17 +291,18 @@
 															value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
 														<td class="title_right"><fmt:formatNumber
 																type="number" pattern="#,##0.00" value="${priceShares}" /></td>
+
 														<c:set var="getAmt"
 															value="${transactionBean.getAmount() / 100}" />
 														<td class="title_right">$<fmt:formatNumber
-																type="number" pattern="#,##0.00"
-																value="${transactionBean.getAmount()}" /></td>
+																type="number" pattern="#,##0.00" value="${getAmt}" /></td>
 													</c:when>
 													<c:otherwise>
 														<td></td>
 														<td></td>
 													</c:otherwise>
 												</c:choose>
+
 											</tr>
 										</c:if>
 
@@ -301,8 +319,9 @@
 												<c:set var="getAmt"
 													value="${transactionBean.getAmount() / 100}" />
 												<td class="title_right">$<fmt:formatNumber
-														type="number" pattern="#,##0.00"
-														value="${transactionBean.getAmount()}" /></td>
+														type="number" pattern="#,##0.00" value="${getAmt}" /></td>
+
+
 											</tr>
 										</c:if>
 										<c:if
@@ -318,10 +337,12 @@
 												<c:set var="getAmt"
 													value="${transactionBean.getAmount() / 100}" />
 												<td class="title_right">$<fmt:formatNumber
-														type="number" pattern="#,##0.00"
-														value="${transactionBean.getAmount()}" /></td>
+														type="number" pattern="#,##0.00" value="${getAmt}" /></td>
+
 											</tr>
 										</c:if>
+
+
 
 									</c:forEach>
 								</c:if>

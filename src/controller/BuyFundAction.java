@@ -78,10 +78,7 @@ public class BuyFundAction extends Action {
 					price.setPrice(-1);
 				}
 				buyFundList[i].setPrice(price.getPrice());
-				change = fundPriceHistoryDAO.readChange(buyFundList[i]
-						.getFund_id());
-				buyFundList[i].setChange(change);
-				buyFundList[i].setChgPer(change / price.getPrice());
+
 
 			}
 
