@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Model;
+import databeans.CustomerBean;
+import databeans.EmployeeBean;
 import databeans.UserBean;
 
 
@@ -61,7 +63,8 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session     = request.getSession(true);
         String      servletPath = request.getServletPath();
-        UserBean        user = (UserBean) session.getAttribute("user");
+        CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+        EmployeeBean employee = (EmployeeBean) session.getAttribute("employee");
         String      action = getActionName(servletPath);
 
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
@@ -71,7 +74,8 @@ public class Controller extends HttpServlet {
 			return Action.perform(action,request);
         }
         
-        if (user == null) {
+        if (customer == null && employee == null) {
+        	System.out.print("no user");
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do",request);
         }

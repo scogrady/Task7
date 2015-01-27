@@ -26,7 +26,7 @@
 						<th width="10%">Ticker</th>
 						<th width="10%" class="title_right">Price</th>
 						<th width="30%" class="title_center">Amount</th>
-						<th width="11%">Buy</th>
+						<th width="11%" class="title_center">Buy</th>
 					</tr>
 				</thead>
 
@@ -79,7 +79,7 @@
 												</div>
 											</c:otherwise>
 										</c:choose></td>
-									<td><input type="hidden" name="fund_id"
+									<td class="title_center"><input type="hidden" name="fund_id"
 										value="${fund.getFund_id()}"> <input type="hidden"
 										name="avail_cash" value="${customer.getAvailable_cash()}"><input
 										class="btn btn-primary" type="submit" name="action"

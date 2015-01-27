@@ -1,18 +1,17 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="databeans.FavoriteBean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
 
 
 <div class=" col-md-offset-2">
-<div class="page-header">
+	<div class="page-header">
 		<h1>Transition Day</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
-<jsp:include page="success.jsp" />
-<div class="table-responsive">
+	<jsp:include page="success.jsp" />
+	<div class="table-responsive">
 		<form role="form" method="post" action="Transition.do">
-
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -44,10 +43,11 @@
       				<c:when test="${lastDate == null}">.
       					<div class="col-md-4"><h4>No Transaction Before</h4></div>
       				</c:when>
-
-      				<c:otherwise>
-      					<div class="col-md-4"><h4>Last Transition Day: ${lastDate }</h4></div>
-      				</c:otherwise>
+					<c:otherwise>
+						<div class="col-md-4">
+							<h4>Last Transition Day: ${lastDate }</h4>
+						</div>
+					</c:otherwise>
 				</c:choose>
 				
             	
@@ -57,9 +57,10 @@
             	</div>
             	<input type="submit" class="btn btn-primary" name="action" value="Start Transition Day!">
             </div>
-            
+  
+
 		</form>
 
-</div>
+	</div>
 </div>
 <jsp:include page="template-bottom.jsp" />

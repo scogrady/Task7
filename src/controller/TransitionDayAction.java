@@ -185,23 +185,22 @@ public class TransitionDayAction extends Action {
 			String message = "Successfully simulate transition day.";
 			request.setAttribute("message", message);
 			request.setAttribute("lastDate", form.getDate());
-			
+			request.setAttribute("form", null );
+			return "employee/transition-day.jsp";			
 		} 
 		catch (RollbackException e) {
 			e.printStackTrace();
+			return "error.jsp";
 		}	
-		//catch (FormBeanException e) {
-		//	e.printStackTrace();
-		//} 
 		catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "error.jsp";
 		}
 		catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return "employee/transition-day.jsp";
-		
+			return "error.jsp";
+		}		
     }
 }

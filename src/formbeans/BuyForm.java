@@ -67,7 +67,7 @@ public class BuyForm extends FormBean {
 
 			long avail_cash = Long.parseLong(this.avail_cash);
 
-			if (!(num > 10)) {
+			if (num < 10) {
 				errors.add("The minimum amount is $10 when buying a fund.");
 			}
 			
