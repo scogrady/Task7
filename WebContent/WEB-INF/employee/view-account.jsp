@@ -60,6 +60,15 @@
 						<td id="customer-name"><%=customer.getFirstname()%> <%=customer.getLastname()%></td>
 					</tr>
 					<tr>
+						<th scope="row" width="25%">Password :</th>
+						<td id="customer-password">
+							<div class="row">
+								<p class="col-md-3">******</p>
+								<a class="btn btn-default" href="ResetPassword.do">Reset Password</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
 						<th scope="row">Address :</th>
 						<td id="customer-address-1"><%=customer.getAddr_line1()%></td>
 					</tr>
@@ -105,18 +114,7 @@
 						</td>
 						<td>
 					</tr>
-					<tr>
-						<th></th>
-						<td>$
-							<form role="form" method="post" action="DepositCheck.do">
-								<input type="text" id="amount" name="amount"> <input
-									type="hidden" name="username" value="${customer.getUsername()}">
-								<input class="btn btn-primary" type="submit" name="action"
-									value="Deposit">
-						</td>
-						</form>
-						</td>
-					</tr>
+
 					<tr>
 						<th scope="row">Last Trading Day:</th>
 						<c:set var="lastTradingDay"

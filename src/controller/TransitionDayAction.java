@@ -71,8 +71,6 @@ public class TransitionDayAction extends Action {
 			}
 			
 			//get form data
-			
-			
 			if (request.getParameter("date") == null) {
 				return "employee/transition-day.jsp";
 			}
@@ -87,9 +85,6 @@ public class TransitionDayAction extends Action {
 				fundPrice.setPrice_date(new java.sql.Date(date.getTime()));
 				fundPriceHistoryDAO.create(fundPrice);
 			}
-			//if (1 == 1) {
-			//	return "employee/transition-day.jsp";
-			//}
 				
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
 
@@ -112,6 +107,7 @@ public class TransitionDayAction extends Action {
 					
 					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
 					position.setShares(position.getShares() - shares);
+					position.setAvailable_shares(position.getAvailable_shares());
 					positionDAO.update(position);
 					
 					transaction.setExecute_date(date);
@@ -136,6 +132,7 @@ public class TransitionDayAction extends Action {
 					
 					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
 					position.setShares(position.getShares() + shares);
+					position.setAvailable_shares(position.getAvailable_shares());
 					positionDAO.update(position);
 					
 					transaction.setExecute_date(date);
@@ -151,7 +148,7 @@ public class TransitionDayAction extends Action {
 					long amount = transaction.getAmount();
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
-					customer.setAvailable_cash(customer.getAvailable_cash() + amount);
+					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
 					transaction.setExecute_date(date);
@@ -165,7 +162,7 @@ public class TransitionDayAction extends Action {
 					long amount = transaction.getAmount();
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
-					customer.setAvailable_cash(customer.getAvailable_cash() - amount);
+					customer.setAvailable_cash(customer.getCurrent_cash());
 					customerDAO.update(customer);
 					
 					
