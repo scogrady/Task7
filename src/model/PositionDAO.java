@@ -26,19 +26,6 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 		return (position.length > 0);
 	}
 	
-	public void create(PositionBean bean) throws RollbackException {
-		try {
-			Transaction.begin();
-			
-			createAutoIncrement(bean);
-			
-			Transaction.commit();
-			
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
-		}		
-	}
-
 	public PositionBean[] readByCustomerID(int customer_id) throws RollbackException {
 		
 		try {

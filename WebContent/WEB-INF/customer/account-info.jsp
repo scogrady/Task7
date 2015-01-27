@@ -37,12 +37,12 @@
 						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
 					</tr>
 					<tr>
-						<c:set var="currentBalance"	value="<%=customer.getCurrent_cash()/100%>" />
+						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
 						<th scope="row">Account balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
 					</tr>
 					<tr>
-						<c:set var="availableBalance" value="<%=customer.getAvailable_cash()/100%>" />
+						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
 						<th scope="row">Available balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
 						</td>
@@ -84,7 +84,7 @@
             	}
             		%>
 				<td><%=symbol%></td>
-				<c:set var="shares" value="<%=pos.getShares() / 1000.00 %>" />
+				<c:set var="shares" value="<%=pos.getShares() / 1000.0 %>" />
 				<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${shares}" /></td>
 				<%
             	long price=-1;
@@ -96,7 +96,7 @@
             		%>
             		<c:set var="price" value="<%=price %>" />
 				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${price}" /></td>
-				<c:set var="worth" value="<%=pos.getShares()*price / 1000.000 %>" />				
+				<c:set var="worth" value="<%=pos.getShares()*price / 1000 %>" />				
 				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${worth}" /></td>
 			</tr>
 			<%

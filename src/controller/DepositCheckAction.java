@@ -55,6 +55,7 @@ public class DepositCheckAction extends Action {
 			try {
 
 				amount = (long) (Double.parseDouble(form.getAmount()) * 100);
+				//System.out.println("depositAmount:  " + amount);
 
 				CustomerBean customer = customerDAO.read(form.getUsername());
 
@@ -71,10 +72,10 @@ public class DepositCheckAction extends Action {
 			if (errors.size() != 0) {
 				return "ViewAccount.do";
 			}
-			
+
 			TransactionBean depositCheck = new TransactionBean();
 			CustomerBean customer = customerDAO.read(form.getUsername());
-			
+
 			depositCheck.setCustomer_id(customer.getCustomer_id());
 			depositCheck.setTransaction_type("Deposit Check");
 			depositCheck.setStatus("Pending");
@@ -86,8 +87,7 @@ public class DepositCheckAction extends Action {
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 
-			customer.setAvailable_cash(customer.getAvailable_cash()
-					+ (long) Double.parseDouble(form.getAmount()) * 100);
+			customer.setAvailable_cash(customer.getAvailable_cash() + amount);
 			customerDAO.update(customer);
 
 			request.setAttribute("transactionList",
