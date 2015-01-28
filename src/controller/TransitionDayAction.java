@@ -118,7 +118,7 @@ public class TransitionDayAction extends Action {
 					
 					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
 					if (position.getShares() - shares < 0.001) {
-						positionDAO.delete(position);
+						positionDAO.delete("customer_id", "fund_id");
 					} else {
 						position.setShares(position.getShares() - shares);
 						position.setAvailable_shares(position.getAvailable_shares());
