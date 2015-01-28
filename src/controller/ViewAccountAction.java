@@ -56,6 +56,7 @@ public class ViewAccountAction extends Action {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		
 		TransactionBean[] transactionHistory;
 		try {
 			IdForm form = formBeanFactory.create(request);
@@ -73,19 +74,26 @@ public class ViewAccountAction extends Action {
 			System.out.println("customer clicked"
 					+ customerClicked.getCustomer_id());
 			// id setting
+			
+			
 			if (request.getParameter("customer_id") == null) {
-
 				id = customerClicked.getCustomer_id();
 			} else {
 				id = Integer.parseInt(request.getParameter("customer_id"));
 				session.setAttribute("customerClicked", null);
 				session.setAttribute("customerClicked",
 						customerDAO.readFromID(id));
-				System.out.println(id);
+						System.out.println(id);
 			}
 
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			request.setAttribute("id", id);
+			//throw error that id in not valid.
+			if(customerDAO.readFromID(id)==null)
+			{
+				errors.add("Illegal customer id passed");
+				return "employee/error.jsp";
+			}
 			request.setAttribute("customer", customerDAO.readFromID(id));
 			// Setting up loacl session for clicked customer
 			session.setAttribute("customerClicked", customerDAO.readFromID(id));
@@ -109,10 +117,10 @@ public class ViewAccountAction extends Action {
 
 			return "employee/view-account.jsp";
 		} catch (RollbackException e) {
-			errors.add(e.getMessage());
+			errors.add("Incorrect Inputs");
 			return "error.jsp";
 		} catch (FormBeanException e) {
-			errors.add(e.getMessage());
+			errors.add("Bean Exceptions");
 			return "error.jsp";
 
 		}
