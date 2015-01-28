@@ -94,7 +94,7 @@ public class TransitionDayAction extends Action {
 			}
 				
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
-
+			synchronized(this) { 
 			for (TransactionBean transaction : transactions) {
 				int customerId = transaction.getCustomer_id();
 				CustomerBean customer = customerDAO.read(customerId);
@@ -198,7 +198,8 @@ public class TransitionDayAction extends Action {
 			request.setAttribute("message", message);
 			request.setAttribute("lastDate", form.getDate());
 			request.setAttribute("form", null );
-			return "employee/transition-day.jsp";			
+			return "employee/transition-day.jsp";	
+			}
 		} 
 		catch (RollbackException e) {
 			e.printStackTrace();
