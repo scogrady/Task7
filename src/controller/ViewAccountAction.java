@@ -56,6 +56,7 @@ public class ViewAccountAction extends Action {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		
 		TransactionBean[] transactionHistory;
 		try {
 			IdForm form = formBeanFactory.create(request);
@@ -91,7 +92,7 @@ public class ViewAccountAction extends Action {
 			if(customerDAO.readFromID(id)==null)
 			{
 				errors.add("Illegal customer id passed");
-				return "employee/error-list.jsp";
+				return "employee/error.jsp";
 			}
 			request.setAttribute("customer", customerDAO.readFromID(id));
 			// Setting up loacl session for clicked customer
