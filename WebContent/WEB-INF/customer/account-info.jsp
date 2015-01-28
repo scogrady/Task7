@@ -68,7 +68,7 @@
 			<tr>
 				<th>Fund Code</th>
 				<th>Number of Shares</th>
-				<th>Share Price</th>
+				<th>Price</th>
 				<th>Worth</th>
 			</tr>
 			<% 

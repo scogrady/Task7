@@ -146,7 +146,10 @@ public class SellFundAction extends Action {
 					customer.getCustomer_id());
 			position.setAvailable_shares(position.getAvailable_shares() - num);
 			positionDAO.update(position);
+			
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
+			
+			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
 
 			sellFundList = new SellFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {

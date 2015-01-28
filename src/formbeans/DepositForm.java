@@ -22,7 +22,7 @@ public class DepositForm extends FormBean {
 	public String getAmount() {
 		return amount;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = trimAndConvert(username, "<>\"");
 	}
@@ -34,7 +34,7 @@ public class DepositForm extends FormBean {
 	public void setAction(String action) {
 		this.action = trimAndConvert(action, "<>\"");
 	}
-	
+
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
@@ -59,17 +59,14 @@ public class DepositForm extends FormBean {
 			}
 
 			num = Double.parseDouble(this.amount);
-			
-			if (!(num > 0 && num < Double.MAX_VALUE)) {
+
+			if (!(num > 0 && num < (Double.MAX_VALUE / 100))) {
 				errors.add("Please double check your input.");
 			}
-			if (num == 0 ) {
+			if (num == 0) {
 				errors.add("You can't deposit $0.");
 			}
-			
-			
 
-			
 			return errors;
 		} catch (NumberFormatException e) {
 			errors.add("Please double check your input.");

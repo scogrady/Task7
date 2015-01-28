@@ -57,7 +57,7 @@
 												<c:otherwise>
 													<div class="form-inline">
 														<input type="text" name="num" class="form-control"
-															pattern="\d+(\.\d{1,3})?" placeholder="Share"
+															pattern="\d*(\.\d{1,3})?" placeholder="Share"
 															data-placement="bottom" min="0" max="100000000"
 															title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
 															required>

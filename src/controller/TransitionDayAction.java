@@ -180,6 +180,7 @@ public class TransitionDayAction extends Action {
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
+					transaction.setPrice(0);
 					transactionDAO.update(transaction);					
 					continue;
 				}				
@@ -195,6 +196,7 @@ public class TransitionDayAction extends Action {
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
+					transaction.setPrice(0);
 					transactionDAO.update(transaction);
 					continue;
 				}
