@@ -165,7 +165,7 @@
 							<th class="title_right">Worth</th>
 						</tr>
 						<%
-							long total = 0;
+							double total = 0;
 							for (PositionBean pos : (PositionBean[]) request
 									.getAttribute("position")) {
 						%>
@@ -179,27 +179,27 @@
 									}
 							%>
 							<td><%=symbol%></td>
-							<c:set var="shares" value="<%=pos.getShares() / 1000%>" />
+							<c:set var="shares" value="<%=pos.getShares() / 1000.00%>" />
 							<td class="title_right"><fmt:formatNumber type="number"
 									pattern="#,##0.000" value="${shares}" /></td>
 							<%
-								long price = -1;
+								double price = -1;
 									for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[]) request
 											.getAttribute("priceList")) {
 
 										if (fundprice.getFund_id() == pos.getFund_id())
-											price = fundprice.getPrice() / 100;
+											price = fundprice.getPrice() / 100.00;
 									}
 							%>
 							<c:set var="price" value="<%=price%>" />
 							<td class="title_right"><fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${price}" /></td>
-							<c:set var="worth" value="<%=pos.getShares() * price / 1000%>" />
+							<c:set var="worth" value="<%=pos.getShares() * price / 1000.00%>" />
 							<td class="title_right"><fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${worth}" /></td>
 						</tr>
 						<%
-							total += pos.getShares() * price / 1000;
+							total += pos.getShares() * price / 1000.00;
 							}
 						%>
 						<tr>
