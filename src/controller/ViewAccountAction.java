@@ -103,6 +103,7 @@ public class ViewAccountAction extends Action {
 			for (int i = 0; i < transactionHistory.length; i++) {
 				transactions.add(transactionHistory[i]);
 			}
+			
 			Collections.sort(transactions);
 			request.setAttribute("transactionHistory", transactionHistory);
 

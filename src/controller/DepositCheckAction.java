@@ -86,6 +86,7 @@ public class DepositCheckAction extends Action {
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
+			request.setAttribute("form", null);
 
 			customer.setAvailable_cash(customer.getAvailable_cash() + amount);
 			customerDAO.update(customer);

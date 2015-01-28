@@ -138,6 +138,8 @@ public class SellFundAction extends Action {
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
+			request.setAttribute("form", null);
+
 
 			PositionBean position = positionDAO.readByIdFundId(
 					Integer.parseInt(form.getFund_id()),

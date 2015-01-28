@@ -78,6 +78,7 @@ public class RequestCheckAction extends Action {
 
 			String message = "Successfully recieve your request.";
 			request.setAttribute("message", message);
+			request.setAttribute("form", null);
 
 			customer.setAvailable_cash(customer.getAvailable_cash() - amount);
 			customerDAO.update(customer);

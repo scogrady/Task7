@@ -125,7 +125,7 @@ public class BuyFundAction extends Action {
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
-
+			request.setAttribute("form", null);
 			// put it into queue
 			// change available balance
 
