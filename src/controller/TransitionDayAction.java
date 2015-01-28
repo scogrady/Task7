@@ -113,6 +113,7 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + moneyGot);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					
@@ -144,6 +145,7 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() - newAmount < 0 ? 0 : customer.getCurrent_cash() - newAmount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					PositionBean[] positions = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId);
@@ -176,6 +178,7 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					transaction.setExecute_date(date);
@@ -191,6 +194,7 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					

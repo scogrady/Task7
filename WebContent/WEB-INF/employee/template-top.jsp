@@ -77,24 +77,11 @@
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul id="sub-operation" class="nav navbar-nav">
             <li class="active" name = "CreateCustomer"><a href="CreateCustomer.do">Create Customer Account</a></li>
-            <li name = "ResetPassword"><a href="ResetPassword.do">Reset Password</a></li>
             <li name = "ViewAccount"><a href="ViewAccount.do">View Customer Account</a></li>
-            <li name = "ViewTransaction"><a href="ViewTransaction.do">Customer Transaction History</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
   </div>
   
-  <div id="fund-operation" class="col-sm-2" style="display:none">
-    <div class="sidebar-nav">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-collapse collapse sidebar-navbar-collapse">
-          <ul id="sub-operation" class="nav navbar-nav">
-            <li class="active" name = "CreateFund"><a href="CreateFund.do">Create Fund</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-  </div>
   <div class="col-sm-10">
