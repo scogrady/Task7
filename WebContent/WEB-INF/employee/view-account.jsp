@@ -27,7 +27,7 @@
 
 	<jsp:include page="error-list.jsp" />
 	<jsp:include page="success.jsp" />
-	
+
 </div>
 
 <div class="row">
@@ -91,7 +91,7 @@
 					</tr>
 					<tr>
 						<c:set var="currentBalance"
-							value="${customer.getCurrent_cash()/100}"  />
+							value="${customer.getCurrent_cash()/100}" />
 						<th scope="row">Current balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
 								value="${currentBalance}" /></td>
@@ -250,10 +250,8 @@
 														<td class="title_right"><fmt:formatNumber
 																type="number" pattern="#,##0.000" value="${getShares}" /></td>
 
-														<c:set var="price" scope="session"
-															value="${transactionBean.getAmount()/transactionBean.getShares()}" />
 														<c:set var="priceShares"
-															value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
+															value="${transactionBean.getPrice() / 100 }" />
 														<td class="title_right"><fmt:formatNumber
 																type="number" pattern="#,##0.00" value="${priceShares}" /></td>
 													</c:when>
@@ -288,10 +286,8 @@
 
 												<c:choose>
 													<c:when test="${!empty transactionBean.getExecute_date()}">
-														<c:set var="price" scope="session"
-															value="${transactionBean.getAmount()/transactionBean.getShares()}" />
 														<c:set var="priceShares"
-															value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
+															value="${transactionBean.getPrice() / 100 }" />
 														<td class="title_right"><fmt:formatNumber
 																type="number" pattern="#,##0.00" value="${priceShares}" /></td>
 

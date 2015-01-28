@@ -10,10 +10,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.genericdao.RollbackException;
+import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
+import databeans.FavoriteBean;
 import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.PositionBean;
@@ -45,7 +47,8 @@ public class TransitionDayAction extends Action {
 
 	public String perform(HttpServletRequest request) {
 		try {
-
+			
+			Transaction.begin();
 			FundBean[] fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
 			
@@ -93,8 +96,8 @@ public class TransitionDayAction extends Action {
 				fundPriceHistoryDAO.create(fundPrice);
 			}
 				
+				
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
-
 			for (TransactionBean transaction : transactions) {
 				int customerId = transaction.getCustomer_id();
 				CustomerBean customer = customerDAO.read(customerId);
@@ -110,12 +113,13 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + moneyGot);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					
 					PositionBean position = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId)[0];
 					if (position.getShares() - shares < 0.001) {
-						positionDAO.delete(position);
+						positionDAO.delete(position.getCustomer_id(), position.getFund_id());
 					} else {
 						position.setShares(position.getShares() - shares);
 						position.setAvailable_shares(position.getAvailable_shares());
@@ -125,6 +129,7 @@ public class TransitionDayAction extends Action {
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
 					transaction.setAmount(moneyGot);
+					transaction.setPrice(price);
 					transactionDAO.update(transaction);
 					
 					continue;
@@ -140,6 +145,7 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() - newAmount < 0 ? 0 : customer.getCurrent_cash() - newAmount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					PositionBean[] positions = positionDAO.readByCustomerIDAndFundId(customer.getCustomer_id(), fundId);
@@ -160,6 +166,7 @@ public class TransitionDayAction extends Action {
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
 					transaction.setShares(shares);
+					transaction.setPrice(price);
 					transactionDAO.update(transaction);
 					
 					continue;
@@ -171,10 +178,12 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() - amount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
+					transaction.setPrice(0);
 					transactionDAO.update(transaction);					
 					continue;
 				}				
@@ -185,11 +194,13 @@ public class TransitionDayAction extends Action {
 					
 					customer.setCurrent_cash(customer.getCurrent_cash() + amount);
 					customer.setAvailable_cash(customer.getCurrent_cash());
+					customer.setLast_login_time(date);
 					customerDAO.update(customer);
 					
 					
 					transaction.setExecute_date(date);
 					transaction.setStatus("completed");
+					transaction.setPrice(0);
 					transactionDAO.update(transaction);
 					continue;
 				}
@@ -198,7 +209,8 @@ public class TransitionDayAction extends Action {
 			request.setAttribute("message", message);
 			request.setAttribute("lastDate", form.getDate());
 			request.setAttribute("form", null );
-			return "employee/transition-day.jsp";			
+			Transaction.commit();
+			return "employee/transition-day.jsp";	
 		} 
 		catch (RollbackException e) {
 			e.printStackTrace();
@@ -214,5 +226,8 @@ public class TransitionDayAction extends Action {
 			e.printStackTrace();
 			return "error.jsp";
 		}		
+		finally {
+			if (Transaction.isActive()) Transaction.rollback();
+		}	
     }
 }

@@ -107,7 +107,7 @@ public class ViewAccountAction extends Action {
 			}
 			
 			Collections.sort(transactions);
-			request.setAttribute("transactionHistory", transactionHistory);
+			request.setAttribute("transactionHistory", transactions);
 
 			return "employee/view-account.jsp";
 		} catch (RollbackException e) {

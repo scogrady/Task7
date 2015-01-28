@@ -43,11 +43,10 @@
 											value="${getShares}" /></td>
 
 									<c:set var="price" scope="session"
-										value="${transactionBean.getAmount()/transactionBean.getShares()}" />
-									<c:set var="priceShares"
-										value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
+										value="${transactionBean.getPrice() / 100 }" />
+								
 									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
-											value="${priceShares}" /></td>
+											value="${price}" /></td>
 								</c:when>
 
 								<c:otherwise>
@@ -78,10 +77,9 @@
 
 							<c:choose>
 								<c:when test="${!empty transactionBean.getExecute_date()}">
-									<c:set var="price" scope="session"
-										value="${transactionBean.getAmount()/transactionBean.getShares()}" />
+									
 									<c:set var="priceShares"
-										value="${transactionBean.getAmount()/transactionBean.getShares() * 10.00}" />
+										value="${transactionBean.getPrice() / 100 }" />
 									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
 											value="${priceShares}" /></td>
 

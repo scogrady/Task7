@@ -51,15 +51,17 @@ public class DepositCheckAction extends Action {
 				return "ViewAccount.do";
 			}
 			long amount = -1;
+			
+			errors.addAll(form.getValidationErrors());
 
 			try {
 
 				amount = (long) (Double.parseDouble(form.getAmount()) * 100);
-				//System.out.println("depositAmount:  " + amount);
+				// System.out.println("depositAmount:  " + amount);
 
 				CustomerBean customer = customerDAO.read(form.getUsername());
 
-				if ((amount + customer.getAvailable_cash()) > Long.MAX_VALUE) {
+				if (amount > (Long.MAX_VALUE - customer.getAvailable_cash())) {
 					errors.add("The available balance will beyond the maximum amount after this deposit.");
 				}
 
@@ -67,10 +69,10 @@ public class DepositCheckAction extends Action {
 				errors.add("Please double check your input.");
 			}
 
-			errors.addAll(form.getValidationErrors());
+			
 
 			if (errors.size() != 0) {
-				return "ViewAccount.do";
+				return "view-account.do";
 			}
 
 			TransactionBean depositCheck = new TransactionBean();

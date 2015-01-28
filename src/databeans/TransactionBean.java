@@ -21,6 +21,7 @@ public class TransactionBean implements Comparable<TransactionBean> {
 	 * Status Type: Pending Completed
 	 * */
 	private String status;
+	private long price;
 	private long amount;
 	private Date generate_date;
 
@@ -64,6 +65,10 @@ public class TransactionBean implements Comparable<TransactionBean> {
 		return amount;
 	}
 
+	public long getPrice() {
+		return price;
+	}
+
 	public void setTransaction_id(int transaction_id) {
 		this.transaction_id = transaction_id;
 	}
@@ -84,6 +89,10 @@ public class TransactionBean implements Comparable<TransactionBean> {
 		this.shares = shares;
 	}
 
+	public void setPrice(long price) {
+		this.price = price;
+	}
+
 	public void setTransaction_type(String transaction_type) {
 		this.transaction_type = transaction_type;
 	}
@@ -96,12 +105,10 @@ public class TransactionBean implements Comparable<TransactionBean> {
 		this.amount = amount;
 	}
 
-	
-
 	@Override
 	public int compareTo(TransactionBean tran2) {
 		// TODO Auto-generated method stub
-		return  - (this.getGenerate_date().compareTo(tran2.getGenerate_date()));
+		return -(this.getGenerate_date().compareTo(tran2.getGenerate_date()));
 	}
 
 }
