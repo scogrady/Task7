@@ -61,7 +61,7 @@ public class LoginAction extends Action {
 			if (role.equals("Customer")) {
 				CustomerBean customer = customerDAO.readByUsername(form.getUsername());
 				if (customer == null) {
-					errors.add("User Not Found");
+					errors.add("Customer Not Found");
 					return "login.jsp";
 				}
 			
@@ -69,7 +69,6 @@ public class LoginAction extends Action {
 					errors.add("Invalid Password");
 					return "login.jsp";
 				}
-				
 		        session.setAttribute("customer", customer);
 				return "AccountInfo.do";
 			}
@@ -77,7 +76,7 @@ public class LoginAction extends Action {
 			if (role.equals("Employee")) {
 				EmployeeBean employee = employeeDAO.readByUsername(form.getUsername());
 				if (employee == null) {
-					errors.add("User Not Found");
+					errors.add("Employee Not Found");
 					return "login.jsp";
 				}
 			

@@ -3,8 +3,11 @@ package formbeans;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.mybeans.form.FormBean;
+
+import sun.util.calendar.ZoneInfo;
 
 public class CustomerForm extends FormBean {
 	private String username;
@@ -40,8 +43,6 @@ public class CustomerForm extends FormBean {
 		return lastname;
 	}
 
-	
-
 	public String getAddr_line1() {
 		return addr_line1;
 	}
@@ -65,8 +66,6 @@ public class CustomerForm extends FormBean {
 	public long getCurrent_cash() {
 		return current_cash;
 	}
-
-	
 
 	public void setAddr_line1(String addr_line1) {
 		this.addr_line1 = trimAndConvert(addr_line1, "<>\"");
@@ -92,7 +91,6 @@ public class CustomerForm extends FormBean {
 		this.current_cash = current_cash;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = trimAndConvert(username, "<>\"");
 	}
@@ -113,34 +111,58 @@ public class CustomerForm extends FormBean {
 		confirm = s.trim();
 	}
 
-
 	public String getAction() {
 		return action;
 	}
+
 	public void setAction(String action) {
 		this.action = action;
 	}
-	
+
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 		
-
+//username & lastname & firstname 3~30
+//address 3~30
+//city 3~30
 		if (username == null || username.length() == 0) {
 			errors.add("Email address is required");
 		}
-
+		if (!Pattern.matches("[\\w]+", username)) {
+			errors.add("Username should be all characters.");
+		}
+		if(username.length()>30||username.length()<3){
+			errors.add("Username shoule more than 3 digit and less than 30 digit.");
+		}
 		if (firstname == null || firstname.length() == 0) {
 			errors.add("First Name is required");
 		}
-
+		if (!Pattern.matches("[A-Za-z ]+", firstname)) {
+			errors.add("First name should be all characters.");
+		}
+		
+		if(firstname.length()>30||firstname.length()<3){
+			errors.add("First name shoule more than 3 digit and less than 30 digit.");
+		}
 		if (lastname == null || lastname.length() == 0) {
 			errors.add("Last Name is required");
 		}
-
+		if (!Pattern.matches("[A-Za-z ]+", lastname)) {
+			errors.add("Last name should be all characters.");
+		}
+		
+		if(lastname.length()>30||lastname.length()<3){
+			errors.add("Last name shoule more than 3 digit and less than 30 digit.");
+		}
+		if (errors.size() > 0) {
+			return errors;
+		}
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");
 		}
-
+		if(password.length()>20||password.length()<3){
+			errors.add("Password should be more than 3 digit less than 20 digit.");
+		}
 		if (confirm == null || confirm.length() == 0) {
 			errors.add("Confirm Password is required");
 		}
@@ -148,9 +170,25 @@ public class CustomerForm extends FormBean {
 		if (addr_line1 == null || addr_line1.length() == 0) {
 			errors.add("Addr_line1 address is required");
 		}
+		
+		if (!Pattern.matches("\\w+", addr_line1)) {
+			errors.add("Please double check Address.");
+		}
+		
+		if(addr_line1.length()>50||addr_line1.length()<3){
+			errors.add("Please double check your Address.");
+		}
 
 		if (city == null || city.length() == 0) {
 			errors.add("City is required");
+		}
+		
+		if (!Pattern.matches("[A-Za-z ]+", city)) {
+			errors.add("City should be all characters.");
+		}
+		
+		if(city.length()>30||city.length()<3){
+			errors.add("City shoule more than 3 digit and less than 30 digit");
 		}
 
 		if (state == null || state.length() == 0) {
@@ -160,9 +198,18 @@ public class CustomerForm extends FormBean {
 		if (zip == null || zip.length() == 0) {
 			errors.add("Zip Code is required");
 		}
-
+		try{
+			int zipcode = Integer.parseInt(zip);
+			if(zipcode<10000 || zipcode>100000){
+				errors.add("Zip Code should be 5 digit number");
+			}
+		}
+		catch(Exception e){
+			errors.add("Zip Code should be 5 digit number");
+		}
 		
 		if (errors.size() > 0) {
+			return errors;
 		}
 
 		if (!password.equals(confirm)) {

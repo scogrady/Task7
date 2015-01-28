@@ -40,11 +40,8 @@
 
 			
 			</form>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-12 col-sm-9">
+			<div class="row">
+		<div class="col-md-12">
 
 			<div class="page-header">
 				<h3>Fund List</h3>
@@ -73,6 +70,10 @@
 			</table>
 		</div>
 	</div>
+		</div>
+	</div>
+
+	
 
 
 

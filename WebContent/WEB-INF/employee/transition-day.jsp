@@ -7,6 +7,7 @@
 <div class=" col-md-offset-2">
 	<div class="page-header">
 		<h1>Transition Day</h1>
+		<p>Fund Price should be between $5 and $10,000</p>
 	</div>
 	<jsp:include page="error-list.jsp" />
 	<jsp:include page="success.jsp" />
@@ -19,7 +20,7 @@
                   <th>Fund Name</th>
                   <th>Fund Ticker</th>
                   <th>Fund Description</th>
-                  <th>Price(Price should be between $5 and $10000)</th>
+                  <th>Price</th>
                 </tr>
               </thead>
               <tbody>
