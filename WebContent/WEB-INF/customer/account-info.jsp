@@ -67,9 +67,9 @@
 		<table class="table table-striped">
 			<tr>
 				<th>Fund Code</th>
-				<th>Number of Shares</th>
-				<th>Price</th>
-				<th>Worth</th>
+				<th class="title_right">Shares</th>
+				<th class="title_right">Price</th>
+				<th class="title_right">Amount</th>
 			</tr>
 			<% 
              double total=0;
@@ -85,7 +85,7 @@
             		%>
 				<td><%=symbol%></td>
 				<c:set var="shares" value="<%=pos.getShares() / 1000.0 %>" />
-				<td><fmt:formatNumber type="number" pattern="#,##0.000"	value="${shares}" /></td>
+				<td  class="title_right"><fmt:formatNumber type="number" pattern="#,##0.000"	value="${shares}" /></td>
 				<%
             	double price=-1;
             	for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[])request.getAttribute("priceList")){
@@ -95,9 +95,9 @@
             	}
             		%>
             		<c:set var="price" value="<%=price %>" />
-				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${price}" /></td>
+				<td  class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${price}" /></td>
 				<c:set var="worth" value="<%=pos.getShares()*price / 1000 %>" />				
-				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${worth}" /></td>
+				<td  class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${worth}" /></td>
 			</tr>
 			<%
             total+=pos.getShares()*price  / 1000.00;
@@ -106,9 +106,9 @@
 			<tr>
 				<td></td>
 				<td></td>
-				<td>Total Investment:</td>
+				<td  class="title_right">Total Investment:</td>
 				<c:set var="total" value="<%=total %>" />
-				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${total}" /></td>
+				<td  class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${total}" /></td>
 			<tr>
 		</table>
 		</div>
