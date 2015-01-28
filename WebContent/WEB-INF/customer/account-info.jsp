@@ -72,7 +72,7 @@
 				<th>Worth</th>
 			</tr>
 			<% 
-             long total=0;
+             double total=0;
             for (PositionBean pos : (PositionBean[])request.getAttribute("position")){
             	%>
 			<tr>
@@ -100,7 +100,7 @@
 				<td><fmt:formatNumber type="number" pattern="#,##0.00" value="${worth}" /></td>
 			</tr>
 			<%
-            total+=pos.getShares()*price  / 1000;
+            total+=pos.getShares()*price  / 1000.00;
             }
              %>
 			<tr>

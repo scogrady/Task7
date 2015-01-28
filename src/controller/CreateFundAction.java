@@ -65,7 +65,8 @@ public class CreateFundAction extends Action{
 			request.setAttribute("message", message);
 
 			request.setAttribute("fundList", fundDAO.getFunds());
-			
+
+			request.setAttribute("form", null);
 			return "employee/create-fund.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

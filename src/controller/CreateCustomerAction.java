@@ -83,7 +83,7 @@ public class CreateCustomerAction extends Action {
 			
 			String message = "Successfully created a new customer account.";
 			request.setAttribute("message", message);
-			
+			request.setAttribute("form", null);
 
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			return "employee/create-customer.jsp";
