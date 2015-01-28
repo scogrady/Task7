@@ -2,6 +2,7 @@ package formbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.mybeans.form.FormBean;
 
@@ -60,21 +61,43 @@ public class EmployeeForm extends FormBean {
 		List<String> errors = new ArrayList<String>();
 
 		if (username == null || username.length() == 0) {
-			errors.add("Employee username is required");
+			errors.add("Email address is required");
 		}
-
+		if (!Pattern.matches("[\\w]+", username)) {
+			errors.add("Username should be all characters.");
+		}
+		if(username.length()>30||username.length()<3){
+			errors.add("Username shoule more than 3 digit and less than 30 digit.");
+		}
 		if (firstname == null || firstname.length() == 0) {
 			errors.add("First Name is required");
 		}
-
+		if (!Pattern.matches("[A-Za-z ]+", firstname)) {
+			errors.add("First name should be all characters.");
+		}
+		
+		if(firstname.length()>30||firstname.length()<3){
+			errors.add("First name shoule more than 3 digit and less than 30 digit");
+		}
 		if (lastname == null || lastname.length() == 0) {
 			errors.add("Last Name is required");
 		}
-
+		if (!Pattern.matches("[A-Za-z ]+", lastname)) {
+			errors.add("Last name should be all characters.");
+		}
+		
+		if(lastname.length()>30||lastname.length()<3){
+			errors.add("Last name shoule more than 3 digit and less than 30 digit.");
+		}
+		if (errors.size() > 0) {
+			return errors;
+		}
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");
 		}
-
+		if(password.length()>20||password.length()<3){
+			errors.add("Password should be more than 3 digit less than 20 digit.");
+		}
 		if (confirm == null || confirm.length() == 0) {
 			errors.add("Confirm Password is required");
 		}

@@ -2,6 +2,7 @@ package formbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.mybeans.form.FormBean;
 
@@ -43,7 +44,6 @@ public class FundForm extends FormBean {
 		this.symbol = trimAndConvert(symbol, "<>\"");
 	}
 
-
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
@@ -52,6 +52,21 @@ public class FundForm extends FormBean {
 		if (symbol == null || symbol.length() == 0)
 			errors.add("Fund symbol is required");
 
+		if (!Pattern.matches("[A-Za-z ]+", name)) {
+			errors.add("Fund name should be all characters.");
+		}
+		if(name.length()>10||name.length()<3){
+			errors.add("Fund name should more than 3 digit and less than 10 digit.");
+		}
+
+		if (!Pattern.matches("[A-Za-z ]+", symbol)) {
+			errors.add("First name should be all characters.");
+		}
+		
+		if(symbol.length()>10||symbol.length()<3){
+			errors.add("Fund symbol should more than 3 digit and less than 10 digit.");
+		}
+		
 		if (action == null)
 			errors.add("Button is required");
 
