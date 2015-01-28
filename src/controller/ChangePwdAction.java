@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import model.Model;
 import model.CustomerDAO;
@@ -35,7 +36,7 @@ public class ChangePwdAction extends Action {
     	// Set up error list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
-
+        HttpSession session = request.getSession();
         try {System.out.println("Coming in ChangePwd.do");
         	CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
 	        // Load the form parameters into a form bean
@@ -63,9 +64,11 @@ public class ChangePwdAction extends Action {
 			}
 			
 			
-			// Change the password
+			// Change the password"
         	customerDAO.setPassword(customer.getCustomer_id(),form.getNewPassword());
-	
+        	int newId=customer.getCustomer_id();
+        	session.setAttribute("customer", null);
+        	session.setAttribute("customer", customerDAO.readFromID(newId));
 			request.setAttribute("message","Password changed for "+customer.getFirstname() +" "+customer.getLastname());
 			
 	        return "customer/change-pwd.jsp";
