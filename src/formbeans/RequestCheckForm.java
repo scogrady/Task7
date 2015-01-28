@@ -54,7 +54,7 @@ public class RequestCheckForm extends FormBean {
 
 			}
 
-			if (!(num >= 0 && num < Integer.MAX_VALUE)) {
+			if (!(num >= 0 && num < Long.MAX_VALUE / 100)) {
 				errors.add("Please double check your input.");
 			}
 			return errors;
