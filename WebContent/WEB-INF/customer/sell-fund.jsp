@@ -21,7 +21,7 @@
 					<tr>
 						<th width="30%">Fund Name</th>
 						<th width="15%" class="title_right">Share</th>
-						<th width="10%" class="title_right">Price</th>
+						<th width="10%" class="title_right">Last Price</th>
 						<th width="30%" class="title_center">Sell Share</th>
 						<th width="15%">Sell</th>
 					</tr>

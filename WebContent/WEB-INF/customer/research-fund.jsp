@@ -193,9 +193,9 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Date</th>
-												<th>Price</th>
-												<th>Status</th>
+												<th width="40%">Date</th>
+												<th width="30%">Price</th>
+												<th width="30%">Status</th>
 											</tr>
 										</thead>
 										<tbody>

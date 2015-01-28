@@ -44,19 +44,7 @@
 			<br>
 		</div>
 	</div>
-	<br />
-	<div class="row-fluid">
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Mail to:</h3>
-
-				</div>
-				<div class="panel-body"><%=customer.getAddr_line1()%></div>
-				<div class="panel-body"><%=customer.getAddr_line2()%></div>
-			</div>
-		</div>
-	</div>
+	
 </div>
 
 <jsp:include page="template-bottom.jsp" />
