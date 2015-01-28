@@ -72,6 +72,8 @@ public class CreateEmployeeAction extends Action {
 			request.setAttribute("message", message);
 
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
+
+			request.setAttribute("form", null);
 			return "employee/create-employee.jsp";
 
 		} catch (RollbackException e) {

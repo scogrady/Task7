@@ -84,7 +84,7 @@
 									name : "${fundPriceHistoryName.getSymbol()}",
 									data : [
 								        <c:forEach var="fundPriceHistory" items="${fundPriceHistoryList}">
-											${fundPriceHistory.getPrice()/100},
+											${fundPriceHistory.getPrice()/100.00},
 										</c:forEach>]
 							    },
 							    
@@ -93,7 +93,7 @@
 							    	name : "${comparePriceHistoryName.getSymbol()}",
 									data : [
 								        <c:forEach var="comparePriceHistory" items="${comparePriceHistoryList}">
-											${comparePriceHistory.getPrice()/100},
+											${comparePriceHistory.getPrice()/100.00},
 										</c:forEach>]
 							    }</c:if>
 							]
@@ -203,7 +203,7 @@
 												items="${fundPriceHistoryList}">
 												<tr>
 													<td>${fundPriceHistory.getPrice_date()}</td>
-													<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${fundPriceHistory.getPrice()/100}" /></td>
+													<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${fundPriceHistory.getPrice()/100.00}" /></td>
 													
 													<td>Up</td>
 												</tr>
