@@ -24,7 +24,7 @@
 					<tr>
 						<th width="20%">Fund Name</th>
 						<th width="10%">Ticker</th>
-						<th width="10%" class="title_right">Price</th>
+						<th width="10%" class="title_right">Last Price</th>
 						<th width="30%" class="title_center">Amount</th>
 						<th width="11%" class="title_center">Buy</th>
 					</tr>

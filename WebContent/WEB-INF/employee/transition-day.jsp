@@ -19,7 +19,7 @@
                   <th>Fund Name</th>
                   <th>Fund Ticker</th>
                   <th>Fund Description</th>
-                  <th>Price</th>
+                  <th>Price(Price should be between $5 and $10000)</th>
                 </tr>
               </thead>
               <tbody>
