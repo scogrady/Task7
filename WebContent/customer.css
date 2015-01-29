@@ -7,10 +7,6 @@ body {
 	height: 100%;
 }
 
-body {
-	height: 100%;
-}
-
 .form-signin {
 	max-width: 330px;
 	padding: 15px;
@@ -52,21 +48,40 @@ body {
 
 .navbar-inverse .navbar-brand {
 	color: white;
+	font-color: black;
 }
 
 .navbar-inverse .navbar-nav>li>a {
 	color: white;
+	font-color: black;
+}
+
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	background: rgb(213,232,244);
+}
+
+
+.btn-primary {
+	background: rgb(213,232,244);
+	color: black;
+	border-color: rgb(200,215,220);
 }
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover,
 	.navbar-inverse .navbar-nav>.active>a:focus {
-	color: orange;
+	color: rgb(213,232,244);
 }
 
 @media ( min-width : 768px) {
+	.navbar-default {
+		background: #FEFFFF;
+		border: 0;
+	} 
 	.sidebar-nav .navbar .navbar-collapse {
 		padding: 0;
 		max-height: none;
+		background-color: #FEFFFF;
 	}
 	.sidebar-nav .navbar ul {
 		float: none;
