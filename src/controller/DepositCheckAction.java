@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -36,7 +37,7 @@ public class DepositCheckAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-
+		HttpSession session = request.getSession();
 		Date date = new Date();
 
 		try {
@@ -46,6 +47,10 @@ public class DepositCheckAction extends Action {
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			DepositForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
+			CustomerBean customer = (CustomerBean) request.getSession(
+					false).getAttribute("customerClicked");
+			System.out.println("after setting session customer");
+			request.setAttribute("customer",customer);
 
 			if (!form.isPresent()) {
 				return "ViewAccount.do";
@@ -59,26 +64,30 @@ public class DepositCheckAction extends Action {
 				amount = (long) (Double.parseDouble(form.getAmount()) * 100);
 				// System.out.println("depositAmount:  " + amount);
 
-				CustomerBean customer = customerDAO.read(form.getUsername());
-
-				if (amount > (Long.MAX_VALUE - customer.getAvailable_cash())) {
+				CustomerBean customer1 = customerDAO.read(form.getUsername());
+				if (amount > (Long.MAX_VALUE - customer1.getAvailable_cash())) {
 					errors.add("The available balance will beyond the maximum amount after this deposit.");
 				}
 
 			} catch (NumberFormatException e) {
 				errors.add("Please double check your input.");
 			}
-
+			// set up ViewAccount.do
 			
-
+			
 			if (errors.size() != 0) {
-				return "view-account.do";
+				System.out.println("we are in if" + session.getAttribute("customerClicked"));
+				
+				System.out.println("after setting session customer");
+				request.setAttribute("customer",customer);
+				System.out.println("cust id in deposit page"+customer.getCustomer_id());
+				return "employee/view-account.jsp";
 			}
 
 			TransactionBean depositCheck = new TransactionBean();
-			CustomerBean customer = customerDAO.read(form.getUsername());
+			CustomerBean customer2 = customerDAO.read(form.getUsername());
 
-			depositCheck.setCustomer_id(customer.getCustomer_id());
+			depositCheck.setCustomer_id(customer2.getCustomer_id());
 			depositCheck.setTransaction_type("Deposit Check");
 			depositCheck.setStatus("Pending");
 			depositCheck.setAmount(amount);
@@ -90,12 +99,12 @@ public class DepositCheckAction extends Action {
 			request.setAttribute("message", message);
 			request.setAttribute("form", null);
 
-			customer.setAvailable_cash(customer.getAvailable_cash() + amount);
-			customerDAO.update(customer);
+			customer2.setAvailable_cash(customer2.getAvailable_cash() + amount);
+			customerDAO.update(customer2);
 
 			request.setAttribute("transactionList",
 					transactionDAO.getTransactions());
-			return "ViewAccount.do";
+			return "employee/view-account.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "employee/error.jsp";

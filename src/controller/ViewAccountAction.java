@@ -23,7 +23,6 @@ import org.mybeans.form.FormBeanFactory;
 import databeans.CustomerBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
-import databeans.UserBean;
 import formbeans.ChangePwdForm;
 import formbeans.DepositForm;
 import formbeans.IdForm;
