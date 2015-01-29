@@ -90,9 +90,10 @@ public class ViewAccountAction extends Action {
 			request.setAttribute("id", id);
 			//throw error that id in not valid.
 			if(customerDAO.readFromID(id)==null)
-			{
+			{	System.out.println("we cought you");
 				errors.add("Illegal customer id passed");
-				return "employee/error.jsp";
+				request.setAttribute("customer", customerDAO.readFromID(1));
+				return "employee/view-account.jsp";
 			}
 			request.setAttribute("customer", customerDAO.readFromID(id));
 			// Setting up loacl session for clicked customer
