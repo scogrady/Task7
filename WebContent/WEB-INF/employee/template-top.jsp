@@ -84,4 +84,16 @@
     </div>
   </div>
   
+  <div id="fund-operation" class="col-sm-2" style="display:none">
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+          <ul id="sub-operation" class="nav navbar-nav">
+            <li class="active" name = "CreateFund"><a href="CreateFund.do">Create Fund</a></li>
+            <li class="active" name = "EmployeeResearchFund"><a href="EmployeeResearchFund.do?fund_id=1">Research Fund</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
   <div class="col-sm-10">
