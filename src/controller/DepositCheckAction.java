@@ -75,20 +75,6 @@ public class DepositCheckAction extends Action {
 			// set up ViewAccount.do
 			
 			
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
 			if (errors.size() != 0) {
 				System.out.println("we are in if" + session.getAttribute("customerClicked"));
 				

@@ -1,7 +1,7 @@
 $(function () {
 	$('#flash').hide();
 	var eaccountOp = ["CreateEmployee", "ChangeEmployeePwd"];
-	var caccountOp = ["CreateCustomer", "ResetPassword", "ViewAccount", "ViewTransaction","EmployeeViewTransHistory", "ResetCustomerPwd"];
+	var caccountOp = ["CreateCustomer", "ResetPassword", "ViewAccount", "ViewTransaction","EmployeeViewTransHistory", "ResetCustomerPwd","DepositCheck"];
 	var fundOp = ["CreateFund", "EmployeeResearchFund"];
 	var active = false;
 	$.each(eaccountOp, function(idx, s) {
