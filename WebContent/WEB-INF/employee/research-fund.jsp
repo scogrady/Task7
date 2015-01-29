@@ -143,7 +143,7 @@
 					<div data-spy="scroll" data-offset="50" class="scrollspy-fundlist">
 						<ul class="list-group">
 							<c:forEach var="fund" items="${fundList}">
-								<li class="list-group-item"><a href="EmployeeResearchFund.do?fund_id=${fund.getFund_id()}">${fund.getName()}-${fund.getSymbol()}</a>
+								<li class="list-group-item"><a href="ResearchFund.do?fund_id=${fund.getFund_id()}">${fund.getName()}-${fund.getSymbol()}</a>
 									<p>${fund.getDescription()}</p></li>
 							</c:forEach>
 
