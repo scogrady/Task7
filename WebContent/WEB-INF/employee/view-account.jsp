@@ -109,7 +109,7 @@
 										value="${AvailBalance}" />
 
 								</p>
-								<form role="form" method="post" action="DepositCheck.do">
+								<form role="form" method="post" action="ViewAccount.do">
 									<div class="input-group col-md-5">
 										<span class="input-group-addon" id="basic-addon1">$</span> <input
 											type="hidden" name="username"
