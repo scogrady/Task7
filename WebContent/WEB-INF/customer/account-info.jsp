@@ -129,4 +129,5 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+
 <jsp:include page="template-bottom.jsp" />
