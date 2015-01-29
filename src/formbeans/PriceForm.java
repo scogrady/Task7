@@ -22,7 +22,17 @@ public class PriceForm extends FormBean {
 	}
 
 	public double[] getPrice() {
-		return price;	}
+		return price;	
+	}
+	
+	public String[] getFormatPrice() {
+		String[] s = new String[price.length];
+		
+		for (int i = 0; i < price.length; i++) {
+			s[i] = String.format("%.2f", price[i]);
+		}
+		return s;
+	}
 	
 	public String getDate() {
 		return date;
@@ -67,6 +77,7 @@ public class PriceForm extends FormBean {
 			}
 			if (price[i] < 5 || price[i] > 10000) {
 				errors.add("Price of the" + i + "th fund should be between $5 and $10000");
+				continue;
 			}
 			if (!Double.toString(price[i]).matches("\\d+(\\.\\d{1,2})?")) {
 				errors.add("Price of the " + i + "th fund should be float and have at most two decimal");
@@ -76,6 +87,12 @@ public class PriceForm extends FormBean {
 			errors.add("Invalid Button");
 		}
 		if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+			errors.add("Invalid Date");
+		}
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			formatter.parse(date);
+		} catch(ParseException e) {
 			errors.add("Invalid Date");
 		}
 		return errors;

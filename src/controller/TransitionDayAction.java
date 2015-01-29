@@ -16,7 +16,6 @@ import org.mybeans.form.FormBeanFactory;
 
 import databeans.BuyFundBean;
 import databeans.CustomerBean;
-import databeans.FavoriteBean;
 import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.PositionBean;
@@ -51,6 +50,7 @@ public class TransitionDayAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
+		List<String> errors = new ArrayList<String>();
 		try {
 
 			Transaction.begin();
@@ -93,7 +93,6 @@ public class TransitionDayAction extends Action {
 				return "employee/transition-day.jsp";
 			}
 			request.setAttribute("form", form);
-			List<String> errors = new ArrayList<String>();
 			request.setAttribute("errors", errors);
 
 			errors.addAll(form.getValidationErrors());
@@ -260,15 +259,18 @@ public class TransitionDayAction extends Action {
 			return "employee/transition-day.jsp";
 		} catch (RollbackException e) {
 			e.printStackTrace();
-			return "error.jsp";
+			errors.add("System Exception");
+			return "employee/transition-day.jsp";
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error.jsp";
+			errors.add("System Exception");
+			return "employee/transition-day.jsp";
 		} catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error.jsp";
+			errors.add("System Exception");
+			return "employee/transition-day.jsp";
 		} finally {
 			if (Transaction.isActive())
 				Transaction.rollback();

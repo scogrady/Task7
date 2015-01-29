@@ -53,11 +53,11 @@
 								<div class="form-inline">
 									<c:choose>
 										<c:when test="${form.price[inner.index] > 0 }">
-											<c:set var="price" value="${form.price[inner.index] }">
+											<c:set var="price" value="${form.getFormatPrice()[inner.index] }">
 											</c:set>
 										</c:when>
 										<c:otherwise>
-											<c:set var="price" value="Price">
+											<c:set var="price" value="">
 											</c:set>
 										</c:otherwise>
 									</c:choose>
