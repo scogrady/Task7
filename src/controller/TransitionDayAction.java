@@ -97,9 +97,16 @@ public class TransitionDayAction extends Action {
 			request.setAttribute("errors", errors);
 
 			errors.addAll(form.getValidationErrors());
+			if (errors.size() != 0) {
+				return "employee/transition-day.jsp";
+			}
+			
 			Date date = formatter.parse(form.getDate());
 			if (lastDate != null && date.compareTo(lastDate) <= 0) {
 				errors.add("Transition Day should be later than last transition day.");
+			}
+			if (fundList.length != form.getPrice().length){
+				errors.add("Fund number not match. Please refresh page");
 			}
 			if (errors.size() != 0) {
 				return "employee/transition-day.jsp";

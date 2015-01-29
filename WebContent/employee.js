@@ -2,7 +2,7 @@ $(function () {
 	$('#flash').hide();
 	var eaccountOp = ["CreateEmployee", "ChangeEmployeePwd"];
 	var caccountOp = ["CreateCustomer", "ResetPassword", "ViewAccount", "ViewTransaction","EmployeeViewTransHistory", "ResetCustomerPwd"];
-	var fundOp = ["CreateFund"];
+	var fundOp = ["CreateFund", "EmployeeResearchFund"];
 	var active = false;
 	$.each(eaccountOp, function(idx, s) {
 		if (window.location.pathname.indexOf(s) != -1) {
@@ -65,10 +65,11 @@ function addSub() {
 	var listItems = $("#sub-operation li");
 	listItems.each(function(idx, li) {
 	    var product = $(li);
-	    if (window.location.pathname.indexOf(product.attr("name")) == -1) {
-	    	product.removeClass("active");
-	    } else {
+	    if (window.location.pathname.indexOf(product.attr("name")) != -1 
+	    || window.location.pathname.indexOf("ResetCustomerPwd") != -1 && product.attr("name") == "ViewAccount") {
 	    	product.addClass("active");
+	    } else {
+	    	product.removeClass("active");
 	    }
 	});	
 }
