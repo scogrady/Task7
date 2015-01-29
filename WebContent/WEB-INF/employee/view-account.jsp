@@ -92,6 +92,8 @@
 					<tr>
 						<c:set var="currentBalance"
 							value="${customer.getCurrent_cash()/100}" />
+							
+							
 						<th scope="row">Current balance:</th>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
 								value="${currentBalance}" /></td>
