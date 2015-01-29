@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -75,7 +77,9 @@ public class Controller extends HttpServlet {
         }
         
         if (customer == null && employee == null) {
-        	System.out.print("no user");
+        	System.out.print("no user session!!!");
+    		List<String> errors = new ArrayList<String>();
+        	errors.add("Please login first!");
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do",request);
         }
