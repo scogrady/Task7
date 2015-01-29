@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
+import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -41,22 +42,24 @@ public class DepositCheckAction extends Action {
 		Date date = new Date();
 
 		try {
+			Transaction.begin();
+
 			request.setAttribute("transactionList",
 					transactionDAO.getTransactions());// TODO DELETE
 
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			DepositForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			CustomerBean customer = (CustomerBean) request.getSession(
-					false).getAttribute("customerClicked");
+			CustomerBean customer = (CustomerBean) request.getSession(false)
+					.getAttribute("customerClicked");
 			System.out.println("after setting session customer");
-			request.setAttribute("customer",customer);
+			request.setAttribute("customer", customer);
 
 			if (!form.isPresent()) {
 				return "ViewAccount.do";
 			}
 			long amount = -1;
-			
+
 			errors.addAll(form.getValidationErrors());
 
 			try {
@@ -73,14 +76,15 @@ public class DepositCheckAction extends Action {
 				errors.add("Please double check your input.");
 			}
 			// set up ViewAccount.do
-			
-			
+
 			if (errors.size() != 0) {
-				System.out.println("we are in if" + session.getAttribute("customerClicked"));
-				
+				System.out.println("we are in if"
+						+ session.getAttribute("customerClicked"));
+
 				System.out.println("after setting session customer");
-				request.setAttribute("customer",customer);
-				System.out.println("cust id in deposit page"+customer.getCustomer_id());
+				request.setAttribute("customer", customer);
+				System.out.println("cust id in deposit page"
+						+ customer.getCustomer_id());
 				return "employee/view-account.jsp";
 			}
 
@@ -104,12 +108,17 @@ public class DepositCheckAction extends Action {
 
 			request.setAttribute("transactionList",
 					transactionDAO.getTransactions());
+			Transaction.commit();
+
 			return "employee/view-account.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "employee/error.jsp";
 		} catch (FormBeanException e) {
 			return "employee/error.jsp";
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
 		}
 	}
 

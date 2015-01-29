@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.genericdao.RollbackException;
+import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -41,6 +42,8 @@ public class RequestCheckAction extends Action {
 		Date date = new Date();
 
 		try {
+			Transaction.begin();
+
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
@@ -64,9 +67,13 @@ public class RequestCheckAction extends Action {
 				errors.add("Please double check your input.");
 			}
 
+			customer = customerDAO.readFromID(customer.getCustomer_id());
+			request.getSession().setAttribute("customer", customer);
+
 			if (errors.size() != 0) {
 				return "customer/request-check.jsp";
 			}
+
 			TransactionBean requestCheck = new TransactionBean();
 
 			requestCheck.setCustomer_id(customer.getCustomer_id());
@@ -85,6 +92,7 @@ public class RequestCheckAction extends Action {
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
+			Transaction.commit();
 
 			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
@@ -92,6 +100,9 @@ public class RequestCheckAction extends Action {
 			return "customer/error.jsp";
 		} catch (FormBeanException e) {
 			return "customer/error.jsp";
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
 		}
 	}
 }
