@@ -31,6 +31,9 @@ public class LogoutAction extends Action {
     		if (session.getAttribute("employee") != null) {
     			session.setAttribute("employee", null);
     		}
+    		if (session.getAttribute("customerClicked") != null) {
+    			session.setAttribute("customerClicked", null);
+    		}
             return "login.jsp";
     }
 }

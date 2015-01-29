@@ -7,58 +7,73 @@
 
 
 <jsp:include page="template-top.jsp" />
-<div class="row">
-	<div class="col-md-3"></div>
-	<div class="col-md-6">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h4>Customer Account</h4>
-
-			</div>
-			<div class="panel-body">
-				<%
-            CustomerBean customer = (CustomerBean) session.getAttribute("customer");
-			%>
-				<table class="table">
-					<tr >
-						<th scope="row" width="25%">Name :</th>
-						<td id="customer-name"><%=customer.getFirstname()%> <%=customer.getLastname()%></td>
-					</tr>
-					<tr>
-						<th scope="row">Address :</th>
-						<td id="customer-address-1"><%=customer.getAddr_line1()%></td>
-					</tr>
-					<tr><% if(customer.getAddr_line2()!=null){ %>
+     <div class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+      </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+			<%
+            	CustomerBean customer = (CustomerBean) session.getAttribute("customer");
+			%>     
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">${customer.getFirstname() } ${customer.getLastname() }</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Address:</td>
+                        <td>${customer.getAddr_line1() }</td>
+                      </tr>
+                      
+                      <tr><% if(customer.getAddr_line2()!=null){ %>
 						<td></td>
 						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
 					</tr><%} %>
-					<tr>
-						<th scope="row">City,State,Zip:</th>
-						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
-					</tr>
-					<tr>
+					 
+					  <tr>
+						 <td>City</td>
+						 <td><%=customer.getCity()%></td>
+					 </tr>
+					 <tr>
+					 	<td>State</td>
+					 	<td><%=customer.getState()%></td>
+					 </tr>
+					 <tr>
+					 	<td>Zip Code</td>
+					 	<td><%=customer.getZip()%></td>
+					 </tr>
+                      
+                     <tr>
 						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
-						<th scope="row">Account balance:</th>
+						<td scope="row">Account balance:</td>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
 					</tr>
+					
 					<tr>
 						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
-						<th scope="row">Available balance:</th>
+						<td scope="row">Available balance:</td>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
 						</td>
-						<td></td>
 					</tr>
+					
 					<tr>
-						<th scope="row">Last Trading Day:</th>
+						<td>Last Trading Day:</td>
 						<c:set var="lastTradingDay" value="<%=customer.getLast_login_time()%>" />
-						<td id="last-trading-day"><fmt:formatDate value="${lastTradingDay}" pattern="MMM dd yyyy " /></td>
+						<td id="last-trading-day"><fmt:formatDate value="${lastTradingDay}" pattern="yyyy-MM-dd" /></td>
 					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3"></div>
-</div>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -114,5 +129,4 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-
 <jsp:include page="template-bottom.jsp" />

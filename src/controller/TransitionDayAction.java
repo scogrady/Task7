@@ -16,7 +16,6 @@ import org.mybeans.form.FormBeanFactory;
 
 import databeans.BuyFundBean;
 import databeans.CustomerBean;
-import databeans.FavoriteBean;
 import databeans.FundBean;
 import databeans.FundPriceHistoryBean;
 import databeans.PositionBean;
@@ -51,14 +50,17 @@ public class TransitionDayAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
+		List<String> errors = new ArrayList<String>();
 		try {
 
 			Transaction.begin();
-			FundBean[] fundList = fundDAO.getFunds();
+			FundBean[] fundList;
+			BuyFundBean[] buyFundList;
+			fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
 			fundList = fundDAO.getFunds();
 
-			BuyFundBean[] buyFundList = new BuyFundBean[fundList.length];
+			buyFundList = new BuyFundBean[fundList.length];
 			for (int i = 0; i < fundList.length; i++) {
 				buyFundList[i] = new BuyFundBean();
 				buyFundList[i].setFund_id(fundList[i].getFund_id());
@@ -93,10 +95,31 @@ public class TransitionDayAction extends Action {
 				return "employee/transition-day.jsp";
 			}
 			request.setAttribute("form", form);
-			List<String> errors = new ArrayList<String>();
 			request.setAttribute("errors", errors);
-
 			errors.addAll(form.getValidationErrors());
+			
+			fundList = fundDAO.getFunds();
+			request.setAttribute("fundList", fundList);
+			fundList = fundDAO.getFunds();
+
+			buyFundList = new BuyFundBean[fundList.length];
+			for (int i = 0; i < fundList.length; i++) {
+				buyFundList[i] = new BuyFundBean();
+				buyFundList[i].setFund_id(fundList[i].getFund_id());
+				buyFundList[i].setName(fundList[i].getName());
+				buyFundList[i].setSymbol(fundList[i].getSymbol());
+
+				FundPriceHistoryBean price = fundPriceHistoryDAO.readLastPrice(buyFundList[i]
+						.getFund_id());
+				if (price == null) {
+					price = new FundPriceHistoryBean();
+					price.setPrice(-1);
+				}
+				buyFundList[i].setPrice(price.getPrice());
+
+			}
+
+			request.setAttribute("buyFundList", buyFundList);
 			if (errors.size() != 0) {
 				return "employee/transition-day.jsp";
 			}
@@ -106,7 +129,7 @@ public class TransitionDayAction extends Action {
 				errors.add("Transition Day should be later than last transition day.");
 			}
 			if (fundList.length != form.getPrice().length){
-				errors.add("Fund number not match. Please refresh page");
+				errors.add("Fund number not match.");
 			}
 			if (errors.size() != 0) {
 				return "employee/transition-day.jsp";
@@ -256,19 +279,44 @@ public class TransitionDayAction extends Action {
 			request.setAttribute("message", message);
 			request.setAttribute("lastDate", form.getDate());
 			request.setAttribute("form", null);
+			fundList = fundDAO.getFunds();
+			request.setAttribute("fundList", fundList);
+			fundList = fundDAO.getFunds();
+
+			buyFundList = new BuyFundBean[fundList.length];
+			for (int i = 0; i < fundList.length; i++) {
+				buyFundList[i] = new BuyFundBean();
+				buyFundList[i].setFund_id(fundList[i].getFund_id());
+				buyFundList[i].setName(fundList[i].getName());
+				buyFundList[i].setSymbol(fundList[i].getSymbol());
+
+				FundPriceHistoryBean price = fundPriceHistoryDAO.readLastPrice(buyFundList[i]
+						.getFund_id());
+				if (price == null) {
+					price = new FundPriceHistoryBean();
+					price.setPrice(-1);
+				}
+				buyFundList[i].setPrice(price.getPrice());
+
+			}
+
+			request.setAttribute("buyFundList", buyFundList);
 			Transaction.commit();
 			return "employee/transition-day.jsp";
 		} catch (RollbackException e) {
 			e.printStackTrace();
-			return "error.jsp";
+			errors.add("System Exception");
+			return "employee/transition-day.jsp";
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error.jsp";
+			errors.add("System Exception");
+			return "employee/transition-day.jsp";
 		} catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error.jsp";
+			errors.add("System Exception");
+			return "employee/transition-day.jsp";
 		} finally {
 			if (Transaction.isActive())
 				Transaction.rollback();
