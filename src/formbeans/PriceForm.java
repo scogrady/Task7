@@ -2,6 +2,7 @@ package formbeans;
 
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,8 +41,13 @@ public class PriceForm extends FormBean {
 
 	public void setPrice(String[] s ) {
 		price = new double[s.length];
-		for (int i = 0; i < s.length; i++)
-			price[i] = s[i] == null ? -1 : Double.parseDouble(s[i]);
+		for (int i = 0; i < s.length; i++) {
+			try {
+				price[i] = Double.parseDouble(s[i]);
+			} catch(NumberFormatException e) {
+				price[i] = -1;
+			}				
+		}
 	}
 	
 	public void setDate(String s) {
@@ -55,6 +61,10 @@ public class PriceForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 		for (int i = 0; i < price.length; i++) {
+			if (price[i] == -1) {
+				errors.add("Price of the" + i + "th fund should not be empty");
+				continue;
+			}
 			if (price[i] < 5 || price[i] > 10000) {
 				errors.add("Price of the" + i + "th fund should be between $5 and $10000");
 			}

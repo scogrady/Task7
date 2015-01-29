@@ -51,11 +51,20 @@
 							<td class="title_center"><input type="hidden" name="id"
 								value="${fund.fund_id}">
 								<div class="form-inline">
-
+									<c:choose>
+										<c:when test="${form.price[inner.index] > 0 }">
+											<c:set var="price" value="${form.price[inner.index] }">
+											</c:set>
+										</c:when>
+										<c:otherwise>
+											<c:set var="price" value="Price">
+											</c:set>
+										</c:otherwise>
+									</c:choose>
 									<input type="text" name="price" class="form-control"
 										pattern="\d+(\.\d{1,2})?" placeholder="Price"
 										title="Fund Price should be between $5.00 and $10,000.00"
-										required value="${form.price[inner.index] }">
+										required value="${price }">
 								</div></td>
 						</tr>
 					</c:forEach>
