@@ -193,9 +193,8 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th width="40%">Date</th>
-												<th width="30%">Price</th>
-												<th width="30%">Status</th>
+												<th width="20%">Date</th>
+												<th width="80%">Price</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -205,7 +204,6 @@
 													<td>${fundPriceHistory.getPrice_date()}</td>
 													<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${fundPriceHistory.getPrice()/100.00}" /></td>
 													
-													<td>Up</td>
 												</tr>
 											</c:forEach>
 
