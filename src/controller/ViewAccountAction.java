@@ -29,7 +29,6 @@ import formbeans.IdForm;
 public class ViewAccountAction extends Action {
 
 	private TransactionDAO transactionDAO;
-
 	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
 	private FundDAO fundDAO;
@@ -56,7 +55,7 @@ public class ViewAccountAction extends Action {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		
+
 		TransactionBean[] transactionHistory;
 		try {
 			IdForm form = formBeanFactory.create(request);
@@ -74,8 +73,7 @@ public class ViewAccountAction extends Action {
 			System.out.println("customer clicked"
 					+ customerClicked.getCustomer_id());
 			// id setting
-			
-			
+
 			if (request.getParameter("customer_id") == null) {
 				id = customerClicked.getCustomer_id();
 			} else {
@@ -83,14 +81,14 @@ public class ViewAccountAction extends Action {
 				session.setAttribute("customerClicked", null);
 				session.setAttribute("customerClicked",
 						customerDAO.readFromID(id));
-						System.out.println(id);
+				System.out.println(id);
 			}
 
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			request.setAttribute("id", id);
-			//throw error that id in not valid.
-			if(customerDAO.readFromID(id)==null)
-			{	System.out.println("we cought you");
+			// throw error that id in not valid.
+			if (customerDAO.readFromID(id) == null) {
+				System.out.println("we cought you");
 				errors.add("Illegal customer id passed");
 				request.setAttribute("customer", customerDAO.readFromID(1));
 				return "employee/view-account.jsp";
@@ -112,7 +110,7 @@ public class ViewAccountAction extends Action {
 			for (int i = 0; i < transactionHistory.length; i++) {
 				transactions.add(transactionHistory[i]);
 			}
-			
+
 			Collections.sort(transactions);
 			request.setAttribute("transactionHistory", transactions);
 
