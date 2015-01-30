@@ -106,6 +106,9 @@ public class BuyFundAction extends Action {
 			}
 
 			errors.addAll(form.getValidationErrors());
+			
+			customer = customerDAO.readFromID(customer.getCustomer_id());
+			request.getSession().setAttribute("customer", customer);
 
 			if (errors.size() != 0) {
 				return "customer/buy-fund.jsp";

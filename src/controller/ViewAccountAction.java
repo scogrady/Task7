@@ -125,6 +125,11 @@ public class ViewAccountAction extends Action {
 				long amount = -1;
 				errors.addAll(form2.getValidationErrors());
 				amount = (long) (Double.parseDouble(form2.getAmount()) * 100);
+				
+				
+				if (errors.size() > 0) {
+					return "employee/view-account.jsp";
+				}
 
 				CustomerBean customer = customerDAO.readFromID(id);
 
