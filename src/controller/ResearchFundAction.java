@@ -75,8 +75,17 @@ public class ResearchFundAction extends Action {
 					request.setAttribute("comparePriceHistoryName", fundDAO.readById(compareId));
 				}
 
-			}
+			}		
 			request.setAttribute("now_id", fundId);
+			
+			if(fundList!=null&&fundList.length>0){
+				request.setAttribute("fundnumber", fundList.length);
+				for(int i=0;i<fundList.length;i++){
+					request.setAttribute("fundprice"+i, fundPriceHistoryDAO.readByFundID(fundList[i].getFund_id()));
+					request.setAttribute("fundname"+i, fundList[i].getFund_id());
+				}
+			}
+			
 			return "customer/research-fund.jsp";
 		} catch (ParseException e) {
 			errors.add("Illegal Fund Id.");
