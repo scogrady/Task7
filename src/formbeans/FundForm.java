@@ -55,17 +55,21 @@ public class FundForm extends FormBean {
 		if (!Pattern.matches("[A-Za-z0-9 ]+", name)) {
 			errors.add("Fund name should be all characters and numbers.");
 		}
-		if(name.length()>10||name.length()<3){
-			errors.add("Fund name should more than 3 digit and less than 10 digit.");
+		if(name.length()>50||name.length()<3){
+			errors.add("Fund name should be more than 3 digit and less than 50 characters.");
 		}
 
 		if (!Pattern.matches("[A-Za-z0-9 ]+", symbol)) {
 			errors.add("Fund symbol should be all characters and numbers.");
 		}
 		
-		if(symbol.length()>10||symbol.length()<3){
-			errors.add("Fund symbol should more than 3 digit and less than 10 digit.");
+		if(symbol.length()>50||symbol.length()<3){
+			errors.add("Fund symbol should be more than 3 digit and less than 50 characters.");
 		}
+		if(description !=null && description.length()>250){
+			errors.add("Fund description should be less than 250 characters.");
+		}
+		
 		
 		if (action == null)
 			errors.add("Button is required");
