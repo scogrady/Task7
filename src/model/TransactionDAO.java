@@ -34,16 +34,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 	}
 	
 	public void create(TransactionBean bean) throws RollbackException {
-		try {
-			Transaction.begin();
-			
-			createAutoIncrement(bean);
-			
-			Transaction.commit();
-			
-		} finally {
-			if (Transaction.isActive()) Transaction.rollback();
-		}		
+			createAutoIncrement(bean);	
 	}
 	
 	public TransactionBean[] readByCustomerID(int customer_id) throws RollbackException {

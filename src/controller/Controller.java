@@ -40,7 +40,6 @@ public class Controller extends HttpServlet {
         Action.add(new ViewTransactionAction(model));
         Action.add(new EmployeeViewTransHistoryAction(model));
         Action.add(new CreateFundAction(model));
-        Action.add(new DepositCheckAction(model));
         Action.add(new TransitionDayAction(model));
         Action.add(new ResetCustomerPwdAction(model));
         Action.add(new EmployeeResearchFundAction(model));

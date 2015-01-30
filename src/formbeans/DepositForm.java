@@ -55,13 +55,13 @@ public class DepositForm extends FormBean {
 			if (this.amount == "") {
 				num = 0.0;
 			} else if (!Pattern.matches("\\d*(\\.\\d{1,2})?", this.amount)) {
-				errors.add("Please double check your input. Only two digits after decimal are allowed.");
+				errors.add("Deposit amount should be less than $1,000,000,000. Only two digits after decimal are allowed.");
 			}
 
 			num = Double.parseDouble(this.amount);
 
-			if (!(num > 0 && num < (Double.MAX_VALUE / 100))) {
-				errors.add("Please double check your input.");
+			if (!(num > 0 && num < 1000000000.0)) {
+				errors.add("Deposit amount should be less than $1,000,000,000. ");
 			}
 			if (num == 0) {
 				errors.add("You can't deposit $0.");
