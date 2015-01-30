@@ -8,7 +8,7 @@
 <jsp:include page="template-top.jsp" />
 <style type="text/css">
 .scrollspy-customerList {
-	height: 600px;
+	height: 480px;
 	width: 100%;
 	overflow: auto;
 	position: relative;
@@ -35,13 +35,12 @@
 	<div class="col-md-3">
 		<h3>Customer list</h3>
 
-		<div style="overflow-y: auto" class="scrollspy-customerlist">
+		<div class="scrollspy-customerList">
 			<ul class="list-group">
 				<c:forEach var="customer" items="${customerList}">
 					<li class="list-group-item"><a
-						href="ViewAccount.do?customer_id=${customer.getCustomer_id()}">${customer.getFirstname()}
-							${customer.getLastname()}</a>
-						<p>User Name:${customer.getUsername()}</p></li>
+						href="ViewAccount.do?customer_id=${customer.getCustomer_id()}">
+							${customer.getUsername()}</a></li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -147,7 +146,7 @@
             </div>
           </div>
         </div>
-	<div class="col-md-7 col-md-offset-1" id="customer-account-info">
+	<div class="col-md-7 col-md-offset-4" id="customer-account-info">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h4>Financial Information</h4>
