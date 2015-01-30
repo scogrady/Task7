@@ -113,8 +113,11 @@ public class DepositCheckAction extends Action {
 			return "employee/view-account.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
+			System.out.println("roll"+e.getMessage());
 			return "employee/error.jsp";
 		} catch (FormBeanException e) {
+			System.out.println("bean"+e.getMessage());
+
 			return "employee/error.jsp";
 		} finally {
 			if (Transaction.isActive())

@@ -47,31 +47,23 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 	}
 
 	public CustomerBean read(String username) throws RollbackException {
-		try {
+	
 			CustomerBean[] userList = match(MatchArg.equals("username",
 					username));
 			if (userList.length == 0)
 				return null;
 			else
 				return userList[0];
-		} finally {
-			if (Transaction.isActive())
-				Transaction.rollback();
-		}
 	}
 
 	public CustomerBean readFromID(int userID) throws RollbackException {
-		try {
 			CustomerBean[] userList = match(MatchArg.equals("customer_id",
 					userID));
 			if (userList.length == 0)
 				return null;
 			else
 				return userList[0];
-		} finally {
-			if (Transaction.isActive())
-				Transaction.rollback();
-		}
+		
 	}
 
 	public void resetPassword(int customer_id, String password)
@@ -94,9 +86,9 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		}
 	}
 
-	public CustomerBean readByUsername(String username)
-			throws RollbackException {
-		try {
+	public CustomerBean readByUsername(String username) throws RollbackException
+			 {
+		
 			CustomerBean[] customers = match(MatchArg.equals("username",
 					username));
 			if (customers.length == 0) {
@@ -104,9 +96,6 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 			} else {
 				return customers[0];
 			}
-		} finally {
-			if (Transaction.isActive())
-				Transaction.rollback();
-		}
+		
 	}
 }
