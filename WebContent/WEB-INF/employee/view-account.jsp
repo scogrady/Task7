@@ -147,9 +147,9 @@
           </div>
         </div>
 	<div class="col-md-7 col-md-offset-4" id="customer-account-info">
-		<div class="panel panel-primary">
+		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h4>Financial Information</h4>
+				<h3 class="panel-title">Financial Information</h3>
 			</div>
 
 			<!-- Nav tabs -->
