@@ -27,10 +27,6 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	}
 	
 	public PositionBean[] readByCustomerID(int customer_id) throws RollbackException {
-		
-		
-			
-
 			PositionBean[] positionList = match(MatchArg.equals("customer_id", customer_id));
 			
 			

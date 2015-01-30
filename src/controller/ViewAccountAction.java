@@ -121,6 +121,7 @@ public class ViewAccountAction extends Action {
 			Collections.sort(transactions);
 			request.setAttribute("transactionHistory", transactions);
 			if (role != null && role.equals("Deposit")) {
+				System.out.println("deposit check");
 				DepositForm form2 = formBeanFactory2.create(request);
 				request.setAttribute("form2", form2);
 				if (!form2.isPresent()) {
@@ -170,7 +171,6 @@ public class ViewAccountAction extends Action {
 				Collections.sort(transactions2);
 				request.setAttribute("transactionHistory", transactions2);
 
-				return "employee/view-account.jsp";
 			}
 			Transaction.commit();
 

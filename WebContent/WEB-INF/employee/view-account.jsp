@@ -8,10 +8,11 @@
 <jsp:include page="template-top.jsp" />
 <style type="text/css">
 .scrollspy-customerList {
-	height: 800px;
+	height: 600px;
 	width: 100%;
 	overflow: auto;
 	position: relative;
+	overflow-y: scroll;
 }
 
 .scrollspy-transactionHistory {
@@ -34,7 +35,7 @@
 	<div class="col-md-3">
 		<h3>Customer list</h3>
 
-		<div data-spy="scroll" data-offset="50" class="scrollspy-customerlist">
+		<div style="overflow-y: auto" class="scrollspy-customerlist">
 			<ul class="list-group">
 				<c:forEach var="customer" items="${customerList}">
 					<li class="list-group-item"><a
@@ -223,18 +224,17 @@
 
 				</div>
 				<div role="tabpanel" class="tab-pane" id="profile">
-					<div data-spy="scroll" data-offset="50"
-						class="scrollspy-transactionHistory">
+					<div class="scrollspy-transactionHistory">
 						<table class="table">
 
 							<thead>
 								<tr>
 									<th width="25%">Date of Execution</th>
 									<th width="15%">Operation</th>
-									<th width="10%" class="title_right">Fund ID</th>
+									<th width="12%" class="title_right">Fund ID</th>
 									<th width="15%" class="title_right">Shares</th>
 									<th width="15%" class="title_right">Price</th>
-									<th width="20%" class="title_right">Amount</th>
+									<th width="18%" class="title_right">Amount</th>
 
 								</tr>
 							</thead>
