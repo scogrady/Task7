@@ -47,7 +47,6 @@ public class RequestCheckAction extends Action {
 				return "login.do";
 			}
 			Transaction.begin();
-
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
@@ -61,15 +60,10 @@ public class RequestCheckAction extends Action {
 
 			errors.addAll(form.getValidationErrors());
 
-			try {
-
 				amount = (long) (Double.parseDouble(form.getNum()) * 100);
 				if (amount > customer.getAvailable_cash()) {
 					errors.add("Not enough money in Available Cash");
 				}
-			} catch (NumberFormatException e) {
-				errors.add("Please double check your input.");
-			}
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
@@ -79,13 +73,15 @@ public class RequestCheckAction extends Action {
 			}
 
 			TransactionBean requestCheck = new TransactionBean();
-
+			
+			System.out.println("commit");
 			requestCheck.setCustomer_id(customer.getCustomer_id());
 			requestCheck.setGenerate_date(date);
 			requestCheck.setTransaction_type("Request Check");
 			requestCheck.setStatus("Pending");
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
+			System.out.println("commit1");
 
 			String message = "Successfully recieve your request.";
 			request.setAttribute("message", message);
@@ -96,17 +92,25 @@ public class RequestCheckAction extends Action {
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
+			
 			Transaction.commit();
-
 			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
+			System.out.println("roll request"+e.getMessage());
 			return "customer/error.jsp";
 		} catch (FormBeanException e) {
+			System.out.println("bean"+e.getMessage());
+
 			return "customer/error.jsp";
-		} finally {
+		}
+		 catch (NumberFormatException e) {
+			errors.add("Please double check your input.");
+		}
+		finally {
 			if (Transaction.isActive())
 				Transaction.rollback();
 		}
+		return "customer/request-check.jsp";
 	}
 }
