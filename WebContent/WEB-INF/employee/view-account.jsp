@@ -169,9 +169,9 @@
 					<table class="table table-striped">
 						<tr>
 							<th>Ticker</th>
-							<th class="title_right">Number of Shares</th>
-							<th class="title_right">Share Price</th>
-							<th class="title_right">Worth</th>
+							<th class="title_right">Shares</th>
+							<th class="title_right">Price</th>
+							<th class="title_right">Amount</th>
 						</tr>
 						<%
 							double total = 0;
@@ -201,10 +201,10 @@
 									}
 							%>
 							<c:set var="price" value="<%=price%>" />
-							<td class="title_right"><fmt:formatNumber type="number"
+							<td class="title_right">$<fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${price}" /></td>
 							<c:set var="worth" value="<%=pos.getShares() * price / 1000.00%>" />
-							<td class="title_right"><fmt:formatNumber type="number"
+							<td class="title_right">$<fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${worth}" /></td>
 						</tr>
 						<%
@@ -216,7 +216,7 @@
 							<td></td>
 							<td class="title_right">Total Investment:</td>
 							<c:set var="total" value="<%=total%>" />
-							<td class="title_right"><fmt:formatNumber type="number"
+							<td class="title_right">$<fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${total}" /></td>
 						<tr>
 					</table>
@@ -260,7 +260,7 @@
 
 														<c:set var="priceShares"
 															value="${transactionBean.getPrice() / 100 }" />
-														<td class="title_right"><fmt:formatNumber
+														<td class="title_right">$<fmt:formatNumber
 																type="number" pattern="#,##0.00" value="${priceShares}" /></td>
 													</c:when>
 
