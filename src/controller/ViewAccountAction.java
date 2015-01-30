@@ -82,8 +82,8 @@ public class ViewAccountAction extends Action {
 			}
 			CustomerBean customerClicked = (CustomerBean) request.getSession(
 					false).getAttribute("customerClicked");
-			System.out.println("customer clicked"
-					+ customerClicked.getCustomer_id());// id setting
+			//System.out.println("customer clicked"
+					//+ customerClicked.getCustomer_id());// id setting
 			if (request.getParameter("customer_id") == null) {
 				id = customerClicked.getCustomer_id();
 			} else {
@@ -91,13 +91,13 @@ public class ViewAccountAction extends Action {
 				session.setAttribute("customerClicked", null);
 				session.setAttribute("customerClicked",
 						customerDAO.readFromID(id));
-				System.out.println(id);
+				//System.out.println(id);
 			}
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			request.setAttribute("id", id);
 			// throw error that id in not valid.
 			if (customerDAO.readFromID(id) == null) {
-				System.out.println("we cought you");
+				//System.out.println("we cought you");
 				errors.add("Illegal customer id passed");
 				request.setAttribute("customer", customerDAO.readFromID(1));
 				return "employee/view-account.jsp";
@@ -121,7 +121,7 @@ public class ViewAccountAction extends Action {
 			Collections.sort(transactions);
 			request.setAttribute("transactionHistory", transactions);
 			if (role != null && role.equals("Deposit")) {
-				System.out.println("deposit check");
+				//System.out.println("deposit check");
 				DepositForm form2 = formBeanFactory2.create(request);
 				request.setAttribute("form2", form2);
 				if (!form2.isPresent()) {

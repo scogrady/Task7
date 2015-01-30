@@ -46,7 +46,7 @@ public class CreateCustomerAction extends Action {
 			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			if (!form.isPresent()) {
-				System.out.println("create customer form is not present!");
+				// System.out.println("create customer form is not present!");
 				return "employee/create-customer.jsp";
 			}
 
@@ -54,20 +54,16 @@ public class CreateCustomerAction extends Action {
 
 			CustomerBean customer = customerDAO.read(form.getUsername());
 			if (customer != null) {
-				System.out.println(" customer is already exist");	
+				// System.out.println(" customer is already exist");
 				errors.add("Customer username is already exist.");
 			}
 
 			if (errors.size() != 0) {
-				System.out.println(" error :");	
-				for(int i=0;i<errors.size();i++){
-					System.out.println(errors.get(i));
-				}
 				return "employee/create-customer.jsp";
 			}
 
 			// Create new UserBean
-			System.out.println("create customer now!");
+			// System.out.println("create customer now!");
 			customer = new CustomerBean();
 			customer.setUsername(form.getUsername());
 			customer.setAddr_line1(form.getAddr_line1());
@@ -84,7 +80,7 @@ public class CreateCustomerAction extends Action {
 			customer.setCurrent_cash(0);
 			customer.setAvailable_cash(0);
 			customerDAO.create(customer);
-			
+
 			String message = "Successfully created a new customer account.";
 			request.setAttribute("message", message);
 			request.setAttribute("form", null);

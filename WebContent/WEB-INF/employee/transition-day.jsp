@@ -89,7 +89,7 @@
 					<input type="text" class="form-control col-md-2" name="date"
 						pattern="\d{4}-\d{2}-\d{2}"
 						title="Please input the right date as yyyy-MM-dd and make sure it is later than last transition day"
-						placeholder="Transition Date" required value=${form.date }>
+						placeholder="Transition Date (yyyy-MM-dd)" required value=${form.date }>
 				</div>
 				<input type="submit" class="btn btn-primary" name="action"
 					value="Start Transition Day!">

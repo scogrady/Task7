@@ -58,7 +58,7 @@ public class CreateFundAction extends Action{
 			}
 
 			// Create new UserBean
-			System.out.println("create fund now!");
+			//System.out.println("create fund now!");
 			fund = new FundBean();
 			fund.setDescription(form.getDescription());
 			fund.setName(form.getName());

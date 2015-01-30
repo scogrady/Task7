@@ -8,7 +8,7 @@
 <jsp:include page="template-top.jsp" />
 <style type="text/css">
 .scrollspy-customerList {
-	height: 600px;
+	height: 480px;
 	width: 100%;
 	overflow: auto;
 	position: relative;
@@ -35,13 +35,12 @@
 	<div class="col-md-3">
 		<h3>Customer list</h3>
 
-		<div style="overflow-y: auto" class="scrollspy-customerlist">
+		<div class="scrollspy-customerList">
 			<ul class="list-group">
 				<c:forEach var="customer" items="${customerList}">
 					<li class="list-group-item"><a
-						href="ViewAccount.do?customer_id=${customer.getCustomer_id()}">${customer.getFirstname()}
-							${customer.getLastname()}</a>
-						<p>User Name:${customer.getUsername()}</p></li>
+						href="ViewAccount.do?customer_id=${customer.getCustomer_id()}">
+							${customer.getUsername()}</a></li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -147,10 +146,10 @@
             </div>
           </div>
         </div>
-	<div class="col-md-7 col-md-offset-1" id="customer-account-info">
-		<div class="panel panel-primary">
+	<div class="col-md-7 col-md-offset-4" id="customer-account-info">
+		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h4>Financial Information</h4>
+				<h3 class="panel-title">Financial Information</h3>
 			</div>
 
 			<!-- Nav tabs -->
@@ -169,9 +168,9 @@
 					<table class="table table-striped">
 						<tr>
 							<th>Ticker</th>
-							<th class="title_right">Number of Shares</th>
-							<th class="title_right">Share Price</th>
-							<th class="title_right">Worth</th>
+							<th class="title_right">Shares</th>
+							<th class="title_right">Price</th>
+							<th class="title_right">Amount</th>
 						</tr>
 						<%
 							double total = 0;
@@ -201,10 +200,10 @@
 									}
 							%>
 							<c:set var="price" value="<%=price%>" />
-							<td class="title_right"><fmt:formatNumber type="number"
+							<td class="title_right">$<fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${price}" /></td>
 							<c:set var="worth" value="<%=pos.getShares() * price / 1000.00%>" />
-							<td class="title_right"><fmt:formatNumber type="number"
+							<td class="title_right">$<fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${worth}" /></td>
 						</tr>
 						<%
@@ -216,7 +215,7 @@
 							<td></td>
 							<td class="title_right">Total Investment:</td>
 							<c:set var="total" value="<%=total%>" />
-							<td class="title_right"><fmt:formatNumber type="number"
+							<td class="title_right">$<fmt:formatNumber type="number"
 									pattern="#,##0.00" value="${total}" /></td>
 						<tr>
 					</table>
@@ -260,7 +259,7 @@
 
 														<c:set var="priceShares"
 															value="${transactionBean.getPrice() / 100 }" />
-														<td class="title_right"><fmt:formatNumber
+														<td class="title_right">$<fmt:formatNumber
 																type="number" pattern="#,##0.00" value="${priceShares}" /></td>
 													</c:when>
 
