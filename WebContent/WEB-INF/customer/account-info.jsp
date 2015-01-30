@@ -29,10 +29,11 @@
                         <td>${customer.getAddr_line1() }</td>
                       </tr>
                       
-                      <tr><% if(customer.getAddr_line2()!=null){ %>
+                      <% if(customer.getAddr_line2() != null && !customer.getAddr_line2().equals("")){ %>
+                      <tr>
 						<td></td>
 						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
-					</tr><%} %>
+					  </tr><% }%>
 					 
 					  <tr>
 						 <td>City</td>

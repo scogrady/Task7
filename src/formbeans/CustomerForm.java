@@ -121,73 +121,58 @@ public class CustomerForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		
-//username & lastname & firstname 3~30
-//address 3~30
-//city 3~30
+
+		// username & lastname & firstname 3~30
+		// address 3~30
+		// city 3~30
 		if (username == null || username.length() == 0) {
 			errors.add("Email address is required");
-		}
-		if (!Pattern.matches("[\\w]+", username)) {
+		} else if (!Pattern.matches("[\\w]+", username)) {
 			errors.add("Username should be all characters.");
-		}
-		if(username.length()>30||username.length()<3){
+		} else if (username.length() > 30 || username.length() < 3) {
 			errors.add("Username shoule more than 3 digit and less than 30 digit.");
 		}
+
 		if (firstname == null || firstname.length() == 0) {
 			errors.add("First Name is required");
-		}
-		if (!Pattern.matches("[A-Za-z ]+", firstname)) {
+		} else if (!Pattern.matches("[A-Za-z ]+", firstname)) {
 			errors.add("First name should be all characters.");
-		}
-		
-		if(firstname.length()>30||firstname.length()<3){
-			errors.add("First name shoule more than 3 digit and less than 30 digit.");
+		} else if (firstname.length() > 30 || firstname.length() < 2) {
+			errors.add("First name shoule more than 2 digit and less than 30 digit.");
 		}
 		if (lastname == null || lastname.length() == 0) {
 			errors.add("Last Name is required");
-		}
-		if (!Pattern.matches("[A-Za-z ]+", lastname)) {
+		} else if (!Pattern.matches("[A-Za-z ]+", lastname)) {
 			errors.add("Last name should be all characters.");
-		}
-		
-		if(lastname.length()>30||lastname.length()<3){
-			errors.add("Last name shoule more than 3 digit and less than 30 digit.");
+		} else if (lastname.length() > 30 || lastname.length() < 2) {
+			errors.add("Last name shoule more than 2 digit and less than 30 digit.");
 		}
 		if (errors.size() > 0) {
 			return errors;
 		}
 		if (password == null || password.length() == 0) {
 			errors.add("Password is required");
+		} else if (password.length() > 20 || password.length() < 3) {
+			errors.add("Password should be more than 3 digit and less than 20 digit.");
 		}
-		if(password.length()>20||password.length()<3){
-			errors.add("Password should be more than 3 digit less than 20 digit.");
-		}
-		if (confirm == null || confirm.length() == 0) {
+
+		else if (confirm == null || confirm.length() == 0) {
 			errors.add("Confirm Password is required");
 		}
-		
+
 		if (addr_line1 == null || addr_line1.length() == 0) {
 			errors.add("Addr_line1 address is required");
-		}
-		
-		if (!Pattern.matches("\\w+", addr_line1)) {
-			errors.add("Please double check Address.");
-		}
-		
-		if(addr_line1.length()>50||addr_line1.length()<3){
-			errors.add("Please double check your Address.");
+		} else if (!Pattern.matches("[\\w ]+", addr_line1)) {
+			errors.add("Address shouldn't have special characters.");
+		} else if (addr_line1.length() > 50 || addr_line1.length() < 3) {
+			errors.add("Address should be more than 3 digit and less than 50 digit.");
 		}
 
 		if (city == null || city.length() == 0) {
 			errors.add("City is required");
-		}
-		
-		if (!Pattern.matches("[A-Za-z ]+", city)) {
+		} else if (!Pattern.matches("[A-Za-z ]+", city)) {
 			errors.add("City should be all characters.");
-		}
-		
-		if(city.length()>30||city.length()<3){
+		} else if (city.length() > 30 || city.length() < 3) {
 			errors.add("City shoule more than 3 digit and less than 30 digit");
 		}
 
@@ -198,16 +183,15 @@ public class CustomerForm extends FormBean {
 		if (zip == null || zip.length() == 0) {
 			errors.add("Zip Code is required");
 		}
-		try{
+		try {
 			int zipcode = Integer.parseInt(zip);
-			if(zipcode<10000 || zipcode>100000){
+			if (zipcode < 10000 || zipcode > 100000) {
 				errors.add("Zip Code should be 5 digit number");
 			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			errors.add("Zip Code should be 5 digit number");
 		}
-		
+
 		if (errors.size() > 0) {
 			return errors;
 		}
@@ -215,7 +199,7 @@ public class CustomerForm extends FormBean {
 		if (!password.equals(confirm)) {
 			errors.add("Passwords are not the same");
 		}
-	
+
 		if (action == null)
 			errors.add("Button is required");
 

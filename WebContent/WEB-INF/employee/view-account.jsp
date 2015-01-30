@@ -59,8 +59,22 @@
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
+                    <tr>
+                    	<td>Username</td>
+                    	<td>${customer.getUsername() }</td>
+                    </tr>
+					<tr>
+						<td>Password</td>
+						<td id="customer-password">
+							<div class="row">
+								<p class="col-md-3">******</p>
+								<a style="float:right" class="btn btn-sm btn-default" href="ResetCustomerPwd.do">Reset
+									Password</a>
+							</div>
+						</td>
+					</tr>
                       <tr>
-                        <td>Address:</td>
+                        <td>Address</td>
                         <td>${customer.getAddr_line1() }</td>
                       </tr>
                       <% if(customer.getAddr_line2() != null && !customer.getAddr_line2().equals("")){ %>
@@ -84,16 +98,41 @@
                       
                      <tr>
 						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
-						<td scope="row">Account balance:</td>
+						<td scope="row">Account Balance</td>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
 					</tr>
 					
 					<tr>
 						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
-						<td scope="row">Available balance:</td>
+						<td scope="row">Available Balance</td>
 						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
 						</td>
 					</tr>
+					
+					<tr>
+						<td width="40%">Deposit Money</td>
+						<td>
+								<form role="form" method="post" action="ViewAccount.do">
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">$</span> <input
+											type="hidden" name="username"
+											value="${customer.getUsername()}"><input
+											type="hidden" name="avail_cash"
+											value="${customer.getAvailable_cash()}"> 
+											<input
+											type="text" name="amount" class="form-control input-sm"
+											pattern="\d*(\.\d{1,2})?" placeholder="Amount"
+											value="${form.getAmount()}"
+											title="Only two digits after decimal are allowed." required>
+										<span class="input-group-btn"> <input
+											class="btn btn-sm btn-default" type="submit" name="action"
+											value="Deposit">
+										</span>
+									</div>
+								</form>
+						</td>
+					</tr>
+				
 					
 					<tr>
 						<td>Last Trading Day:</td>
@@ -107,102 +146,8 @@
             </div>
           </div>
         </div>
-	<div class="col-md-9" id="customer-account-info">
+	<div class="col-md-7 col-md-offset-1" id="customer-account-info">
 		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h4>Customer Account</h4>
-			</div>
-			<div class="panel-body">
-				<%
-					 customer = (CustomerBean) request
-							.getAttribute("customer");
-				%>
-				<table class="table">
-					<tr>
-						<th scope="row" width="25%">Name :</th>
-						<td id="customer-name"><%=customer.getFirstname()%> <%=customer.getLastname()%></td>
-					</tr>
-					<tr>
-						<th scope="row" width="25%">Password :</th>
-						<td id="customer-password">
-							<div class="row">
-								<p class="col-md-3">******</p>
-								<a class="btn btn-default" href="ResetCustomerPwd.do">Reset
-									Password</a>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">Address :</th>
-						<td id="customer-address-1"><%=customer.getAddr_line1()%></td>
-					</tr>
-					<%
-						if (customer.getAddr_line2() != null) {
-					%>
-					<tr>
-						<td></td>
-						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
-					</tr>
-					<%
-						}
-					%>
-					<tr>
-						<th scope="row">City,State,Zip:</th>
-						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
-					</tr>
-					<tr>
-						<c:set var="currentBalance"
-							value="${customer.getCurrent_cash()/100}" />
-							
-							
-						<th scope="row">Current balance:</th>
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
-								value="${currentBalance}" /></td>
-					</tr>
-					<tr>
-
-						<th scope="row">Available balance:</th>
-						<td>
-							<div class="row">
-								<p class="col-md-3">
-									<c:set var="AvailBalance"
-										value="${customer.getAvailable_cash()/100}" />
-									$
-									<fmt:formatNumber type="number" pattern="#,##0.00"
-										value="${AvailBalance}" />
-
-								</p>
-								<form role="form" method="post" action="ViewAccount.do">
-									<div class="input-group col-md-5">
-										<span class="input-group-addon" id="basic-addon1">$</span> <input
-											type="hidden" name="username"
-											value="${customer.getUsername()}"><input
-											type="hidden" name="avail_cash"
-											value="${customer.getAvailable_cash()}"> <input
-											type="text" name="amount" class="form-control"
-											pattern="\d*(\.\d{1,2})?" placeholder="Amount"
-											value="${form.getAmount()}"
-											title="Only two digits after decimal are allowed." required>
-										<span class="input-group-btn"> <input
-											class="btn btn-default" type="submit" name="action"
-											value="Deposit">
-										</span>
-									</div>
-								</form>
-							</div>
-						</td>
-						<td>
-					</tr>
-
-					<tr>
-						<th scope="row">Last Trading Day:</th>
-						<c:set var="lastTradingDay"
-							value="<%=customer.getLast_login_time()%>" />
-						<td id="last-trading-day"><fmt:formatDate
-								value="${lastTradingDay}" pattern="MMM dd yyyy " /></td>
-					</tr>
-				</table>
-			</div>
 			<div class="panel-heading">
 				<h4>Financial Information</h4>
 			</div>

@@ -1,8 +1,5 @@
 
-
 package controller;
-
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +19,8 @@ import databeans.CustomerBean;
 import databeans.PositionBean;
 import databeans.UserBean;
 
-
-
 public class AccountInfoAction extends Action {
 
-	
-	
 	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
 	private FundDAO fundDAO;
@@ -64,7 +57,6 @@ public class AccountInfoAction extends Action {
 			request.setAttribute("fundTicker", fundDAO.getFunds());
 			//to get fund price 
 			request.setAttribute("priceList", fundPriceHistoryDAO.getFundPriceHistorys());
-			
 			
 			
 			//request.setAttribute("userList",userDAO.getUsers());

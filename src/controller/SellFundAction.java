@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.genericdao.RollbackException;
+import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -53,6 +54,7 @@ public class SellFundAction extends Action {
 		request.setAttribute("errors", errors);
 		CustomerBean customer = (CustomerBean) request.getSession(false)
 				.getAttribute("customer");
+		
 		Date date = new Date();
 		PositionBean[] fundList;
 		SellFundBean[] sellFundList;
@@ -64,6 +66,9 @@ public class SellFundAction extends Action {
 				errors.add("Wrong User");
 				return "login.do";
 			}
+			Transaction.begin();
+			
+			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
@@ -172,6 +177,7 @@ public class SellFundAction extends Action {
 				sellFundList[i].setPrice(price.getPrice());
 			}
 			request.setAttribute("sellFundList", sellFundList);
+			Transaction.commit();
 
 			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {
@@ -179,6 +185,9 @@ public class SellFundAction extends Action {
 			return "customer/error.jsp";
 		} catch (FormBeanException e) {
 			return "customer/error.jsp";
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
 		}
 
 	}
