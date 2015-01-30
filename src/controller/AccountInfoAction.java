@@ -44,13 +44,17 @@ public class AccountInfoAction extends Action {
 	}
 
 	public String getName() {
-	return "AccountInfo.do"; }
+		return "AccountInfo.do"; 
+	}
 
 	public String perform(HttpServletRequest request) {
         // Set up the errors list
-		
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors",errors);
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
+		if (request.getSession(false).getAttribute("customer") == null) {
+			errors.add("Wrong User");
+			return "login.do";
+		}
         
 		try {
 			 CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");

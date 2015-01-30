@@ -45,7 +45,68 @@
 			</ul>
 		</div>
 	</div>
-
+        <div class="col-md-7 col-md-offset-1 toppad" >
+			<%
+            	CustomerBean customer = (CustomerBean) request.getAttribute("customer");
+			%>     
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">${customer.getFirstname() } ${customer.getLastname() }</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Address:</td>
+                        <td>${customer.getAddr_line1() }</td>
+                      </tr>
+                      <% if(customer.getAddr_line2() != null && !customer.getAddr_line2().equals("")){ %>
+                      <tr>
+						<td></td>
+						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
+					  </tr><% }%>
+					 
+					  <tr>
+						 <td>City</td>
+						 <td><%=customer.getCity()%></td>
+					 </tr>
+					 <tr>
+					 	<td>State</td>
+					 	<td><%=customer.getState()%></td>
+					 </tr>
+					 <tr>
+					 	<td>Zip Code</td>
+					 	<td><%=customer.getZip()%></td>
+					 </tr>
+                      
+                     <tr>
+						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
+						<td scope="row">Account balance:</td>
+						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
+					</tr>
+					
+					<tr>
+						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
+						<td scope="row">Available balance:</td>
+						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
+						</td>
+					</tr>
+					
+					<tr>
+						<td>Last Trading Day:</td>
+						<c:set var="lastTradingDay" value="<%=customer.getLast_login_time()%>" />
+						<td id="last-trading-day"><fmt:formatDate value="${lastTradingDay}" pattern="yyyy-MM-dd" /></td>
+					</tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 	<div class="col-md-9" id="customer-account-info">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -53,7 +114,7 @@
 			</div>
 			<div class="panel-body">
 				<%
-					CustomerBean customer = (CustomerBean) request
+					 customer = (CustomerBean) request
 							.getAttribute("customer");
 				%>
 				<table class="table">

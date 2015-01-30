@@ -41,6 +41,10 @@ public class DepositCheckAction extends Action {
 		Date date = new Date();
 
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			request.setAttribute("transactionList",
 					transactionDAO.getTransactions());// TODO DELETE
 

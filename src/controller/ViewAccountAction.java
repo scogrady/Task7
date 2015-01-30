@@ -66,7 +66,11 @@ public class ViewAccountAction extends Action {
 
     	String role = request.getParameter("action");
 			
-		try {			
+		try {	
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			IdForm form = formBeanFactory.create(request);
 			int id;
 			if (session.getAttribute("customerClicked") == null)// for first time coming to page
