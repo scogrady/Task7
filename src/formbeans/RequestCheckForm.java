@@ -41,7 +41,7 @@ public class RequestCheckForm extends FormBean {
 			Double num;
 			if (this.num == "") {
 				num = 0.0;
-			} else if (!Pattern.matches("\\d*(\\.\\d{1,2})?", this.num)) {
+			} else if (!Pattern.matches("\\d*(\\.\\d{1,2}0*)?", this.num)) {
 				errors.add("Please double check your input. Only two digits after decimal are allowed.");
 			}
 

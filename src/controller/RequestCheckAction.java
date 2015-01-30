@@ -82,7 +82,7 @@ public class RequestCheckAction extends Action {
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
 
-			String message = "Successfully recieve your request.";
+			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 			request.setAttribute("form", null);
 

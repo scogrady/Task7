@@ -93,6 +93,10 @@ public class BuyFundAction extends Action {
 			if (!form.isPresent()) {
 				return "customer/buy-fund.jsp";
 			}
+			
+			if (errors.size() != 0) {
+				return "customer/buy-fund.jsp";
+			}
 
 			long num = -1;
 

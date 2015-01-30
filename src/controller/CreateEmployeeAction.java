@@ -51,7 +51,7 @@ public class CreateEmployeeAction extends Action {
 			EmployeeBean employee = employeeDAO.read(form.getUsername());
 			if (employee != null) {
 				// System.out.println(" employee  is already exist");
-				errors.add("Employee username is already exist.");
+				errors.add("Employee username already exists.");
 			}
 
 			if (errors.size() != 0) {
