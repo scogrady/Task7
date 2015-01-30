@@ -97,6 +97,9 @@
 											${comparePriceHistory.getPrice()/100.00},
 										</c:forEach>]
 							    }</c:if>
+							    
+							    
+							    
 							]
 					});
 	});

@@ -12,7 +12,7 @@
 	width: 100%;
 	overflow: auto;
 	position: relative;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .scrollspy-transactionHistory {
