@@ -41,6 +41,10 @@ public class EmployeeResearchFundAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			FundBean[] fundList = fundDAO.getFunds();
 			FundBean[] recommanList = Arrays.copyOf(fundList, 3);
 			request.setAttribute("fundList", fundList);

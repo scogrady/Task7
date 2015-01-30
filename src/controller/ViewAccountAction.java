@@ -66,11 +66,13 @@ public class ViewAccountAction extends Action {
 		String role = request.getParameter("action");
 
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			IdForm form = formBeanFactory.create(request);
 			int id;
-			if (session.getAttribute("customerClicked") == null)// for first
-																// time coming
-																// to page
+			if (session.getAttribute("customerClicked") == null)
 			{
 				session.setAttribute("customerClicked",
 						customerDAO.readFromID(1));

@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function(){
 	var accountOp = ["AccountInfo", "ChangePwd", "TransHistory", "RequestCheck"];
 	var fundOp = ["BuyFund", "SellFund", "ResearchFund"];
 	var active = false;

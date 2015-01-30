@@ -38,6 +38,10 @@ public class CreateCustomerAction extends Action {
 		request.setAttribute("errors", errors);
 		CustomerForm form;
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);

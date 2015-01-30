@@ -32,7 +32,11 @@ public class EmployeeViewTransHistoryAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-				try {
+		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			IdForm form = formBeanFactory.create(request);
 
 			int id = form.getIdAsInt();

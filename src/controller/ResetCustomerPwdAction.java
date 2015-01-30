@@ -30,6 +30,10 @@ public class ResetCustomerPwdAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		try{
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			request.setAttribute("customerList", customerDAO.getCustomers());
 			ResetForm form = formBeanFactory.create(request);
 			request.setAttribute("errors", errors);

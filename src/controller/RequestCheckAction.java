@@ -42,6 +42,10 @@ public class RequestCheckAction extends Action {
 		Date date = new Date();
 
 		try {
+			if (request.getSession(false).getAttribute("customer") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			Transaction.begin();
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);

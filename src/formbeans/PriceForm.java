@@ -70,17 +70,20 @@ public class PriceForm extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		for (int i = 0; i < price.length; i++) {
-			if (price[i] == -1) {
-				errors.add("Price of the" + i + "th fund should not be empty");
-				continue;
-			}
-			if (price[i] < 5 || price[i] > 10000) {
-				errors.add("Price of the" + i + "th fund should be between $5 and $10000");
-				continue;
-			}
-			if (!Double.toString(price[i]).matches("\\d+(\\.\\d{1,2})?")) {
-				errors.add("Price of the " + i + "th fund should be float and have at most two decimal");
+		System.out.println(price);
+		if (price != null) {
+			for (int i = 0; i < price.length; i++) {
+				if (price[i] == -1) {
+					errors.add("Price of the" + i + "th fund should not be empty");
+					continue;
+				}
+				if (price[i] < 5 || price[i] > 10000) {
+					errors.add("Price of the" + i + "th fund should be between $5 and $10000");
+					continue;
+				}
+				if (!Double.toString(price[i]).matches("\\d+(\\.\\d{1,2})?")) {
+					errors.add("Price of the " + i + "th fund should be float and have at most two decimal");
+				}
 			}
 		}
 		if (!action.equals("Start Transition Day!")) {

@@ -7,8 +7,6 @@
 
 <div class="col-xs-12 col-sm-12">
 	<div class="row">
-
-		<div  class="col-md-3"><p>Add navi Bar here!!! (Create Fund & Research Fund )</p></div>
 		
 		<div class="col-md-12">
 	
