@@ -42,7 +42,7 @@ public class CreateEmployeeAction extends Action {
 			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			if (!form.isPresent()) {
-				System.out.println("create employee form is not present!");
+				// System.out.println("create employee form is not present!");
 				return "employee/create-employee.jsp";
 			}
 
@@ -50,7 +50,7 @@ public class CreateEmployeeAction extends Action {
 
 			EmployeeBean employee = employeeDAO.read(form.getUsername());
 			if (employee != null) {
-				System.out.println(" employee  is already exist");	
+				// System.out.println(" employee  is already exist");
 				errors.add("Employee username is already exist.");
 			}
 
@@ -61,17 +61,17 @@ public class CreateEmployeeAction extends Action {
 			// Create new UserBean
 			employee = new EmployeeBean();
 			employee.setUsername(form.getUsername());
-			System.out.println("username = "+form.getUsername());
-			
+			// System.out.println("username = "+form.getUsername());
+
 			employee.setFirstname(form.getFirstname());
-			System.out.println("first = "+form.getFirstname());
+			// System.out.println("first = "+form.getFirstname());
 			employee.setLastname(form.getLastname());
-			System.out.println("last = "+form.getLastname());
+			// System.out.println("last = "+form.getLastname());
 			employee.setPassword(form.getPassword());
-			System.out.println("pass = "+form.getPassword());
+			// System.out.println("pass = "+form.getPassword());
 			employee.setStatus(0);
 			employeeDAO.create(employee);
-			System.out.println("create employee now!");
+			// System.out.println("create employee now!");
 			String message = "Successfully created a new employee account.";
 			request.setAttribute("message", message);
 

@@ -74,14 +74,13 @@ public class RequestCheckAction extends Action {
 
 			TransactionBean requestCheck = new TransactionBean();
 			
-			System.out.println("commit");
+			//System.out.println("commit");
 			requestCheck.setCustomer_id(customer.getCustomer_id());
 			requestCheck.setGenerate_date(date);
 			requestCheck.setTransaction_type("Request Check");
 			requestCheck.setStatus("Pending");
 			requestCheck.setAmount(amount);
 			transactionDAO.create(requestCheck);
-			System.out.println("commit1");
 
 			String message = "Successfully recieve your request.";
 			request.setAttribute("message", message);
@@ -97,10 +96,8 @@ public class RequestCheckAction extends Action {
 			return "customer/request-check.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			System.out.println("roll request"+e.getMessage());
 			return "customer/error.jsp";
 		} catch (FormBeanException e) {
-			System.out.println("bean"+e.getMessage());
 
 			return "customer/error.jsp";
 		}

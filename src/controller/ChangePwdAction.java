@@ -50,7 +50,7 @@ public class ChangePwdAction extends Action {
 	        if (!form.isPresent()) {
 	            return "customer/change-pwd.jsp";
 	        }
-	        System.out.println("Coming in after putting form");
+	        //System.out.println("Coming in after putting form");
 	        // Check for any validation errors
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
