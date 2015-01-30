@@ -17,6 +17,7 @@ import model.FundPriceHistoryDAO;
 import model.TransactionDAO;
 
 import org.genericdao.RollbackException;
+import org.genericdao.Transaction;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
@@ -70,10 +71,11 @@ public class ViewAccountAction extends Action {
 				errors.add("Wrong User");
 				return "login.do";
 			}
+			Transaction.begin();
+
 			IdForm form = formBeanFactory.create(request);
 			int id;
-			if (session.getAttribute("customerClicked") == null)
-			{
+			if (session.getAttribute("customerClicked") == null) {
 				session.setAttribute("customerClicked",
 						customerDAO.readFromID(1));
 				id = 1;
@@ -127,8 +129,7 @@ public class ViewAccountAction extends Action {
 				long amount = -1;
 				errors.addAll(form2.getValidationErrors());
 				amount = (long) (Double.parseDouble(form2.getAmount()) * 100);
-				
-				
+
 				if (errors.size() > 0) {
 					return "employee/view-account.jsp";
 				}
@@ -171,6 +172,7 @@ public class ViewAccountAction extends Action {
 
 				return "employee/view-account.jsp";
 			}
+			Transaction.commit();
 
 			return "employee/view-account.jsp";
 		} catch (RollbackException e) {
@@ -180,6 +182,9 @@ public class ViewAccountAction extends Action {
 			errors.add("Bean Exceptions");
 			return "error.jsp";
 
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
 		}
 	}
 }
