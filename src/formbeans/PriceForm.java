@@ -74,15 +74,15 @@ public class PriceForm extends FormBean {
 		if (price != null) {
 			for (int i = 0; i < price.length; i++) {
 				if (price[i] == -1) {
-					errors.add("Price of the" + i + "th fund should not be empty");
+					errors.add("Price of the" + (i + 1) + "th fund should not be empty");
 					continue;
 				}
 				if (price[i] < 5 || price[i] > 10000) {
-					errors.add("Price of the" + i + "th fund should be between $5 and $10000");
+					errors.add("Price of the" + (i + 1)+ "th fund should be between $5 and $10000");
 					continue;
 				}
 				if (!Double.toString(price[i]).matches("\\d+(\\.\\d{1,2})?")) {
-					errors.add("Price of the " + i + "th fund should be float and have at most two decimal");
+					errors.add("Price of the " +(i + 1) + "th fund should be float and have at most two decimal");
 				}
 			}
 		}
