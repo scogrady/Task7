@@ -45,7 +45,7 @@
 									<c:set var="price" scope="session"
 										value="${transactionBean.getPrice() / 100 }" />
 								
-									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
+									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
 											value="${price}" /></td>
 								</c:when>
 
@@ -80,7 +80,7 @@
 									
 									<c:set var="priceShares"
 										value="${transactionBean.getPrice() / 100 }" />
-									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
+									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
 											value="${priceShares}" /></td>
 
 									<c:set var="getAmt"

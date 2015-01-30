@@ -62,7 +62,7 @@ public class BuyFundAction extends Action {
 				errors.add("Wrong User");
 				return "login.do";
 			}
-			//Transaction.begin();
+			// Transaction.begin();
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
@@ -83,7 +83,6 @@ public class BuyFundAction extends Action {
 					price.setPrice(-1);
 				}
 				buyFundList[i].setPrice(price.getPrice());
-
 			}
 
 			request.setAttribute("buyFundList", buyFundList);
@@ -94,8 +93,6 @@ public class BuyFundAction extends Action {
 			if (!form.isPresent()) {
 				return "customer/buy-fund.jsp";
 			}
-
-			// check if it's within available balance?
 
 			long num = -1;
 
@@ -110,7 +107,7 @@ public class BuyFundAction extends Action {
 			}
 
 			errors.addAll(form.getValidationErrors());
-			
+
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
@@ -118,7 +115,6 @@ public class BuyFundAction extends Action {
 				return "customer/buy-fund.jsp";
 			}
 
-			// handle amount from form
 			Transaction.begin();
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
@@ -127,26 +123,22 @@ public class BuyFundAction extends Action {
 			buyFund.setCustomer_id(customer.getCustomer_id());
 			buyFund.setFund_id(Integer.parseInt(form.getFund_id()));
 			buyFund.setGenerate_date(date);
-			// buyFund.setShares();
 			buyFund.setTransaction_type("Buy Fund");
 			buyFund.setStatus("Pending");
 
 			buyFund.setAmount(num);
 			transactionDAO.create(buyFund);
-			Transaction.commit();
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 			request.setAttribute("form", null);
-			// put it into queue
-			// change available balance
-
+			
 			customer.setAvailable_cash(customer.getAvailable_cash() - num);
 			customerDAO.update(customer);
+			Transaction.commit();
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-			//Transaction.commit();
 
 			return "customer/buy-fund.jsp";
 		} catch (RollbackException e) {

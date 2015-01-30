@@ -95,9 +95,9 @@ public class SellFundAction extends Action {
 
 			SellForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			System.out.println(form.getFund_id());
+			//System.out.println(form.getFund_id());
 			if (!form.isPresent()) {
-				System.out.println("no form");
+				//System.out.println("no form");
 				return "customer/sell-fund.jsp";
 			}
 
@@ -142,7 +142,6 @@ public class SellFundAction extends Action {
 			sellFund.setStatus("Pending");
 			// sellFund.setAmount(amount);
 			transactionDAO.create(sellFund);
-			Transaction.commit();
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
@@ -153,6 +152,8 @@ public class SellFundAction extends Action {
 					customer.getCustomer_id());
 			position.setAvailable_shares(position.getAvailable_shares() - num);
 			positionDAO.update(position);
+			Transaction.commit();
+
 
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
 

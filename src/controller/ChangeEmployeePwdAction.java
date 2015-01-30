@@ -54,7 +54,7 @@ public class ChangeEmployeePwdAction extends Action {
 	        }
 	     // Old password not correct
 	     	if(!employee.getPassword().equals(form.getOldPassword())){
-	     		errors.add("Enter correct Old password to countinue");
+	     		errors.add("Enter correct Old password to continue");
 	     		return"employee/change-pwd.jsp";
 	   		}
 	        // new password same as old password

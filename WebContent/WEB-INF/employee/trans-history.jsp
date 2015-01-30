@@ -47,7 +47,7 @@
 										value="${transactionBean.getAmount()/transactionBean.getShares()}" />
 									<c:set var="priceShares"
 										value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
-									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
+									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
 											value="${priceShares}" /></td>
 								</c:when>
 
@@ -83,7 +83,7 @@
 										value="${transactionBean.getAmount()/transactionBean.getShares()}" />
 									<c:set var="priceShares"
 										value="${transactionBean.getAmount()/transactionBean.getShares() * 10}" />
-									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.00"
+									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
 											value="${priceShares}" /></td>
 
 									<c:set var="getAmt"

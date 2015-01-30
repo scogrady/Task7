@@ -70,8 +70,8 @@ public class TransitionDayAction extends Action {
 				buyFundList[i].setName(fundList[i].getName());
 				buyFundList[i].setSymbol(fundList[i].getSymbol());
 
-				FundPriceHistoryBean price = fundPriceHistoryDAO.readLastPrice(buyFundList[i]
-						.getFund_id());
+				FundPriceHistoryBean price = fundPriceHistoryDAO
+						.readLastPrice(buyFundList[i].getFund_id());
 				if (price == null) {
 					price = new FundPriceHistoryBean();
 					price.setPrice(-1);
@@ -100,7 +100,7 @@ public class TransitionDayAction extends Action {
 			request.setAttribute("form", form);
 			request.setAttribute("errors", errors);
 			errors.addAll(form.getValidationErrors());
-			
+
 			fundList = fundDAO.getFunds();
 			request.setAttribute("fundList", fundList);
 			fundList = fundDAO.getFunds();
@@ -112,8 +112,8 @@ public class TransitionDayAction extends Action {
 				buyFundList[i].setName(fundList[i].getName());
 				buyFundList[i].setSymbol(fundList[i].getSymbol());
 
-				FundPriceHistoryBean price = fundPriceHistoryDAO.readLastPrice(buyFundList[i]
-						.getFund_id());
+				FundPriceHistoryBean price = fundPriceHistoryDAO
+						.readLastPrice(buyFundList[i].getFund_id());
 				if (price == null) {
 					price = new FundPriceHistoryBean();
 					price.setPrice(-1);
@@ -125,13 +125,15 @@ public class TransitionDayAction extends Action {
 			if (errors.size() != 0) {
 				return "employee/transition-day.jsp";
 			}
-			
+
 			Date date = formatter.parse(form.getDate());
 			if (lastDate != null && date.compareTo(lastDate) <= 0) {
 				errors.add("Transition Day should be later than last transition day.");
 			}
-			
-			if ((fundList.length != 0 && form.getPrice() == null) || (form.getPrice() != null && fundList.length != form.getPrice().length)){
+
+			if ((fundList.length != 0 && form.getPrice() == null)
+					|| (form.getPrice() != null && fundList.length != form
+							.getPrice().length)) {
 				errors.add("Fund number not match.");
 			}
 			if (errors.size() != 0) {
@@ -143,15 +145,15 @@ public class TransitionDayAction extends Action {
 				return "employee/transition-day.jsp";
 			}
 			if (form.getId() != null)
-			for (int i = 0; i < form.getId().length; i++) {
-				int fundId = form.getId()[i];
-				long price = Math.round(form.getPrice()[i] * 100);
-				FundPriceHistoryBean fundPrice = new FundPriceHistoryBean();
-				fundPrice.setFund_id(fundId);
-				fundPrice.setPrice(price);
-				fundPrice.setPrice_date(new java.sql.Date(date.getTime()));
-				fundPriceHistoryDAO.create(fundPrice);
-			}
+				for (int i = 0; i < form.getId().length; i++) {
+					int fundId = form.getId()[i];
+					long price = Math.round(form.getPrice()[i] * 100);
+					FundPriceHistoryBean fundPrice = new FundPriceHistoryBean();
+					fundPrice.setFund_id(fundId);
+					fundPrice.setPrice(price);
+					fundPrice.setPrice_date(new java.sql.Date(date.getTime()));
+					fundPriceHistoryDAO.create(fundPrice);
+				}
 
 			TransactionBean[] transactions = transactionDAO.readByDate(null);
 			for (TransactionBean transaction : transactions) {
@@ -293,8 +295,8 @@ public class TransitionDayAction extends Action {
 				buyFundList[i].setName(fundList[i].getName());
 				buyFundList[i].setSymbol(fundList[i].getSymbol());
 
-				FundPriceHistoryBean price = fundPriceHistoryDAO.readLastPrice(buyFundList[i]
-						.getFund_id());
+				FundPriceHistoryBean price = fundPriceHistoryDAO
+						.readLastPrice(buyFundList[i].getFund_id());
 				if (price == null) {
 					price = new FundPriceHistoryBean();
 					price.setPrice(-1);
@@ -308,17 +310,17 @@ public class TransitionDayAction extends Action {
 			return "employee/transition-day.jsp";
 		} catch (RollbackException e) {
 			e.printStackTrace();
-			errors.add("System Exception");
+			// errors.add("System Exception");
 			return "employee/transition-day.jsp";
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			errors.add("System Exception");
+			// errors.add("System Exception");
 			return "employee/transition-day.jsp";
 		} catch (FormBeanException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			errors.add("System Exception");
+			// errors.add("System Exception");
 			return "employee/transition-day.jsp";
 		} finally {
 			if (Transaction.isActive())

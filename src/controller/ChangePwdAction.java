@@ -50,7 +50,7 @@ public class ChangePwdAction extends Action {
 	        if (!form.isPresent()) {
 	            return "customer/change-pwd.jsp";
 	        }
-	        System.out.println("Coming in after putting form");
+	        //System.out.println("Coming in after putting form");
 	        // Check for any validation errors
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() != 0) {
@@ -58,7 +58,7 @@ public class ChangePwdAction extends Action {
 	        }
 	        // Old password not correct
 	     	if(!customer.getPassword().equals(form.getOldPassword())){
-	     		errors.add("Enter correct Old password to countinue");
+	     		errors.add("Enter correct old password to continue");
 	     		return"customer/change-pwd.jsp";
 	   		}
 	        // new password same as old password

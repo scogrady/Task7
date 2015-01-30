@@ -49,7 +49,7 @@ public class ResetCustomerPwdAction extends Action {
 			}
 			
 			 errors.addAll(form.getValidationErrors());
-			 System.out.println(errors);
+			 //System.out.println(errors);
 		        if (errors.size() != 0) {
 		            return "employee/reset-password-form.jsp";
 		        }
