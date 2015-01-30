@@ -55,7 +55,7 @@ public class CreateCustomerAction extends Action {
 			CustomerBean customer = customerDAO.read(form.getUsername());
 			if (customer != null) {
 				// System.out.println(" customer is already exist");
-				errors.add("Customer username is already exist.");
+				errors.add("Customer username already exists.");
 			}
 
 			if (errors.size() != 0) {
