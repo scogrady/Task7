@@ -15,7 +15,7 @@ public class PositionDAO extends GenericDAO<PositionBean> {
 	public PositionDAO(String tableName, ConnectionPool pool) throws DAOException {
 		super(PositionBean.class, tableName, pool);
 	}
-//TODO
+
 	public PositionBean[] getPostions() throws RollbackException {
 		PositionBean[] positions = match();
 		return positions;
