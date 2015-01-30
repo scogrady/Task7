@@ -53,6 +53,7 @@ public class SellFundAction extends Action {
 		request.setAttribute("errors", errors);
 		CustomerBean customer = (CustomerBean) request.getSession(false)
 				.getAttribute("customer");
+		
 		Date date = new Date();
 		PositionBean[] fundList;
 		SellFundBean[] sellFundList;

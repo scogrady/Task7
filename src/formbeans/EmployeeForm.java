@@ -76,8 +76,8 @@ public class EmployeeForm extends FormBean {
 			errors.add("First name should be all characters.");
 		}
 		
-		if(firstname.length()>30||firstname.length()<3){
-			errors.add("First name shoule more than 3 digit and less than 30 digit");
+		if(firstname.length()>30||firstname.length()<2){
+			errors.add("First name shoule more than 2 digit and less than 30 digit");
 		}
 		if (lastname == null || lastname.length() == 0) {
 			errors.add("Last Name is required");
@@ -86,8 +86,8 @@ public class EmployeeForm extends FormBean {
 			errors.add("Last name should be all characters.");
 		}
 		
-		if(lastname.length()>30||lastname.length()<3){
-			errors.add("Last name shoule more than 3 digit and less than 30 digit.");
+		if(lastname.length()>30||lastname.length()<2){
+			errors.add("Last name shoule more than 2 digit and less than 30 digit.");
 		}
 		if (errors.size() > 0) {
 			return errors;
@@ -96,7 +96,7 @@ public class EmployeeForm extends FormBean {
 			errors.add("Password is required");
 		}
 		if(password.length()>20||password.length()<3){
-			errors.add("Password should be more than 3 digit less than 20 digit.");
+			errors.add("Password should be more than 3 digit and less than 20 digit.");
 		}
 		if (confirm == null || confirm.length() == 0) {
 			errors.add("Confirm Password is required");
