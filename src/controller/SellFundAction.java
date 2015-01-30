@@ -54,7 +54,7 @@ public class SellFundAction extends Action {
 		request.setAttribute("errors", errors);
 		CustomerBean customer = (CustomerBean) request.getSession(false)
 				.getAttribute("customer");
-		
+
 		Date date = new Date();
 		PositionBean[] fundList;
 		SellFundBean[] sellFundList;
@@ -66,8 +66,8 @@ public class SellFundAction extends Action {
 				errors.add("Wrong User");
 				return "login.do";
 			}
-			Transaction.begin();
-			
+			// Transaction.begin();
+
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
 
@@ -127,36 +127,35 @@ public class SellFundAction extends Action {
 
 			// handle amount from form
 
-
 			// create transaction
+			Transaction.begin();
 
+			customer = customerDAO.readFromID(customer.getCustomer_id());
 			TransactionBean sellFund = new TransactionBean();
 
 			sellFund.setCustomer_id(customer.getCustomer_id());
 			sellFund.setFund_id(Integer.parseInt(form.getFund_id()));
 			sellFund.setGenerate_date(date);
 
-		
-
 			sellFund.setShares(num);
 			sellFund.setTransaction_type("Sell Fund");
 			sellFund.setStatus("Pending");
 			// sellFund.setAmount(amount);
 			transactionDAO.create(sellFund);
+			Transaction.commit();
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
 			request.setAttribute("form", null);
-
 
 			PositionBean position = positionDAO.readByIdFundId(
 					Integer.parseInt(form.getFund_id()),
 					customer.getCustomer_id());
 			position.setAvailable_shares(position.getAvailable_shares() - num);
 			positionDAO.update(position);
-			
+
 			price = fundPriceHistoryDAO.readLastPrice(sellFund.getFund_id());
-			
+
 			fundList = positionDAO.readByCustomerID(customer.getCustomer_id());
 
 			sellFundList = new SellFundBean[fundList.length];
@@ -177,7 +176,7 @@ public class SellFundAction extends Action {
 				sellFundList[i].setPrice(price.getPrice());
 			}
 			request.setAttribute("sellFundList", sellFundList);
-			Transaction.commit();
+			// Transaction.commit();
 
 			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {

@@ -62,7 +62,7 @@ public class BuyFundAction extends Action {
 				errors.add("Wrong User");
 				return "login.do";
 			}
-			Transaction.begin();
+			//Transaction.begin();
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
@@ -110,13 +110,18 @@ public class BuyFundAction extends Action {
 			}
 
 			errors.addAll(form.getValidationErrors());
+			
+			customer = customerDAO.readFromID(customer.getCustomer_id());
+			request.getSession().setAttribute("customer", customer);
 
 			if (errors.size() != 0) {
 				return "customer/buy-fund.jsp";
 			}
 
 			// handle amount from form
+			Transaction.begin();
 
+			customer = customerDAO.readFromID(customer.getCustomer_id());
 			TransactionBean buyFund = new TransactionBean();
 
 			buyFund.setCustomer_id(customer.getCustomer_id());
@@ -128,6 +133,7 @@ public class BuyFundAction extends Action {
 
 			buyFund.setAmount(num);
 			transactionDAO.create(buyFund);
+			Transaction.commit();
 
 			String message = "Successfully recieved your request.";
 			request.setAttribute("message", message);
@@ -140,7 +146,7 @@ public class BuyFundAction extends Action {
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());
 			request.getSession().setAttribute("customer", customer);
-			Transaction.commit();
+			//Transaction.commit();
 
 			return "customer/buy-fund.jsp";
 		} catch (RollbackException e) {
