@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import org.genericdao.RollbackException;
 
 import databeans.CustomerBean;
 import databeans.PositionBean;
+import databeans.TransactionBean;
 import databeans.UserBean;
 
 public class AccountInfoAction extends Action {
@@ -27,47 +27,53 @@ public class AccountInfoAction extends Action {
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 
 	public AccountInfoAction(Model model) {
-    	
-		
-    	customerDAO =model.getCustomerDAO();
-    	positionDAO =model.getPositionDAO();
-    	fundDAO =model.getFundDAO();
-    	fundPriceHistoryDAO =model.getFundPriceHistoryDAO();
+
+		customerDAO = model.getCustomerDAO();
+		positionDAO = model.getPositionDAO();
+		fundDAO = model.getFundDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 
 	}
 
 	public String getName() {
-		return "AccountInfo.do"; 
+		return "AccountInfo.do";
 	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
+		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		if (request.getSession(false).getAttribute("customer") == null) {
 			errors.add("Wrong User");
 			return "login.do";
 		}
-        
-		try {
-			 CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
-		    //set up portfolio list for customer 
-			request.setAttribute("position",positionDAO.readByCustomerID(customer.getCustomer_id()));
-			//to get fund symbol list
-			request.setAttribute("fundTicker", fundDAO.getFunds());
-			//to get fund price 
-			request.setAttribute("priceList", fundPriceHistoryDAO.getFundPriceHistorys());
-			
-			
-			//request.setAttribute("userList",userDAO.getUsers());
-			//UserBean user = (UserBean) request.getSession(false).getAttribute("user");
-        	//FavoriteBean[] favoriteList = favoriteDAO.getUserFavorites(user.getUserID());
-	        //request.setAttribute("favoriteList",favoriteList);
 
-	        return "customer/account-info.jsp";
-        } catch (RollbackException e) {
-        	errors.add(e.getMessage());
-        	return "customer/error.jsp";
-        }
-    }
+		try {
+			CustomerBean customer = (CustomerBean) request.getSession(false)
+					.getAttribute("customer");
+			// set up portfolio list for customer
+			request.setAttribute("position",
+					positionDAO.readByCustomerID(customer.getCustomer_id()));
+			// to get fund symbol list
+			request.setAttribute("fundTicker", fundDAO.getFunds());
+			// to get fund price
+			request.setAttribute("priceList",
+					fundPriceHistoryDAO.getFundPriceHistorys());
+
+			customer = customerDAO.readFromID(customer.getCustomer_id());
+			request.getSession().setAttribute("customer", customer);
+
+			// request.setAttribute("userList",userDAO.getUsers());
+			// UserBean user = (UserBean)
+			// request.getSession(false).getAttribute("user");
+			// FavoriteBean[] favoriteList =
+			// favoriteDAO.getUserFavorites(user.getUserID());
+			// request.setAttribute("favoriteList",favoriteList);
+
+			return "customer/account-info.jsp";
+		} catch (RollbackException e) {
+			errors.add(e.getMessage());
+			return "customer/error.jsp";
+		}
+	}
 }

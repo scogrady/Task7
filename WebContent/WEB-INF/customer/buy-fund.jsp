@@ -61,7 +61,7 @@
 											<c:when test="${fund.getFund_id() == form.getFund_id()}">
 												<div class="form-inline">
 													$ <input type="text" name="num" class="form-control"
-														pattern="\d*(\.\d{1,2})?" placeholder="Amount"
+														pattern="\d*(\.\d{1,2}0*)?" placeholder="Amount"
 														data-placement="bottom" min="0" max="100000000"
 														value="${form.getNum()}"
 														title="You can buy between $10 to your available cash. Only two digits after decimal."
@@ -72,7 +72,7 @@
 											<c:otherwise>
 												<div class="form-inline">
 													$ <input type="text" name="num" class="form-control"
-														pattern="\d*(\.\d{1,2})?" placeholder="Amount"
+														pattern="\d*(\.\d{1,2}0*)?" placeholder="Amount"
 														data-placement="bottom" min="0" max="100000000"
 														title="You can buy between $10 to your available cash. Only two digits after decimal."
 														required>
