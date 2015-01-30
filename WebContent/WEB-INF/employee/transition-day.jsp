@@ -63,7 +63,7 @@
 									</c:choose>
 									<input type="text" name="price" class="form-control"
 										pattern="\d+(\.\d{1,2})?" placeholder="Price"
-										title="Fund Price should be between $5.00 and $10,000.00"
+										title="Price of the fund should have at most two decimal"
 										required value="${price }">
 								</div></td>
 						</tr>

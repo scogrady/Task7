@@ -146,10 +146,11 @@ public class BuyFundAction extends Action {
 
 			return "customer/buy-fund.jsp";
 		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return "customer/error.jsp";
+			errors.add("System error, please try again");
+			return "customer/buy-fund.jsp";
 		} catch (FormBeanException e) {
-			return "customer/error.jsp";
+			errors.add("System error, please try again");
+			return "customer/buy-fund.jsp";
 		} finally {
 			if (Transaction.isActive())
 				Transaction.rollback();

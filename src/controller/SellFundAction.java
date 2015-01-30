@@ -181,10 +181,11 @@ public class SellFundAction extends Action {
 
 			return "customer/sell-fund.jsp";
 		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return "customer/error.jsp";
+			errors.add("System error, please try again");
+			return "customer/sell-fund.jsp";
 		} catch (FormBeanException e) {
-			return "customer/error.jsp";
+			errors.add("System error, please try again");
+			return "customer/sell-fund.jsp";
 		} finally {
 			if (Transaction.isActive())
 				Transaction.rollback();
