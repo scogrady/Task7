@@ -88,6 +88,16 @@ public class TransitionDayAction extends Action {
 			Date lastDate = null;
 			if (fundPriceHistory != null) {
 				lastDate = fundPriceHistory.getPrice_date();
+			}
+			TransactionBean lastTransaction = transactionDAO.readByLastDate();
+			if (lastTransaction != null) {
+				if (lastDate == null) {
+					lastDate = lastTransaction.getExecute_date();
+				} else
+				if (lastTransaction.getExecute_date().compareTo(lastDate) > 0) 
+					lastDate = lastTransaction.getExecute_date();				
+			}
+			if (lastDate != null) {
 				request.setAttribute("lastDate", formatter.format(lastDate));
 			} else {
 				request.setAttribute("lastDate", null);
