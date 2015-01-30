@@ -29,12 +29,17 @@ public class ViewTransactionAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
+
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
 		
 		//找列表
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			request.setAttribute("customerList", customerDAO.getCustomers());
 
 			

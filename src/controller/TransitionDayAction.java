@@ -52,7 +52,10 @@ public class TransitionDayAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		try {
-
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			Transaction.begin();
 			FundBean[] fundList;
 			BuyFundBean[] buyFundList;
@@ -116,7 +119,6 @@ public class TransitionDayAction extends Action {
 					price.setPrice(-1);
 				}
 				buyFundList[i].setPrice(price.getPrice());
-
 			}
 
 			request.setAttribute("buyFundList", buyFundList);
@@ -128,7 +130,8 @@ public class TransitionDayAction extends Action {
 			if (lastDate != null && date.compareTo(lastDate) <= 0) {
 				errors.add("Transition Day should be later than last transition day.");
 			}
-			if (fundList.length != form.getPrice().length){
+			
+			if ((fundList.length != 0 && form.getPrice() == null) || (form.getPrice() != null && fundList.length != form.getPrice().length)){
 				errors.add("Fund number not match.");
 			}
 			if (errors.size() != 0) {
@@ -139,7 +142,7 @@ public class TransitionDayAction extends Action {
 			if (request.getParameter("date") == null) {
 				return "employee/transition-day.jsp";
 			}
-
+			if (form.getId() != null)
 			for (int i = 0; i < form.getId().length; i++) {
 				int fundId = form.getId()[i];
 				long price = Math.round(form.getPrice()[i] * 100);

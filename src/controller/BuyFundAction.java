@@ -58,6 +58,10 @@ public class BuyFundAction extends Action {
 		FundPriceHistoryBean price;
 
 		try {
+			if (request.getSession(false).getAttribute("customer") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			Transaction.begin();
 
 			customer = customerDAO.readFromID(customer.getCustomer_id());

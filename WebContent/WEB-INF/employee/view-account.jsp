@@ -45,103 +45,109 @@
 			</ul>
 		</div>
 	</div>
-
-	<div class="col-md-9" id="customer-account-info">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h4>Customer Account</h4>
-			</div>
-			<div class="panel-body">
-				<%
-					CustomerBean customer = (CustomerBean) request
-							.getAttribute("customer");
-				%>
-				<table class="table">
+        <div class="col-md-7 col-md-offset-1 toppad" >
+			<%
+            	CustomerBean customer = (CustomerBean) request.getAttribute("customer");
+			%>     
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">${customer.getFirstname() } ${customer.getLastname() }</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                    <tr>
+                    	<td>Username</td>
+                    	<td>${customer.getUsername() }</td>
+                    </tr>
 					<tr>
-						<th scope="row" width="25%">Name :</th>
-						<td id="customer-name"><%=customer.getFirstname()%> <%=customer.getLastname()%></td>
-					</tr>
-					<tr>
-						<th scope="row" width="25%">Password :</th>
+						<td>Password</td>
 						<td id="customer-password">
 							<div class="row">
 								<p class="col-md-3">******</p>
-								<a class="btn btn-default" href="ResetCustomerPwd.do">Reset
+								<a style="float:right" class="btn btn-sm btn-default" href="ResetCustomerPwd.do">Reset
 									Password</a>
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<th scope="row">Address :</th>
-						<td id="customer-address-1"><%=customer.getAddr_line1()%></td>
-					</tr>
-					<%
-						if (customer.getAddr_line2() != null) {
-					%>
-					<tr>
+                      <tr>
+                        <td>Address</td>
+                        <td>${customer.getAddr_line1() }</td>
+                      </tr>
+                      <% if(customer.getAddr_line2() != null && !customer.getAddr_line2().equals("")){ %>
+                      <tr>
 						<td></td>
 						<td id="customer-address-2"><%=customer.getAddr_line2()%></td>
+					  </tr><% }%>
+					 
+					  <tr>
+						 <td>City</td>
+						 <td><%=customer.getCity()%></td>
+					 </tr>
+					 <tr>
+					 	<td>State</td>
+					 	<td><%=customer.getState()%></td>
+					 </tr>
+					 <tr>
+					 	<td>Zip Code</td>
+					 	<td><%=customer.getZip()%></td>
+					 </tr>
+                      
+                     <tr>
+						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
+						<td scope="row">Account Balance</td>
+						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
 					</tr>
-					<%
-						}
-					%>
+					
 					<tr>
-						<th scope="row">City,State,Zip:</th>
-						<td id="customer-city"><%=customer.getCity()%>,<%=customer.getState()%>,<%=customer.getZip()%></td>
+						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
+						<td scope="row">Available Balance</td>
+						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
+						</td>
 					</tr>
+					
 					<tr>
-						<c:set var="currentBalance"
-							value="${customer.getCurrent_cash()/100}" />
-							
-							
-						<th scope="row">Current balance:</th>
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"
-								value="${currentBalance}" /></td>
-					</tr>
-					<tr>
-
-						<th scope="row">Available balance:</th>
+						<td width="40%">Deposit Money</td>
 						<td>
-							<div class="row">
-								<p class="col-md-3">
-									<c:set var="AvailBalance"
-										value="${customer.getAvailable_cash()/100}" />
-									$
-									<fmt:formatNumber type="number" pattern="#,##0.00"
-										value="${AvailBalance}" />
-
-								</p>
 								<form role="form" method="post" action="ViewAccount.do">
-									<div class="input-group col-md-5">
+									<div class="input-group">
 										<span class="input-group-addon" id="basic-addon1">$</span> <input
 											type="hidden" name="username"
 											value="${customer.getUsername()}"><input
 											type="hidden" name="avail_cash"
-											value="${customer.getAvailable_cash()}"> <input
-											type="text" name="amount" class="form-control"
+											value="${customer.getAvailable_cash()}"> 
+											<input
+											type="text" name="amount" class="form-control input-sm"
 											pattern="\d*(\.\d{1,2})?" placeholder="Amount"
 											value="${form.getAmount()}"
 											title="Only two digits after decimal are allowed." required>
 										<span class="input-group-btn"> <input
-											class="btn btn-default" type="submit" name="action"
+											class="btn btn-sm btn-default" type="submit" name="action"
 											value="Deposit">
 										</span>
 									</div>
 								</form>
-							</div>
 						</td>
-						<td>
 					</tr>
-
+				
+					
 					<tr>
-						<th scope="row">Last Trading Day:</th>
-						<c:set var="lastTradingDay"
-							value="<%=customer.getLast_login_time()%>" />
-						<td id="last-trading-day"><fmt:formatDate
-								value="${lastTradingDay}" pattern="MMM dd yyyy " /></td>
+						<td>Last Trading Day:</td>
+						<c:set var="lastTradingDay" value="<%=customer.getLast_login_time()%>" />
+						<td id="last-trading-day"><fmt:formatDate value="${lastTradingDay}" pattern="yyyy-MM-dd" /></td>
 					</tr>
-				</table>
-			</div>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+	<div class="col-md-7 col-md-offset-1" id="customer-account-info">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h4>Financial Information</h4>
 			</div>

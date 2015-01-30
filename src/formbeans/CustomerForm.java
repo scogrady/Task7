@@ -122,9 +122,6 @@ public class CustomerForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		// username & lastname & firstname 3~30
-		// address 3~30
-		// city 3~30
 		if (username == null || username.length() == 0) {
 			errors.add("Email address is required");
 		} else if (!Pattern.matches("[\\w]+", username)) {
@@ -161,11 +158,19 @@ public class CustomerForm extends FormBean {
 		}
 
 		if (addr_line1 == null || addr_line1.length() == 0) {
-			errors.add("Addr_line1 address is required");
-		} else if (!Pattern.matches("[\\w ]+", addr_line1)) {
-			errors.add("Address shouldn't have special characters.");
+			errors.add("Address line 1 is required");
+		} else if (!Pattern.matches("[\\w ,-]+", addr_line1)) {
+			errors.add("Address line 1 shouldn't have special characters.");
 		} else if (addr_line1.length() > 50 || addr_line1.length() < 3) {
-			errors.add("Address should be more than 3 digit and less than 50 digit.");
+			errors.add("Address line 1 should be more than 3 digit and less than 50 digit.");
+		}
+
+		if (addr_line2 != null || addr_line2.length() != 0) {
+			if (!Pattern.matches("[\\w ,-]+", addr_line2)) {
+				errors.add("Address line 2 shouldn't have special characters.");
+			} else if (addr_line2.length() > 50) {
+				errors.add("Address line 2 should be less than 50 digit.");
+			}
 		}
 
 		if (city == null || city.length() == 0) {

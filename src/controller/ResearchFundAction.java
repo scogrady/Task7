@@ -42,6 +42,10 @@ public class ResearchFundAction extends Action {
 		request.setAttribute("errors", errors);
 
 		try {
+			if (request.getSession(false).getAttribute("customer") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			// Set up fund list for nav bar
 
 			FundBean[] fundList = fundDAO.getFunds();

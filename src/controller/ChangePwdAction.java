@@ -37,7 +37,11 @@ public class ChangePwdAction extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         HttpSession session = request.getSession();
-        try {System.out.println("Coming in ChangePwd.do");
+        try {
+    		if (request.getSession(false).getAttribute("customer") == null) {
+				errors.add("Wrong User");
+    			return "login.do";
+    		}
         	CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
 	        // Load the form parameters into a form bean
 	        ChangePwdForm form = formBeanFactory.create(request);

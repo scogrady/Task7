@@ -34,6 +34,10 @@ public class CreateEmployeeAction extends Action {
 		request.setAttribute("errors", errors);
 		EmployeeForm form;
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			request.setAttribute("employeeList", employeeDAO.getEmployees());
 			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);

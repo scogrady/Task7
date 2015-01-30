@@ -15,6 +15,7 @@
 	width: 100%;
 	overflow: auto;
 	position: relative;
+	overflow-y: scroll;
 }
 
 .scrollspy-chart {
@@ -140,11 +141,11 @@
 				<div class="col-sm-6 col-md-3">
 					<h3>Mutual Funds.</h3>
 
-					<div data-spy="scroll" data-offset="50" class="scrollspy-fundlist">
-						<ul class="list-group">
+					<div class="scrollspy-fundlist">
+						<ul class="nav nav-sidebar">
 							<c:forEach var="fund" items="${fundList}">
-								<li class="list-group-item"><a href="ResearchFund.do?fund_id=${fund.getFund_id()}">${fund.getName()}-${fund.getSymbol()}</a>
-									<p>${fund.getDescription()}</p></li>
+								<li><a style="color:black;" href="EmployeeResearchFund.do?fund_id=${fund.getFund_id()}">${fund.getName()}-${fund.getSymbol()}</a>
+								</li>
 							</c:forEach>
 
 						</ul>
@@ -193,9 +194,9 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th width="40%">Date</th>
-												<th width="30%">Price</th>
-												<th width="30%">Status</th>
+												<th width="20%">Date</th>
+												<th style="text-align:right" width="40%">Price</th>
+												<th width="40%"></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -203,9 +204,8 @@
 												items="${fundPriceHistoryList}">
 												<tr>
 													<td>${fundPriceHistory.getPrice_date()}</td>
-													<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${fundPriceHistory.getPrice()/100.00}" /></td>
-													
-													<td>Up</td>
+													<td align="right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${fundPriceHistory.getPrice()/100.00}" /></td>
+													<td></td>
 												</tr>
 											</c:forEach>
 

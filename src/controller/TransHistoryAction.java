@@ -31,6 +31,10 @@ public class TransHistoryAction extends Action {
 		CustomerBean customer = (CustomerBean) request.getSession(false)
 				.getAttribute("customer");
 		try {
+			if (request.getSession(false).getAttribute("customer") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			transactionHistory = transactionDAO.readByCustomerID(customer
 					.getCustomer_id());
 			ArrayList<TransactionBean> transactions = new ArrayList<TransactionBean>();

@@ -34,6 +34,10 @@ public class CreateFundAction extends Action{
 		request.setAttribute("errors", errors);
 		FundForm form;
 		try {
+			if (request.getSession(false).getAttribute("employee") == null) {
+				errors.add("Wrong User");
+				return "login.do";
+			}
 			request.setAttribute("fundList", fundDAO.getFunds());
 			form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
