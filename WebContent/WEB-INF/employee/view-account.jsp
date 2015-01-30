@@ -122,7 +122,7 @@
 											value="${customer.getAvailable_cash()}"> 
 											<input
 											type="text" name="amount" class="form-control input-sm"
-											pattern="\d*(\.\d{1,2})?" placeholder="Amount"
+											pattern="\d*(\.\d{1,2}0*)?" placeholder="Amount"
 											value="${form.getAmount()}"
 											title="Only two digits after decimal are allowed." required>
 										<span class="input-group-btn"> <input

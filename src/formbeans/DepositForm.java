@@ -54,7 +54,7 @@ public class DepositForm extends FormBean {
 			Double num;
 			if (this.amount == "") {
 				num = 0.0;
-			} else if (!Pattern.matches("\\d*(\\.\\d{1,2})?", this.amount)) {
+			} else if (!Pattern.matches("\\d*(\\.\\d{1,2}0*)?", this.amount)) {
 				errors.add("Deposit amount should be less than $1,000,000,000. Only two digits after decimal are allowed.");
 			}
 
