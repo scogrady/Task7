@@ -48,24 +48,7 @@
 					 	<td><%=customer.getZip()%></td>
 					 </tr>
                       
-                     <tr>
-						<c:set var="currentBalance"	value="${customer.getCurrent_cash()/100}"  />
-						<td scope="row">Account balance:</td>
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${currentBalance}" /></td>
-					</tr>
-					
-					<tr>
-						<c:set var="availableBalance" value="${customer.getAvailable_cash()/100}"  />
-						<td scope="row">Available balance:</td>
-						<td>$<fmt:formatNumber type="number" pattern="#,##0.00"	value="${availableBalance}" />
-						</td>
-					</tr>
-					
-					<tr>
-						<td>Last Trading Day:</td>
-						<c:set var="lastTradingDay" value="<%=customer.getLast_login_time()%>" />
-						<td id="last-trading-day"><fmt:formatDate value="${lastTradingDay}" pattern="yyyy-MM-dd" /></td>
-					</tr>
+                     
                     </tbody>
                   </table>
                 </div>
@@ -78,54 +61,24 @@
 <div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<h3>Portfolio</h3>
-
+		<h3>Tweets History</h3>
 		<table class="table table-striped">
 			<tr>
-				<th>Fund Code</th>
-				<th class="title_right">Shares</th>
-				<th class="title_right">Price</th>
-				<th class="title_right">Amount</th>
+				<th>Time</th>
+				<th>Location</th>
+				<th>Comment</th>
+				<th>Number</th>
 			</tr>
-			<% 
-             double total=0;
-            for (PositionBean pos : (PositionBean[])request.getAttribute("position")){
-            	%>
+
 			<tr>
-				<%
-            	String symbol="";
-            	for (FundBean fun : (FundBean[])request.getAttribute("fundTicker")){
-            		if(fun.getFund_id()==pos.getFund_id())
-            			symbol=fun.getSymbol();
-            	}
-            		%>
-				<td><%=symbol%></td>
-				<c:set var="shares" value="<%=pos.getShares() / 1000.0 %>" />
-				<td  class="title_right"><fmt:formatNumber type="number" pattern="#,##0.000"	value="${shares}" /></td>
-				<%
-            	double price=-1;
-            	for (FundPriceHistoryBean fundprice : (FundPriceHistoryBean[])request.getAttribute("priceList")){
-            		
-            		if(fundprice.getFund_id()==pos.getFund_id())
-            			price=fundprice.getPrice() / 100.00;
-            	}
-            		%>
-            		<c:set var="price" value="<%=price %>" />
-				<td  class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${price}" /></td>
-				<c:set var="worth" value="<%=pos.getShares()*price / 1000 %>" />				
-				<td  class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${worth}" /></td>
+				
+				<td>Time</td>
+				<td>Location</td>
+				<td>Comment</td>
+				<td>Number</td>
 			</tr>
-			<%
-            total+=pos.getShares()*price  / 1000.00;
-            }
-             %>
-			<tr>
-				<td></td>
-				<td></td>
-				<td  class="title_right">Total Investment:</td>
-				<c:set var="total" value="<%=total %>" />
-				<td  class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00" value="${total}" /></td>
-			<tr>
+
+
 		</table>
 		</div>
 		<div class="col-md-2"></div>

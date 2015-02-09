@@ -2,49 +2,71 @@
 
 <%@ page import="databeans.CustomerBean"%>
 
-<%
-	CustomerBean customer = (CustomerBean) session
-			.getAttribute("customer");
-%>
-
 <jsp:include page="template-top.jsp" />
 
-<jsp:include page="balance.jsp" />
 
-
-
-<div class="col-xs-12 col-sm-9">
-
-	<div class="page-header">
-		<h1>Request Check</h1>
-	</div>
-	<jsp:include page="error-list.jsp" />
-	<jsp:include page="success.jsp" />
-
+<div class="container-fluid">
 	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h3>Analysis.</h3>
+			</div>
 
-		<div class="col-md-12">
-			<form class="form-inline" method="post" action="RequestCheck.do">
-				<div class="form-group">
-					<label class="sr-only" for="InputAmount">Amount (in
-						dollars)</label>
+			<div class="row">
+				<div class="col-lg-6">
 					<div class="input-group">
-						<div class="input-group-addon">$</div>
-
-						<input type="text" name="num" class="form-control"
-							pattern="\d*(\.\d{1,2}0*)?" placeholder="Amount"
-							value="${form.getNum()}"
-							title="You can request between $0.01 to your available cash. Only two digits after decimal."
-							required>
+						<input type="text" class="form-control"
+							placeholder="Search for..."> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</span>
 					</div>
-					<input type="submit" class="btn btn-primary" name="action"
-						value="Request Check">
+					<!-- /input-group -->
 				</div>
-			</form>
-			<br>
+				<!-- /.col-lg-6 -->
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-9" id="detail-section">
+					<div role="tabpanel">
+
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#home"
+								aria-controls="home" role="tab" data-toggle="tab">Graphic</a></li>
+							<li role="presentation"><a href="#profile"
+								aria-controls="profile" role="tab" data-toggle="tab">Info</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="home">
+								<div id="mymap" style="width: 500px; height: 500px;"></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="profile">
+								<div data-spy="scroll" data-offset="50" class="scrollspy-chart">
+									<table class="table">
+										<thead>
+											<tr>
+												<th width="20%">User ID</th>
+												<th width="40%">Times</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<tr>
+												<td>Userid</td>
+												<td>Times</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	
 </div>
 
 <jsp:include page="template-bottom.jsp" />
