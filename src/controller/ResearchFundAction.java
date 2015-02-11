@@ -70,15 +70,18 @@ public class ResearchFundAction extends Action {
 				int compareId = Integer.parseInt(request.getParameter("compare_id"));
 				if (compareId > fundList.length) {
 					errors.add("No Such Fund.");
-				} else {
+				}else if(compareId == fundId){
+					System.out.println("same fund!!!");
+					errors.add("Can't compare with the same fund.");
+				}
+				else {
+					System.out.println("compareId = "+compareId+"      fundid = "+fundId);
 					request.setAttribute("comparePriceHistoryList", fundPriceHistoryDAO.readByFundID(compareId));
 					request.setAttribute("comparePriceHistoryName", fundDAO.readById(compareId));
 				}
 
 			}		
 			request.setAttribute("now_id", fundId);
-		
-		
 			
 			return "customer/research-fund.jsp";
 		} catch (ParseException e) {

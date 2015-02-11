@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CFS</title>
+<title>CWS</title>
 <link
 	href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -24,7 +24,7 @@
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">Carnegie Financial Services</a>
+					<a class="navbar-brand" href="#">Carnegie Web Services</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,8 +33,12 @@
 					<ul id="group-function" class="nav navbar-nav">
 						<li class="active" id="view-account"><a href="AccountInfo.do">View
 								Account</a></li>
-						<li id="fund-manage"><a href="ResearchFund.do?fund_id=1">Fund
-								Management</a>
+						<li id="fund-manage"><a href="ResearchFund.do?fund_id=1">Land
+								</a></li>
+						<li id="fund-manage"><a href="ResearchFund.do?fund_id=1">Water
+								</a></li>
+						<li id="fund-manage"><a href="ResearchFund.do?fund_id=1">Sky
+								</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -51,9 +55,7 @@
 						<br />
 					</ul>
 				</div>
-				<!-- /.navbar-collapse -->
 			</div>
-			<!-- /.container-fluid -->
 		</nav>
 		<div class="container-fluid" style="margin-bottom: 80px">
 
@@ -67,13 +69,9 @@
 										href="AccountInfo.do">Account Information</a></li>
 									<li name="ChangePwd"><a href="ChangePwd.do">Change
 											Password</a></li>
-									<li name="TransHistory"><a href="TransHistory.do">Transaction
-											History</a></li>
-									<li name="RequestCheck"><a href="RequestCheck.do">Request
-											Check</a></li>
+									<li id="fund-manage"><a href="RequestCheck.do">Analytics</a></li>
 								</ul>
 							</div>
-							<!--/.nav-collapse -->
 						</div>
 					</div>
 				</div>
@@ -83,15 +81,19 @@
 						<div class="navbar navbar-default" role="navigation">
 							<div class="navbar-collapse collapse sidebar-navbar-collapse">
 								<ul id="sub-operation" class="nav navbar-nav">
-									<li class="active" name="SellFund"><a href="SellFund.do">Sell
-											Fund</a></li>
-									<li name="BuyFund"><a href="BuyFund.do">Buy Fund</a></li>
+									<li class="active" name="SellFund"><a href="SellFund.do">Search on Twitter
+											</a></li>
+									<li name="BuyFund"><a href="BuyFund.do">Search on Flickr</a></li>
 									<li name="ResearchFund"><a
-										href="ResearchFund.do?fund_id=1">Research Fund</a></li>
+										href="ResearchFund.do?fund_id=1">Show on Map</a></li>
+									<li name="ResearchFund"><a href="ResearchFund.do?fund_id=1">Tweet</a></li>
 								</ul>
 							</div>
-							<!--/.nav-collapse -->
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
 				<div class="col-sm-10">

@@ -22,15 +22,15 @@
 	<form class="form-signin" role="form" method="post" action="login.do">
 		<h2 class="form-signin-heading">Please log in</h2>
 			<jsp:include page="error.jsp" />
-	    <label for="inputEmail" class="sr-only">Email address</label>
+	    <label for="inputEmail" class="sr-only">Username</label>
     	<input type="text" name="username" id="input-username" class="form-control" placeholder="Username" value="${form.username }" required>
     	<br>
     	<label for="inputPassword" class="sr-only">Password</label>
 	    <input type="password" name="password" id="input-password" class="form-control" placeholder="Password" required>
 		<br><br>
 		<h4>Login as:</h4>
-		<input type="submit" class="btn btn-lg btn-primary" name="action" value="Customer"/>
-		<input type="submit" class="btn btn-lg btn-primary" name="action" value="Employee"/>
+		<input type="submit" class="btn btn-lg btn-primary" name="action" value="Twitter"/>
+		<input type="submit" class="btn btn-lg btn-primary" name="action" value="Flickr"/>
 	</form>
 </body>
 </html>

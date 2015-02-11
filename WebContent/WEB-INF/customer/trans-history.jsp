@@ -4,137 +4,58 @@
 
 <jsp:include page="template-top.jsp" />
 
+
 <div class="col-xs-12 col-sm-12">
 
-	<div class="page-header">
-		<h1>Transaction History</h1>
+	<div class="row-fluid">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Photo Detail from Flickr</h1>
+			</div>
+			<div class="row">
+				<button class="btn btn-default" type="button">Back</button>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="Search for..."> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</div>
+				<!-- /.col-lg-6 -->
+			</div>
+			
+			<jsp:include page="error-list.jsp" />
+			<jsp:include page="success.jsp" />
+			
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<img src="reading_dog.jpg" alt="Please check the source">
+						<div class="caption">
+							<h3>Photo title</h3>
+							<p>User id - description</p>
+							<p>
+								<a href="#" class="btn btn-primary" role="button">Comment</a>
+								<a href="#" class="btn btn-default" role="button">Retweet</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-6 col-md-8">
+					<ul >
+						<li >user id</li>
+						<li >Comments</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<table class="table">
-
-		<thead>
-			<tr>
-				<th width="25%">Date of Execution</th>
-				<th width="15%">Operation</th>
-				<th width="10%" class="title_right">Fund ID</th>
-				<th width="15%" class="title_right">Shares</th>
-				<th width="15%" class="title_right">Price</th>
-				<th width="20%" class="title_right">Dollar Amount</th>
-
-			</tr>
-		</thead>
-		
-		<tbody>
-			<c:if test="${!empty transactionHistory}">
-				<c:forEach items="${transactionHistory}" var="transactionBean">
-					<c:if
-						test="${transactionBean.getTransaction_type() == 'Buy Fund' }">
-						<tr class="active">
-
-							<td><fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${transactionBean.getExecute_date()}" /></td>
-							<td>${transactionBean.getTransaction_type()}</td>
-							<td class="title_right">${transactionBean.getFund_id()}</td>
-							<c:choose>
-								<c:when test="${!empty transactionBean.getExecute_date()}">
-
-									<c:set var="getShares"
-										value="${transactionBean.getShares() / 1000 }" />
-									<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.000"
-											value="${getShares}" /></td>
-
-									<c:set var="price" scope="session"
-										value="${transactionBean.getPrice() / 100 }" />
-								
-									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-											value="${price}" /></td>
-								</c:when>
-
-								<c:otherwise>
-
-									<td></td>
-									<td></td>
-								</c:otherwise>
-							</c:choose>
-
-							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
-							<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${getAmt}" /></td>
-
-						</tr>
-					</c:if>
-
-					<c:if
-						test="${transactionBean.getTransaction_type() == 'Sell Fund' }">
-						<tr class="success">
-							<td><fmt:formatDate type="both"  pattern="yyyy-MM-dd"  value="${transactionBean.getExecute_date()}" /></td>
-
-							<td>${transactionBean.getTransaction_type()}</td>
-							<td class="title_right">${transactionBean.getFund_id()}</td>
-							<c:set var="getShares"
-								value="${transactionBean.getShares() / 1000 }" />
-							<td class="title_right"><fmt:formatNumber type="number" pattern="#,##0.000"
-									value="${getShares}" /></td>
-
-							<c:choose>
-								<c:when test="${!empty transactionBean.getExecute_date()}">
-									
-									<c:set var="priceShares"
-										value="${transactionBean.getPrice() / 100 }" />
-									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-											value="${priceShares}" /></td>
-
-									<c:set var="getAmt"
-										value="${transactionBean.getAmount() / 100}" />
-									<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-											value="${getAmt}" /></td>
-								</c:when>
-								<c:otherwise>
-									<td></td>
-									<td></td>
-								</c:otherwise>
-							</c:choose>
-
-						</tr>
-					</c:if>
-
-					<c:if
-						test="${transactionBean.getTransaction_type() == 'Request Check' }">
-						<tr class="info">
-
-							<td><fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${transactionBean.getExecute_date()}" /></td>
-							<td>${transactionBean.getTransaction_type()}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
-							<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${getAmt}" /></td>
-
-
-						</tr>
-					</c:if>
-					<c:if
-						test="${transactionBean.getTransaction_type() == 'Deposit Check' }">
-						<tr class="warning">
-							<td><fmt:formatDate type="both" pattern="yyyy-MM-dd" value="${transactionBean.getExecute_date()}" /></td>
-
-							<td>${transactionBean.getTransaction_type()}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<c:set var="getAmt" value="${transactionBean.getAmount() / 100}" />
-							<td class="title_right">$<fmt:formatNumber type="number" pattern="#,##0.00"
-									value="${getAmt}" /></td>
-
-						</tr>
-					</c:if>
-
-
-
-				</c:forEach>
-			</c:if>
-		</tbody>
-	</table>
 </div>
 
 <jsp:include page="template-bottom.jsp" />

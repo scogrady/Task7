@@ -3,8 +3,6 @@
 <%@ page import="databeans.FavoriteBean"%>
 
 <jsp:include page="template-top.jsp" />
-<jsp:include page="balance.jsp" />
-
 
 
 <div class="col-xs-12 col-sm-12">
@@ -12,69 +10,43 @@
 	<div class="row-fluid">
 		<div class="col-md-12">
 			<div class="page-header">
-				<h1>SELL FUND</h1>
+				<h1>Search on Twitter</h1>
 			</div>
+
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="input-group">
+						<input type="text" class="form-control"
+							placeholder="Search for..."> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button">Go!</button>
+						</span>
+					</div>
+					<!-- /input-group -->
+				</div>
+				<!-- /.col-lg-6 -->
+			</div>
+
 			<jsp:include page="error-list.jsp" />
 			<jsp:include page="success.jsp" />
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th width="30%">Fund Name</th>
-						<th width="15%" class="title_right">Share</th>
-						<th width="10%" class="title_right">Last Price</th>
-						<th width="30%" class="title_center">Sell Share</th>
-						<th width="15%">Sell</th>
+						<th>Twitter User ID</th>
+						<th>Twitter Comment</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${!empty sellFundList}">
-						<c:forEach items="${sellFundList}" var="fund">
-							<form role="form" method="post" action="SellFund.do">
-								<tr>
-									<div class="form-group">
-										<td>${fund.getName()}</td>
-										<td class="title_right"><c:set var="getShare"
-												value="${fund.getShares() / 1000}" />
-											<div class="num">
-												<fmt:formatNumber type="number" pattern="#,##0.000"
-													value="${getShare}" />
-											</div></td>
-										<c:set var="getPrice" value="${fund.getPrice() / 100}" />
-										<td id="change-p" class="title_right">$<fmt:formatNumber
-												type="number" pattern="#,##0.00" value="${getPrice}" /></td>
-										<td class="title_center"><c:choose>
-												<c:when test="${fund.getFund_id() == form.getFund_id()}">
-													<div class="form-inline">
-														<input type="text" name="num" class="form-control"
-															pattern="\d*(\.\d{1,3}0*)?" placeholder="Share"
-															data-placement="bottom" min="0" max="100000000"
-															value="${form.getNum()}"
-															title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
-															required>
-
-													</div>
-												</c:when>
-												<c:otherwise>
-													<div class="form-inline">
-														<input type="text" name="num" class="form-control"
-															pattern="\d*(\.\d{1,3}0*)?" placeholder="Share"
-															data-placement="bottom" min="0" max="100000000"
-															title="You can sell between 0.001 share to what you have now. Only three digits after decimal."
-															required>
-
-													</div>
-												</c:otherwise>
-											</c:choose></td>
-										<td><input type="hidden" name="fund_id"
-											value="${fund.getFund_id()}"> <input type="hidden"
-											name="shares" value="${fund.getShares()}"> <input
-											class="btn btn-primary" type="submit" value="Sell"
-											name="action"></td>
-									</div>
-								</tr>
-							</form>
-						</c:forEach>
-					</c:if>
+					<!--<c:if test="${!empty sellFundList}">-->
+					<form role="form" method="post" action="SellFund.do">
+						<tr>
+							<div class="form-group">
+								<td>User ID</td>
+								<td>Comments</td>
+							</div>
+						</tr>
+					</form>
+					<!--</c:if>-->
 				</tbody>
 			</table>
 		</div>
