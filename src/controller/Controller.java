@@ -43,6 +43,8 @@ public class Controller extends HttpServlet {
         Action.add(new TransitionDayAction(model));
         Action.add(new ResetCustomerPwdAction(model));
         Action.add(new EmployeeResearchFundAction(model));
+        Action.add(new LoginTwitterAction(model));
+
         
         Action.add(new LogoutAction(model));
     }
