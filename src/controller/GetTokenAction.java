@@ -31,13 +31,15 @@ public class GetTokenAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
-
+		System.out.println("ok");
 		try {
 			TwitterLoginForm form = formBeanFactory.create(request);
 			Verifier verifier = new Verifier(form.getOauth_verifier());	
+			System.out.println(verifier);
 			OAuthService service = (OAuthService) request.getSession().getAttribute("oauthService");
 			Token requestToken = (Token) request.getSession().getAttribute("requestToken");
-
+			
+			System.out.println(service.getVersion());
 			Token accessToken = service.getAccessToken(requestToken, verifier);
 			OAuthRequest httpRequest = new OAuthRequest(Verb.GET,
 					"https://api.twitter.com/1.1/statuses/lookup.json");
@@ -49,7 +51,7 @@ public class GetTokenAction extends Action {
 			Response response = httpRequest.send();
 			System.out.println(response.getBody());
 
-			return "";
+			return "www.baidu.com";
 
 		} catch (FormBeanException e) {
 			return "customer/error.jsp";

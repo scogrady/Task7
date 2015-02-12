@@ -9,11 +9,7 @@ import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;

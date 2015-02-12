@@ -79,13 +79,13 @@ public class Controller extends HttpServlet {
 			return Action.perform(action,request);
         }
         
-        if (customer == null && employee == null) {
+        /*if (customer == null && employee == null) {
         	System.out.print("no user session!!!");
     		List<String> errors = new ArrayList<String>();
         	errors.add("Please login first!");
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("loginTwitter.do",request);
-        }
+        }*/
         
       	// Let the logged in user run his chosen action
 		return Action.perform(action,request);
@@ -112,12 +112,13 @@ public class Controller extends HttpServlet {
 	   		d.forward(request,response);
 	   		return;
     	} 
+    	System.out.println(nextPage);
     	
     	if (nextPage.startsWith("http://")) {
     		response.sendRedirect(response.encodeRedirectURL(nextPage));
     		return;
     	}
-    	response.sendRedirect(response.encodeRedirectURL("http://" + nextPage));
+    	response.sendRedirect(response.encodeRedirectURL(nextPage));
     	
     	//throw new ServletException(Controller.class.getName()+".sendToNextPage(\"" + nextPage + "\"): invalid extension.");
     }
