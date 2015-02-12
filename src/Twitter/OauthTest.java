@@ -26,7 +26,7 @@ public class OauthTest {
 				.provider(TwitterApi.class)
 				.apiKey("t5tzzNMVl1qX7FQucZdvVZmct")
 				.apiSecret("JbAJvT1tLsxEWJK76tnTwPfvxgp1aox9R0vFzGETow9LBHcJzB")
-				.callback("").build();
+				.callback("http://www.baidu.com").build();
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("=== Twitter's OAuth Workflow ===");

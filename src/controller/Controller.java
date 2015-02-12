@@ -44,6 +44,7 @@ public class Controller extends HttpServlet {
         Action.add(new ResetCustomerPwdAction(model));
         Action.add(new EmployeeResearchFundAction(model));
         Action.add(new LoginTwitterAction(model));
+        Action.add(new GetTokenAction(model));
 
         
         Action.add(new LogoutAction(model));
@@ -83,7 +84,7 @@ public class Controller extends HttpServlet {
     		List<String> errors = new ArrayList<String>();
         	errors.add("Please login first!");
         	// If the user hasn't logged in, direct him to the login page
-			return Action.perform("login.do",request);
+			return Action.perform("loginTwitter.do",request);
         }
         
       	// Let the logged in user run his chosen action

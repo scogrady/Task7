@@ -19,7 +19,7 @@
 	
 
 
-	<form class="form-signin" role="form" method="post" action="login.do">
+	<form class="form-signin" role="form" method="post" action="loginTwitter.do">
 		<h2 class="form-signin-heading">Please log in</h2>
 			<jsp:include page="error.jsp" />
 	    <label for="inputEmail" class="sr-only">Username</label>
