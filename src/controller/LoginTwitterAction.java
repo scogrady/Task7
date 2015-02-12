@@ -58,17 +58,17 @@ public class LoginTwitterAction extends Action {
 				return "login.jsp";
 			}
 			
-			if (role.equals("Customer")) {
+			if (role.equals("Twitter")) {
 				CustomerBean customer = customerDAO.readByUsername(form.getUsername());
-				if (customer == null) {
+				/*if (customer == null) {
 					errors.add("Customer Not Found");
 					return "login.jsp";
-				}
+				}*/
 			
-				if (!customer.checkPassword(form.getPassword())) {
+				/*if (!customer.checkPassword(form.getPassword())) {
 					errors.add("Invalid Password");
 					return "login.jsp";
-				}
+				}*/
 		        session.setAttribute("customer", customer);
 				return "AccountInfo.do";
 			}

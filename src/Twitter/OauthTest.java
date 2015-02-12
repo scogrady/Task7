@@ -1,10 +1,19 @@
 package Twitter;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
@@ -14,19 +23,24 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import com.sun.xml.internal.txw2.Document;
 
 public class OauthTest {
 
 	private static final String PROTECTED_RESOURCE_URL = "https://api.twitter.com/1.1/account/verify_credentials.json";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
 		// If you choose to use a callback, "oauth_verifier" will be the return
 		// value by Twitter (request param)
 		OAuthService service = new ServiceBuilder()
 				.provider(TwitterApi.class)
-				.apiKey("t5tzzNMVl1qX7FQucZdvVZmct")
-				.apiSecret("JbAJvT1tLsxEWJK76tnTwPfvxgp1aox9R0vFzGETow9LBHcJzB")
-				.callback("").build();
+				.apiKey("erbdRve3OEYq1qqgf1chyGKw2")
+				.apiSecret("sfQxOI7zydKQvEuVUmjDQoab11KhikIy1kGwCpftjPrHCjjfXW")
+				//.callback("http://www.baidu.com")
+				.build();
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("=== Twitter's OAuth Workflow ===");
@@ -77,6 +91,24 @@ public class OauthTest {
 
 		System.out.println(response.getBody());
 		System.out.println();
+		
+		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getStream()));
+
+		StringBuilder content = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+		    content.append(line);
+		}
+		  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+
+		   org.w3c.dom.Document doc=factory.newDocumentBuilder().parse(response.getBody());
+		    NodeList mentions=doc.getElementsByTagName("status");
+		    System.out.println(mentions.getLength());
+	    //for(int i=0; i<tsmresponse.size(); i++){
+	    //    list.add(tsmresponse.getJSONObject(i).getString("name"));
+	    //}
+	    
+
 
 		/*
 		 * JSONObject jsonObject = JSONObject.fromObject(response.getBody());
