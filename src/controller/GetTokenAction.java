@@ -39,8 +39,8 @@ public class GetTokenAction extends Action {
 			Token requestToken = (Token) request.getSession().getAttribute("requestToken");
 
 			Token accessToken = service.getAccessToken(requestToken, verifier);
-			OAuthRequest httpRequest = new OAuthRequest(Verb.GET,
-					"https://api.twitter.com/1.1/statuses/lookup.json");
+			String resourceURL = "https://api.twitter.com/1.1/statuses/lookup.json";
+			OAuthRequest httpRequest = new OAuthRequest(Verb.GET,resourceURL);
 			httpRequest.addQuerystringParameter("id", "20,432656548536401920");
 
 			service.signRequest(accessToken, httpRequest);
@@ -49,7 +49,7 @@ public class GetTokenAction extends Action {
 			Response response = httpRequest.send();
 			System.out.println(response.getBody());
 
-			return "";
+			return "login.jsp";
 
 		} catch (FormBeanException e) {
 			return "customer/error.jsp";

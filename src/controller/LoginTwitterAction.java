@@ -30,7 +30,7 @@ public class LoginTwitterAction extends Action {
 				.provider(TwitterApi.class)
 				.apiKey("t5tzzNMVl1qX7FQucZdvVZmct")
 				.apiSecret("JbAJvT1tLsxEWJK76tnTwPfvxgp1aox9R0vFzGETow9LBHcJzB")
-				.callback("www.baidu.com").build();
+				.callback("http://localhost:8080/Task7/getTokenAction.do").build();
 
 		Token requestToken = service.getRequestToken();
 
