@@ -73,7 +73,7 @@ public class GetTokenAction extends Action {
 			    twitters.add(twitter);
 			}
 			request.setAttribute("tweets", twitters);
-			return "index.jsp";
+			return "customer/account-info.jsp";
 
 		} catch (FormBeanException e) {
 			return "customer/error.jsp";
