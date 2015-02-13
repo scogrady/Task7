@@ -28,13 +28,13 @@ public class LoginAction extends Action {
 		employeeDAO = model.getEmployeeDAO();
 	}
 
-	public String getName() { return "login.do"; }
+	public String getName() { return "getTokenAction.do"; }
     
     public String perform(HttpServletRequest request) {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
-        
-    	String role = request.getParameter("action");
+        return "index.jsp";
+    	/*String role = request.getParameter("action");
     	
     	LoginForm form;
         HttpSession session = request.getSession(false);
@@ -91,16 +91,7 @@ public class LoginAction extends Action {
 			if (role != null) {
 				if (role.equals("Customer")) return "AccountInfo.do";
 				if (role.equals("Employee")) return "CreateEmployee.do";
-			} 
+			} */
 		}
-		catch (FormBeanException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (RollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    return "login.jsp"; 
-    }
+
 }

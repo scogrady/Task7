@@ -8,15 +8,11 @@
 	<title>CFS</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">    
-    <style type="text/css">
-
-    </style>
 </head>
 
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	
 
 
 	<form class="form-signin" role="form" method="post" action="login.do">

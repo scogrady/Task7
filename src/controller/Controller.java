@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
         Action.add(new EmployeeResearchFundAction(model));
         Action.add(new LoginTwitterAction(model));
         Action.add(new GetTokenAction(model));
-
+        Action.add(new PostTweetAction(model));
         
         Action.add(new LogoutAction(model));
     }
@@ -74,18 +74,21 @@ public class Controller extends HttpServlet {
 
         // System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
 
+      /* 
+       * 
         if (action.equals("register.do") || action.equals("login.do")) {
         	// Allow these actions without logging in
 			return Action.perform(action,request);
         }
         
-        /*if (customer == null && employee == null) {
+       *  if (customer == null && employee == null) {
         	System.out.print("no user session!!!");
     		List<String> errors = new ArrayList<String>();
         	errors.add("Please login first!");
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("loginTwitter.do",request);
-        }*/
+        }
+        */
         
       	// Let the logged in user run his chosen action
 		return Action.perform(action,request);
@@ -112,13 +115,12 @@ public class Controller extends HttpServlet {
 	   		d.forward(request,response);
 	   		return;
     	} 
-    	System.out.println(nextPage);
     	
-    	if (nextPage.startsWith("http://")) {
+    	if (nextPage.startsWith("https://")) {
     		response.sendRedirect(response.encodeRedirectURL(nextPage));
     		return;
     	}
-    	response.sendRedirect(response.encodeRedirectURL(nextPage));
+    	response.sendRedirect(response.encodeRedirectURL("http://" + nextPage));
     	
     	//throw new ServletException(Controller.class.getName()+".sendToNextPage(\"" + nextPage + "\"): invalid extension.");
     }

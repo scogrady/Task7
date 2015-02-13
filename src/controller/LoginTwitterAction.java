@@ -25,19 +25,20 @@ public class LoginTwitterAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
-
-		OAuthService service = new ServiceBuilder()
+		OAuthService service;
+		if (request.getSession().getAttribute("oauthService") != null) 
+			service = (OAuthService)request.getSession().getAttribute("oauthService"); else 
+				service = new ServiceBuilder()
 				.provider(TwitterApi.class)
-				.apiKey("erbdRve3OEYq1qqgf1chyGKw2")
-				.apiSecret("sfQxOI7zydKQvEuVUmjDQoab11KhikIy1kGwCpftjPrHCjjfXW")
-				.callback("http://127.0.0.1:8080/Task7/getTokenAction.do")
-				.build();
-		
+				.apiKey("t5tzzNMVl1qX7FQucZdvVZmct")
+				.apiSecret("JbAJvT1tLsxEWJK76tnTwPfvxgp1aox9R0vFzGETow9LBHcJzB")
+				.callback("http://localhost:8080/Task7/getTokenAction.do").build();
+
 		Token requestToken = service.getRequestToken();
+
+		String url = service.getAuthorizationUrl(requestToken);
 		request.getSession().setAttribute("oauthService", service);
 		request.getSession().setAttribute("requestToken", requestToken);
-		String url = service.getAuthorizationUrl(requestToken);
-
 
 		return url;
 
